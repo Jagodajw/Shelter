@@ -1,34 +1,28 @@
+<div class="login-container">
+    <div class="login-content">
+        <mat-toolbar class="login-toolbar" color="primary">Schronisko</mat-toolbar>
+        <mat-card>
+            <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+                <mat-form-field appearance="fill">
+                    <mat-label>Username</mat-label>
+                    <mat-icon matPrefix>person_outline</mat-icon>
+                    <input autofocus type="login" matInput placeholder="Podaj login" formControlName="username"
+                        required>
+                </mat-form-field>
 
-<div class="auth-view">
-    <form class="auth-view__form" [formGroup]="loginForm" >  
-            
-        <div class="auth-view__logo">
-                <h1> Zaloguj się </h1>
-        </div>
-       
-        <mat-form-field class="auth-view__form-login" appearance="fill">
-            <mat-label>Podaj e-mail</mat-label>
-            <input matInput 
-                placeholder="pat@example.com"
-                formControlName="login"
-                #email
-                required>
-            <mat-error *ngIf="loginForm.value">Niepoprawny email</mat-error>
-          </mat-form-field>
+                <mat-form-field appearance="fill">
+                    <mat-label>Password</mat-label>
+                    <mat-icon matPrefix>lock_outline</mat-icon>
+                    <input [type]="hide ? 'password' : 'text'" type="password" autocomplete="false" matInput
+                        placeholder="Podaj hasło" formControlName="password" required>
+                    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    </button>
+                </mat-form-field>
 
-        <mat-form-field class="auth-view__form-password"appearance="fill">
-            <mat-label>Podaj hasło</mat-label>
-            <input matInput 
-            [type]="hide ? 'password' : 'text'"  
-            formControlName="password"
-            type="password"
-            #password>
-            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-        </mat-form-field>
-        <button class="auth-view__form-button" mat-stroked-button>Zaloguj się</button>
-    </form>
-
-
+                <button type="submit" mat-raised-button color="primary">Zaloguj się</button>
+            </form>
+        </mat-card>
+    </div>
 </div>
