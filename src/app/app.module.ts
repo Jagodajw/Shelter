@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MatSliderModule } from '@angular/material/slider';
 import { AppRoutingModule } from './app-routing.component';
-
 @NgModule({
   declarations: [AppComponent],
   imports: [
