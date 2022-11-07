@@ -1,1 +1,34 @@
-<p>auth-view works!</p>
+
+<div class="auth-view">
+    <form class="auth-view__form" [formGroup]="loginForm" >  
+            
+        <div class="auth-view__logo">
+                <h1> Zaloguj się </h1>
+        </div>
+       
+        <mat-form-field class="auth-view__form-login" appearance="fill">
+            <mat-label>Podaj e-mail</mat-label>
+            <input matInput 
+                placeholder="pat@example.com"
+                formControlName="login"
+                #email
+                required>
+            <mat-error *ngIf="loginForm.value">Niepoprawny email</mat-error>
+          </mat-form-field>
+
+        <mat-form-field class="auth-view__form-password"appearance="fill">
+            <mat-label>Podaj hasło</mat-label>
+            <input matInput 
+            [type]="hide ? 'password' : 'text'"  
+            formControlName="password"
+            type="password"
+            #password>
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <button class="auth-view__form-button" mat-stroked-button>Zaloguj się</button>
+    </form>
+
+
+</div>

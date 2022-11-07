@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'auth-view',
+    redirectTo: 'app-view',
     pathMatch: 'full',
   },
   {
