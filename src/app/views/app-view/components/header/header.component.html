@@ -2,7 +2,7 @@
     <h1 class="header__logo">
         Schronisko
     </h1>
-    
+
     <span class="example-spacer"></span>
     <div class="header__link">
         <a [routerLink]="['/app-view/pets']"  routerLinkActive #link="routerLinkActive" [ngClass]="{'active': link.isActive}">
@@ -11,7 +11,7 @@
                 Ustawienia     
             </span>   
         </a>
-        <a [routerLink]="['/app-view/people']">  
+        <!-- <a [routerLink]="['/app-view/people']">  
             <mat-icon>group</mat-icon>
             <span class="nav-link">
                 Ludzie     
@@ -34,7 +34,7 @@
             <span class="nav-link">
                 Dokumenty     
             </span>   
-        </a>     
+        </a>      -->
     </div>
 
     <div class="header__login">

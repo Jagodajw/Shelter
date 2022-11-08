@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import menuConfiguration from './menu.json';
+import { iMenuInterface } from './menu';
 
 
 @Component({
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  menu = menuConfiguration;
   constructor() {}
 
   ngOnInit(): void {}
