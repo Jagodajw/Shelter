@@ -5,49 +5,30 @@
 
     <span class="example-spacer"></span>
     <div class="header__link">
-        <a [routerLink]="['/app-view/pets']"  routerLinkActive #link="routerLinkActive" [ngClass]="{'active': link.isActive}">
-            <mat-icon>pets</mat-icon>
-            <span class="nav-link">
-                Ustawienia     
-            </span>   
-        </a>
-        <!-- <a [routerLink]="['/app-view/people']">  
-            <mat-icon>group</mat-icon>
-            <span class="nav-link">
-                Ludzie     
-            </span>   
-        </a>
-        <a [routerLink]="['/app-view/stats']" >  
-            <mat-icon>trending_up</mat-icon>
-            <span class="nav-link">
-                Statystyki     
-            </span>   
-        </a>  
-        <a [routerLink]="['/app-view/settings']"  >  
-            <mat-icon>settings</mat-icon>
-            <span class="nav-link">
-                    Ustawienia     
-            </span>                
-        </a>
-        <a [routerLink]="['/app-view/documentation']" >  
-            <mat-icon>folder_open</mat-icon>
-            <span class="nav-link">
-                Dokumenty     
-            </span>   
-        </a>      -->
+        <ul>
+            <li *ngFor="let menuItem of menuItems">
+                <a [routerLink]="['/app-view/'+ menuItem.route]" routerLinkActive #link="routerLinkActive"
+                    [ngClass]="{'active': link.isActive}">
+                    <mat-icon>{{menuItem.icon}}</mat-icon>
+                    <span class="nav-link">
+                        {{menuItem.name}}
+                    </span>
+                </a>
+            </li>
+        </ul>
     </div>
 
     <div class="header__login">
         <button mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>account_circle</mat-icon>
         </button>
-        <mat-menu #menu="matMenu"  class="header__login-menu">
-            <button mat-menu-item>
+        <mat-menu #menu="matMenu" class="header__login-menu">
+            <button mat-menu-item (click)="openDialog()">
                 Przełącz
                 <mat-icon>supervisor_account</mat-icon>
             </button>
 
-            <button mat-menu-item  [routerLink]="['/auth-view']" >
+            <button mat-menu-item [routerLink]="['/auth-view']">
                 Wyloguj się
                 <mat-icon>login</mat-icon>
             </button>

@@ -1,17 +1,18 @@
 <div class="login-container">
-    <div class="login-content">
-        <mat-toolbar class="login-toolbar" color="primary">Schronisko</mat-toolbar>
+    <div class="login-container__content">
+        <mat-toolbar>Schronisko</mat-toolbar>
         <mat-card>
+
             <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
                 <mat-form-field appearance="fill">
-                    <mat-label>Username</mat-label>
+                    <mat-label>Nazwa użytkownika</mat-label>
                     <mat-icon matPrefix>person_outline</mat-icon>
                     <input autofocus type="login" matInput placeholder="Podaj login" formControlName="username"
                         required>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
-                    <mat-label>Password</mat-label>
+                    <mat-label>Hasło</mat-label>
                     <mat-icon matPrefix>lock_outline</mat-icon>
                     <input [type]="hide ? 'password' : 'text'" type="password" autocomplete="false" matInput
                         placeholder="Podaj hasło" formControlName="password" required>
@@ -20,8 +21,9 @@
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
-
-                <button type="submit" mat-raised-button color="primary">Zaloguj się</button>
+                <button [routerLink]="['/app-view/pets']"       class="login-container__content-button-form" type="submit"
+                    mat-raised-button>Zaloguj
+                    się</button>
             </form>
         </mat-card>
     </div>

@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 
+
 @Component({
   selector: 'app-auth-view',
   templateUrl: './auth-view.component.html',
@@ -24,4 +25,5 @@ export class AuthViewComponent implements OnInit {
     });
   }
   onSubmit() {}
+
 }
