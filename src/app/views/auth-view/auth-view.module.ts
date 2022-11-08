@@ -10,9 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { PopupComponent } from '../app-view/components/popup/popup.component';
 
 @NgModule({
-  declarations: [AuthViewComponent],
+  declarations: [AuthViewComponent, PopupComponent],
   imports: [
     CommonModule,
     AuthViewRoutingModule,

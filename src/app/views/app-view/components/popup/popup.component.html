@@ -1,0 +1,21 @@
+<div class="popup-container">
+    <div class="popup-container-title">
+        <h1>Wybierz schronisko</h1>
+    </div>
+    <div class="cards">
+        <div class="popup-container_card">
+            <mat-toolbar>Schronisko OTOZ</mat-toolbar>
+            <mat-card [routerLink]="['/app-view/pets']" (click)="onNoClick()">
+                <img mat-card-image src="https://otoz.pl/wp-content/themes/otoz/images/otoz-animals.png"
+                    alt="Photo of a Shiba Inu">
+            </mat-card>
+        </div>
+        <div class="popup-container_card">
+            <mat-toolbar>Schronisko Tychy</mat-toolbar>
+            <mat-card [routerLink]="['/app-view/pets']" (click)="onNoClick()">
+                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                    alt="Photo of a Shiba Inu">
+            </mat-card>
+        </div>
+    </div>
+</div>

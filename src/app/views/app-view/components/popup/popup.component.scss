@@ -1,0 +1,32 @@
+.popup-container {
+  align-items: center;
+
+  .cards {
+    display: flex;
+  }
+  &-title h1 {
+    display: flex;
+    justify-content: center;
+  }
+  &_card {
+    width: 50%;
+    height: 80%;
+    justify-content: center;
+    margin: 20px;
+  }
+  &_card:hover {
+    width: 50%;
+    height: 80%;
+    justify-content: center;
+    margin: 20px;
+    border: 2px solid #d5239a;
+  }
+
+  & mat-toolbar {
+    background-color: #23d5ab;
+    justify-content: center;
+  }
+  & mat-icon {
+    font-size: 2rem;
+  }
+}

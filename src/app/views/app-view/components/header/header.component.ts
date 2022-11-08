@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import menuConfiguration from './menu.json';
+import { MatDialog } from '@angular/material/dialog';
+import { PopupComponent } from '../popup/popup.component';
+import { navList } from './menu';
 import { iMenuInterface } from './menu';
-
 
 @Component({
   selector: 'app-header',
@@ -9,8 +10,15 @@ import { iMenuInterface } from './menu';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  menu = menuConfiguration;
-  constructor() {}
+  public menuItems = navList;
+  constructor(public dialog: MatDialog) {}
 
   ngOnInit(): void {}
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '50%',
+    });
+    dialogRef.afterClosed().subscribe((result) => {});
+  }
 }
