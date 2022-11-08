@@ -14,11 +14,16 @@
                 font-size: 1rem;
                 text-decoration: none;
                 padding: 10px;
+                color: #551A8B;
                 & mat-icon{
                     font-size: 0.9rem;
                     width: 0.9rem;
                     height: 0.9rem;
                     padding-right: 3px;
+                }
+
+                &.active {
+                    color: red;
                 }
             }
         }
@@ -57,3 +62,38 @@
         padding-left:5px;
     }
 }
+
+.nav-link{
+    position: relative;
+}
+
+.nav-link .nav-border{
+    display: none;   
+}
+
+.nav-link:hover .nav-border {
+    display: block;
+    position: absolute;
+    width: 120%;
+    height: 2px;
+    background-color: #551A8B;
+    bottom: -10px;
+    left: -15%;
+}
+
+a:active .nav-border {
+    display: block;
+    position: absolute;
+    width: 120%;
+    height: 2px;
+    background-color:#551A8B;
+    bottom: -10px;
+    left: -15%;
+}
+
+
+// a:active .nav-link{
+//     color: #551A8B;
+//     width: fit-content;
+//     white-space: nowrap;
+// } 

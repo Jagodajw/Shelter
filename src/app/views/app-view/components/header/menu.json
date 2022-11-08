@@ -1,0 +1,28 @@
+[
+    {
+      "name": "Zwierzęta",
+      "route": "pets",
+      "icon": "pets"
+    },
+    {
+      "name": "Ludzie",
+      "route": "people",
+      "icon": "group"
+    },
+    {
+        "name": "Statystyki",
+        "route": "stats",
+        "icon": "trending_up"
+    },
+    {
+        "name": "Ustawienia",
+        "route": "settings",
+        "icon": "settings"
+    },
+    {
+        "name": "Dokumenty",
+        "route": "documentation",
+        "icon": "folder_open"
+    }
+
+]

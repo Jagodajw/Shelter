@@ -6,6 +6,8 @@ import { HeaderComponent } from './components/header/header.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 @NgModule({
@@ -13,6 +15,6 @@ import {MatMenuModule} from '@angular/material/menu';
     AppViewComponent,
     HeaderComponent
   ],
-  imports: [CommonModule, AppViewRoutingModule, MatToolbarModule, MatIconModule,MatMenuModule],
+  imports: [CommonModule, AppViewRoutingModule, MatToolbarModule, MatIconModule,MatMenuModule,MatTabsModule],
 })
 export class AppViewModule {}
