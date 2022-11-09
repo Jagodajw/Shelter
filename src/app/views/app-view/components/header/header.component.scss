@@ -1,11 +1,25 @@
+@mixin linkEffect {
+  &::before {
+    visibility: visible;
+    transform: scale(1, 1);
+  }
+}
+
 :host {
   display: block;
 
   .header {
-    background-color: rgb(129, 122, 122);
+    background: rgb(45, 111, 209);
+    background: linear-gradient(
+      -180deg,
+      rgb(104, 103, 185) 0%,
+      rgb(91, 134, 228) 100%,
+      rgba(193, 193, 200, 1) 60%
+    );
     &__logo {
       font-size: 1.3rem;
-      color: #551a8b;
+      color: azure;
+      margin-left: 40px;
     }
     &__link {
       & li {
@@ -13,13 +27,16 @@
         list-style: none;
       }
       & a {
-        align-items: center;
         display: inline-flex;
+        align-items: center;
         justify-content: center;
         font-size: 1rem;
         text-decoration: none;
-        padding: 10px;
-        color: #551a8b;
+        padding: 0 10px;
+        margin: 0 5px;
+        color: azure;
+        position: relative;
+
         & mat-icon {
           font-size: 0.9rem;
           width: 0.9rem;
@@ -28,8 +45,27 @@
         }
 
         &.active {
-          background-color: rgba(207, 125, 228, 0.459);
           color: rgb(255, 255, 255);
+          @include linkEffect;
+        }
+
+        &::before {
+          content: "";
+          display: block;
+          position: absolute;
+          left: 0;
+          bottom: 0;
+          background-color: azure;
+          width: 100%;
+          height: 3px;
+          transition: all 0.2s ease-in-out;
+          transform: scale(0, 0);
+          visibility: hidden;
+          border-radius: 25px;
+        }
+
+        &:hover {
+          @include linkEffect;
         }
       }
     }
@@ -44,6 +80,7 @@
           width: 2rem;
           height: 2rem;
           font-size: 2rem;
+          color: azure;
         }
       }
     }
@@ -65,9 +102,3 @@
     padding-left: 5px;
   }
 }
-
-// a:active .nav-link{
-//     color: #551A8B;
-//     width: fit-content;
-//     white-space: nowrap;
-// }

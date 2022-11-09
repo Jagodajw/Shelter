@@ -5,18 +5,23 @@
     width: 100vw;
     align-items: center;
     display: flex;
-    background: linear-gradient(-65deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-    background-size: 200% 200%;
+    background: rgb(45, 111, 209);
+    background: linear-gradient(
+      -30deg,
+      rgb(104, 103, 185) 0%,
+      rgb(91, 134, 228) 100%,
+      rgba(193, 193, 200, 1) 60%
+    );
     &__content {
       width: 500px;
       display: block;
       margin: 0 auto;
       & mat-toolbar {
         justify-content: center;
-        background-color: #23d5ab;
+        background-color: rgb(45, 111, 209);
         border-top-left-radius: 40%;
         border-top-right-radius: 40%;
-        color: rgb(255, 255, 255);
+        color: azure;
         font-size: 2rem;
       }
       & form {
@@ -29,8 +34,8 @@
       &-button-form {
         width: 100%;
         margin-top: 10px;
-        background-color: #23d5ab;
-        color: rgb(255, 255, 255);
+        background-color: rgb(45, 111, 209);
+        color: azure;
         font-size: 1rem;
         margin-bottom: 10px;
       }

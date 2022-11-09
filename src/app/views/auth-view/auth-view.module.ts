@@ -10,10 +10,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
-import { PopupComponent } from '../app-view/components/popup/popup.component';
+import { ChooseShelterPopupComponenet } from '../app-view/components/choose-shelter-popup/choose-shelter-popup.componenet';
 
 @NgModule({
-  declarations: [AuthViewComponent, PopupComponent],
+  declarations: [AuthViewComponent, ChooseShelterPopupComponenet],
   imports: [
     CommonModule,
     AuthViewRoutingModule,

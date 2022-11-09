@@ -1,0 +1,29 @@
+<div class="popup-container">
+  <div class="popup-container-title">
+    <h1>Wybierz schronisko</h1>
+  </div>
+
+  <div class="popup-container-cards">
+    <div class="popup-container-cards-item">
+      <mat-card [routerLink]="['/app-view/pets']" (click)="onNoClick()">
+        <mat-card-title> OTOZ</mat-card-title>
+        <img
+          mat-card-image
+          src="https://otoz.pl/wp-content/themes/otoz/images/otoz-animals.png"
+          alt=""
+        />
+      </mat-card>
+    </div>
+
+    <div class="popup-container-cards-item">
+      <mat-card [routerLink]="['/app-view/pets']" (click)="onNoClick()">
+        <mat-card-title>TYCHY</mat-card-title>
+        <img
+          mat-card-image
+          src="https://otoz.pl/wp-content/themes/otoz/images/otoz-animals.png"
+          alt=""
+        />
+      </mat-card>
+    </div>
+  </div>
+</div>
