@@ -8,8 +8,8 @@
     background: rgb(45, 111, 209);
     background: linear-gradient(
       -30deg,
-      rgb(104, 103, 185) 0%,
-      rgb(91, 134, 228) 100%,
+      rgb(146, 145, 226) 0%,
+      rgb(126, 154, 214) 100%,
       rgba(193, 193, 200, 1) 60%
     );
     &__content {
@@ -18,7 +18,7 @@
       margin: 0 auto;
       & mat-toolbar {
         justify-content: center;
-        background-color: rgb(45, 111, 209);
+        background-color: rgb(98, 96, 221);
         border-top-left-radius: 40%;
         border-top-right-radius: 40%;
         color: azure;
@@ -34,7 +34,7 @@
       &-button-form {
         width: 100%;
         margin-top: 10px;
-        background-color: rgb(45, 111, 209);
+        background-color: rgb(98, 96, 221);
         color: azure;
         font-size: 1rem;
         margin-bottom: 10px;
