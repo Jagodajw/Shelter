@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { PopupComponent } from '../app-view/components/popup/popup.component';
+import { ChooseShelterPopupService } from './components/choose-shelter-popup/choose-shelter-popup.service';
 @Component({
   selector: 'app-app-view',
   templateUrl: './app-view.component.html',
   styleUrls: ['./app-view.component.scss'],
+  providers: [ChooseShelterPopupService],
 })
 export class AppViewComponent implements OnInit {
-  constructor(public dialog: MatDialog) {}
+  constructor(
+    private readonly chooseShelterService: ChooseShelterPopupService
+  ) {}
 
   ngOnInit(): void {
-    this.openDialog();
-  }
-
-  openDialog(): void {
-    const dialogRef = this.dialog.open(PopupComponent, {
-      width: '50%',
-    });
-    dialogRef.afterClosed().subscribe((result) => {});
+    this.chooseShelterService.openDialog();
   }
 }
