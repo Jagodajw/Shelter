@@ -1,6 +1,6 @@
 <mat-toolbar class="header" role="header">
     <h1 class="header__logo">
-        Schronisko
+        Schronisko {{typeShelter| async}}
     </h1>
 
     <span class="example-spacer"></span>
@@ -28,7 +28,7 @@
                 <mat-icon>supervisor_account</mat-icon>
             </button>
 
-            <button mat-menu-item [routerLink]="['/auth-view']">
+            <button mat-menu-item (click)="resetStorage()"[routerLink]="['/auth-view']">
                 Wyloguj się
                 <mat-icon>login</mat-icon>
             </button>
