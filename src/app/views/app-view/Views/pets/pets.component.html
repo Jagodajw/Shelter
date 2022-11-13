@@ -1,1 +1,9 @@
-<p>pets works!</p>
+<app-button-filter (change)="add($event)" [filters]="filtersPets"></app-button-filter>
+<div>
+    <app-select [values]="arrayOfGatunek" placeholder="Gatunek"></app-select>
+
+    <app-select [values]="arrayOfRasa" placeholder="Rasa"></app-select>
+    
+    <app-select [values]="arrayOfGatunek" placeholder="Gatunek"></app-select>
+
+</div>

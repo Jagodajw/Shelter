@@ -13,7 +13,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppViewComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [CommonModule, AppViewRoutingModule, MatToolbarModule, MatIconModule,MatMenuModule,MatTabsModule],
 })

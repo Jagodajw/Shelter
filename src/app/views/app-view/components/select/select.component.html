@@ -1,0 +1,9 @@
+<mat-form-field appearance="fill" *ngFor="let select of selecty">
+    <mat-label>{{select.categorySelect}}</mat-label>
+    <mat-select [formControl]="speciesControl">
+      <mat-option></mat-option>
+        <mat-option *ngFor="let spec of species" [value]="spec.id">
+          {{spec.name}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>
