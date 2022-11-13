@@ -1,0 +1,4 @@
+<mat-button-toggle-group class="btn" (change)="onChange($event)">
+  <mat-button-toggle class="btn__toggle" *ngFor="let filter of filters" [value]="filter.id">{{filter.name}}
+  </mat-button-toggle>
+</mat-button-toggle-group>

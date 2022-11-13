@@ -1,1 +1,21 @@
-<p>pets works!</p>
+<div style="margin:20px">
+    <app-button-filter (change)="add($event)" [filters]="filtersPets"></app-button-filter>
+</div>
+
+<div style="margin:20px">
+    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="Gatunek"></app-select>
+    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="Gatunek"></app-select>
+    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="Gatunek"></app-select>
+    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="Gatunek"></app-select>
+    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="Gatunek"></app-select>
+    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="Gatunek"></app-select>
+</div>
+
+
+<div style="margin:20px">
+    <app-data-picker placeholder="Data urodzenia od - do "></app-data-picker>
+</div>
+
+<div style="margin:20px">
+    <app-search></app-search>
+</div>
