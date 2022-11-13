@@ -1,32 +1,31 @@
 :host {
+  ::ng-deep {
+    .mat-button-toggle-checked {
+      background-color: rgb(91, 134, 228);
+      color: white !important;
+    }
+    .mat-button-toggle-group-appearance-standard
+      .mat-button-toggle
+      + .mat-button-toggle {
+      border-left: 2px solid rgb(45, 111, 209);
+    }
+    .mat-button-toggle-group {
+      border: solid 1px rgb(45, 111, 209);
+    }
+  }
 
-    ::ng-deep{
-        .mat-button-toggle-checked {
-            background-color: #d391c8;
-            color: white !important;
-        }
-        .mat-button-toggle-group-appearance-standard .mat-button-toggle+.mat-button-toggle {
-            border-left: 2px solid #bd48a9;
-        }
-        .mat-button-toggle-group  {
-            border: solid 1px #bd48a9;
-        }
+  .btn {
+    &:first-child {
+      border-radius: 2rem;
     }
 
-    .btn{
-        &:first-child {
-            border-radius: 2rem;
-        }
-    
-        &__toggle{
-            font-size: 1rem;
-            color: #bd48a9;
-            
-        }
-        &__toggle:hover{
-            background-color: #d391c8;
-            color:white;
-        }
+    &__toggle {
+      font-size: 1rem;
+      color: rgb(45, 111, 209);
     }
+    &__toggle:hover {
+      background-color: rgb(91, 134, 228);
+      color: white;
+    }
+  }
 }
-
