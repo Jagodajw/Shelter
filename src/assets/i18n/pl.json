@@ -1,0 +1,35 @@
+{
+  "pets": {
+    "title": "Zwierzęta",
+    "species": "Gatunek",
+    "searchPlaceholder": " Wyszukaj imię, nr-chipa",
+    "dataPickerPlaceholder": "Data urodzenia od - do",
+    "cuarantine": "Na kwarantannie",
+    "unvaccinated": "Niezaszczepione",
+    "filterNoCastrated": "Niewykastrowane/Niewysterylizowane",
+    "filterCastrated": "Wykastrowane/Wysterylizowane",
+    "current": "Przebywające",
+    "past": "Wydane"
+  },
+  "people": {
+    "title": "Ludzie"
+  },
+  "stats": {
+    "title": "Statystyki"
+  },
+  "setings": {
+    "title": "Ustawienia"
+  },
+  "document": {
+    "title": "Dokumenty"
+  },
+
+  "shelter": {
+    "title": "Schronisko",
+    "choose": "Wybierz schronisko"
+  },
+  "authView": {
+    "logout": "Wyloguj się",
+    "switchAccount": "Przełącz schronisko"
+  }
+}

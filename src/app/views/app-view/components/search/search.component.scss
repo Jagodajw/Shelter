@@ -1,0 +1,13 @@
+:host {
+    ::ng-deep {
+      .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: rgb(91, 134, 228);
+      }
+      .mat-button,
+      .mat-icon-button,
+      .mat-stroked-button {
+        background-color: rgb(123 133 255 / 35%);
+      }
+    }
+  }
+  
