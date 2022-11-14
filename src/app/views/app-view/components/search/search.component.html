@@ -1,7 +1,7 @@
 <mat-form-field class="example-form-field" appearance="outline">
-    <mat-label>Clearable input</mat-label>
-    <input [formControl]="search" matInput type="text">
+    <mat-label>{{placeholder | translate }}</mat-label>
+    <input [formControl]="search" matInput type="text" (keydown)="keyDownFunction($event)">
     <button matSuffix mat-icon-button aria-label="Clear" (click)="clearForm()">
-        <mat-icon>close</mat-icon>
+        <mat-icon>search</mat-icon>
     </button>
 </mat-form-field>

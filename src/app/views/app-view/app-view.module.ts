@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SearchModule } from './components/search/search.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [AppViewComponent, HeaderComponent],
@@ -19,6 +20,7 @@ import { SearchModule } from './components/search/search.module';
     MatMenuModule,
     MatTabsModule,
     SearchModule,
+    TranslateModule,
   ],
 })
 export class AppViewModule {}

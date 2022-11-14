@@ -8,27 +8,27 @@ export interface iMenuInterface {
 
 export const navList = [
   {
-    name: 'Zwierzęta',
+    name: 'pets.title',
     route: 'pets',
     icon: 'pets',
   },
   {
-    name: 'Ludzie',
+    name: 'people.title',
     route: 'people',
     icon: 'group',
   },
   {
-    name: 'Statystyki',
+    name: 'stats.title',
     route: 'stats',
     icon: 'trending_up',
   },
   {
-    name: 'Ustawienia',
+    name: 'setings.title',
     route: 'settings',
     icon: 'settings',
   },
   {
-    name: 'Dokumenty',
+    name: 'document.title',
     route: 'documentation',
     icon: 'folder_open',
   },

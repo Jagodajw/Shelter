@@ -11,6 +11,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { ChooseShelterPopupComponenet } from '../app-view/components/choose-shelter-popup/choose-shelter-popup.componenet';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [AuthViewComponent, ChooseShelterPopupComponenet],
@@ -26,6 +27,7 @@ import { ChooseShelterPopupComponenet } from '../app-view/components/choose-shel
     MatButtonModule,
     MatToolbarModule,
     MatCardModule,
+    TranslateModule,
   ],
 })
 export class AuthViewModule {}

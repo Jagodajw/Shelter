@@ -1,0 +1,7 @@
+@use "@angular/material" as mat;
+@use "src/styles/config/color-palettes" as palette;
+
+$-shelter-primary: mat.define-palette(palette.$primary-palette);
+$-shelter-accent: mat.define-palette(palette.$accent-palette);
+$shelter-theme: mat.define-light-theme($-shelter-primary, $-shelter-accent);
+$color-config: mat.get-color-config($shelter-theme);

@@ -9,11 +9,11 @@
   display: block;
   width: 100%;
   .header {
-    background: rgb(45, 111, 209);
+    background: #2d6dce;
     background: linear-gradient(
       -180deg,
-      rgb(104, 103, 185) 0%,
-      rgb(91, 134, 228) 100%,
+      #6867b9 0%,
+      #5b86e4 100%,
       rgba(193, 193, 200, 1) 60%
     );
     &__logo {

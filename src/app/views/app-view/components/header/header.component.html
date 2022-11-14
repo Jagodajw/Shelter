@@ -1,6 +1,6 @@
 <mat-toolbar class="header" role="header">
     <h1 class="header__logo">
-        Schronisko {{typeShelter| async}}
+        {{"shelter.title" | translate}} {{typeShelter| async}}
     </h1>
 
     <span class="example-spacer"></span>
@@ -11,7 +11,7 @@
                     [ngClass]="{'active': link.isActive}">
                     <mat-icon>{{menuItem.icon}}</mat-icon>
                     <span class="nav-link">
-                        {{menuItem.name}}
+                        {{menuItem.name | translate}}
                     </span>
                 </a>
             </li>
@@ -24,13 +24,12 @@
         </button>
         <mat-menu #menu="matMenu" class="header__login-menu">
             <button mat-menu-item (click)="openDialog()">
-                Przełącz
+                {{"authView.switchAccount" | translate}}
                 <mat-icon>supervisor_account</mat-icon>
             </button>
 
-            <button mat-menu-item (click)="resetStorage()"[routerLink]="['/auth-view']">
-                Wyloguj się
-                <mat-icon>login</mat-icon>
+            <button mat-menu-item (click)="resetStorage()" [routerLink]="['/auth-view']">
+                {{"authView.logout" | translate}} <mat-icon>login</mat-icon>
             </button>
         </mat-menu>
     </div>
