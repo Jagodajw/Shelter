@@ -2,14 +2,25 @@
   "pets": {
     "title": "Zwierzęta",
     "species": "Gatunek",
+    "breed": "Rasa",
+    "community": "Gmina",
+    "area": "Rejon",
+    "gender": "Płeć",
+    "size": "Rozmiar",
+    "color": "maść",
+    "castred": "Styrylizacja",
     "searchPlaceholder": " Wyszukaj imię, nr-chipa",
-    "dataPickerPlaceholder": "Data urodzenia od - do",
+    "dataPickerBirth": "Data urodzenia od - do",
+    "dataPickerAccepted": "Data przyjęcia od - do",
     "cuarantine": "Na kwarantannie",
     "unvaccinated": "Niezaszczepione",
     "filterNoCastrated": "Niewykastrowane/Niewysterylizowane",
     "filterCastrated": "Wykastrowane/Wysterylizowane",
     "current": "Przebywające",
-    "past": "Wydane"
+    "past": "Wydane",
+    "addPets": "Dodaj nowe zwierzę",
+    "controlToVaccination": "Kontrola szczepień",
+    "controlToOut": "Kontrola wydania"
   },
   "people": {
     "title": "Ludzie"

@@ -9,6 +9,9 @@ import { PetsComponent } from './pets.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
 
 @NgModule({
   declarations: [PetsComponent],
@@ -23,6 +26,9 @@ import { TranslateModule } from '@ngx-translate/core';
     ReactiveFormsModule,
     FormsModule,
     TranslateModule,
+    MatButtonModule,
+    MatIconModule,
+    MatBadgeModule,
   ],
 })
 export class PetsModule {}

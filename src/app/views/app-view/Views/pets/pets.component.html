@@ -1,34 +1,82 @@
-<div style="margin:20px">
-    <app-button-filter (change)="add($event)" [filters]="filtersPets"></app-button-filter>
-</div>
+<div class="pets_container ">
+    <div class="pets_container-btnAdd">
+        <div class="pets_container-btnAdd-animate">
+            <h1>
+                {{"pets.title" | translate}} </h1>
 
-<div style="margin:20px">
-    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.species"></app-select>
-    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.species"></app-select>
-    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.species"></app-select>
-    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.species"></app-select>
-    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.species"></app-select>
-    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.species"></app-select>
-</div>
+            <div class="toggle-item-container" (click)="clickEvent()"
+                [ngClass]="status ?'' : 'toggle-item-container-animated' ">
+                <div class="toggle-item-2">Przebywające</div>
+                <div class="toggle-item-2">Wydane</div>
+            </div>
+            <div class="toggle-btn" (click)="clickEvent()">
+                <mat-icon>
+                    swap_vert
+                </mat-icon>
+            </div>
+        </div>
+
+        <button mat-flat-button color="accent">
+            {{"pets.addPets" | translate}}
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
+
+    <div class="pets_container-main">
+        <div class="demo-section">
+            <button mat-raised-button color="primary" matBadge="8" matBadgePosition="before" matBadgeColor="accent">
+                {{"pets.controlToOut" | translate}}
+            </button>
+        </div>
+        <div class="demo-section">
+            <button mat-raised-button color="primary" matBadge="8" matBadgePosition="before" matBadgeColor="accent">
+                {{"pets.controlToVaccination" | translate}}
+            </button>
+        </div>
+
+    </div>
 
 
-<div style="margin:20px">
-    <app-data-picker placeholder="pets.dataPickerPlaceholder"></app-data-picker>
-</div>
+    <div class="pets_container-row">
+        <div class="pets_container-filtr">
 
-<div style="margin:20px">
-    <app-search placeholder="pets.searchPlaceholder"></app-search>
-</div>
+            <h3>Wyszukiwarka</h3>
+            <div style="font-size: 14px" class="pets_container-filtr-primary">
+                <app-search placeholder="pets.searchPlaceholder"></app-search>
+                <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.species">
+                </app-select>
+                <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.breed">
+                </app-select>
+                <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.community">
+                </app-select>
+                <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.area">
+                </app-select>
+                <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.gender">
+                </app-select>
+            </div>
 
-<section class="example-section" [formGroup]="toppings">
-    <p>
-        <mat-checkbox formControlName="cuarantine">{{"pets.cuarantine" | translate}}</mat-checkbox>
-    </p>
-    <p>
-        <mat-checkbox formControlName="unvaccinated">{{"pets.unvaccinated" |translate}} </mat-checkbox>
-    </p>
-</section>
+            <h3>Filtracja</h3>
+            <div style="font-size: 14px" class="pets_container-filtr-add">
+                <app-select (change)="chooseSelect($event)" [values]="filtersAddPets" placeholder="pets.size">
+                </app-select>
+                <app-select (change)="chooseSelect($event)" [values]="filtersAddPets" placeholder="pets.color">
+                </app-select>
+                <app-select (change)="chooseSelect($event)" [values]="filtersAddPets" placeholder="pets.castred">
+                </app-select>
+                <app-data-picker placeholder="pets.dataPickerBirth"></app-data-picker>
+                <app-data-picker placeholder="pets.dataPickerAccepted"></app-data-picker>
 
-<div style="margin:20px">
-    <app-button-filter (change)="add($event)" [filters]="filtersAddPets"></app-button-filter>
+
+                <section style="font-size: 14px" class="example-section" [formGroup]="toppings">
+                    <p>
+                        <mat-checkbox formControlName="cuarantine">{{"pets.cuarantine" | translate}}</mat-checkbox>
+                    </p>
+                    <p>
+                        <mat-checkbox formControlName="unvaccinated">{{"pets.unvaccinated" |translate}} </mat-checkbox>
+                    </p>
+                </section>
+            </div>
+        </div>
+    </div>
+
 </div>
