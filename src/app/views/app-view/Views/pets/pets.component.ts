@@ -9,10 +9,7 @@ import { Select } from '../../components/select/select';
   styleUrls: ['./pets.component.scss'],
 })
 export class PetsComponent implements OnInit {
-  public filtersAddPets: ButtonFilter[] = [
-    { id: 0, name: 'pets.filterNoCastrated' },
-    { id: 1, name: 'pets.filterCastrated' },
-  ];
+  status: boolean = false;
   public filtersPets: ButtonFilter[] = [
     { id: 0, name: 'pets.current' },
     { id: 1, name: 'pets.past' },
@@ -20,6 +17,10 @@ export class PetsComponent implements OnInit {
   public arrayOfSpecies: Select[] = [
     { id: 0, name: 'kot' },
     { id: 1, name: 'pies' },
+  ];
+  public filtersAddPets: Select[] = [
+    { id: 0, name: 'pets.filterNoCastrated' },
+    { id: 1, name: 'pets.filterCastrated' },
   ];
   constructor(private _formBuilder: FormBuilder) {}
   toppings = this._formBuilder.group({
@@ -34,5 +35,8 @@ export class PetsComponent implements OnInit {
   }
   chooseSelect(event: Select[]) {
     console.log(event);
+  }
+  clickEvent() {
+    this.status = !this.status;
   }
 }
