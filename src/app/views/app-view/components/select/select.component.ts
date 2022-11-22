@@ -11,12 +11,9 @@ import { Select } from './select';
 export class SelectComponent implements OnInit {
   @Input() values: Select[] = [];
   @Input() placeholder: string = '';
-  @Output() change: EventEmitter<Select[]> = new EventEmitter<
-    Select[]
-  >();
-  
+  @Output() change: EventEmitter<Select> = new EventEmitter<Select>();
 
-  public control = new FormControl('');
+  public controlSelect = new FormControl('');
   constructor() {}
 
   ngOnInit(): void {}

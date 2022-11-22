@@ -1,17 +1,26 @@
 {
   "pets": {
     "title": "Zwierzęta",
+    "name": "Imię",
     "species": "Gatunek",
     "breed": "Rasa",
     "community": "Gmina",
     "area": "Rejon",
     "gender": "Płeć",
     "size": "Rozmiar",
-    "color": "maść",
+    "color": "Maść",
     "castred": "Styrylizacja",
+    "ID": "Identyfikator",
+    "registerType": "Typ przyjęcia",
+    "handOverTheAnimal": "Wydaj zwierzę",
+    "questionAboutHandOverTheAnimal": "Czy napewno chcesz wydać zwierzę?",
+    "nr-chip": "Nr-chipa",
     "searchPlaceholder": " Wyszukaj imię, nr-chipa",
-    "dataPickerBirth": "Data urodzenia od - do",
-    "dataPickerAccepted": "Data przyjęcia od - do",
+    "datePickerBirth": "Data urodzenia",
+    "datePickerBirthFromTo": "Data urodzenia od - do",
+    "datePickerAccepted": "Data przyjęcia od - do",
+    "dateRegister": "Data rejestracji",
+    "dateCuarantineTo": "Kwarantanna do",
     "cuarantine": "Na kwarantannie",
     "unvaccinated": "Niezaszczepione",
     "filterNoCastrated": "Niewykastrowane/Niewysterylizowane",
@@ -20,7 +29,9 @@
     "past": "Wydane",
     "addPets": "Dodaj nowe zwierzę",
     "controlToVaccination": "Kontrola szczepień",
-    "controlToOut": "Kontrola wydania"
+    "controlToOut": "Kontrola wydania",
+    "search": "Wyszukaj",
+    "description": "Opis zwierzęcia"
   },
   "people": {
     "title": "Ludzie"

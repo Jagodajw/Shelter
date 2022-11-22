@@ -12,6 +12,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
+import { MatTableModule } from '@angular/material/table';
+import { MatMenuModule } from '@angular/material/menu';
+import { PopupRegisterModule } from './components/popup-register/popup-register.module';
+import { AutocompleteModule } from '../../components/autocomplete/autocomplete.module';
 
 @NgModule({
   declarations: [PetsComponent],
@@ -29,6 +33,10 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatButtonModule,
     MatIconModule,
     MatBadgeModule,
+    MatTableModule,
+    MatMenuModule,
+    PopupRegisterModule,
+    AutocompleteModule,
   ],
 })
 export class PetsModule {}

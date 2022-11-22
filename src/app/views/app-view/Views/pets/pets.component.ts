@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { MatTableDataSource } from '@angular/material/table';
 import { ButtonFilter } from '../../components/button-filter/button-filter';
 import { Select } from '../../components/select/select';
+import { PetsTableInterface } from './pets-table-interface';
+import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pets',
@@ -9,7 +13,22 @@ import { Select } from '../../components/select/select';
   styleUrls: ['./pets.component.scss'],
 })
 export class PetsComponent implements OnInit {
+  private petsType: PetsTableInterface[] = [];
+  public petsTable = new MatTableDataSource<PetsTableInterface>(this.petsType);
   status: boolean = false;
+
+  public displayedColumns: string[] = [
+    'name',
+    'species',
+    'breed',
+    'gender',
+    'community',
+    'area',
+    'ID',
+    'Nr-chip',
+    'handOverTheAnimal',
+  ];
+
   public filtersPets: ButtonFilter[] = [
     { id: 0, name: 'pets.current' },
     { id: 1, name: 'pets.past' },
@@ -22,8 +41,24 @@ export class PetsComponent implements OnInit {
     { id: 0, name: 'pets.filterNoCastrated' },
     { id: 1, name: 'pets.filterCastrated' },
   ];
-  constructor(private _formBuilder: FormBuilder) {}
-  toppings = this._formBuilder.group({
+
+  public dataPets: PetsTableInterface[] = [
+    {
+      id: 0,
+      name: 'RIKI',
+      species: 'Pies',
+      breed: ' dachowiec',
+      community: 'Tychy',
+      area: 'tychy',
+      gender: ' suczka',
+      numberChip: 13123,
+      identificator: 'P/1',
+    },
+  ];
+  dataSource = this.dataPets;
+
+  constructor(private _form: FormBuilder) {}
+  toppings = this._form.group({
     cuarantine: false,
     unvaccinated: false,
   });
@@ -33,10 +68,15 @@ export class PetsComponent implements OnInit {
   add(event: number) {
     console.log(event);
   }
-  chooseSelect(event: Select[]) {
+  chooseSelect(event: Select) {
+    console.log(event);
+  }
+  chooseAutocomplete(event: Select) {
     console.log(event);
   }
   clickEvent() {
     this.status = !this.status;
   }
+
+  outPet(element: PetsTableInterface): void {}
 }

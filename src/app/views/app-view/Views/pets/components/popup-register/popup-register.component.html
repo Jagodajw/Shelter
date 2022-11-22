@@ -1,0 +1,36 @@
+<form [formGroup]="registerPetsForm">
+    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" placeholder="pets.species">
+    </app-autocomplete>
+    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" placeholder="pets.breed">
+    </app-autocomplete>
+    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" arrayOfSpecies="pets.color">
+    </app-autocomplete>
+    <app-data-picker placeholder="pets.datePickerBirth"></app-data-picker>
+
+    <mat-form-field>
+        <textarea matInput placeholder="pets.description">
+        </textarea>
+    </mat-form-field>
+
+    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" placeholder="pets.community">
+    </app-autocomplete>
+    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" placeholder="pets.area">
+    </app-autocomplete>
+
+    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.gender">
+    </app-select>
+    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.size">
+    </app-select>
+
+
+
+
+    <app-data-picker placeholder="pets.dateRegister"></app-data-picker>
+    <app-data-picker placeholder="pets.dateCuarantineTo"></app-data-picker>
+    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.castred">
+    </app-select>
+    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+        arrayOfSpecies="pets.registerType">
+    </app-autocomplete>
+
+</form>
