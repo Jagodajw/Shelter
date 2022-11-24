@@ -37,6 +37,13 @@ const routes: Routes = [
           import('./Views/stats/stats.module').then((m) => m.StatsModule),
       },
       {
+        path: 'pet-detail/:id',
+        loadChildren: () =>
+          import('./Views/pet-detail/pet-detail.module').then(
+            (m) => m.PetDetailModule
+          ),
+      },
+      {
         path: '',
         redirectTo: 'pets',
         pathMatch: 'full',

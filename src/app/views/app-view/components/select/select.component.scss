@@ -1,12 +1,11 @@
 :host {
-  padding-right: 10px;
+  display: block;
+  // padding: 0 5px;
   ::ng-deep {
     .mat-form-field-appearance-outline .mat-form-field-infix {
       padding: 0.75em 0 0.75em 0;
     }
-    .mat-form-field-infix {
-      width: 120px;
-    }
+
     // .mat-form-field-appearance-outline .mat-form-field-infix {
     //   //   padding: 0;
     // }

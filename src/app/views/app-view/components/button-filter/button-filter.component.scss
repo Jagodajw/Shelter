@@ -1,30 +1,28 @@
 :host {
+  display: block;
   ::ng-deep {
     .mat-button-toggle-checked {
-      background-color: rgb(91, 134, 228);
+      background-color: rgb(140, 127, 255) !important;
       color: white !important;
     }
     .mat-button-toggle-group-appearance-standard
       .mat-button-toggle
       + .mat-button-toggle {
-      border-left: 2px solid rgb(45, 111, 209);
+      border-left: 1px solid rgb(140, 127, 255);
     }
     .mat-button-toggle-group {
-      border: solid 1px rgb(45, 111, 209);
+      border: solid 1px rgb(140, 127, 255);
     }
   }
 
   .btn {
-    &:first-child {
-      border-radius: 2rem;
-    }
-
     &__toggle {
       font-size: 1rem;
-      color: rgb(45, 111, 209);
+      background-color: white;
+      color: rgb(140, 127, 255);
     }
     &__toggle:hover {
-      background-color: rgb(91, 134, 228);
+      background-color: rgb(140, 127, 255);
       color: white;
     }
   }

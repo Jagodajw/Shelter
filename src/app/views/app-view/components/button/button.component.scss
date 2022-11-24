@@ -1,0 +1,51 @@
+.button {
+  &--raised {
+    color: white;
+    border-color: #514edd;
+    background-color: #514edd;
+
+    &.mat-button-disabled {
+      color: #fff;
+      background-color: rgba(0, 0, 0, 0.12);
+    }
+
+    ::ng-deep .mat-spinner {
+      circle {
+        stroke: #fff;
+      }
+    }
+  }
+
+  &--stroked {
+
+    ::ng-deep {
+      &.mat-button-disabled .mat-ripple {
+        border-color: #dfd7d7;
+      }
+
+      .mat-spinner circle {
+        stroke: #514edd;
+      }
+    }
+  }
+
+  &--icon {
+    ::ng-deep &.mat-button-disabled .mat-ripple {
+      border-color: #dfd7d7;
+    }
+  }
+
+  &--cancelable {
+    color: rgb(238, 38, 38);
+    background: #fff;
+  }
+
+  &--widest {
+    width: 100%;
+  }
+
+  &--disabled {
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.12);
+  }
+}

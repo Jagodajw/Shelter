@@ -9,6 +9,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { SearchModule } from './components/search/search.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { PetDetailModule } from './Views/pet-detail/pet-detail.module';
 
 @NgModule({
   declarations: [AppViewComponent, HeaderComponent],
@@ -21,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatTabsModule,
     SearchModule,
     TranslateModule,
+    PetDetailModule,
   ],
 })
 export class AppViewModule {}

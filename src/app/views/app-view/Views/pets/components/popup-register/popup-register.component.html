@@ -1,36 +1,140 @@
-<form [formGroup]="registerPetsForm">
-    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" placeholder="pets.species">
-    </app-autocomplete>
-    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" placeholder="pets.breed">
-    </app-autocomplete>
-    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" arrayOfSpecies="pets.color">
-    </app-autocomplete>
-    <app-data-picker placeholder="pets.datePickerBirth"></app-data-picker>
+<div class="register">
+    <form>
+        <div class="register__animals-title">
+            <h1 mat-dialog-title>{{'pets.titleRegisterAnimal' | translate}}</h1>
+        </div>
 
-    <mat-form-field>
-        <textarea matInput placeholder="pets.description">
-        </textarea>
-    </mat-form-field>
+        <mat-dialog-content class="register__animals">
+            <h2>{{'pets.dataRegisterAnimal' | translate}}</h2>
 
-    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" placeholder="pets.community">
-    </app-autocomplete>
-    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" placeholder="pets.area">
-    </app-autocomplete>
+            <div class="input-row">
+                <mat-form-field class="input-quarter">
+                    <mat-label>{{'pets.name' | translate}}</mat-label>
+                    <input matInput placeholder="{{'pets.name' | translate}}">
+                </mat-form-field>
 
-    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.gender">
-    </app-select>
-    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.size">
-    </app-select>
+                <span class="inline input-quarter">
+                    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                        placeholder="pets.species">
+                    </app-autocomplete>
+                </span>
+
+                <span class="inline input-quarter">
+                    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                        placeholder="pets.breed">
+                    </app-autocomplete>
+                </span>
+
+                <mat-form-field class="input-quarter">
+                    <mat-label>{{'pets.nr-chip' | translate}}</mat-label>
+                    <input matInput placeholder="{{'pets.nr-chip' | translate}}">
+                </mat-form-field>
+            </div>
+
+            <div class="input-row">
+                <mat-form-field class="input-quarter">
+                    <mat-label>{{'pets.ID' | translate}}</mat-label>
+                    <input matInput placeholder="{{'pets.ID' | translate}}">
+                </mat-form-field>
+                <div class="input-quarter">
+                    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                        placeholder="pets.color">
+                    </app-autocomplete>
+                </div>
+                <div class="input-quarter">
+                    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                        placeholder="pets.community">
+                    </app-autocomplete>
+                </div>
+                <div class="input-quarter">
+                    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                        placeholder="pets.area">
+                    </app-autocomplete>
+                </div>
+            </div>
+
+            <div class="input-row">
+                <div class="input-third">
+                    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.gender">
+                    </app-select>
+                </div>
+                <div class="input-third">
+                    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.size">
+                    </app-select>
+                </div>
+                <div class="input-third">
+                    <app-data-picker placeholder="pets.datePickerBirth"></app-data-picker>
+                </div>
+            </div>
+
+            <div class="input-row">
+                <mat-form-field class="input-full">
+                    <mat-label>{{'pets.description' | translate}}</mat-label>
+                    <textarea rows="1" matInput></textarea>
+                </mat-form-field>
+            </div>
+
+            <app-data-person-donor></app-data-person-donor>
+
+
+            <h2>{{'pets.dataRegister' | translate}}</h2>
 
 
 
+            <div class="input-row">
+                <div class="input-quarter">
+                    <app-data-picker placeholder="pets.dateRegister"></app-data-picker>
+                </div>
+                <div class="input-quarter">
+                    <app-data-picker placeholder="pets.dateCuarantineTo"></app-data-picker>
+                </div>
+                <div class="input-quarter">
+                    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.castred">
+                    </app-select>
+                </div>
+                <div class="input-quarter">
+                    <app-data-picker placeholder="pets.dateCastred"></app-data-picker>
+                </div>
+            </div>
 
-    <app-data-picker placeholder="pets.dateRegister"></app-data-picker>
-    <app-data-picker placeholder="pets.dateCuarantineTo"></app-data-picker>
-    <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.castred">
-    </app-select>
-    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-        arrayOfSpecies="pets.registerType">
-    </app-autocomplete>
+            <div class="input-row">
 
-</form>
+                <div class="input-third">
+                    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                        placeholder="pets.registerType">
+                    </app-autocomplete>
+                </div>
+
+                <div class="input-third">
+                    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                        placeholder="pets.introduced">
+                    </app-autocomplete>
+                </div>
+                <div class="input-third">
+                    <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                        placeholder="pets.accepted">
+                    </app-autocomplete>
+                </div>
+
+            </div>
+
+            <div class="input-row">
+                <mat-form-field class="input-full">
+                    <mat-label>{{'pets.commentsRegister' | translate}}</mat-label>
+                    <textarea rows="1" matInput placeholder="{{'pets.comments' | translate}}">
+                    </textarea>
+                </mat-form-field>
+            </div>
+
+
+            <mat-dialog-actions align="end" class="register__animals-btn">
+                <app-button type="button" variant="cancelable" mat-dialog-close>
+                    {{ 'action.cancel' | translate }}
+                </app-button>
+                <app-button type="submit" variant="raised">
+                    {{ 'action.accept' | translate }}
+                </app-button>
+            </mat-dialog-actions>
+        </mat-dialog-content>
+    </form>
+</div>

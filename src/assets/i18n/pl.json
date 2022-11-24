@@ -9,9 +9,11 @@
     "gender": "Płeć",
     "size": "Rozmiar",
     "color": "Maść",
-    "castred": "Styrylizacja",
+    "castred": "Sterylizacja",
     "ID": "Identyfikator",
     "registerType": "Typ przyjęcia",
+    "introduced": "Wprowadził",
+    "accepted": "Przyjął",
     "handOverTheAnimal": "Wydaj zwierzę",
     "questionAboutHandOverTheAnimal": "Czy napewno chcesz wydać zwierzę?",
     "nr-chip": "Nr-chipa",
@@ -31,10 +33,35 @@
     "controlToVaccination": "Kontrola szczepień",
     "controlToOut": "Kontrola wydania",
     "search": "Wyszukaj",
-    "description": "Opis zwierzęcia"
+    "description": "Opis zwierzęcia",
+    "comments": "Uwagi",
+    "commentsRegister": "Uwagi rejestacji",
+    "dataRegisterAnimal": "Dane przyjmowanego zwierzęcia",
+    "dataRegister": "Informacje rejestracji",
+    "dateCastred": "Data kastracji",
+    "titleRegisterAnimal": "Rejestracja zwierzęcia",
+    "out": {
+      "data": "Dane wydawanego zwierzęcia",
+      "type": "Rodzaj wydania",
+      "date": " Data wydania",
+      "comments": "Uwagi wydania"
+    }
   },
   "people": {
-    "title": "Ludzie"
+    "title": "Ludzie",
+    "dataPerson": "Dane oddającego",
+    "personType": "Typ osoby",
+    "personName": "Imię i nawisko",
+    "name": "Nazwa",
+    "adress": "Adres",
+    "city": "Miejscowość",
+    "zip-code": "Kod-pocztowy",
+    "province": "Województwo",
+    "IDnumber": "Numer dowodu",
+    "pesel": "Pesel",
+    "tel": "Telefon",
+    "email": "E-mail",
+    "nip": "NIP"
   },
   "stats": {
     "title": "Statystyki"
@@ -53,5 +80,9 @@
   "authView": {
     "logout": "Wyloguj się",
     "switchAccount": "Przełącz schronisko"
+  },
+  "action": {
+    "cancel": "Anuluj",
+    "accept": "Zarejestruj"
   }
 }
