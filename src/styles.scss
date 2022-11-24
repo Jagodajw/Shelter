@@ -5,6 +5,11 @@
 @include mat.core();
 @include mat.all-component-themes(theme.$shelter-theme);
 
+* {
+  box-sizing: border-box;
+  outline: none;
+}
+
 html,
 body {
   height: 100%;
@@ -12,4 +17,70 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.input-row {
+  justify-content: center;
+  // flex-wrap: wrap;
+  align-items: center;
+  display: flex;
+}
+
+/* style mat-form-field and input */
+
+.mat-form-field {
+  // width: 50%;
+  padding: 0 5px;
+}
+
+.input-full {
+  width: 100%;
+}
+
+.input-half {
+  width: 50%;
+}
+
+.input-third {
+  width: 33.33%;
+}
+
+.input-third-complement {
+  width: 66%;
+}
+
+.input-quarter {
+  width: 25%;
+}
+
+.input-five {
+  width: 20%;
+}
+.input-quarter-18-7 {
+  width: 18.7%;
+}
+
+.input-quarter-half {
+  width: 12.5%;
+}
+.inline {
+  display: inline-block;
+}
+.input-70 {
+  width: 70%;
+}
+.modal-without-padding {
+  .mat-dialog-container {
+    padding: 0;
+  }
+  .mat-dialog-title {
+    padding: 10px;
+  }
+
+  .mat-dialog-content {
+    overflow-x: hidden;
+    padding: 20px;
+    padding-top: 0;
+    margin: 0;
+  }
 }

@@ -1,0 +1,22 @@
+<button *ngIf="variant === 'stroked'" mat-stroked-button class="button button--stroked" [type]="type"
+    [ngClass]="{ 'button--widest': widthFull }" [disabled]="disabled || isProcessing" (click)="clickEvent.emit()">
+    <ng-template *ngTemplateOutlet="content"></ng-template>
+</button>
+
+<button *ngIf="variant === 'raised' || variant === 'cancelable'" mat-raised-button class="button button--raised"
+    [type]="type" [ngClass]="{
+    'button--cancelable': variant === 'cancelable',
+    'button--widest': widthFull,
+    'button--disabled': disabled
+  }" [disabled]="disabled || isProcessing" (click)="clickEvent.emit()">
+    <ng-template *ngTemplateOutlet="content"></ng-template>
+</button>
+
+<button *ngIf="variant === 'icon'" mat-stroked-button class="button button--icon" [type]="type"
+    [disabled]="disabled || isProcessing" (click)="clickEvent.emit()">
+    <ng-template *ngTemplateOutlet="content"></ng-template>
+</button>
+
+<ng-template #content>
+    <ng-content></ng-content>
+</ng-template>

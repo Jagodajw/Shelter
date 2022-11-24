@@ -16,6 +16,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatMenuModule } from '@angular/material/menu';
 import { PopupRegisterModule } from './components/popup-register/popup-register.module';
 import { AutocompleteModule } from '../../components/autocomplete/autocomplete.module';
+import { MatDialogModule } from '@angular/material/dialog';
+import { PopupOutAnimalModule } from './components/popup-out-animal/popup-out-animal.model';
 
 @NgModule({
   declarations: [PetsComponent],
@@ -35,8 +37,11 @@ import { AutocompleteModule } from '../../components/autocomplete/autocomplete.m
     MatBadgeModule,
     MatTableModule,
     MatMenuModule,
+    MatDialogModule,
     PopupRegisterModule,
     AutocompleteModule,
+    PopupOutAnimalModule,
+    PopupRegisterModule,
   ],
 })
 export class PetsModule {}

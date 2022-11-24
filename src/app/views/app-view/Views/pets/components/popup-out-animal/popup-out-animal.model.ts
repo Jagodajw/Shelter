@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { PopupRegisterComponent } from './popup-register.component';
 import { AutocompleteModule } from 'src/app/views/app-view/components/autocomplete/autocomplete.module';
 import { SelectModule } from 'src/app/views/app-view/components/select/select.module';
 import { DataPickerModule } from '../data-picker/data-picker.module';
@@ -12,10 +11,11 @@ import { DataPersonDonorModule } from 'src/app/views/app-view/components/data-pe
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonModule } from 'src/app/views/app-view/components/button/button.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { PopupOutAnimalComponent } from './popup-out-animal.component';
 
 @NgModule({
-  declarations: [PopupRegisterComponent],
-  exports: [PopupRegisterComponent],
+  declarations: [PopupOutAnimalComponent],
+  exports: [PopupOutAnimalComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -32,4 +32,4 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatDialogModule,
   ],
 })
-export class PopupRegisterModule {}
+export class PopupOutAnimalModule {}
