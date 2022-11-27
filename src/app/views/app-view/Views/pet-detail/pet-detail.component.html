@@ -1,1 +1,33 @@
-<p>pet-detail works!</p>
+<div class="pet-detail">
+    <mat-tab-group>
+        <mat-tab label="Dane przyjętego zwierzęcia">
+            <form>
+                <mat-dialog-content class="pet-detail_content">
+
+                    <app-data-pet-register></app-data-pet-register>
+
+                    <app-data-person-donor></app-data-person-donor>
+
+                    <app-data-register></app-data-register>
+
+
+                </mat-dialog-content>
+            </form>
+        </mat-tab>
+
+        <mat-tab label="Dane wydanego zwierzęcia">
+            <form>
+                <mat-dialog-content class="pet-detail_content">
+
+                    <app-data-pet-out></app-data-pet-out>
+                    <app-data-person-take-away></app-data-person-take-away>
+
+                </mat-dialog-content>
+            </form>
+        </mat-tab>
+
+        <mat-tab label="Dokumenty">
+            <app-drop-document></app-drop-document>
+        </mat-tab>
+    </mat-tab-group>
+</div>

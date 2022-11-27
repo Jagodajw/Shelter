@@ -1,32 +1,34 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ButtonFilterModule } from '../../components/button-filter/button-filter.module';
-import { MatCheckboxModule } from '@angular/material/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatTableModule } from '@angular/material/table';
-import { MatMenuModule } from '@angular/material/menu';
 import { PetDetailRoutingModule } from './pet-detail-routing.module';
 import { PetDetailComponent } from './pet-detail.component';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DataPersonDonorModule } from '../../components/data-person-donor/data-person-donor.module';
+import { DataPetRegisterModule } from '../../components/data-pet-register/data-pet-register.module';
+import { DataRegisterModule } from '../../components/data-register/data-register.module';
+import { DataPetOutModule } from '../../components/data-pet-out/date-pet-out.module';
+import { DataPersonTakeAwayModule } from '../../components/data-person-take-away/data-person-take-away.module';
+import { DropDocumentModule } from '../../components/drop-document/drop-document.module';
 
 @NgModule({
   declarations: [PetDetailComponent],
   imports: [
     CommonModule,
     PetDetailRoutingModule,
-    ButtonFilterModule,
-    MatCheckboxModule,
     ReactiveFormsModule,
     FormsModule,
     TranslateModule,
-    MatButtonModule,
-    MatIconModule,
-    MatBadgeModule,
-    MatTableModule,
-    MatMenuModule,
+    MatTabsModule,
+    MatDialogModule,
+    DataPersonDonorModule,
+    DataPetRegisterModule,
+    DataRegisterModule,
+    DataPetOutModule,
+    DataPersonTakeAwayModule,
+    DropDocumentModule,
   ],
 })
 export class PetDetailModule {}

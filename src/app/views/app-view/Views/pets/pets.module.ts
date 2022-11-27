@@ -13,7 +13,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatTableModule } from '@angular/material/table';
-import { MatMenuModule } from '@angular/material/menu';
+
 import { PopupRegisterModule } from './components/popup-register/popup-register.module';
 import { AutocompleteModule } from '../../components/autocomplete/autocomplete.module';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -36,12 +36,12 @@ import { PopupOutAnimalModule } from './components/popup-out-animal/popup-out-an
     MatIconModule,
     MatBadgeModule,
     MatTableModule,
-    MatMenuModule,
     MatDialogModule,
     PopupRegisterModule,
     AutocompleteModule,
     PopupOutAnimalModule,
     PopupRegisterModule,
+    
   ],
 })
 export class PetsModule {}

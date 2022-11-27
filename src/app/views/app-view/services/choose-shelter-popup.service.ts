@@ -19,7 +19,7 @@ export class ChooseShelterPopupService {
 
   openDialog(): void {
     const dialogRef = this.dialog.open(ChooseShelterPopupComponenet, {
-      width: '50%',
+      panelClass: 'shelter-choose-popup',
     });
 
     dialogRef.afterClosed().subscribe((res) => {

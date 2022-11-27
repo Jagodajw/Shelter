@@ -12,6 +12,8 @@ import { DataPersonDonorModule } from 'src/app/views/app-view/components/data-pe
 import { MatButtonModule } from '@angular/material/button';
 import { ButtonModule } from 'src/app/views/app-view/components/button/button.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { DataPetRegisterModule } from 'src/app/views/app-view/components/data-pet-register/data-pet-register.module';
+import { DataRegisterModule } from 'src/app/views/app-view/components/data-register/data-register.module';
 
 @NgModule({
   declarations: [PopupRegisterComponent],
@@ -30,6 +32,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatButtonModule,
     ButtonModule,
     MatDialogModule,
+    DataPetRegisterModule,
+    DataRegisterModule,
   ],
 })
 export class PopupRegisterModule {}
