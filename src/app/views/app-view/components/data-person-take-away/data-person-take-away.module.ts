@@ -5,14 +5,14 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { DataPersonDonorComponent } from './data-person-donor.component';
 import { AutocompleteModule } from '../autocomplete/autocomplete.module';
 import { ButtonFilterModule } from '../button-filter/button-filter.module';
 import { MatTabsModule } from '@angular/material/tabs';
+import { DataPersonTakeAwayComponent } from './data-person-take-away.component';
 
 @NgModule({
-  declarations: [DataPersonDonorComponent],
-  exports: [DataPersonDonorComponent],
+  declarations: [DataPersonTakeAwayComponent],
+  exports: [DataPersonTakeAwayComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,4 +26,4 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatTabsModule,
   ],
 })
-export class DataPersonDonorModule {}
+export class DataPersonTakeAwayModule {}

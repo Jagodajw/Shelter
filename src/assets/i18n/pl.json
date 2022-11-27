@@ -50,6 +50,7 @@
   "people": {
     "title": "Ludzie",
     "dataPerson": "Dane oddającego",
+    "dataPersonTakeAway": "Dane odbierającego",
     "personType": "Typ osoby",
     "personName": "Imię i nawisko",
     "name": "Nazwa",

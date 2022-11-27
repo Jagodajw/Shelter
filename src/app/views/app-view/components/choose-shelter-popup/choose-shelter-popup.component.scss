@@ -1,59 +1,62 @@
-::ng-deep .mat-dialog-container {
-  background: rgb(45, 111, 209);
-  background: linear-gradient(
-    -180deg,
-    rgb(104, 103, 185) 0%,
-    rgb(91, 134, 228) 100%,
-    rgba(193, 193, 200, 1) 60%
-  );
-}
+:host {
+  .popup-container {
+    // ::ng-deep .mat-dialog-container {
+    //   background: rgb(45, 111, 209);
+    //   background: linear-gradient(
+    //     -180deg,
+    //     rgb(104, 103, 185) 0%,
+    //     rgb(91, 134, 228) 100%,
+    //     rgba(193, 193, 200, 1) 60%
+    //   );
+    // }
 
-.popup-container {
-  &-title {
-    color: azure;
-    h1 {
-      font-size: 3rem;
-      display: flex;
-      justify-content: center;
-      text-align: center;
-    }
-  }
-  &-cards {
-    ul {
-      margin: 0;
-      padding: 0 !important;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      li {
-        list-style: none;
-        display: inline-block;
-        margin-bottom: 10px;
+    &-title {
+      color: #514edd;
+      h1 {
+        font-size: 3rem;
+        display: flex;
+        justify-content: center;
+        text-align: center;
       }
     }
-    &-item {
-      width: 100%;
-      background-color: rgb(104, 103, 185);
-      border-radius: 5%;
-      box-shadow: 0 0 5px rgb(255, 255, 255);
-      display: flex;
-      cursor: pointer;
-      & h2 {
-        writing-mode: vertical-rl;
-        text-orientation: upright;
+    &-cards {
+      ul {
+        margin: 0;
+        padding: 0 !important;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        li {
+          list-style: none;
+          display: inline-block;
+          margin-bottom: 10px;
+        }
+      }
+      &-item {
+        width: 100%;
         background-color: rgb(104, 103, 185);
-        align-self: center;
-        color: azure;
-      }
-      & img {
-        object-fit: cover;
-        border-top-right-radius: 5%;
-        border-bottom-right-radius: 5%;
+        border-radius: 5%;
+        box-shadow: 0 0 5px rgb(104, 103, 185);
+        display: flex;
+        cursor: pointer;
+        & h2 {
+          writing-mode: vertical-rl;
+          text-orientation: upright;
+          background-color: rgb(104, 103, 185);
+          align-self: center;
+          color: azure;
+        }
+        & img {
+          object-fit: cover;
+          border-top-right-radius: 5%;
+          border-bottom-right-radius: 5%;
+          border: 1px solid rgb(104, 103, 185);
+        }
       }
     }
-  }
 
-  &-item:hover {
-    transform: translateY(-5px) scale(1.005) translateZ(0);
+    &-item:hover {
+      transform: translateY(-5px) scale(1.005) translateZ(0);
+    }
   }
 }

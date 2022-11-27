@@ -1,0 +1,49 @@
+<div class="dataRegister">
+    <h2>{{'pets.dataRegister' | translate}}</h2>
+
+
+    <div class="input-row">
+        <div class="input-quarter">
+            <app-data-picker placeholder="pets.dateRegister"></app-data-picker>
+        </div>
+        <div class="input-quarter">
+            <app-data-picker placeholder="pets.dateCuarantineTo"></app-data-picker>
+        </div>
+        <div class="input-quarter">
+            <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.castred">
+            </app-select>
+        </div>
+        <div class="input-quarter">
+            <app-data-picker placeholder="pets.dateCastred"></app-data-picker>
+        </div>
+    </div>
+
+    <div class="input-row">
+
+        <div class="input-third">
+            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                placeholder="pets.registerType">
+            </app-autocomplete>
+        </div>
+
+        <div class="input-third">
+            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                placeholder="pets.introduced">
+            </app-autocomplete>
+        </div>
+        <div class="input-third">
+            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                placeholder="pets.accepted">
+            </app-autocomplete>
+        </div>
+
+    </div>
+
+    <div class="input-row">
+        <mat-form-field class="input-full">
+            <mat-label>{{'pets.commentsRegister' | translate}}</mat-label>
+            <textarea rows="1" matInput placeholder="{{'pets.comments' | translate}}">
+                    </textarea>
+        </mat-form-field>
+    </div>
+</div>
