@@ -1,0 +1,7 @@
+<div class="file-upload">
+    <button type="button" mat-raised-button (click)="fileInput.click()">
+<ng-content></ng-content>
+    </button>
+    <input hidden (change)="onFileSelected()" #fileInput type="file" id="file">
+    <span class="file-name"></span>
+</div>

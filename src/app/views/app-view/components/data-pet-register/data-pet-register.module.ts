@@ -10,6 +10,9 @@ import { AutocompleteModule } from '../autocomplete/autocomplete.module';
 import { SelectModule } from '../select/select.module';
 import { DataPickerModule } from '../../Views/pets/components/data-picker/data-picker.module';
 import { DataPetRegisterComponent } from './data-pet-register.component';
+import { PetAvatarModule } from '../pet-avatar/pet-avatar.module';
+import { FileUploadModule } from '../file-upload/file-upload.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [DataPetRegisterComponent],
@@ -26,6 +29,8 @@ import { DataPetRegisterComponent } from './data-pet-register.component';
     AutocompleteModule,
     SelectModule,
     DataPickerModule,
+    PetAvatarModule,
+    MatIconModule,
   ],
 })
 export class DataPetRegisterModule {}

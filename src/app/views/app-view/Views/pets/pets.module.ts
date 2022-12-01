@@ -40,7 +40,7 @@ import { PopupOutAnimalModule } from './components/popup-out-animal/popup-out-an
     PopupRegisterModule,
     AutocompleteModule,
     PopupOutAnimalModule,
-    PopupRegisterModule,
+
     
   ],
 })

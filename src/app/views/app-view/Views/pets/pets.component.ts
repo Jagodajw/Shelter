@@ -17,7 +17,7 @@ import { PetsTableInterface } from './pets-table-interface';
 export class PetsComponent implements OnInit {
   private petsType: PetsTableInterface[] = [];
   public petsTable = new MatTableDataSource<PetsTableInterface>(this.petsType);
-  status: boolean = false;
+  public status: boolean = false;
 
   constructor(
     private _form: FormBuilder,
@@ -88,12 +88,14 @@ export class PetsComponent implements OnInit {
   outPet(): void {
     this.dialog.open(PopupOutAnimalComponent, {
       panelClass: ['input-70', 'modal-without-padding'],
+      disableClose: true,
     });
   }
 
   openDialog(): void {
     this.dialog.open(PopupRegisterComponent, {
       panelClass: ['input-70', 'modal-without-padding'],
+      disableClose: true,
     });
   }
 

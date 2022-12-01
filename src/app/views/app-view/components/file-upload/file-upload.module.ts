@@ -2,13 +2,13 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { DropDocumentComponent } from './drop-document.component';
+import { FileUploadComponent } from './file-upload.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [DropDocumentComponent],
-  exports: [DropDocumentComponent],
+  declarations: [FileUploadComponent],
+  exports: [FileUploadComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -18,4 +18,4 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
   ],
 })
-export class DropDocumentModule {}
+export class FileUploadModule {}

@@ -145,15 +145,12 @@
                     {{"pets.handOverTheAnimal" | translate}}
                 </th>
                 <td mat-cell *matCellDef="let petsRowModel" class="settings__menu-box">
-                    <div (click)="$event.stopPropagation()">
-                        <button mat-icon-button (click)="outPet()">
-                            <mat-icon>
-                                home
-                            </mat-icon>
-                        </button>
-                    </div>
 
-
+                    <button mat-icon-button (click)="$event.stopPropagation()" (click)="outPet()">
+                        <mat-icon>
+                            home
+                        </mat-icon>
+                    </button>
 
                 </td>
             </ng-container>

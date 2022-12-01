@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DropDocumentComponent } from './drop-document.component';
+import { PetAvatarComponent } from './pet-avatar.component';
 
-describe('DropDocumentComponent', () => {
-  let component: DropDocumentComponent;
-  let fixture: ComponentFixture<DropDocumentComponent>;
+describe('PetAvatarComponent', () => {
+  let component: PetAvatarComponent;
+  let fixture: ComponentFixture<PetAvatarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DropDocumentComponent ]
+      declarations: [ PetAvatarComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DropDocumentComponent);
+    fixture = TestBed.createComponent(PetAvatarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
