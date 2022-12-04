@@ -1,7 +1,7 @@
 <div class="pet-detail">
     <mat-tab-group>
         <mat-tab label="Dane przyjętego zwierzęcia">
-            <form>
+            <form [formGroup]="detailPetsForm">
                 <div class="pet-detail_content">
 
                     <app-data-pet-register></app-data-pet-register>
@@ -10,13 +10,12 @@
 
                     <app-data-register></app-data-register>
 
-
                 </div>
             </form>
         </mat-tab>
 
         <mat-tab label="Dane wydanego zwierzęcia">
-            <form>
+            <form [formGroup]="detailPetsOutForm">
                 <div class="pet-detail_content">
 
                     <app-data-pet-out></app-data-pet-out>

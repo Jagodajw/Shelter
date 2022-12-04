@@ -5,6 +5,7 @@ import { DataPersonActionPopupComponent } from './data-person-action-popup.compo
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from '../button/button.module';
 import { MatDialogModule } from '@angular/material/dialog';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DataPersonActionPopupComponent],
@@ -12,6 +13,8 @@ import { MatDialogModule } from '@angular/material/dialog';
   imports: [
     CommonModule,
     DataPersonTakeAwayModule,
+    ReactiveFormsModule,
+    FormsModule,
     TranslateModule,
     ButtonModule,
     MatDialogModule,

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { Select } from 'src/app/views/app-view/components/select/select';
 
 @Component({
@@ -19,20 +18,43 @@ export class PopupRegisterComponent implements OnInit {
 
   public buildForm(): void {
     this.registerPetsForm = this._form.group({
-      Species: ['', Validators.required],
-      Age: ['', Validators.required],
-      Size: ['', Validators.required],
-      Description: [''],
-      Breed: ['', Validators.required],
-      Gender: ['', Validators.required],
-      Color: [''],
-      Comments: [''],
-      ID: ['', Validators.required],
-      Name: ['', Validators.required],
-      NrChip: ['', Validators.required],
-      Area: [''],
-      Community: [''],
-      DateGraft: [''],
+      dataPetRegister: this._form.group({
+        name: ['', Validators.required],
+        species: ['', Validators.required],
+        breed: ['', Validators.required],
+        ID: ['', Validators.required],
+        community: [''],
+        area: [''],
+        color: [''],
+        size: ['', Validators.required],
+        gender: ['', Validators.required],
+        nrChip: ['', Validators.required],
+        dateBirth: ['', Validators.required],
+        description: [''],
+        // DateGraft: [''],
+      }),
+      dataPersonRegister: this._form.group({
+        personName: [''],
+        IDnumber: [''],
+        pesel: [''],
+        email: [''],
+        tel: [''],
+        adress: [''],
+        city: [''],
+        zipCode: [''],
+        province: [''],
+        comments: [''],
+      }),
+      dataRegister: this._form.group({
+        dateRegister: ['', Validators.required],
+        dateCuarantineTo: ['', Validators.required],
+        castred: ['', Validators.required],
+        dateCastred: ['', Validators.required],
+        registerType: [''],
+        introduced: [''],
+        accepted: [''],
+        commentsRegister: [''],
+      }),
     });
   }
 

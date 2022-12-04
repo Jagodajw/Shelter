@@ -1,21 +1,42 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import {
+  Component,
+  EventEmitter,
+  forwardRef,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
+import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Select } from '../select/select';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
+import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 
 @Component({
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => AutocompleteComponent),
+      multi: true,
+    },
+  ],
 })
-export class AutocompleteComponent implements OnInit {
+export class AutocompleteComponent
+  extends ControlValueAccessorsAbstract
+  implements OnInit
+{
   @Input() placeholder: string = '';
   @Input() values: Select[] = [];
   @Output() change: EventEmitter<Select> = new EventEmitter<Select>();
-  constructor() {}
+  constructor() {
+    super();
+  }
 
+  public writeValue(value: unknown): void {}
   public controlAutoSelect = new FormControl('');
 
   selection(event: MatAutocompleteSelectedEvent): void {

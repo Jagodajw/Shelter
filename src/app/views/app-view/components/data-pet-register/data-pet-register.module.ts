@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,7 +10,6 @@ import { SelectModule } from '../select/select.module';
 import { DataPickerModule } from '../../Views/pets/components/data-picker/data-picker.module';
 import { DataPetRegisterComponent } from './data-pet-register.component';
 import { PetAvatarModule } from '../pet-avatar/pet-avatar.module';
-import { FileUploadModule } from '../file-upload/file-upload.module';
 import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
@@ -22,7 +20,6 @@ import { MatIconModule } from '@angular/material/icon';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
-    MatAutocompleteModule,
     MatSelectModule,
     MatFormFieldModule,
     MatInputModule,

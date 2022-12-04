@@ -96,7 +96,7 @@ export class PeopleComponent implements OnInit {
     });
   }
 
-  deletePattern() {}
+  deletePeople() {}
 
   public openPetDetail(petId: number) {
     console.log(petId);

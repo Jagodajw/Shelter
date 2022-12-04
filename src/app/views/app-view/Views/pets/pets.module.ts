@@ -1,23 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ButtonFilterModule } from '../../components/button-filter/button-filter.module';
-import { SearchModule } from '../../components/search/search.module';
-import { SelectModule } from '../../components/select/select.module';
-import { DataPickerModule } from './components/data-picker/data-picker.module';
 import { PetsRoutingModule } from './pets-routing.module';
 import { PetsComponent } from './pets.component';
-import { MatCheckboxModule } from '@angular/material/checkbox';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { MatBadgeModule } from '@angular/material/badge';
-import { MatTableModule } from '@angular/material/table';
-
 import { PopupRegisterModule } from './components/popup-register/popup-register.module';
-import { AutocompleteModule } from '../../components/autocomplete/autocomplete.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { PopupOutAnimalModule } from './components/popup-out-animal/popup-out-animal.model';
+import { PetsTableModule } from '../../components/pets-table/pets-table.module';
+import { SearchEngineModule } from './components/search-engine/search-engine.module';
 
 @NgModule({
   declarations: [PetsComponent],
@@ -25,23 +18,14 @@ import { PopupOutAnimalModule } from './components/popup-out-animal/popup-out-an
     CommonModule,
     PetsRoutingModule,
     ButtonFilterModule,
-    SelectModule,
-    DataPickerModule,
-    SearchModule,
-    MatCheckboxModule,
-    ReactiveFormsModule,
-    FormsModule,
     TranslateModule,
     MatButtonModule,
     MatIconModule,
-    MatBadgeModule,
-    MatTableModule,
     MatDialogModule,
     PopupRegisterModule,
-    AutocompleteModule,
     PopupOutAnimalModule,
-
-    
+    PetsTableModule,
+    SearchEngineModule,
   ],
 })
 export class PetsModule {}

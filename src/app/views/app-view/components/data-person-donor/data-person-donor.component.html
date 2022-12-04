@@ -1,4 +1,4 @@
-<div class="dataPerson">
+<div class="dataPerson" formGroupName="dataPersonRegister">
     <h2>{{'people.dataPerson' | translate}}</h2>
     <app-button-filter [filters]="filtersPeople" (change)="onChangeSelect($event)"></app-button-filter>
 
@@ -7,28 +7,29 @@
             <mat-label *ngIf="personType === 0 "> {{'people.personName' | translate}} </mat-label>
             <mat-label *ngIf="personType === 2 "> {{'people.personName' | translate}} </mat-label>
             <mat-label *ngIf="personType === 1"> {{'people.name' | translate}} </mat-label>
-            <input matInput placeholder="{{'people.personName' | translate}}">
+            <input formControlName="personName" matInput placeholder="{{'people.personName' | translate}}">
         </mat-form-field>
         <mat-form-field class="input-five">
             <mat-label>{{'people.IDnumber' | translate}}</mat-label>
-            <input [disabled]="blockInput" matInput placeholder=" {{'people.IDnumber' | translate}}">
+            <input formControlName="IDnumber" [disabled]="blockInput" matInput
+                placeholder=" {{'people.IDnumber' | translate}}">
         </mat-form-field>
         <mat-form-field class="input-five">
             <mat-label *ngIf="personType === 0">{{'people.pesel' | translate}}</mat-label>
             <mat-label *ngIf="personType === 2">{{'people.pesel' | translate}}</mat-label>
             <mat-label *ngIf="personType === 1">{{'people.nip' | translate}}</mat-label>
-            <input matInput placeholder="{{'people.pesel' | translate}}">
+            <input formControlName="pesel" matInput placeholder="{{'people.pesel' | translate}}">
         </mat-form-field>
 
         <mat-form-field class="input-five">
             <mat-label>{{'people.email' | translate}}</mat-label>
-            <input type="email" matInput placeholder="{{'people.email' | translate}}">
+            <input formControlName="email" type="email" matInput placeholder="{{'people.email' | translate}}">
         </mat-form-field>
 
         <mat-form-field class="input-five">
             <mat-label>{{'people.tel' | translate}}</mat-label>
             <span matPrefix>+48 &nbsp;</span>
-            <input type="tel" matInput placeholder="{{'people.tel' | translate}}">
+            <input formControlName="tel" type="tel" matInput placeholder="{{'people.tel' | translate}}">
         </mat-form-field>
 
     </div>
@@ -36,20 +37,21 @@
     <div class="input-row">
         <mat-form-field class="input-quarter">
             <mat-label>{{'people.adress' | translate}}</mat-label>
-            <input matInput placeholder="{{'people.adress' | translate}}">
+            <input formControlName="adress" matInput placeholder="{{'people.adress' | translate}}">
         </mat-form-field>
 
         <div class="inline input-quarter">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" placeholder="people.city">
+            <app-autocomplete formControlName="city" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                placeholder="people.city">
             </app-autocomplete>
         </div>
         <mat-form-field class="input-quarter">
             <mat-label>{{'people.zip-code' | translate}}</mat-label>
-            <input matInput placeholder="{{'people.zip-code' | translate}}">
+            <input formControlName="zipCode" matInput placeholder="{{'people.zip-code' | translate}}">
         </mat-form-field>
 
         <div class="inline input-quarter">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+            <app-autocomplete formControlName="province" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
                 placeholder="people.province">
             </app-autocomplete>
         </div>
@@ -57,7 +59,7 @@
     <div class="input-row">
         <mat-form-field class="input-full">
             <mat-label>{{'pets.commentsRegister' | translate}}</mat-label>
-            <textarea matInput rows="1" placeholder="{{'pets.comments' | translate}}">
+            <textarea formControlName="comments" matInput rows="1" placeholder="{{'pets.comments' | translate}}">
                 </textarea>
         </mat-form-field>
     </div>

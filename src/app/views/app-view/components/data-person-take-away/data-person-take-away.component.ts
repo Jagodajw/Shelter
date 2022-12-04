@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SkipSelf } from '@angular/core';
+import { ControlContainer } from '@angular/forms';
 import { ButtonFilter } from '../button-filter/button-filter';
 import { Select } from '../select/select';
 
@@ -6,6 +7,13 @@ import { Select } from '../select/select';
   selector: 'app-data-person-take-away',
   templateUrl: './data-person-take-away.component.html',
   styleUrls: ['./data-person-take-away.component.scss'],
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useFactory: (container: ControlContainer) => container,
+      deps: [[new SkipSelf(), ControlContainer]],
+    },
+  ],
 })
 export class DataPersonTakeAwayComponent implements OnInit {
   public personType: number = 0;

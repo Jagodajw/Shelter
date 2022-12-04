@@ -81,14 +81,17 @@
                     </button>
 
                     <mat-menu #tableMenuAction="matMenu" xPosition="before">
-                        <button mat-menu-item class="parameter__menu--item" (click)="viewPerson()">
+                        <button mat-menu-item (click)="viewPerson()">
+                            <mat-icon> edit</mat-icon>
                             {{ 'people.editSelectedPosition' | translate }}
                         </button>
-                        <button mat-menu-item class="parameter__menu--item">
+                        <button mat-menu-item>
+                            <mat-icon> pan_tool</mat-icon>
                             {{ 'people.addToBlackList' | translate }}
                         </button>
 
-                        <app-button-item-delete (onDelete)="deletePattern()">
+                        <app-button-item-delete (onDelete)="deletePeople()">
+                            <mat-icon> delete</mat-icon>
                             {{ 'people.deleteSelectedPosition' | translate }}
 
                         </app-button-item-delete>
@@ -100,10 +103,12 @@
 
             <ng-container matColumnDef="ExpandedDetail">
                 <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
-                    <div class="containers__expanded-detail">
-                        <!-- [data]="element"
-                        (closeDetail)="expandedElement = null"
-                        (operationDate)="element.OperationDate = $event || element.OperationDate"> -->
+                    <h3>
+                        {{"pets.title" | translate}}
+                    </h3>
+                    <div class="pets">
+                        <app-pets-table [isVisibiltyHeader]="false">
+                        </app-pets-table>
                     </div>
                 </td>
             </ng-container>

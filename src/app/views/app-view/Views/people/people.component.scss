@@ -48,6 +48,9 @@
           text-align: -webkit-center;
         }
       }
+      & h3 {
+        text-align: left;
+      }
     }
 
     //BTN - header
@@ -89,5 +92,9 @@
       font-size: 28px;
       align-items: center;
     }
+  }
+  .pets {
+    width: 100%;
+    padding: 5px;
   }
 }

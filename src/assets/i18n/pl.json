@@ -39,6 +39,7 @@
     "dataRegisterAnimal": "Dane przyjmowanego zwierzęcia",
     "dataRegister": "Informacje rejestracji",
     "dateCastred": "Data kastracji",
+    "deleteSelectedPosition": "Usuń wybrane zwierzę",
     "titleRegisterAnimal": "Rejestracja zwierzęcia",
     "out": {
       "data": "Dane wydawanego zwierzęcia",

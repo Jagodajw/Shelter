@@ -1,42 +1,42 @@
-<div class="data-pet-out">
+<div class="data-pet-out" formGroupName="dataPetOut">
     <h2>{{'pets.out.data' | translate}}</h2>
     <div class="input-row">
         <mat-form-field class="input-quarter">
             <mat-label>{{'pets.name' | translate}}</mat-label>
-            <input matInput placeholder="{{'pets.name' | translate}}">
+            <input matInput formControlName="name" placeholder="{{'pets.name' | translate}}">
         </mat-form-field>
         <div class="input-quarter">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+            <app-autocomplete formControlName="species" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
                 placeholder="pets.species">
             </app-autocomplete>
         </div>
 
         <div class="input-quarter">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+            <app-autocomplete formControlName="typeOut" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
                 placeholder="pets.out.type">
 
             </app-autocomplete>
         </div>
         <div class="input-quarter">
-            <app-data-picker placeholder="pets.out.date"></app-data-picker>
+            <app-data-picker formControlName="dateOut" placeholder="pets.out.date"></app-data-picker>
         </div>
     </div>
 
     <div class="input-row">
         <div class="input-quarter">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-                placeholder="pets.introduced">
+            <app-autocomplete formControlName="introduced" (change)="chooseAutocomplete($event)"
+                [values]="arrayOfSpecies" placeholder="pets.introduced">
             </app-autocomplete>
         </div>
         <div class="input-quarter">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+            <app-autocomplete formControlName="accepted" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
                 placeholder="pets.accepted">
             </app-autocomplete>
         </div>
 
         <mat-form-field class="input-half">
             <mat-label>{{'pets.out.comments' | translate}}</mat-label>
-            <textarea matInput rows="1" placeholder="{{'pets.out.comments' | translate}}">
+            <textarea formControlName="commentsOut" matInput rows="1" placeholder="{{'pets.out.comments' | translate}}">
                 </textarea>
         </mat-form-field>
     </div>

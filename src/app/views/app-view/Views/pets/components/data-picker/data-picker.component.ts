@@ -1,5 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  NG_VALUE_ACCESSOR,
+  Validators,
+} from '@angular/forms';
+import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 
 interface DateScope {
   From: Date | null;
@@ -12,8 +18,18 @@ type DatePicker = DateScope | Date | null;
   selector: 'app-data-picker',
   templateUrl: './data-picker.component.html',
   styleUrls: ['./data-picker.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => DataPickerComponent),
+      multi: true,
+    },
+  ],
 })
-export class DataPickerComponent<DatePicker> implements OnInit {
+export class DataPickerComponent<DatePicker>
+  extends ControlValueAccessorsAbstract
+  implements OnInit
+{
   @Input() placeholder = '';
   @Input() public pickerType: 'normal' | 'range' = 'normal';
   @Input() set minDate(date: Date | string | null) {
@@ -23,7 +39,9 @@ export class DataPickerComponent<DatePicker> implements OnInit {
   public min!: Date;
   public dateGroup!: FormGroup;
 
-  constructor(private readonly _form: FormBuilder) {}
+  constructor(private readonly _form: FormBuilder) {
+    super();
+  }
 
   ngOnInit(): void {
     this.initDateGroupByPickerType();
