@@ -25,9 +25,30 @@ body {
   align-items: center;
   display: flex;
 }
+.popup {
+  &__container {
+    max-height: 100%;
+    &-btn {
+      text-align: end;
 
+      & app-button {
+        margin-right: 10px;
+      }
+    }
+    &-title {
+      color: azure;
+      background-color: rgb(86, 71, 219);
+      & h1 {
+        margin: 0;
+        padding: 10px;
+      }
+    }
+  }
+}
 /* style mat-form-field and input */
-
+.error {
+  color: red;
+}
 .mat-form-field {
   // width: 50%;
   padding: 0 5px;
@@ -69,6 +90,12 @@ body {
 .input-70 {
   width: 70%;
 }
+.input-75 {
+  width: 75%;
+}
+.input-25 {
+  width: 25%;
+}
 .modal-without-padding {
   .mat-dialog-container {
     padding: 0;
@@ -94,5 +121,56 @@ body {
     border-radius: 15px;
     color: #000000;
     padding: 10px;
+  }
+}
+.modal {
+  &__width {
+    width: 40%;
+    overflow-y: auto;
+    &--30 {
+      width: 30%;
+    }
+    &--35 {
+      width: 35%;
+    }
+    &--50 {
+      width: 50%;
+    }
+    &--60 {
+      width: 60%;
+    }
+    &--80 {
+      width: 80%;
+    }
+    &--95 {
+      width: 95%;
+    }
+  }
+  &__budget-group {
+    max-height: 600px;
+  }
+}
+@mixin extendableTableStyle($rootClassName) {
+  &__expanded-detail {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__expanded-row {
+    display: none;
+
+    &:hover {
+      background: #fff !important;
+    }
+  }
+
+  tr.#{$rootClassName}__row.#{$rootClassName}__is-expanded-row {
+    &:hover {
+      background: #fff;
+    }
+    td {
+      border-bottom-width: 0;
+    }
   }
 }

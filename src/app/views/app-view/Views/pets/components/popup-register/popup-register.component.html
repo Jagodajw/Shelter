@@ -1,5 +1,5 @@
 <div class="register">
-    <form>
+    <form [formGroup]="registerPetsForm">
         <div class="register__animals-title">
             <h1 mat-dialog-title>{{'pets.titleRegisterAnimal' | translate}}</h1>
         </div>
@@ -11,6 +11,7 @@
             <app-data-person-donor></app-data-person-donor>
 
             <app-data-register></app-data-register>
+
             <mat-dialog-actions align="end" class="register__animals-btn">
                 <app-button type="button" variant="cancelable" mat-dialog-close>
                     {{ 'action.cancel' | translate }}

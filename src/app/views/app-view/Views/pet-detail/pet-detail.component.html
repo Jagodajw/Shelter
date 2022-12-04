@@ -1,8 +1,8 @@
 <div class="pet-detail">
     <mat-tab-group>
         <mat-tab label="Dane przyjętego zwierzęcia">
-            <form>
-                <mat-dialog-content class="pet-detail_content">
+            <form [formGroup]="detailPetsForm">
+                <div class="pet-detail_content">
 
                     <app-data-pet-register></app-data-pet-register>
 
@@ -10,24 +10,26 @@
 
                     <app-data-register></app-data-register>
 
-
-                </mat-dialog-content>
+                </div>
             </form>
         </mat-tab>
 
         <mat-tab label="Dane wydanego zwierzęcia">
-            <form>
-                <mat-dialog-content class="pet-detail_content">
+            <form [formGroup]="detailPetsOutForm">
+                <div class="pet-detail_content">
 
                     <app-data-pet-out></app-data-pet-out>
                     <app-data-person-take-away></app-data-person-take-away>
 
-                </mat-dialog-content>
+                </div>
             </form>
         </mat-tab>
 
         <mat-tab label="Dokumenty">
-            <app-drop-document></app-drop-document>
+            <app-file-upload>
+                Dodaj załącznik
+                <mat-icon>attach_file</mat-icon>
+            </app-file-upload>
         </mat-tab>
     </mat-tab-group>
 </div>

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Select } from 'src/app/views/app-view/components/select/select';
 
 @Component({
@@ -7,9 +8,38 @@ import { Select } from 'src/app/views/app-view/components/select/select';
   styleUrls: ['./popup-out-animal.component.scss'],
 })
 export class PopupOutAnimalComponent implements OnInit {
-  constructor() {}
+  outPetForm!: FormGroup;
+  constructor(private readonly _form: FormBuilder) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.buildForm();
+  }
+  public buildForm(): void {
+    this.outPetForm = this._form.group({
+      dataPetOut: this._form.group({
+        name: ['', Validators.required],
+        species: ['', Validators.required],
+        typeOut: ['', Validators.required],
+        dateOut: ['', Validators.required],
+        introduced: ['', Validators.required],
+        accepted: ['', Validators.required],
+        commentsOut: [''],
+      }),
+      dataPersonTakeAway: this._form.group({
+        personName: [''],
+        IDnumber: [''],
+        pesel: [''],
+        email: [''],
+        tel: [''],
+        adress: [''],
+        city: [''],
+        zipCode: [''],
+        province: [''],
+        comments: [''],
+      }),
+    });
+  }
+
   public arrayOfSpecies: Select[] = [
     { id: 0, name: 'kot' },
     { id: 1, name: 'pies' },

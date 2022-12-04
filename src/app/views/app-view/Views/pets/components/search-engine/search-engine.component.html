@@ -1,0 +1,90 @@
+<form class="search" [formGroup]="searchEngineForm">
+
+    <div class="search__main">
+        <h2>Wyszukiwanie</h2>
+        <div class="search__main-header">
+            <div class="demo-section">
+                <button mat-raised-button matBadge="5" matBadgePosition="before" matBadgeColor="accent">
+                    {{"pets.controlToOut" | translate}}
+                </button>
+            </div>
+            <div class="demo-section">
+                <button mat-raised-button matBadge="8" matBadgePosition="before" matBadgeColor="accent">
+                    {{"pets.controlToVaccination" | translate}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <div style="font-size: 14px" class="search__primary">
+        <span class="input-quarter">
+            <app-autocomplete formControlName="species" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                placeholder="pets.species">
+            </app-autocomplete>
+        </span>
+
+        <span class="input-quarter">
+            <app-autocomplete formControlName="breed" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                placeholder="pets.breed">
+            </app-autocomplete>
+        </span>
+
+        <span class="input-quarter">
+            <app-autocomplete formControlName="community" (change)="chooseAutocomplete($event)"
+                [values]="arrayOfSpecies" placeholder="pets.community">
+            </app-autocomplete>
+        </span>
+        <span class="input-quarter">
+            <app-autocomplete formControlName="area" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+                placeholder="pets.area">
+            </app-autocomplete>
+        </span>
+        <span class="input-quarter">
+            <app-autocomplete formControlName="color" (change)="chooseAutocomplete($event)" [values]="filtersAddPets"
+                placeholder="pets.color">
+            </app-autocomplete>
+        </span>
+        <div class="input-quarter">
+            <app-select formControlName="gender" (change)="chooseSelect($event)" [values]="arrayOfSpecies"
+                placeholder="pets.gender">
+            </app-select>
+        </div>
+        <div class="input-quarter">
+            <app-select formControlName="size" (change)="chooseSelect($event)" [values]="filtersAddPets"
+                placeholder="pets.size">
+            </app-select>
+        </div>
+        <div class="input-quarter">
+            <app-select formControlName="castred" (change)="chooseSelect($event)" [values]="filtersAddPets"
+                placeholder="pets.castred">
+            </app-select>
+        </div>
+        <div class="input-quarter">
+            <app-search  formControlName="search" placeholder="pets.searchPlaceholder"></app-search>
+        </div>
+        <div class="input-quarter">
+            <app-data-picker formControlName="datePickerBirthFromTo" placeholder="pets.datePickerBirthFromTo"
+                pickerType="range">
+            </app-data-picker>
+        </div>
+        <div class="input-quarter">
+            <app-data-picker formControlName="datePickerAccepted" placeholder="pets.datePickerAccepted"
+                pickerType="range">
+            </app-data-picker>
+        </div>
+        <div class="search__primary-checkbox input-quarter">
+            <p class="inline">
+                <mat-checkbox formControlName="cuarantine">{{"pets.cuarantine" | translate}}</mat-checkbox>
+            </p>
+            <p class="inline">
+                <mat-checkbox formControlName="unvaccinated">{{"pets.unvaccinated" |translate}} </mat-checkbox>
+            </p>
+        </div>
+    </div>
+    <div class="search__btn-search">
+        <button mat-flat-button color="accent">
+            {{"pets.search" | translate}}
+        </button>
+    </div>
+</form>

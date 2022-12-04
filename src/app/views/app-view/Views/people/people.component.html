@@ -1,2 +1,130 @@
+<div class="people_container">
+    <div class="people_container-header">
+        <div class="people_container-header-animate">
+            <h1>
+                {{"people.title" | translate}}
+            </h1>
 
-<app-button-filter [filters]="filtersPeople"></app-button-filter>
+            <div class="toggle-item-container" (click)="clickEvent()"
+                [ngClass]="status ?'' : 'toggle-item-container-animated' ">
+                <div class="toggle-item-2">{{"people.bringing" | translate}}</div>
+                <div class="toggle-item-2">{{"people.takeAway" | translate}}</div>
+            </div>
+            <div class="toggle-btn" (click)="clickEvent()">
+                <mat-icon>
+                    swap_vert
+                </mat-icon>
+            </div>
+        </div>
+        <span class=" input-row">
+            <mat-slide-toggle> {{"people.blackList" | translate}}</mat-slide-toggle>
+        </span>
+    </div>
+
+
+
+
+
+    <div class="people_container-table">
+        <span class="input-full">
+            <app-search placeholder="people.searchPlaceholder"></app-search>
+        </span>
+        <table mat-table [dataSource]="dataPeople" multiTemplateDataRows class="mat-elevation-z8">
+
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef> {{"people.personName" | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.name}} {{element.surname}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="city">
+                <th mat-header-cell *matHeaderCellDef> {{"people.city" | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.city}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="adress">
+                <th mat-header-cell *matHeaderCellDef> {{"people.adress" | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.adress}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="peselNip">
+                <th mat-header-cell *matHeaderCellDef> {{"people.pesel" | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.pesel}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="telepohone">
+                <th mat-header-cell *matHeaderCellDef> {{"people.tel" | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.telephone}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="community">
+                <th mat-header-cell *matHeaderCellDef> {{"pets.community" | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.community}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="blackList">
+                <th mat-header-cell *matHeaderCellDef> {{"people.blackList" | translate}} </th>
+                <td mat-cell *matCellDef="let element"> {{element.blackList}} </td>
+            </ng-container>
+
+
+            <ng-container matColumnDef="action">
+                <th mat-header-cell *matHeaderCellDef>
+                    Akcja
+                </th>
+                <td mat-cell *matCellDef="let peopleRowModel" class="settings__menu-box">
+
+                    <button mat-icon-button [matMenuTriggerFor]="tableMenuAction" (click)="$event.stopPropagation()">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+
+                    <mat-menu #tableMenuAction="matMenu" xPosition="before">
+                        <button mat-menu-item (click)="viewPerson()">
+                            <mat-icon> edit</mat-icon>
+                            {{ 'people.editSelectedPosition' | translate }}
+                        </button>
+                        <button mat-menu-item>
+                            <mat-icon> pan_tool</mat-icon>
+                            {{ 'people.addToBlackList' | translate }}
+                        </button>
+
+                        <app-button-item-delete (onDelete)="deletePeople()">
+                            <mat-icon> delete</mat-icon>
+                            {{ 'people.deleteSelectedPosition' | translate }}
+
+                        </app-button-item-delete>
+                    </mat-menu>
+                </td>
+            </ng-container>
+
+
+
+            <ng-container matColumnDef="ExpandedDetail">
+                <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                    <h3>
+                        {{"pets.title" | translate}}
+                    </h3>
+                    <div class="pets">
+                        <app-pets-table [isVisibiltyHeader]="false">
+                        </app-pets-table>
+                    </div>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
+
+            <tr mat-row *matRowDef="let peopleRowModel; columns: displayedColumns;"
+                (click)="expandedElement = expandedElement === peopleRowModel ? null : peopleRowModel"
+                [class.containers__is-expanded-row]="expandedElement === peopleRowModel">
+            </tr>
+            <tr mat-row *matRowDef="let peopleRowModel; columns: ['ExpandedDetail']" class="containers__expanded-row"
+                [@extension]="peopleRowModel == expandedElement ? 'expand' : 'collapse'"></tr>
+
+
+        </table>
+    </div>
+
+
+</div>

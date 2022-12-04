@@ -1,0 +1,88 @@
+<table mat-table [dataSource]="dataPets"
+    [ngClass]="{'mat-elevation-z8': isVisibiltyHeader, 'style-for-people': !isVisibiltyHeader}">
+
+    <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> {{"pets.name" | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="species">
+        <th mat-header-cell *matHeaderCellDef> {{"pets.species" | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.species}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="breed">
+        <th mat-header-cell *matHeaderCellDef> {{"pets.breed" | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.breed}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef> {{"pets.gender" | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.gender}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="community">
+        <th mat-header-cell *matHeaderCellDef> {{"pets.community" | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.community}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="area">
+        <th mat-header-cell *matHeaderCellDef> {{"pets.area" | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.area}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ID">
+        <th mat-header-cell *matHeaderCellDef> {{"pets.ID" | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.identificator}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Nr-chip">
+        <th mat-header-cell *matHeaderCellDef> {{"pets.nr-chip" | translate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.numberChip}} </td>
+    </ng-container>
+
+    <!-- <ng-container matColumnDef="handOverTheAnimal">
+        <th mat-header-cell *matHeaderCellDef>
+            {{"pets.handOverTheAnimal" | translate}}
+        </th>
+        <td mat-cell *matCellDef="let petsRowModel" class="settings__menu-box">
+
+            <button mat-icon-button (click)="$event.stopPropagation()" (click)="outPet()">
+                <mat-icon>
+                    home
+                </mat-icon>   {{"pets.handOverTheAnimal" | translate}}
+            </button>
+
+        </td>
+    </ng-container> -->
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>
+            Akcja
+        </th>
+        <td mat-cell *matCellDef="let peopleRowModel" class="settings__menu-box">
+
+            <button mat-icon-button [matMenuTriggerFor]="tableMenuAction" (click)="$event.stopPropagation()">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #tableMenuAction="matMenu" xPosition="before">
+                <button mat-menu-item (click)="outPet()">
+                    <mat-icon> home</mat-icon>
+                    {{"pets.handOverTheAnimal" | translate}}
+                </button>
+
+                <app-button-item-delete (onDelete)="deletePeople()">
+                    <mat-icon>delete</mat-icon>
+                    {{ 'pets.deleteSelectedPosition' | translate }}
+                </app-button-item-delete>
+            </mat-menu>
+        </td>
+    </ng-container>
+    <ng-container *ngIf="isVisibiltyHeader">
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    </ng-container>
+    <tr mat-row *matRowDef="let petsRowModel; columns: displayedColumns;" (click)="openPetDetail(petsRowModel.id)"></tr>
+</table>

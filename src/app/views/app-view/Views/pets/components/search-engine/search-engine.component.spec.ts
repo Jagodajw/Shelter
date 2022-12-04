@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DropDocumentComponent } from './drop-document.component';
+import { SearchEngineComponent } from './search-engine.component';
 
-describe('DropDocumentComponent', () => {
-  let component: DropDocumentComponent;
-  let fixture: ComponentFixture<DropDocumentComponent>;
+describe('SearchEngineComponent', () => {
+  let component: SearchEngineComponent;
+  let fixture: ComponentFixture<SearchEngineComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DropDocumentComponent ]
+      declarations: [ SearchEngineComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(DropDocumentComponent);
+    fixture = TestBed.createComponent(SearchEngineComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

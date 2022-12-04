@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SkipSelf } from '@angular/core';
+import { ControlContainer, FormGroupDirective } from '@angular/forms';
 import { ButtonFilter } from '../button-filter/button-filter';
 import { Select } from '../select/select';
 
@@ -6,6 +7,13 @@ import { Select } from '../select/select';
   selector: 'app-data-person-donor',
   templateUrl: './data-person-donor.component.html',
   styleUrls: ['./data-person-donor.component.scss'],
+  viewProviders: [
+    {
+      provide: ControlContainer,
+      useFactory: (container: ControlContainer) => container,
+      deps: [[new SkipSelf(), ControlContainer]],
+    },
+  ],
 })
 export class DataPersonDonorComponent implements OnInit {
   public personType: number = 0;

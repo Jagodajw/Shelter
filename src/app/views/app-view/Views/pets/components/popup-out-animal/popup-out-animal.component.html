@@ -1,14 +1,13 @@
-<div class="out">
-    <form>
-        <div class="out__animals-title">
+<div class="popup">
+    <form [formGroup]="outPetForm">
+        <div class="popup__container-title">
             <h1 mat-dialog-title>{{'pets.handOverTheAnimal' | translate}}</h1>
         </div>
 
-        <mat-dialog-content class="out__animals">
+        <mat-dialog-content class="popup__container">
             <app-data-pet-out></app-data-pet-out>
             <app-data-person-take-away></app-data-person-take-away>
-
-            <div class="out__animals-btn">
+            <div class="popup__container-btn">
                 <app-button type="button" variant="cancelable" mat-dialog-close>
                     {{ 'action.cancel' | translate }}
                 </app-button>

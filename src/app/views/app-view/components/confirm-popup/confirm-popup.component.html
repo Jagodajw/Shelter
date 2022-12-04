@@ -1,0 +1,15 @@
+<div class="confirm-popup">
+  <p class="confirm-popup__message" *ngIf="data.isTranslatedMessage" [innerHTML]="data.message | safeHtml"></p>
+  <p class="confirm-popup__message" *ngIf="!data.isTranslatedMessage">
+    {{ data.message | translate }}
+  </p>
+
+  <div class="confirm-popup__btn-container">
+    <app-button type="button" variant="cancelable" (clickEvent)="onNoClick()">
+      {{ 'global.action.no' | translate }}
+    </app-button>
+    <app-button type="button" variant="raised" [mat-dialog-close]="true">
+      {{ 'global.action.yes' | translate }}
+    </app-button>
+  </div>
+</div>

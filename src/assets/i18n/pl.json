@@ -39,6 +39,7 @@
     "dataRegisterAnimal": "Dane przyjmowanego zwierzęcia",
     "dataRegister": "Informacje rejestracji",
     "dateCastred": "Data kastracji",
+    "deleteSelectedPosition": "Usuń wybrane zwierzę",
     "titleRegisterAnimal": "Rejestracja zwierzęcia",
     "out": {
       "data": "Dane wydawanego zwierzęcia",
@@ -48,7 +49,9 @@
     }
   },
   "people": {
-    "title": "Ludzie",
+    "title": "Osoby",
+    "bringing": "Przyprowadzające",
+    "takeAway": "Odbierające",
     "dataPerson": "Dane oddającego",
     "dataPersonTakeAway": "Dane odbierającego",
     "personType": "Typ osoby",
@@ -62,7 +65,15 @@
     "pesel": "Pesel",
     "tel": "Telefon",
     "email": "E-mail",
-    "nip": "NIP"
+    "nip": "NIP",
+    "searchPlaceholder": " Wyszukaj imię, nazwisko",
+    "blackList": "Czarna lista",
+    "edit": "Edytuj osobę",
+    "delete": "Usuń osobę",
+    "action": "Akcja",
+    "addToBlackList": "Dodaj na czarną listę",
+    "deleteSelectedPosition": "Usuń wybraną osobę",
+    "editSelectedPosition": "Edytuj wybraną osobę"
   },
   "stats": {
     "title": "Statystyki"
@@ -84,6 +95,17 @@
   },
   "action": {
     "cancel": "Anuluj",
-    "accept": "Zarejestruj"
+    "accept": "Zarejestruj",
+    "edit": "Edytuj"
+  },
+  "deleteDialog": {
+    "beSure": "Czy na pewno chcesz usunąć?",
+    "title": "Usuwanie"
+  },
+  "global": {
+    "action": {
+      "no": "nie",
+      "yes": "tak"
+    }
   }
 }

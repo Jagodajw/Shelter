@@ -11,7 +11,8 @@ import { DataPetRegisterModule } from '../../components/data-pet-register/data-p
 import { DataRegisterModule } from '../../components/data-register/data-register.module';
 import { DataPetOutModule } from '../../components/data-pet-out/date-pet-out.module';
 import { DataPersonTakeAwayModule } from '../../components/data-person-take-away/data-person-take-away.module';
-import { DropDocumentModule } from '../../components/drop-document/drop-document.module';
+import { FileUploadModule } from '../../components/file-upload/file-upload.module';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [PetDetailComponent],
@@ -28,7 +29,8 @@ import { DropDocumentModule } from '../../components/drop-document/drop-document
     DataRegisterModule,
     DataPetOutModule,
     DataPersonTakeAwayModule,
-    DropDocumentModule,
+    FileUploadModule,
+    MatIconModule,
   ],
 })
 export class PetDetailModule {}
