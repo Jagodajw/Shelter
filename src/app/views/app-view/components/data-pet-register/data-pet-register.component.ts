@@ -1,9 +1,5 @@
 import { Component, Input, OnInit, SkipSelf } from '@angular/core';
-import {
-  ControlContainer,
-  FormGroup,
-  FormGroupDirective,
-} from '@angular/forms';
+import { ControlContainer, FormGroupDirective } from '@angular/forms';
 import { Select } from '../select/select';
 
 @Component({

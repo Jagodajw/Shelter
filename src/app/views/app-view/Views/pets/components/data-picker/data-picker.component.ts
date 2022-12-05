@@ -5,6 +5,7 @@ import {
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms';
+import { DateRange } from '@angular/material/datepicker';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 
 interface DateScope {
@@ -74,5 +75,10 @@ export class DataPickerComponent<DatePicker>
     // );
     // if (this.pickerType === 'normal') return this.onChange(this.dateGroup.value.Value);
     // this.onChange(this.dateGroup.value);
+  }
+
+  public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) return this.dateGroup.disable();
+    this.dateGroup.enable();
   }
 }

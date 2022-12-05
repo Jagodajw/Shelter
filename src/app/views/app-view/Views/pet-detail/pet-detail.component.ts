@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Location } from '@angular/common';
 @Component({
   selector: 'app-pet-detail',
   templateUrl: './pet-detail.component.html',
@@ -9,12 +9,32 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class PetDetailComponent implements OnInit {
   detailPetsForm!: FormGroup;
   detailPetsOutForm!: FormGroup;
-  constructor(private readonly _form: FormBuilder) {}
+  public edit: boolean = false;
+  constructor(
+    private readonly _form: FormBuilder,
+    private _location: Location
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
+    if (!this.edit) {
+      this.detailPetsForm.disable();
+      this.detailPetsOutForm.disable();
+    }
   }
-
+  backClicked() {
+    this._location.back();
+  }
+  public editButtonClick() {
+    this.edit = true;
+    this.detailPetsForm.enable();
+    this.detailPetsOutForm.enable();
+  }
+  public saveEditButtonClick() {
+    this.edit = false;
+    this.detailPetsForm.disable();
+    this.detailPetsOutForm.disable();
+  }
   public buildForm(): void {
     this.detailPetsForm = this._form.group({
       dataPetRegister: this._form.group({
@@ -62,9 +82,9 @@ export class PetDetailComponent implements OnInit {
         typeOut: ['', Validators.required],
         dateOut: ['', Validators.required],
         introduced: ['', Validators.required],
-        accepted:['', Validators.required],
+        accepted: ['', Validators.required],
         commentsOut: [''],
-      }),      
+      }),
       dataPersonTakeAway: this._form.group({
         personName: [''],
         IDnumber: [''],
