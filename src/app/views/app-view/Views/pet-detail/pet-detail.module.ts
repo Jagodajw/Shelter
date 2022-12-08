@@ -13,6 +13,8 @@ import { DataPetOutModule } from '../../components/data-pet-out/date-pet-out.mod
 import { DataPersonTakeAwayModule } from '../../components/data-person-take-away/data-person-take-away.module';
 import { FileUploadModule } from '../../components/file-upload/file-upload.module';
 import { MatIconModule } from '@angular/material/icon';
+import { ButtonModule } from '../../components/button/button.module';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [PetDetailComponent],
@@ -31,6 +33,8 @@ import { MatIconModule } from '@angular/material/icon';
     DataPersonTakeAwayModule,
     FileUploadModule,
     MatIconModule,
+    MatButtonModule,
+    ButtonModule,
   ],
 })
 export class PetDetailModule {}

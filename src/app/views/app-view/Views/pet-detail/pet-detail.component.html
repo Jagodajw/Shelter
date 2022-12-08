@@ -1,5 +1,19 @@
 <div class="pet-detail">
-    <mat-tab-group>
+    <div class="inline  input-80 ">
+        <button mat-button (click)="backClicked()">
+            <mat-icon>arrow_back</mat-icon>
+        </button>
+    </div>
+    <div class="inline">
+        <app-button type="submit" variant="raised" (click)="editButtonClick()">
+            <mat-icon>edit</mat-icon> {{ 'action.edit' | translate }}
+        </app-button>
+        <app-button type="submit" variant="raised" (click)="saveEditButtonClick()">
+            <mat-icon>star</mat-icon> Zapisz
+        </app-button>
+    </div>
+    <mat-tab-group mat-align-tabs="center">
+
         <mat-tab label="Dane przyjętego zwierzęcia">
             <form [formGroup]="detailPetsForm">
                 <div class="pet-detail_content">
@@ -13,7 +27,6 @@
                 </div>
             </form>
         </mat-tab>
-
         <mat-tab label="Dane wydanego zwierzęcia">
             <form [formGroup]="detailPetsOutForm">
                 <div class="pet-detail_content">
@@ -24,7 +37,6 @@
                 </div>
             </form>
         </mat-tab>
-
         <mat-tab label="Dokumenty">
             <app-file-upload>
                 Dodaj załącznik

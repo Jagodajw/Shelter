@@ -66,4 +66,9 @@ export class AutocompleteComponent
   public displayFn(value: Select): string {
     return value ? value.name : '';
   }
+
+  public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) return this.controlAutoSelect.disable();
+    this.controlAutoSelect.enable();
+  }
 }

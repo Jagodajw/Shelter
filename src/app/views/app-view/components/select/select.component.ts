@@ -41,4 +41,8 @@ export class SelectComponent
   selection(event: MatSelectChange): void {
     this.change.emit(event.value);
   }
+  public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) return this.controlSelect.disable();
+    this.controlSelect.enable();
+  }
 }
