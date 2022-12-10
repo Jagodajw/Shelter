@@ -1,0 +1,175 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model People{
+  ID Int @id  @default(autoincrement())
+  name String
+  id_number String? @default("")
+  pesel String? @default("")
+  nip String? @default("")
+  telephone String? @default("")
+  email String? @default("")
+  description String? @default("")
+  adress String? @default("")
+  type_of_person Type_of_person
+  black_list Boolean
+  province_id Int
+  city_id Int
+  commune_id Int
+  adoption Adoption []
+  registration Registration []
+
+// relations
+  province Province @relation(fields: [province_id], references: [ID])
+  city City @relation(fields: [city_id], references: [ID])
+  commune Commune @relation(fields: [commune_id], references: [ID])
+}
+
+model Animals{
+  ID String @id  @default(uuid())
+  name String 
+  nr_chip String
+  date_vaccination DateTime?  @db.Date
+  vaccination Boolean
+  date_of_birth DateTime @db.Date
+  size Size
+  gender Gender
+  description_animal String? @default("")
+  area_id Int
+  commune_id Int
+  color_id Int
+  species_id Int
+  breed_id Int
+  adoption Adoption []
+  registration Registration []
+  // relations
+  area Area @relation(fields: [area_id], references: [ID])
+  commune Commune @relation(fields: [commune_id], references: [ID])
+  color Color @relation(fields: [color_id], references: [ID])
+  species Species @relation(fields: [species_id], references: [ID])
+  breed Breed @relation(fields: [breed_id], references: [ID])
+}
+
+model Adoption{
+  ID Int @id  @default(autoincrement())
+  date_of_adoption DateTime @db.Date
+  description String? @default("")
+  employees_id Int
+  type_adoption_id Int
+  people_id Int
+  animals_id String
+
+  // relations
+  employees Employees @relation(fields: [employees_id], references: [ID])
+  typeAdoption TypeAdoption @relation(fields: [type_adoption_id], references: [ID])
+  people People @relation(fields: [people_id], references: [ID])
+  animals Animals @relation(fields: [animals_id], references: [ID])
+}
+
+model Registration{
+  ID Int  @id  @default(autoincrement())
+  date_of_registration DateTime @db.Date
+  quarantine DateTime @db.Date
+  type_of_acceptance String
+  decription_registration String? @default("")
+  employees_id Int
+  people_id Int
+  animals_id String
+
+   // relations
+  employees Employees @relation(fields: [employees_id], references: [ID])
+  people People @relation(fields: [people_id], references: [ID])
+  animals Animals @relation(fields: [animals_id], references: [ID])
+
+}
+model City {
+  ID       Int    @id  @default(autoincrement())
+  city     String
+  zip_code String
+  people People []
+}
+
+model Province{
+  ID       Int    @id @default(autoincrement())
+  province String
+  people People []
+}
+
+model Commune{
+  ID       Int    @id @default(autoincrement())
+  commune String
+  people People []
+  animals Animals []
+}
+
+model Species{
+  ID       Int    @id  @default(autoincrement())
+  species String
+  breed Breed [] 
+  animals Animals [] 
+}
+
+
+model Breed{
+  ID       Int    @id  @default(autoincrement())
+  breed String
+  species_id Int 
+  animals Animals []
+
+// relation
+  species Species @relation( fields: [species_id], references: [ID])
+}
+
+model Color{
+  ID       Int    @id  @default(autoincrement())
+  color String
+  animals Animals []
+}
+
+model Area{
+  ID       Int    @id @default(autoincrement())
+  area String
+
+  animals Animals []
+}
+
+model TypeAdoption{
+  ID       Int    @id @default(autoincrement())
+  type_adoption String
+  adoption Adoption []
+}
+
+model Employees{
+  ID       Int    @id @default(autoincrement())
+  name String
+  surname String
+  adoption Adoption []
+  registration Registration []
+
+}
+
+enum Type_of_person{
+  legal
+  private
+  none
+}
+
+enum Size{
+  medium
+  large
+  small
+}
+
+enum Gender{
+  male
+  female
+}
