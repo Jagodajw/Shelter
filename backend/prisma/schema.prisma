@@ -157,6 +157,12 @@ model Employees{
 
 }
 
+model Account{
+  ID String @id @unique @default(uuid())
+  username String @unique 
+  password String
+}
+
 enum Type_of_person{
   legal
   private
