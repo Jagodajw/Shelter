@@ -15,9 +15,7 @@ import { Select } from '../select/select';
   ],
 })
 export class DataPetRegisterComponent implements OnInit {
-  constructor(private readonly formGroupDirective: FormGroupDirective) {
-    console.log(formGroupDirective);
-  }
+  constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
   ngOnInit(): void {}
 

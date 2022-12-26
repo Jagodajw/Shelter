@@ -7,8 +7,7 @@
                 <mat-form-field appearance="fill">
                     <mat-label>Nazwa użytkownika</mat-label>
                     <mat-icon matPrefix>person_outline</mat-icon>
-                    <input autofocus type="login" matInput placeholder="Podaj login" formControlName="username"
-                        required>
+                    <input autofocus type="login" matInput placeholder="Podaj login" formControlName="login" required>
                 </mat-form-field>
 
                 <mat-form-field appearance="fill">
@@ -21,8 +20,7 @@
                         <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
                     </button>
                 </mat-form-field>
-                <button [routerLink]="['/app-view/pets']" class="login-container__content-button-form" type="submit"
-                    mat-raised-button>Zaloguj
+                <button class="login-container__content-button-form" type="submit" mat-raised-button>Zaloguj
                     się</button>
             </form>
         </mat-card>

@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { BrowserStorageService } from 'src/app/storage.service';
-import { Shelter } from '../choose-shelter-popup/choose-shelter-popup';
+
+import { Shelters } from '../choose-shelter-popup/choose-shelter-popup';
 import { ChooseShelterPopupService } from '../../services/choose-shelter-popup.service';
 import { navList } from './menu';
-import { Observable } from 'rxjs';
+
+import { StorageService } from 'src/app/services/storage.service';
+import { Observable, pluck } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -13,13 +15,16 @@ import { Observable } from 'rxjs';
 export class HeaderComponent implements OnInit {
   public menuItems = navList;
 
-  public typeShelter: Observable<Shelter> =
-    this.chooseShelterPopupService.typeSchelterInfo.asObservable();
+  public readonly shelterName$?: Observable<string | undefined>;
 
   constructor(
     private chooseShelterPopupService: ChooseShelterPopupService,
-    public storage: BrowserStorageService
-  ) {}
+    public storage: StorageService
+  ) {
+    this.shelterName$ = this.chooseShelterPopupService.shelter
+      .asObservable()
+      .pipe(pluck('name')) as Observable<string | undefined>;
+  }
 
   ngOnInit(): void {}
 

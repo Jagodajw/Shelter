@@ -2,8 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { ApiService } from 'src/api/services';
 import { PopupOutAnimalComponent } from '../../Views/pets/components/popup-out-animal/popup-out-animal.component';
-import { PetsTableInterface } from '../../Views/pets/pets-table-interface';
+
 
 @Component({
   selector: 'app-pets-table',
@@ -12,17 +14,28 @@ import { PetsTableInterface } from '../../Views/pets/pets-table-interface';
 })
 export class PetsTableComponent implements OnInit {
   @Input() isVisibiltyHeader: boolean = true;
-  private petsType: PetsTableInterface[] = [];
-  public petsTable = new MatTableDataSource<PetsTableInterface>(this.petsType);
+  // private petsType: PetsTableInterface[] = [];
+  public petsTable = new MatTableDataSource<any[]>();
+  public readonly dataAnimalsTable?: Observable<any[]>;
 
-  constructor(public router: Router, public dialog: MatDialog) {}
+  constructor(
+    public router: Router,
+    public dialog: MatDialog,
+    private readonly api: ApiService
+  ) {
+    this.dataAnimalsTable = this.getAnimalsTableList();
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAnimalsTableList().subscribe(
+      (petsData) => (this.petsTable = new MatTableDataSource<any[]>(petsData))
+    );
+  }
 
   openPetDetail(petId: number) {
-    console.log(petId);
     this.router.navigate(['/app-view/pet-detail/', petId]);
   }
+
   outPet(): void {
     this.dialog.open(PopupOutAnimalComponent, {
       panelClass: ['input-70', 'modal-without-padding'],
@@ -41,19 +54,12 @@ export class PetsTableComponent implements OnInit {
     // 'handOverTheAnimal',
     'action',
   ];
-  public dataPets: PetsTableInterface[] = [
-    {
-      id: 0,
-      name: 'RIKI',
-      species: 'Pies',
-      breed: ' dachowiec',
-      community: 'Tychy',
-      area: 'tychy',
-      gender: ' suczka',
-      numberChip: 13123,
-      identificator: 'P/1',
-    },
-  ];
-  dataSource = this.dataPets;
+
+
+  dataSource = this.dataAnimalsTable;
+
+  private getAnimalsTableList(): Observable<any> {
+    return this.api.getAnimals();
+  }
   deletePeople() {}
 }

@@ -1,4 +1,4 @@
-<table mat-table [dataSource]="dataPets"
+<table mat-table [dataSource]="petsTable"
     [ngClass]="{'mat-elevation-z8': isVisibiltyHeader, 'style-for-people': !isVisibiltyHeader}">
 
     <ng-container matColumnDef="name">
@@ -84,5 +84,5 @@
     <ng-container *ngIf="isVisibiltyHeader">
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     </ng-container>
-    <tr mat-row *matRowDef="let petsRowModel; columns: displayedColumns;" (click)="openPetDetail(petsRowModel.id)"></tr>
+    <tr mat-row *matRowDef="let petsRowModel; columns: displayedColumns;" (click)="openPetDetail(petsRowModel.ID)"></tr>
 </table>

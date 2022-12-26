@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Auth } from './auth-view.interface';
+import { AuthViewService } from './auth-view.service';
 
 @Component({
   selector: 'app-auth-view',
@@ -15,7 +13,11 @@ export class AuthViewComponent implements OnInit {
   loginForm!: FormGroup;
   hide = true;
 
-  constructor(private form: FormBuilder) {}
+  constructor(
+    private router: Router,
+    private form: FormBuilder,
+    private readonly auth: AuthViewService
+  ) {}
 
   ngOnInit() {
     this.loginForm = this.form.group({
@@ -23,6 +25,9 @@ export class AuthViewComponent implements OnInit {
       password: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
-  onSubmit() {}
-
+  onSubmit() {
+    this.auth
+      .login(this.loginForm.value as Auth)
+      .subscribe(() => this.router.navigate(['/app-view/pets']));
+  }
 }

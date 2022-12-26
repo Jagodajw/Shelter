@@ -10,6 +10,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { SearchModule } from './components/search/search.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { PetAvatarModule } from './components/pet-avatar/pet-avatar.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ShelterInterceptorService } from 'src/app/interceptors/shelter-interceptor.service';
 
 @NgModule({
   declarations: [AppViewComponent, HeaderComponent],
@@ -23,6 +25,13 @@ import { PetAvatarModule } from './components/pet-avatar/pet-avatar.module';
     SearchModule,
     TranslateModule,
     PetAvatarModule,
+  ],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ShelterInterceptorService,
+      multi: true,
+    },
   ],
 })
 export class AppViewModule {}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BrowserStorageService } from 'src/app/storage.service';
+import { StorageService } from 'src/app/services/storage.service';
 import { ChooseShelterPopupService } from './services/choose-shelter-popup.service';
 @Component({
   selector: 'app-app-view',
@@ -10,7 +10,7 @@ import { ChooseShelterPopupService } from './services/choose-shelter-popup.servi
 export class AppViewComponent implements OnInit {
   constructor(
     private readonly chooseShelterService: ChooseShelterPopupService,
-    private readonly storage: BrowserStorageService
+    private readonly storage: StorageService
   ) {}
 
   ngOnInit(): void {
