@@ -10,8 +10,13 @@ import { MatSliderModule } from '@angular/material/slider';
 import { AppRoutingModule } from './app-routing.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpClientModule,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TokenApiRestInterceptorService } from './interceptors/token-api-rest-interceptor.service';
 @NgModule({
   declarations: [AppComponent],
   imports: [
@@ -31,7 +36,14 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
       },
     }),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'pl' }],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pl' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenApiRestInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

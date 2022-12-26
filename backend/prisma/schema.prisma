@@ -10,172 +10,339 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model People{
-  ID Int @id  @default(autoincrement())
-  name String
-  id_number String? @default("")
-  pesel String? @default("")
-  nip String? @default("")
-  telephone String? @default("")
-  email String? @default("")
-  description String? @default("")
-  adress String? @default("")
+model People {
+  ID             Int            @id @unique @default(autoincrement())
+  name           String
+  id_number      String?        @default("")
+  pesel          String?        @default("")
+  nip            String?        @default("")
+  telephone      String?        @default("")
+  email          String?        @default("")
+  description    String?        @default("")
+  adress         String?        @default("")
   type_of_person Type_of_person
-  black_list Boolean
-  province_id Int
-  city_id Int
-  commune_id Int
-  adoption Adoption []
-  registration Registration []
+  black_list     Boolean?       @default(false)
+  province_id    Int
+  city_id        Int
+  commune_id     Int
+  shelters_id    String
+  adoption       Adoption[]
+  registration   Registration[]
 
-// relations
+  // relations
   province Province? @relation(fields: [province_id], references: [ID])
-  city City? @relation(fields: [city_id], references: [ID])
-  commune Commune? @relation(fields: [commune_id], references: [ID])
+  city     City?     @relation(fields: [city_id], references: [ID])
+  commune  Commune?  @relation(fields: [commune_id], references: [ID])
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
-model Animals{
-  ID String @id  @default(uuid())
-  name String 
-  nr_chip String
-  date_vaccination DateTime?  @db.Date
-  vaccination Boolean
-  date_of_birth DateTime @db.Date
-  size Size
-  gender Gender
-  description_animal String? @default("")
-  area_id Int
-  commune_id Int
-  color_id Int
-  species_id Int
-  breed_id Int
-  adoption Adoption []
-  registration Registration []
+model tablePeople {
+  ID          Int     @id @default(autoincrement())
+  name        String
+  city        String
+  adress      String
+  pesel       String
+  nip         String
+  telephone   String
+  commune     String
+  black_list  Boolean
+  shelters_id String
+}
+
+model dataRegisterPeople {
+  ID             Int            @unique
+  animals_id     String         @unique
+  people_id      Int
+  type_of_person Type_of_person
+  name           String
+  id_number      String?
+  pesel          String?
+  nip            String?
+  telephone      String?
+  email          String?
+  adress         String?
+  city           String
+  zip_code       String
+  province       String
+  description    String?
+  shelters_id    String
+}
+
+model Animals {
+  ID                 String    @id @default(uuid())
+  name               String
+  nr_chip            String
+  id_number          String
+  date_vaccination   DateTime? @db.Date
+  vaccination        Boolean
+  date_of_birth      DateTime  @db.Date
+  size               Size
+  gender             Gender
+  description_animal String?   @default("")
+  area_id            Int
+  commune_id         Int
+  color_id           Int
+  species_id         Int
+  breed_id           Int
+  shelters_id        String
+  sterilization      Boolean
+  date_sterilization DateTime? @db.Date
+
+  adoption     Adoption[]
+  registration Registration[]
   // relations
-  area Area? @relation(fields: [area_id], references: [ID])
-  commune Commune? @relation(fields: [commune_id], references: [ID])
-  color Color? @relation(fields: [color_id], references: [ID])
-  species Species? @relation(fields: [species_id], references: [ID])
-  breed Breed? @relation(fields: [breed_id], references: [ID])
+  area         Area?          @relation(fields: [area_id], references: [ID])
+  commune      Commune?       @relation(fields: [commune_id], references: [ID])
+  color        Color?         @relation(fields: [color_id], references: [ID])
+  species      Species?       @relation(fields: [species_id], references: [ID])
+  breed        Breed?         @relation(fields: [breed_id], references: [ID])
+  shelters     Shelters?      @relation(fields: [shelters_id], references: [ID])
 }
 
-model Adoption{
-  ID Int @id  @default(autoincrement())
+model tableAnimals {
+  ID          String @id @default(uuid())
+  name        String
+  species     String
+  breed       String
+  gender      Gender
+  commune     String
+  area        String
+  id_number   String
+  nr_chip     String
+  shelters_id String
+}
+
+model dataRegisterAnimal {
+  ID                 Int      @unique
+  animals_id         String   @unique
+  people_id          Int
+  name               String
+  species            String
+  breed              String
+  id_number          String
+  commune            String
+  area               String
+  color              String
+  size               Size
+  gender             Gender
+  nr_chip            String
+  date_of_birth      DateTime
+  description_animal String
+  shelters_id        String
+}
+
+model Adoption {
+  ID                     Int      @id @default(autoincrement())
+  date_of_adoption       DateTime @db.Date
+  description            String?  @default("")
+  introduced_employee_id Int
+  spent_employee_id      Int
+  type_adoption_id       Int
+  people_id              Int
+  animals_id             String
+  shelters_id            String
+
+  // relations
+  introduced_employees Employees?    @relation(name: "Adoption_introduced_employees_id_fkey", fields: [introduced_employee_id], references: [ID])
+  spent_employees      Employees?    @relation(name: "Adoption_spent_employees_id_fkey", fields: [spent_employee_id], references: [ID])
+  typeAdoption         TypeAdoption? @relation(fields: [type_adoption_id], references: [ID])
+  people               People?       @relation(fields: [people_id], references: [ID])
+  animals              Animals?      @relation(fields: [animals_id], references: [ID])
+  shelters             Shelters?     @relation(fields: [shelters_id], references: [ID])
+}
+
+model dataAdoptionAnimal {
+  ID               Int
+  animals_id       String   @unique
+  people_id        Int
+  nameAnimals      String
+  species_id       Int
+  type_adoption    String
   date_of_adoption DateTime @db.Date
-  description String? @default("")
-  employees_id Int
-  type_adoption_id Int
-  people_id Int
-  animals_id String
+  nameIntroduced   String
+  sunameIntroduced String
+  nameSpent        String
+  sunameSpent      String
+  description      String?  @default("")
+  shelters_id      String
+}
+
+model Registration {
+  ID                      Int      @id @default(autoincrement())
+  date_of_registration    DateTime @db.Date
+  quarantine              DateTime @db.Date
+  type_of_acceptance      String
+  decription_registration String?  @default("")
+  introduced_employees_id Int
+  accepted_employees_id   Int
+  people_id               Int
+  animals_id              String
+  shelters_id             String
 
   // relations
-  employees Employees? @relation(fields: [employees_id], references: [ID])
-  typeAdoption TypeAdoption? @relation(fields: [type_adoption_id], references: [ID])
-  people People? @relation(fields: [people_id], references: [ID])
-  animals Animals? @relation(fields: [animals_id], references: [ID])
+  introduced_employees Employees? @relation(name: "Registraion_introduced_employees_id_fkey", fields: [introduced_employees_id], references: [ID])
+  spent_employees      Employees? @relation(name: "Registraion_accepted_employees_id_fkey", fields: [accepted_employees_id], references: [ID])
+
+  people   People?   @relation(fields: [people_id], references: [ID])
+  animals  Animals?  @relation(fields: [animals_id], references: [ID])
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
-model Registration{
-  ID Int  @id  @default(autoincrement())
-  date_of_registration DateTime @db.Date
-  quarantine DateTime @db.Date
-  type_of_acceptance String
-  decription_registration String? @default("")
-  employees_id Int
-  people_id Int
-  animals_id String
-
-   // relations
-  employees Employees? @relation(fields: [employees_id], references: [ID])
-  people People? @relation(fields: [people_id], references: [ID])
-  animals Animals? @relation(fields: [animals_id], references: [ID])
-
+model animalsOfPeopleGivingBack {
+  ID          Int    @id
+  people_id   Int
+  animals_id  String
+  name        String
+  species     String
+  breed       String
+  gender      Gender
+  commune     String
+  area        String
+  id_number   String
+  nr_chip     String
+  shelters_id String
 }
+
+model dataRegistration {
+  ID                      Int       @unique
+  animals_id              String    @unique
+  people_id               Int
+  date_of_registration    DateTime  @db.Date
+  quarantine              DateTime  @db.Date
+  sterilization           Boolean
+  date_sterilization      DateTime? @db.Date
+  nameIntroduced          String
+  surnameIntroduced       String
+  decription_registration String
+  shelters_id             String
+}
+
 model City {
-  ID       Int    @id  @default(autoincrement())
-  city     String
-  zip_code String
-  people People []
+  ID          Int      @id @unique @default(autoincrement())
+  city        String
+  zip_code    String
+  shelters_id String
+  people      People[]
+
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
-model Province{
-  ID       Int    @id @default(autoincrement())
+model Province {
+  ID       Int      @id @default(autoincrement())
   province String
-  people People []
+  people   People[]
 }
 
-model Commune{
-  ID       Int    @id @default(autoincrement())
-  commune String
-  people People []
-  animals Animals []
+model Commune {
+  ID          Int       @id @unique @default(autoincrement())
+  commune     String
+  shelters_id String
+  people      People[]
+  animals     Animals[]
+  shelters    Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
-model Species{
-  ID       Int    @id  @default(autoincrement())
-  species String
-  breed Breed []
-  animals Animals [] 
+model Species {
+  ID          Int       @id @unique @default(autoincrement())
+  species     String
+  shelters_id String
+  breed       Breed[]
+  animals     Animals[]
+
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
+model Breed {
+  ID          Int       @id @unique @default(autoincrement())
+  breed       String
+  species_id  Int
+  shelters_id String
+  animals     Animals[]
 
-model Breed{
-  ID       Int   @id @unique  @default(autoincrement())
-  breed String
-  species_id  Int 
-  animals Animals []
-
-// relation
-  species Species? @relation( fields: [species_id], references: [ID])
+  // relation
+  species  Species?  @relation(fields: [species_id], references: [ID])
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
-model Color{
-  ID       Int    @id  @default(autoincrement())
-  color String
-  animals Animals []
+model Color {
+  ID          Int    @id @unique @default(autoincrement())
+  color       String
+  shelters_id String
+
+  animals Animals[]
+
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
-model Area{
-  ID       Int    @id @default(autoincrement())
-  area String
+model Area {
+  ID          Int       @id @unique @default(autoincrement())
+  area        String
+  shelters_id String
+  animals     Animals[]
 
-  animals Animals []
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
-model TypeAdoption{
-  ID       Int    @id @default(autoincrement())
+model TypeAdoption {
+  ID            Int        @id @unique @default(autoincrement())
   type_adoption String
-  adoption Adoption []
+  shelters_id   String
+  adoption      Adoption[]
+
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
-model Employees{
-  ID       Int    @id @default(autoincrement())
+model Employees {
+  ID          Int    @id @unique @default(autoincrement())
+  name        String
+  surname     String
+  shelters_id String
+
+  adoption_introduced_employees     Adoption[]     @relation(name: "Adoption_introduced_employees_id_fkey")
+  adoption_spent_employees          Adoption[]     @relation(name: "Adoption_spent_employees_id_fkey")
+  registration_introduced_employees Registration[] @relation(name: "Registraion_introduced_employees_id_fkey")
+  registration_accepted_employees   Registration[] @relation(name: "Registraion_accepted_employees_id_fkey")
+  shelters                          Shelters?      @relation(fields: [shelters_id], references: [ID])
+}
+
+model Shelters {
+  ID   String @id @default(uuid())
   name String
-  surname String
-  adoption Adoption []
-  registration Registration []
+  img Bytes? 
 
+  adoption     Adoption[]
+  animals      Animals[]
+  area         Area[]
+  city         City[]
+  breed        Breed[]
+  color        Color[]
+  employees    Employees[]
+  people       People[]
+  species      Species[]
+  registration Registration[]
+  commune      Commune[]
+  typeAdoption TypeAdoption[]
 }
 
-model Account{
-  ID String @id @unique @default(uuid())
-  username String @unique 
+model Account {
+  ID       String @id @unique @default(uuid())
+  username String @unique
   password String
 }
 
-enum Type_of_person{
+enum Type_of_person {
   legal
   private
   none
 }
 
-enum Size{
+enum Size {
   medium
   large
   small
 }
 
-enum Gender{
+enum Gender {
   male
   female
 }

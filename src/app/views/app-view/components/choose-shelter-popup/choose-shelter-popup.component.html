@@ -5,10 +5,10 @@
 
   <div class="popup-container-cards">
     <ul>
-      <li *ngFor="let cards of cardList">
-        <div class="popup-container-cards-item" [routerLink]="['/app-view/pets']" (click)="setShelter(cards.type)">
-          <h2>{{cards.type}} </h2>
-          <img src="{{cards.img}}" alt="" />
+      <li *ngFor="let shelter of data.shelterList$ | async">
+        <div class="popup-container-cards-item" [routerLink]="['/app-view/pets']" (click)="setShelter(shelter)">
+          <h2>{{shelter.name}} </h2>
+          <img src="{{shelter.img?? defaultShelterImg}}" alt="" />
         </div>
       </li>
     </ul>
