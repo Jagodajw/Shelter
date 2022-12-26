@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { ApiService } from 'src/api/services';
 @Component({
   selector: 'app-pet-detail',
   templateUrl: './pet-detail.component.html',
@@ -12,7 +13,8 @@ export class PetDetailComponent implements OnInit {
   public edit: boolean = false;
   constructor(
     private readonly _form: FormBuilder,
-    private _location: Location
+    private _location: Location,
+    private readonly api: ApiService
   ) {}
 
   ngOnInit(): void {
