@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { ApiService } from 'src/api/services';
 import { PopupOutAnimalComponent } from '../../Views/pets/components/popup-out-animal/popup-out-animal.component';
 
-
 @Component({
   selector: 'app-pets-table',
   templateUrl: './pets-table.component.html',
@@ -14,7 +13,6 @@ import { PopupOutAnimalComponent } from '../../Views/pets/components/popup-out-a
 })
 export class PetsTableComponent implements OnInit {
   @Input() isVisibiltyHeader: boolean = true;
-  // private petsType: PetsTableInterface[] = [];
   public petsTable = new MatTableDataSource<any[]>();
   public readonly dataAnimalsTable?: Observable<any[]>;
 
@@ -54,7 +52,6 @@ export class PetsTableComponent implements OnInit {
     // 'handOverTheAnimal',
     'action',
   ];
-
 
   dataSource = this.dataAnimalsTable;
 
