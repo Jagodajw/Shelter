@@ -1,37 +1,34 @@
-<div class="pets_container ">
-    <div class="pets_container-header">
-        <div class="pets_container-header-animate">
-            <h1>
-                {{"pets.title" | translate}}
-            </h1>
+<div class="pets_container">
+  <div class="pets_container-header">
+    <div class="pets_container-header-animate">
+      <h1>
+        {{ "pets.title" | translate }}
+      </h1>
 
-            <div class="toggle-item-container" (click)="clickEvent()"
-                [ngClass]="status ?'' : 'toggle-item-container-animated' ">
-                <div class="toggle-item-2">{{"pets.current" | translate}}</div>
-                <div class="toggle-item-2">{{"pets.past" | translate}}</div>
-            </div>
-            <div class="toggle-btn" (click)="clickEvent()">
-                <mat-icon>
-                    swap_vert
-                </mat-icon>
-            </div>
-        </div>
-
-        <button mat-flat-button (click)="openDialog()">
-            {{"pets.addPets" | translate}}
-            <mat-icon>add_circle</mat-icon>
-        </button>
+      <div
+        class="toggle-item-container"
+        (click)="clickEvent()"
+        [ngClass]="status ? '' : 'toggle-item-container-animated'"
+      >
+        <div class="toggle-item-2">{{ "pets.current" | translate }}</div>
+        <div class="toggle-item-2">{{ "pets.past" | translate }}</div>
+      </div>
+      <div class="toggle-btn" (click)="clickEvent()">
+        <mat-icon> swap_vert </mat-icon>
+      </div>
     </div>
 
+    <button mat-flat-button (click)="openDialog()">
+      {{ "pets.addPets" | translate }}
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
 
+  <div class="pets_container-search">
+    <app-search-engine></app-search-engine>
+  </div>
 
-    <div class="pets_container-search">
-        <app-search-engine></app-search-engine>
-    </div>
-
-    <div class="pets_container-tabble">
-        <app-pets-table>
-
-        </app-pets-table>
-    </div>
+  <div class="pets_container-tabble">
+    <app-pets-table></app-pets-table>
+  </div>
 </div>

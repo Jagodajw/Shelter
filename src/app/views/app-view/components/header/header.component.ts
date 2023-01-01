@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-import { Shelters } from '../choose-shelter-popup/choose-shelter-popup';
-import { ChooseShelterPopupService } from '../../services/choose-shelter-popup.service';
-import { navList } from './menu';
-
-import { StorageService } from 'src/app/services/storage.service';
 import { Observable, pluck } from 'rxjs';
+import { StorageService } from 'src/app/services/storage.service';
+import { ShelterService } from '../../services/shelter.service';
+import { navList } from './menu';
 
 @Component({
   selector: 'app-header',
@@ -13,25 +10,25 @@ import { Observable, pluck } from 'rxjs';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  public menuItems = navList;
-
+  public readonly menuItems = navList;
   public readonly shelterName$?: Observable<string | undefined>;
 
   constructor(
-    private chooseShelterPopupService: ChooseShelterPopupService,
-    public storage: StorageService
+    private readonly ShelterService: ShelterService,
+    public readonly storage: StorageService
   ) {
-    this.shelterName$ = this.chooseShelterPopupService.shelter
-      .asObservable()
-      .pipe(pluck('name')) as Observable<string | undefined>;
+    this.shelterName$ = this.ShelterService.getSelectedShelter$.pipe(
+      pluck('name')
+    ) as Observable<string | undefined>;
   }
 
   ngOnInit(): void {}
 
-  openDialog(): void {
-    this.chooseShelterPopupService.openDialog();
+  public openDialog(): void {
+    this.ShelterService.openDialog();
   }
-  resetStorage(): void {
+
+  public resetStorage(): void {
     this.storage.clear();
   }
 }
