@@ -14,10 +14,10 @@ export class HeaderComponent implements OnInit {
   public readonly shelterName$?: Observable<string | undefined>;
 
   constructor(
-    private readonly ShelterService: ShelterService,
+    private readonly shelter: ShelterService,
     public readonly storage: StorageService
   ) {
-    this.shelterName$ = this.ShelterService.getSelectedShelter$.pipe(
+    this.shelterName$ = this.shelter.getSelectedShelter$.pipe(
       pluck('name')
     ) as Observable<string | undefined>;
   }
@@ -25,7 +25,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {}
 
   public openDialog(): void {
-    this.ShelterService.openDialog();
+    this.shelter.openDialog();
   }
 
   public resetStorage(): void {

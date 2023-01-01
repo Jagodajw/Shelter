@@ -8,7 +8,7 @@ import { Shelters } from '../components/choose-shelter-popup/choose-shelter-popu
 import { ChooseShelterPopupComponenet } from '../components/choose-shelter-popup/choose-shelter-popup.componenet';
 @Injectable()
 export class ShelterService {
-  public readonly selectedShelter$: BehaviorSubject<Shelters | null> =
+  private readonly selectedShelter$: BehaviorSubject<Shelters | null> =
     new BehaviorSubject<Shelters | null>(null);
 
   constructor(
