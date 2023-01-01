@@ -1,8 +1,13 @@
-import jwt, { Secret } from 'jsonwebtoken';
 import express from 'express';
+import jwt, { Secret } from 'jsonwebtoken';
 import { checkAccountExists } from '../services/AuthService';
 
 const router = express.Router();
+
+router.use((req, res, next) => {
+  // #swagger.tags = ['Auth']
+  next();
+});
 
 router.post('/login', async (req, res) => {
   const login = req.body.login;

@@ -1,7 +1,6 @@
 import { Prisma } from '@prisma/client';
 import express from 'express';
 import { authenticate } from '../middlewares/authentication';
-import { Breed } from '../models/BreedModel';
 import { City } from '../models/CityModel';
 import {
   deleteAllArea,
@@ -18,7 +17,6 @@ import {
   getAllSpecies,
   getAllTypeAdoption,
   postArea,
-  postBreed,
   postCity,
   postColor,
   postCommune,
@@ -34,6 +32,12 @@ import {
 } from '../services/DictionaryService';
 
 const router = express.Router();
+
+router.use((req, res, next) => {
+  // #swagger.tags = ['Dictonary']
+  next();
+});
+
 //GET
 router.get('/settingsCity/:sheltersId', authenticate, async (req, res) => {
   try {

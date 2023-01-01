@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { mergeMap, Observable } from 'rxjs';
-import { ApiService } from 'src/api/services';
+import { AnimalsService } from 'src/api/services';
 import { ShelterService } from '../../services/shelter.service';
 import { PopupOutAnimalComponent } from '../../Views/pets/components/popup-out-animal/popup-out-animal.component';
 
@@ -31,7 +31,7 @@ export class PetsTableComponent implements OnInit {
   constructor(
     public readonly router: Router,
     public readonly dialog: MatDialog,
-    private readonly api: ApiService,
+    private readonly api: AnimalsService,
     private readonly shelter: ShelterService
   ) {}
 

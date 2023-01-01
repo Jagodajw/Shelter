@@ -4,6 +4,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationInterface } from './api-configuration';
 
 import { ApiService } from './services/api.service';
+import { AnimalsService } from './services/animals.service';
+import { AuthService } from './services/auth.service';
+import { DictonaryService } from './services/dictonary.service';
+import { PeopleService } from './services/people.service';
+import { ShelterService } from './services/shelter.service';
 
 /**
  * Provider for all Api services, plus ApiConfiguration
@@ -18,7 +23,12 @@ import { ApiService } from './services/api.service';
   declarations: [],
   providers: [
     ApiConfiguration,
-    ApiService
+    ApiService,
+    AnimalsService,
+    AuthService,
+    DictonaryService,
+    PeopleService,
+    ShelterService
   ],
 })
 export class ApiModule {

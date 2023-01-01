@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-import { ApiService } from 'src/api/services';
+import { AuthService } from 'src/api/services';
 import { StorageService } from '../../services/storage.service';
-import { Auth, LoginResponse } from './auth-view.interface';
+import { Auth } from './auth-view.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +10,7 @@ import { Auth, LoginResponse } from './auth-view.interface';
 export class AuthViewService {
   private readonly JWT_TOKEN_KEY = 'JWT_TOKEN_KEY';
   constructor(
-    private readonly _api: ApiService,
+    private readonly _api: AuthService,
     private readonly storage: StorageService
   ) {}
 
