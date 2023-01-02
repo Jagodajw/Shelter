@@ -107,5 +107,12 @@
       "no": "nie",
       "yes": "tak"
     }
+  },
+  "errors": {
+    "BAD_SHELTER_ID": "Błędny Identyfikator schroniska",
+    "INTERNAL_SERVER_ERROR": "Błąd serwera",
+    "UNKNOWN_ERROR": "Nieznany błąd",
+    "FORBIDDEN": "Brak dostępu",
+    "WRONG_LOGIN_DATA": "Błędne dane logownia, spróbuj ponownie"
   }
 }

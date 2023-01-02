@@ -15,7 +15,8 @@ router.post('/login', async (req, res) => {
 
   // check user in database
   const id = await checkAccountExists(login, password);
-  if (id === null) return res.sendStatus(500);
+  if (id === null)
+    return res.status(500).json({ ERROR_CODE: 'WRONG_LOGIN_DATA' });
   const accessToken = jwt.sign({ id }, process.env.TOKEN_SECRET as Secret, {
     expiresIn: 86400,
   });

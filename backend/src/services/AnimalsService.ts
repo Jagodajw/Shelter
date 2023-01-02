@@ -1,8 +1,13 @@
+import { tableAnimals } from '@prisma/client';
 import { prisma } from '..';
 import { Animals, People, Registration } from '../models/DataRegister';
 
-export async function getAllAnimals() {
-  return await prisma.tableAnimals.findMany();
+export async function getAllAnimalsByShelterId(
+  shelterId: string
+): Promise<tableAnimals[]> {
+  return await prisma.tableAnimals.findMany({
+    where: { shelters_id: shelterId },
+  });
 }
 
 export async function getAnimalDataRegister(animalId: string) {

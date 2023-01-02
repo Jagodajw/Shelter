@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable, pluck } from 'rxjs';
-import { StorageService } from 'src/app/services/storage.service';
+import { AuthRootService } from 'src/app/services/auth-root.service';
 import { ShelterService } from '../../services/shelter.service';
 import { navList } from './menu';
 
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private readonly shelter: ShelterService,
-    public readonly storage: StorageService
+    private readonly auth: AuthRootService
   ) {
     this.shelterName$ = this.shelter.getSelectedShelter$.pipe(
       pluck('name')
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
     this.shelter.openDialog();
   }
 
-  public resetStorage(): void {
-    this.storage.clear();
+  public logout(): void {
+    this.auth.logout();
   }
 }

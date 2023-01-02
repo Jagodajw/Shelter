@@ -7,6 +7,7 @@ import { LOCALE_ID, NgModule } from '@angular/core';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from '@angular/material/slider';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
 import {
   BrowserAnimationsModule,
@@ -16,6 +17,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.component';
 import { AppComponent } from './app.component';
+import { ErrorHandlerInteceptorService } from './interceptors/error-handler.interceptor.service';
 import { ShelterInterceptorService } from './interceptors/shelter-interceptor.service';
 import { TokenApiRestInterceptorService } from './interceptors/token-api-rest-interceptor.service';
 import { AppInitService } from './services/app-init.service';
@@ -34,6 +36,7 @@ export function appInit(appInitService: AppInitService): any {
     MatNativeDateModule,
     HttpClientModule,
     NoopAnimationsModule,
+    MatSnackBarModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -44,6 +47,11 @@ export function appInit(appInitService: AppInitService): any {
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pl' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorHandlerInteceptorService,
+      multi: true,
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenApiRestInterceptorService,

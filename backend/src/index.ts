@@ -1,7 +1,7 @@
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
 import { PrismaClient } from '@prisma/client';
+import cors from 'cors';
+import dotenv from 'dotenv';
+import express from 'express';
 import swaggerUi from 'swagger-ui-express';
 import swaggerDocument from '../swagger-output.json';
 import routes from './routes';
@@ -11,11 +11,6 @@ const app = express();
 
 dotenv.config();
 
-const options = {
-  swaggerOptions: {
-    url: '/api-docs/swagger.json',
-  }, 
-};
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

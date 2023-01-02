@@ -37,6 +37,11 @@
         "description": "",
         "parameters": [
           {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "authorization",
             "in": "header",
             "type": "string"

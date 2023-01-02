@@ -1,25 +1,23 @@
 import { Gender, Size, Type_of_person } from '@prisma/client';
 
-export class Animals {
-  constructor(
-    public name: string,
-    public species_id: number,
-    public breed_id: number,
-    public id_number: string,
-    public commune_id: number,
-    public area_id: number,
-    public color_id: number,
-    public size: Size,
-    public gender: Gender,
-    public nr_chip: string,
-    public date_of_birth: Date,
-    public description_animal: string,
-    public date_vaccination: Date,
-    public vaccination: boolean,
-    public shelters_id: string,
-    public sterilization: boolean,
-    public date_sterilization: Date
-  ) {}
+export interface Animals {
+  name: string;
+  species_id: number;
+  breed_id: number;
+  id_number: string;
+  commune_id: number;
+  area_id: number;
+  color_id: number;
+  size: Size;
+  gender: Gender;
+  nr_chip: string;
+  date_of_birth: Date;
+  description_animal: string;
+  date_vaccination: Date;
+  vaccination: boolean;
+  shelters_id: string;
+  sterilization: boolean;
+  date_sterilization: Date;
 }
 
 export class People {

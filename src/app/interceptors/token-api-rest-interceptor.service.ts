@@ -6,11 +6,11 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { AuthViewService } from '../views/auth-view/auth-view.service';
+import { AuthRootService } from '../services/auth-root.service';
 
 @Injectable()
 export class TokenApiRestInterceptorService implements HttpInterceptor {
-  constructor(private readonly auth: AuthViewService) {}
+  constructor(private readonly auth: AuthRootService) {}
 
   intercept(
     request: HttpRequest<unknown>,
