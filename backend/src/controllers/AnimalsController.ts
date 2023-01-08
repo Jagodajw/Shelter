@@ -3,6 +3,7 @@ import { authenticate } from '../middlewares/authentication';
 import { shelterAuthenticate } from '../middlewares/shelterAuthentication';
 import {
   getAllAnimalsByShelterId,
+  getAnimalById,
   getAnimalDataAdoption,
   getAnimalDataRegister,
   postAnimalDataRegister,
@@ -36,10 +37,14 @@ router.get(
   async (req, res) => {
     try {
       const animalId = req.params.animalId;
+
+      const animalData = await getAnimalById(animalId);
+      if (animalData === null) throw new Error('ANIMAL_DOESNT_EXIST');
+
       const animalDataRegister = await getAnimalDataRegister(animalId);
       res.status(200).json(animalDataRegister);
-    } catch (error) {
-      res.sendStatus(500);
+    } catch (error: any) {
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
     }
   }
 );
@@ -60,15 +65,17 @@ router.get(
 );
 
 router.post(
-  '/animalRegistration/',
+  '/animalRegistration',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
     try {
+      const shelters_id: string = req.headers['shelters_id'] as string;
       const registerAnimal = req.body.registerAnimal;
       const registerPeople = req.body.registerPeople;
       const register = req.body.register;
       const registrationAnimal = await postAnimalDataRegister(
+        shelters_id,
         registerAnimal,
         registerPeople,
         register

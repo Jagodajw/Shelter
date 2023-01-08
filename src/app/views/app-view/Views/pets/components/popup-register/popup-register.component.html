@@ -1,25 +1,24 @@
 <div class="register">
-    <form [formGroup]="registerPetsForm">
-        <div class="register__animals-title">
-            <h1 mat-dialog-title>{{'pets.titleRegisterAnimal' | translate}}</h1>
-        </div>
+  <form [formGroup]="registerPetsForm" (ngSubmit)="addPet()">
+    <div class="register__animals-title">
+      <h1 mat-dialog-title>{{ "pets.titleRegisterAnimal" | translate }}</h1>
+    </div>
 
-        <mat-dialog-content class="register__animals">
+    <mat-dialog-content class="register__animals">
+      <app-data-pet-register></app-data-pet-register>
 
-            <app-data-pet-register></app-data-pet-register>
+      <app-data-person-donor></app-data-person-donor>
 
-            <app-data-person-donor></app-data-person-donor>
+      <app-data-register></app-data-register>
 
-            <app-data-register></app-data-register>
-
-            <mat-dialog-actions align="end" class="register__animals-btn">
-                <app-button type="button" variant="cancelable" mat-dialog-close>
-                    {{ 'action.cancel' | translate }}
-                </app-button>
-                <app-button type="submit" variant="raised">
-                    {{ 'action.accept' | translate }}
-                </app-button>
-            </mat-dialog-actions>
-        </mat-dialog-content>
-    </form>
+      <mat-dialog-actions align="end" class="register__animals-btn">
+        <app-button type="button" variant="cancelable" mat-dialog-close>
+          {{ "action.cancel" | translate }}
+        </app-button>
+        <app-button type="submit" variant="raised">
+          {{ "action.accept" | translate }}
+        </app-button>
+      </mat-dialog-actions>
+    </mat-dialog-content>
+  </form>
 </div>

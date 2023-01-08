@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
+import { AnimalsService } from 'src/api/services';
 import { Select } from 'src/app/views/app-view/components/select/select';
 
 @Component({
@@ -10,7 +12,11 @@ import { Select } from 'src/app/views/app-view/components/select/select';
 export class PopupRegisterComponent implements OnInit {
   registerPetsForm!: FormGroup;
 
-  constructor(private readonly _form: FormBuilder) {}
+  constructor(
+    private readonly _form: FormBuilder,
+    private readonly animalApi: AnimalsService,
+    private readonly dialogRef: MatDialogRef<PopupRegisterComponent, undefined>
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -20,30 +26,32 @@ export class PopupRegisterComponent implements OnInit {
     this.registerPetsForm = this._form.group({
       dataPetRegister: this._form.group({
         name: ['', Validators.required],
-        species: ['', Validators.required],
-        breed: ['', Validators.required],
-        ID: ['', Validators.required],
-        community: [''],
-        area: [''],
-        color: [''],
+        species_id: ['', Validators.required],
+        breed_id: ['', Validators.required],
+        id_number: ['', Validators.required],
+        commune_id: [''],
+        area_id: [''],
+        color_id: [''],
         size: ['', Validators.required],
         gender: ['', Validators.required],
-        nrChip: ['', Validators.required],
-        dateBirth: ['', Validators.required],
-        description: [''],
+        nr_chip: ['', Validators.required],
+        date_of_birth: ['', Validators.required],
+        description_animal: [''],
         // DateGraft: [''],
       }),
       dataPersonRegister: this._form.group({
-        personName: [''],
-        IDnumber: [''],
-        pesel: [''],
+        name: [''],
+        id_number: [''],
+        pesel: [null],
+        nip: [null],
         email: [''],
-        tel: [''],
+        telephone: [''],
         adress: [''],
-        city: [''],
+        city_id: [''],
+        province_id: [''],
+        description: [''],
+        //not sure, zipCode is in city object, or isn't?
         zipCode: [''],
-        province: [''],
-        comments: [''],
       }),
       dataRegister: this._form.group({
         dateRegister: ['', Validators.required],
@@ -62,10 +70,23 @@ export class PopupRegisterComponent implements OnInit {
     { id: 0, name: 'kot' },
     { id: 1, name: 'pies' },
   ];
+
   chooseSelect(event: Select) {
     console.log(event);
   }
+
   chooseAutocomplete(event: Select) {
     console.log(event);
+  }
+
+  public addPet(): void {
+    // to test, basic implementation without
+    this.animalApi
+      .postAnimalRegistration({ body: this.registerPetsForm.value })
+      .subscribe({
+        next: () => {
+          this.dialogRef.close();
+        },
+      });
   }
 }

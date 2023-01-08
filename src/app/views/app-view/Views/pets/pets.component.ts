@@ -14,10 +14,11 @@ export class PetsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  clickEvent() {
+  public togglePetsView() {
     this.status = !this.status;
   }
-  openDialog(): void {
+
+  public addPet(): void {
     this.dialog.open(PopupRegisterComponent, {
       panelClass: ['input-70', 'modal-without-padding'],
       disableClose: true,

@@ -20,35 +20,32 @@ export interface Animals {
   date_sterilization: Date;
 }
 
-export class People {
-  constructor(
-    public type_of_person: Type_of_person,
-    public name: string,
-    public id_number: string,
-    public pesel: string,
-    public nip: string,
-    public telephone: string,
-    public email: string,
-    public adress: string,
-    public city_id: number,
-    public province_id: number,
-    public commune_id: number,
-    public description: string,
-    public shelters_id: string,
-    public black_list?: boolean
-  ) {}
+export interface People {
+  type_of_person: Type_of_person;
+  name: string;
+  id_number: string;
+  pesel: string;
+  nip?: string;
+  email: string;
+  telephone: string;
+  adress: string;
+  // maybe to delete shelter attribute in city table?
+  city_id: number;
+  province_id: number;
+  commune_id: number;
+  description: string;
+  shelters_id: string;
+  black_list?: boolean;
 }
 
-export class Registration {
-  constructor(
-    public animals_id: string,
-    public people_id: number,
-    public date_of_registration: Date,
-    public quarantine: Date,
-    public introduced_employees_id: number,
-    public accepted_employees_id: number,
-    public decription_registration: string,
-    public type_of_acceptance: string,
-    public shelters_id: string
-  ) {}
+export interface Registration {
+  animals_id: string;
+  people_id: number;
+  date_of_registration: Date;
+  quarantine: Date;
+  introduced_employees_id: number;
+  accepted_employees_id: number;
+  decription_registration: string;
+  type_of_acceptance: string;
+  shelters_id: string;
 }

@@ -80,6 +80,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -115,6 +120,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -133,13 +143,18 @@
         }
       }
     },
-    "/animalRegistration/": {
+    "/animalRegistration": {
       "post": {
         "tags": [
           "Animals"
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "authorization",
             "in": "header",
@@ -230,6 +245,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -263,6 +283,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           }
@@ -300,6 +325,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -333,6 +363,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           }
@@ -370,6 +405,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -403,6 +443,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           }
@@ -440,6 +485,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -475,6 +525,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -505,6 +560,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           }
@@ -539,6 +599,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -569,6 +634,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           }
@@ -603,6 +673,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -633,6 +708,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           }
@@ -667,6 +747,11 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -695,6 +780,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           },
@@ -742,6 +832,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           },
@@ -796,6 +891,11 @@
             "type": "string"
           },
           {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -839,6 +939,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           },
@@ -890,6 +995,11 @@
             "type": "string"
           },
           {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -937,6 +1047,11 @@
             "type": "string"
           },
           {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
             "name": "body",
             "in": "body",
             "schema": {
@@ -980,6 +1095,11 @@
           },
           {
             "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           },
