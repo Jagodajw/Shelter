@@ -1,9 +1,9 @@
-import { Breed } from '@prisma/client';
+import { Breed, City } from '@prisma/client';
 import { prisma } from '..';
-import { City } from '../models/CityModel';
+import { CityResponse } from '../models/DictionaryModel';
 
 //GET
-export async function getAllCity(sheltersId: string) {
+export async function getAllCity(sheltersId: string): Promise<CityResponse[]> {
   return await prisma.city.findMany({
     where: {
       shelters_id: sheltersId,
@@ -123,7 +123,7 @@ export async function updateCity(cityId: number, updateCityModel: City) {
     },
     data: {
       city: updateCityModel.city,
-      zip_code: updateCityModel.zipCode,
+      zip_code: updateCityModel.zip_code,
     },
   });
 }
@@ -203,7 +203,7 @@ export async function postCity(updateCityModel: City, shelters_id: string) {
   return await prisma.city.create({
     data: {
       city: updateCityModel.city,
-      zip_code: updateCityModel.zipCode,
+      zip_code: updateCityModel.zip_code,
       shelters_id: shelters_id,
     },
   });

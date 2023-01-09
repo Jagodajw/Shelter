@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { mergeMap, Observable } from 'rxjs';
 import { AnimalsService } from 'src/api/services';
+import { PetService } from '../../services/api/pet.service';
 import { ShelterService } from '../../services/shelter.service';
 import { PopupOutAnimalComponent } from '../../Views/pets/components/popup-out-animal/popup-out-animal.component';
 
@@ -32,7 +33,8 @@ export class PetsTableComponent implements OnInit {
     public readonly router: Router,
     public readonly dialog: MatDialog,
     private readonly api: AnimalsService,
-    private readonly shelter: ShelterService
+    private readonly shelter: ShelterService,
+    private readonly apiv2: PetService
   ) {}
 
   ngOnInit(): void {
@@ -42,14 +44,19 @@ export class PetsTableComponent implements OnInit {
   private shelterChangeDetector(): void {
     // have to unsubscribe, mayby @UntilDestory
     this.shelter.selectedShelterChangeDetector$
-      .pipe(mergeMap(() => this.getAnimalsTableList()))
+      .pipe(mergeMap(() => this.getAnimalsTableList2()))
       .subscribe(
         (petsData) => (this.petsTable = new MatTableDataSource<any[]>(petsData))
       );
+    this.getAnimalsTableList().subscribe();
   }
 
   private getAnimalsTableList(): Observable<any> {
     return this.api.getAnimals();
+  }
+
+  private getAnimalsTableList2(): Observable<any> {
+    return this.apiv2.getPets();
   }
 
   public openPetDetail(petId: number) {

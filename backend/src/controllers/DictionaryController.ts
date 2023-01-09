@@ -3,6 +3,7 @@ import express from 'express';
 import { authenticate } from '../middlewares/authentication';
 import { shelterAuthenticate } from '../middlewares/shelterAuthentication';
 import { City } from '../models/CityModel';
+import { CityResponse } from '../models/DictionaryModel';
 import {
   deleteAllArea,
   deleteAllBreed,
@@ -18,14 +19,12 @@ import {
   getAllSpecies,
   getAllTypeAdoption,
   postArea,
-  postCity,
   postColor,
   postCommune,
   postSpecies,
   postTypeAdoption,
   updateArea,
   updateBreed,
-  updateCity,
   updateColor,
   updateCommune,
   updateSpecies,
@@ -40,21 +39,16 @@ router.use((req, res, next) => {
 });
 
 //GET
-router.get(
-  '/settingsCity/:sheltersId',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const sheltersId = req.params.sheltersId;
+router.get('/cities', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelters_id: string = req.headers['shelters_id'] as string;
 
-      const dictionaryCity = await getAllCity(sheltersId);
-      res.json(dictionaryCity);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+    const dictionaryCity = await getAllCity(shelters_id);
+    res.json(dictionaryCity as CityResponse[]);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
 router.get(
   '/settingsCommune/:sheltersId',
@@ -332,11 +326,12 @@ router.put(
       const cityId = req.params.cityId;
       const updateCityModel = new City(req.body.city, req.body.zip_code);
       const convertCityId = parseInt(cityId);
-      const dictionaryCityIdUpdate = await updateCity(
-        convertCityId,
-        updateCityModel
-      );
-      res.json(dictionaryCityIdUpdate);
+      //to debug
+      // const dictionaryCityIdUpdate = await updateCity(
+      //   convertCityId,
+      //   updateCityModel
+      // );
+      res.json([]);
     } catch (error) {
       res.sendStatus(500);
     }
@@ -480,8 +475,9 @@ router.post(
     try {
       const shelters_id: string = req.headers['shelters_id'] as string;
       const updateCityModel = new City(req.body.city, req.body.zip_code);
-      const dictionaryAddCity = await postCity(updateCityModel, shelters_id);
-      res.json(dictionaryAddCity);
+      //to debug
+      // const dictionaryAddCity = await postCity(updateCityModel, shelters_id);
+      res.json([]);
     } catch (error) {
       res.sendStatus(500);
     }
