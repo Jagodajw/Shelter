@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { AppInitService } from './services/app-init.service';
 
 @Component({
   selector: 'app-root',
@@ -7,9 +8,14 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Shelter';
-
-  constructor(private translate: TranslateService) {
+  constructor(
+    private readonly translate: TranslateService,
+    private readonly appInit: AppInitService
+  ) {
     translate.use('pl');
+  }
+
+  ngOnInit(): void {
+    this.appInit.init();
   }
 }

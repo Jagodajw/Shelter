@@ -1,17 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatButtonToggleChange } from '@angular/material/button-toggle';
-import { ButtonFilter } from './button-filter';
+import { ButtonFilter, ButtonFilterDefaultID } from './button-filter';
 
 @Component({
   selector: 'app-button-filter',
   templateUrl: './button-filter.component.html',
   styleUrls: ['./button-filter.component.scss'],
 })
-export class ButtonFilterComponent implements OnInit {
-  @Input() filters: ButtonFilter[] = [];
+export class ButtonFilterComponent<T = ButtonFilterDefaultID>
+  implements OnInit
+{
+  @Input() filters: ButtonFilter<T>[] = [];
   @Input() disabled: boolean = false;
-  @Input() initialValue!: number;
-  @Output() change: EventEmitter<number> = new EventEmitter<number>();
+  @Input() initialValue!: T;
+  @Output() change: EventEmitter<T> = new EventEmitter<T>();
 
   constructor() {}
 

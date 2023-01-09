@@ -1,4 +1,5 @@
-export interface ButtonFilter{
-    id: number;
-    name: string;
+export type ButtonFilterDefaultID = number;
+export interface ButtonFilter<TId = ButtonFilterDefaultID> {
+  id: TId;
+  name: string;
 }

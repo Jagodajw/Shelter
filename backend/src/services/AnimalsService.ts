@@ -1,8 +1,19 @@
+import { tableAnimals } from '@prisma/client';
 import { prisma } from '..';
 import { Animals, People, Registration } from '../models/DataRegister';
 
-export async function getAllAnimals() {
-  return await prisma.tableAnimals.findMany();
+export async function getAllAnimalsByShelterId(
+  shelterId: string
+): Promise<tableAnimals[]> {
+  return await prisma.tableAnimals.findMany({
+    where: { shelters_id: shelterId },
+  });
+}
+
+export async function getAnimalById(
+  animalId: string
+): Promise<tableAnimals | null> {
+  return await prisma.tableAnimals.findUnique({ where: { ID: animalId } });
 }
 
 export async function getAnimalDataRegister(animalId: string) {
@@ -26,6 +37,7 @@ export async function getAnimalDataRegister(animalId: string) {
 }
 
 export async function postAnimalDataRegister(
+  shelterId: string,
   updateDataRegisterAnimal: Animals,
   updateDataRegisterPeople: People,
   updateDataRegistration: Registration
@@ -48,24 +60,24 @@ export async function postAnimalDataRegister(
       vaccination: updateDataRegisterAnimal.vaccination,
       sterilization: updateDataRegisterAnimal.sterilization,
       date_sterilization: updateDataRegisterAnimal.date_sterilization,
-      shelters_id: updateDataRegisterAnimal.shelters_id,
+      shelters_id: shelterId,
     },
   });
   const registerPeople = await prisma.people.create({
     data: {
+      type_of_person: updateDataRegisterPeople.type_of_person,
       name: updateDataRegisterPeople.name,
       id_number: updateDataRegisterPeople.id_number,
       pesel: updateDataRegisterPeople.pesel,
       nip: updateDataRegisterPeople.nip,
-      telephone: updateDataRegisterPeople.telephone,
       email: updateDataRegisterPeople.email,
+      telephone: updateDataRegisterPeople.telephone,
       adress: updateDataRegisterPeople.adress,
       city_id: updateDataRegisterPeople.city_id,
       province_id: updateDataRegisterPeople.province_id,
       commune_id: updateDataRegisterPeople.commune_id,
       description: updateDataRegisterPeople.description,
-      type_of_person: updateDataRegisterPeople.type_of_person,
-      shelters_id: updateDataRegisterPeople.shelters_id,
+      shelters_id: shelterId,
     },
   });
   const register = await prisma.registration.create({
@@ -78,7 +90,7 @@ export async function postAnimalDataRegister(
       type_of_acceptance: updateDataRegistration.type_of_acceptance,
       animals_id: registerAnimal.ID,
       people_id: registerPeople.ID,
-      shelters_id: updateDataRegistration.shelters_id,
+      shelters_id: shelterId,
     },
   });
 

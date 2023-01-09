@@ -1,36 +1,40 @@
 <mat-toolbar class="header" role="header">
-    <h1 class="header__logo">
-        {{"shelter.title" | translate}} {{shelterName$ | async}}
-    </h1>
+  <h1 class="header__logo">
+    {{ "shelter.title" | translate }} {{ shelterName$ | async }}
+  </h1>
 
-    <span class="example-spacer"></span>
-    <div class="header__link">
-        <ul>
-            <li *ngFor="let menuItem of menuItems">
-                <a [routerLink]="['/app-view/'+ menuItem.route]" routerLinkActive #link="routerLinkActive"
-                    [ngClass]="{'active': link.isActive}">
-                    <mat-icon>{{menuItem.icon}}</mat-icon>
-                    <span class="nav-link">
-                        {{menuItem.name | translate}}
-                    </span>
-                </a>
-            </li>
-        </ul>
-    </div>
+  <span class="example-spacer"></span>
+  <div class="header__link">
+    <ul>
+      <li *ngFor="let menuItem of menuItems">
+        <a
+          [routerLink]="['/app-view/' + menuItem.route]"
+          routerLinkActive
+          #link="routerLinkActive"
+          [ngClass]="{ active: link.isActive }"
+        >
+          <mat-icon>{{ menuItem.icon }}</mat-icon>
+          <span class="nav-link">
+            {{ menuItem.name | translate }}
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>
 
-    <div class="header__login">
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>account_circle</mat-icon>
-        </button>
-        <mat-menu #menu="matMenu" class="header__login-menu">
-            <button mat-menu-item (click)="openDialog()">
-                {{"authView.switchAccount" | translate}}
-                <mat-icon>supervisor_account</mat-icon>
-            </button>
+  <div class="header__login">
+    <button mat-icon-button [matMenuTriggerFor]="menu">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="header__login-menu">
+      <button mat-menu-item (click)="openDialog()">
+        {{ "authView.switchAccount" | translate }}
+        <mat-icon>supervisor_account</mat-icon>
+      </button>
 
-            <button mat-menu-item (click)="resetStorage()" [routerLink]="['/auth-view']">
-                {{"authView.logout" | translate}} <mat-icon>login</mat-icon>
-            </button>
-        </mat-menu>
-    </div>
+      <button mat-menu-item (click)="logout()">
+        {{ "authView.logout" | translate }} <mat-icon>login</mat-icon>
+      </button>
+    </mat-menu>
+  </div>
 </mat-toolbar>

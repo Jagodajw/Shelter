@@ -8,6 +8,11 @@ import {
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+  // #swagger.tags = ['People']
+  next();
+});
+
 //REQUEST - ep/endpoint
 // req- ządanie z frontu
 // Response res - odpowiedź z backu

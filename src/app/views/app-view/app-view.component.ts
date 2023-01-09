@@ -1,21 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { StorageService } from 'src/app/services/storage.service';
-import { ChooseShelterPopupService } from './services/choose-shelter-popup.service';
+import { ShelterService } from './services/shelter.service';
 @Component({
   selector: 'app-app-view',
   templateUrl: './app-view.component.html',
   styleUrls: ['./app-view.component.scss'],
-  providers: [ChooseShelterPopupService],
+  providers: [ShelterService],
 })
 export class AppViewComponent implements OnInit {
-  constructor(
-    private readonly chooseShelterService: ChooseShelterPopupService,
-    private readonly storage: StorageService
-  ) {}
+  constructor(private readonly shelter: ShelterService) {}
 
   ngOnInit(): void {
-    if (!this.storage.get('shelter')) {
-      this.chooseShelterService.openDialog();
-    }
+    this.shelter.init();
   }
 }

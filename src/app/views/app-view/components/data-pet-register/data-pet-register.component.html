@@ -1,85 +1,127 @@
 <div class="dataPet" formGroupName="dataPetRegister">
-    <h2>{{'pets.dataRegisterAnimal' | translate}}</h2>
+  <h2>{{ "pets.dataRegisterAnimal" | translate }}</h2>
 
-    <div class="inline input-75">
-        <div class="input-row">
-            <mat-form-field class="input-third">
-                <mat-label>{{'pets.name' | translate}}</mat-label>
-                <input matInput formControlName="name" placeholder="{{'pets.name' | translate}}">
-            </mat-form-field>
+  <div class="inline input-75">
+    <div class="input-row">
+      <mat-form-field class="input-third">
+        <mat-label>{{ "pets.name" | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="name"
+          placeholder="{{ 'pets.name' | translate }}"
+        />
+      </mat-form-field>
 
-            <span class="inline input-third">
-                <app-autocomplete formControlName="species" (change)="chooseAutocomplete($event)"
-                    [values]="arrayOfSpecies" placeholder="pets.species">
-                </app-autocomplete>
-            </span>
+      <span class="inline input-third">
+        <app-autocomplete
+          formControlName="species_id"
+          (change)="chooseAutocomplete($event)"
+          [values]="arrayOfSpecies"
+          placeholder="pets.species"
+        >
+        </app-autocomplete>
+      </span>
 
-            <span class="inline input-third">
-                <app-autocomplete formControlName="breed" (change)="chooseAutocomplete($event)"
-                    [values]="arrayOfSpecies" placeholder="pets.breed">
-                </app-autocomplete>
-            </span>
-
-        </div>
-
-        <div class="input-row">
-            <mat-form-field class="input-third">
-                <mat-label>{{'pets.ID' | translate}}</mat-label>
-                <input formControlName="ID" matInput placeholder="{{'pets.ID' | translate}}">
-            </mat-form-field>
-            <div class="input-third">
-                <app-autocomplete formControlName="community" (change)="chooseAutocomplete($event)"
-                    [values]="arrayOfSpecies" placeholder="pets.community">
-                </app-autocomplete>
-            </div>
-            <div class="input-third">
-                <app-autocomplete formControlName="area" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-                    placeholder="pets.area">
-                </app-autocomplete>
-            </div>
-        </div>
-        <div class="input-row">
-            <div class="input-third">
-                <app-autocomplete formControlName="color" (change)="chooseAutocomplete($event)"
-                    [values]="arrayOfSpecies" placeholder="pets.color">
-                </app-autocomplete>
-            </div>
-            <div class="input-third">
-                <app-select formControlName="size" (change)="chooseSelect($event)" [values]="arrayOfSpecies"
-                    placeholder="pets.size">
-                </app-select>
-            </div>
-            <div class="input-third">
-                <app-select formControlName="gender" (change)="chooseSelect($event)" [values]="arrayOfSpecies"
-                    placeholder="pets.gender">
-                </app-select>
-            </div>
-        </div>
-
-        <div class="input-row">
-            <mat-form-field class="input-third">
-                <mat-label>{{'pets.nr-chip' | translate}}</mat-label>
-                <input formControlName="nrChip" matInput placeholder="{{'pets.nr-chip' | translate}}">
-            </mat-form-field>
-
-            <div class="input-third-complement ">
-                <app-data-picker formControlName="dateBirth" placeholder="pets.datePickerBirth"></app-data-picker>
-            </div>
-        </div>
+      <span class="inline input-third">
+        <app-autocomplete
+          formControlName="breed_id"
+          (change)="chooseAutocomplete($event)"
+          [values]="arrayOfSpecies"
+          placeholder="pets.breed"
+        >
+        </app-autocomplete>
+      </span>
     </div>
-
-    <div class="inline input-25">
-        <app-pet-avatar></app-pet-avatar>
-    </div>
-
-
 
     <div class="input-row">
-        <mat-form-field class="input-full">
-            <mat-label>{{'pets.description' | translate}}</mat-label>
-            <textarea formControlName="description" rows="1" matInput></textarea>
-        </mat-form-field>
+      <mat-form-field class="input-third">
+        <mat-label>{{ "pets.ID" | translate }}</mat-label>
+        <input
+          formControlName="id_number"
+          matInput
+          placeholder="{{ 'pets.ID' | translate }}"
+        />
+      </mat-form-field>
+      <div class="input-third">
+        <app-autocomplete
+          formControlName="commune_id"
+          (change)="chooseAutocomplete($event)"
+          [values]="arrayOfSpecies"
+          placeholder="pets.community"
+        >
+        </app-autocomplete>
+      </div>
+      <div class="input-third">
+        <app-autocomplete
+          formControlName="area_id"
+          (change)="chooseAutocomplete($event)"
+          [values]="arrayOfSpecies"
+          placeholder="pets.area"
+        >
+        </app-autocomplete>
+      </div>
+    </div>
+    <div class="input-row">
+      <div class="input-third">
+        <app-autocomplete
+          formControlName="color_id"
+          (change)="chooseAutocomplete($event)"
+          [values]="arrayOfSpecies"
+          placeholder="pets.color"
+        >
+        </app-autocomplete>
+      </div>
+      <div class="input-third">
+        <app-select
+          formControlName="size"
+          (change)="chooseSelect($event)"
+          [values]="arrayOfSpecies"
+          placeholder="pets.size"
+        >
+        </app-select>
+      </div>
+      <div class="input-third">
+        <app-select
+          formControlName="gender"
+          (change)="chooseSelect($event)"
+          [values]="arrayOfSpecies"
+          placeholder="pets.gender"
+        >
+        </app-select>
+      </div>
     </div>
 
+    <div class="input-row">
+      <mat-form-field class="input-third">
+        <mat-label>{{ "pets.nr-chip" | translate }}</mat-label>
+        <input
+          formControlName="nr_chip"
+          matInput
+          placeholder="{{ 'pets.nr-chip' | translate }}"
+        />
+      </mat-form-field>
 
+      <div class="input-third-complement">
+        <app-data-picker
+          formControlName="date_of_birth"
+          placeholder="pets.datePickerBirth"
+        ></app-data-picker>
+      </div>
+    </div>
+  </div>
+
+  <div class="inline input-25">
+    <app-pet-avatar></app-pet-avatar>
+  </div>
+
+  <div class="input-row">
+    <mat-form-field class="input-full">
+      <mat-label>{{ "pets.description" | translate }}</mat-label>
+      <textarea
+        formControlName="description_animal"
+        rows="1"
+        matInput
+      ></textarea>
+    </mat-form-field>
+  </div>
 </div>

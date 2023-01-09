@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable, tap } from 'rxjs';
-import { ApiService } from 'src/api/services';
-import { StorageService } from '../../services/storage.service';
-import { Auth, LoginResponse } from './auth-view.interface';
+import { AuthService } from 'src/api/services';
+import { Auth } from '../views/auth-view/auth-view.interface';
+import { StorageService } from './storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AuthViewService {
+export class AuthRootService {
   private readonly JWT_TOKEN_KEY = 'JWT_TOKEN_KEY';
   constructor(
-    private readonly _api: ApiService,
-    private readonly storage: StorageService
+    private readonly api: AuthService,
+    private readonly storage: StorageService,
+    private readonly router: Router
   ) {}
 
   public login(authParam: Auth): Observable<any> {
-    return this._api
+    return this.api
       .postLogin(authParam)
       .pipe(tap((x: any) => this.setJwtToken(x.accessToken)));
   }
@@ -23,7 +25,13 @@ export class AuthViewService {
   public getJwtToken(): string | null {
     return this.storage.get(this.JWT_TOKEN_KEY);
   }
+
   public setJwtToken(token: string) {
     this.storage.set(this.JWT_TOKEN_KEY, token);
+  }
+
+  public logout(): void {
+    this.storage.clear();
+    this.router.navigate(['/auth-view']);
   }
 }

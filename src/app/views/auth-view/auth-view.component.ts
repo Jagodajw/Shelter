@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthRootService } from 'src/app/services/auth-root.service';
 import { Auth } from './auth-view.interface';
-import { AuthViewService } from './auth-view.service';
 
 @Component({
   selector: 'app-auth-view',
@@ -16,7 +16,7 @@ export class AuthViewComponent implements OnInit {
   constructor(
     private router: Router,
     private form: FormBuilder,
-    private readonly auth: AuthViewService
+    private readonly auth: AuthRootService
   ) {}
 
   ngOnInit() {

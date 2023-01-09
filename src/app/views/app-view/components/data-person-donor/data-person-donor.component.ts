@@ -1,7 +1,9 @@
 import { Component, OnInit, SkipSelf } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import { ControlContainer } from '@angular/forms';
 import { ButtonFilter } from '../button-filter/button-filter';
 import { Select } from '../select/select';
+
+type PersonType = 'natural' | 'legal' | 'found';
 
 @Component({
   selector: 'app-data-person-donor',
@@ -16,15 +18,15 @@ import { Select } from '../select/select';
   ],
 })
 export class DataPersonDonorComponent implements OnInit {
-  public personType: number = 0;
+  public personType: PersonType = 'natural';
   public blockInput: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}
-  public filtersPeople: ButtonFilter[] = [
-    { id: 0, name: 'Osoba fizyczna' },
-    { id: 1, name: 'Osoba prawna' },
-    { id: 2, name: 'znaleziony' },
+  public filtersPeople: ButtonFilter<PersonType>[] = [
+    { id: 'natural', name: 'Osoba fizyczna' },
+    { id: 'legal', name: 'Osoba prawna' },
+    { id: 'found', name: 'znaleziony' },
   ];
   public arrayOfSpecies: Select[] = [
     { id: 0, name: 'kot' },
@@ -37,9 +39,9 @@ export class DataPersonDonorComponent implements OnInit {
     console.log(event);
   }
 
-  onChangeSelect(event: number): void {
+  onChangeSelect(event: PersonType): void {
     this.personType = event;
-    if (this.personType === 1) {
+    if (this.personType === 'legal') {
       this.blockInput = true;
     } else {
       this.blockInput = false;

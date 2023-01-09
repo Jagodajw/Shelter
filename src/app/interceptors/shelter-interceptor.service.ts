@@ -8,7 +8,6 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { StorageService } from '../services/storage.service';
 import { Shelters } from '../views/app-view/components/choose-shelter-popup/choose-shelter-popup';
-import { AuthViewService } from '../views/auth-view/auth-view.service';
 
 @Injectable()
 export class ShelterInterceptorService implements HttpInterceptor {

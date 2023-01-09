@@ -10,9 +10,8 @@ import { map as __map, filter as __filter } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-class ApiService extends __BaseService {
-  static readonly getApiDocsPath = '/api-docs';
-  static readonly getApiDocsSwaggerJsonPath = '/api-docs/swagger.json';
+class AuthService extends __BaseService {
+  static readonly postLoginPath = '/login';
 
   constructor(
     config: __Configuration,
@@ -20,13 +19,18 @@ class ApiService extends __BaseService {
   ) {
     super(config, http);
   }
-  getApiDocsResponse(): __Observable<__StrictHttpResponse<null>> {
+
+  /**
+   * @param body undefined
+   */
+  postLoginResponse(body?: {login?: any, password?: any}): __Observable<__StrictHttpResponse<null>> {
     let __params = this.newParams();
     let __headers = new HttpHeaders();
     let __body: any = null;
+    __body = body;
     let req = new HttpRequest<any>(
-      'GET',
-      this.rootUrl + `/api-docs`,
+      'POST',
+      this.rootUrl + `/login`,
       __body,
       {
         headers: __headers,
@@ -40,39 +44,18 @@ class ApiService extends __BaseService {
         return _r as __StrictHttpResponse<null>;
       })
     );
-  }  getApiDocs(): __Observable<null> {
-    return this.getApiDocsResponse().pipe(
-      __map(_r => _r.body as null)
-    );
   }
-  getApiDocsSwaggerJsonResponse(): __Observable<__StrictHttpResponse<null>> {
-    let __params = this.newParams();
-    let __headers = new HttpHeaders();
-    let __body: any = null;
-    let req = new HttpRequest<any>(
-      'GET',
-      this.rootUrl + `/api-docs/swagger.json`,
-      __body,
-      {
-        headers: __headers,
-        params: __params,
-        responseType: 'json'
-      });
-
-    return this.http.request<any>(req).pipe(
-      __filter(_r => _r instanceof HttpResponse),
-      __map((_r) => {
-        return _r as __StrictHttpResponse<null>;
-      })
-    );
-  }  getApiDocsSwaggerJson(): __Observable<null> {
-    return this.getApiDocsSwaggerJsonResponse().pipe(
+  /**
+   * @param body undefined
+   */
+  postLogin(body?: {login?: any, password?: any}): __Observable<null> {
+    return this.postLoginResponse(body).pipe(
       __map(_r => _r.body as null)
     );
   }
 }
 
-module ApiService {
+module AuthService {
 }
 
-export { ApiService }
+export { AuthService }

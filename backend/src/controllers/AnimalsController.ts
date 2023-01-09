@@ -1,7 +1,9 @@
 import express from 'express';
 import { authenticate } from '../middlewares/authentication';
+import { shelterAuthenticate } from '../middlewares/shelterAuthentication';
 import {
-  getAllAnimals,
+  getAllAnimalsByShelterId,
+  getAnimalById,
   getAnimalDataAdoption,
   getAnimalDataRegister,
   postAnimalDataRegister,
@@ -9,53 +11,81 @@ import {
 
 const router = express.Router();
 
+router.use((req, res, next) => {
+  // #swagger.tags = ['Animals']
+  next();
+});
+
 //REQUEST - ep/endpoint
 // req- ządanie z frontu
 // Response res - odpowiedź z backu
-router.get('/animals', authenticate, async (req, res) => {
+router.get('/animals', authenticate, shelterAuthenticate, async (req, res) => {
   try {
-    const animals = await getAllAnimals();
-    res.json(animals);
+    const shelters_id: string = req.headers['shelters_id'] as string;
+    const animals = await getAllAnimalsByShelterId(shelters_id);
+
+    res.status(200).json(animals);
   } catch (error) {
     res.sendStatus(500);
   }
 });
 
-router.get('/animalDataRegister/:animalId', authenticate, async (req, res) => {
-  try {
-    const animalId = req.params.animalId;
-    const animalDataRegister = await getAnimalDataRegister(animalId);
-    res.json(animalDataRegister);
-  } catch (error) {
-    res.sendStatus(500);
-  }
-});
+router.get(
+  '/animalDataRegister/:animalId',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const animalId = req.params.animalId;
 
-router.get('/animalDataAdoption/:animalId', authenticate, async (req, res) => {
-  try {
-    const animalId = req.params.animalId;
-    const animalDataAdoption = await getAnimalDataAdoption(animalId);
-    res.json(animalDataAdoption);
-  } catch (error) {
-    res.sendStatus(500);
-  }
-});
+      const animalData = await getAnimalById(animalId);
+      if (animalData === null) throw new Error('ANIMAL_DOESNT_EXIST');
 
-router.post('/animalRegistration/', authenticate, async (req, res) => {
-  try {
-    const registerAnimal = req.body.registerAnimal;
-    const registerPeople = req.body.registerPeople;
-    const register = req.body.register;
-    const registrationAnimal = await postAnimalDataRegister(
-      registerAnimal,
-      registerPeople,
-      register
-    );
-    res.json(registrationAnimal);
-  } catch (error) {
-    console.error(error);
-    res.sendStatus(500);
+      const animalDataRegister = await getAnimalDataRegister(animalId);
+      res.status(200).json(animalDataRegister);
+    } catch (error: any) {
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
+    }
   }
-});
+);
+
+router.get(
+  '/animalDataAdoption/:animalId',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const animalId = req.params.animalId;
+      const animalDataAdoption = await getAnimalDataAdoption(animalId);
+      res.status(200).json(animalDataAdoption);
+    } catch (error) {
+      res.sendStatus(500);
+    }
+  }
+);
+
+router.post(
+  '/animalRegistration',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const shelters_id: string = req.headers['shelters_id'] as string;
+      const registerAnimal = req.body.registerAnimal;
+      const registerPeople = req.body.registerPeople;
+      const register = req.body.register;
+      const registrationAnimal = await postAnimalDataRegister(
+        shelters_id,
+        registerAnimal,
+        registerPeople,
+        register
+      );
+      res.json(registrationAnimal);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
+    }
+  }
+);
 
 export default router;

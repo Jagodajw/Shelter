@@ -8,6 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "api": "node_modules/.bin/ng-swagger-gen -i http://localhost:3000/api-docs/swagger.json -o src/api",
+    "gen-api-config": "ng-swagger-gen --gen-config -i http://localhost:3000/api-docs/swagger.json -o src/api",
     "lint": "cross-env ./node_modules/.bin/eslint index.js"
   },
   "private": true,

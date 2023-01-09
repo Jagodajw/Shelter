@@ -5,13 +5,15 @@ import { environment } from 'src/environments/environment';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'app-view',
+    redirectTo: 'auth-view',
     pathMatch: 'full',
   },
   {
     path: 'auth-view',
     loadChildren: () =>
-      import('./views/auth-view/auth-view.module').then((m) => m.AuthViewModule),
+      import('./views/auth-view/auth-view.module').then(
+        (m) => m.AuthViewModule
+      ),
   },
   {
     path: 'app-view',
