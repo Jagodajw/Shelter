@@ -48,7 +48,6 @@ export class PetsTableComponent implements OnInit {
       .subscribe(
         (petsData) => (this.petsTable = new MatTableDataSource<any[]>(petsData))
       );
-    this.getAnimalsTableList().subscribe();
   }
 
   private getAnimalsTableList(): Observable<any> {

@@ -3,8 +3,25 @@ import express from 'express';
 import { authenticate } from '../middlewares/authentication';
 import { shelterAuthenticate } from '../middlewares/shelterAuthentication';
 import { City } from '../models/CityModel';
-import { CityResponse } from '../models/DictionaryModel';
 import {
+  AreaResponse,
+  BreedRequest,
+  BreedResponse,
+  CityRequest,
+  CityResponse,
+  ColorResponse,
+  CommuneResponse,
+  SpeciesResponse,
+  TypeAdoptionResponse,
+} from '../models/DictionaryModel';
+import {
+  addArea,
+  addBreed,
+  addCity,
+  addColor,
+  addComune,
+  addSpecies,
+  addTypeAdoption,
   deleteAllArea,
   deleteAllBreed,
   deleteAllCity,
@@ -18,11 +35,6 @@ import {
   getAllCommune,
   getAllSpecies,
   getAllTypeAdoption,
-  postArea,
-  postColor,
-  postCommune,
-  postSpecies,
-  postTypeAdoption,
   updateArea,
   updateBreed,
   updateColor,
@@ -41,104 +53,80 @@ router.use((req, res, next) => {
 //GET
 router.get('/cities', authenticate, shelterAuthenticate, async (req, res) => {
   try {
-    const shelters_id: string = req.headers['shelters_id'] as string;
+    const shelterId: string = req.headers['shelters_id'] as string;
 
-    const dictionaryCity = await getAllCity(shelters_id);
+    const dictionaryCity = await getAllCity(shelterId);
     res.json(dictionaryCity as CityResponse[]);
   } catch (error) {
     res.sendStatus(500);
   }
 });
 
-router.get(
-  '/settingsCommune/:sheltersId',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const sheltersId = req.params.sheltersId;
+router.get('/commune', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
 
-      const dictionaryCommune = await getAllCommune(sheltersId);
-      res.json(dictionaryCommune);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+    const dictionaryCommune = await getAllCommune(shelterId);
+    res.json(dictionaryCommune as CommuneResponse[]);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
-router.get(
-  '/settingsSpecies/:sheltersId',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const sheltersId = req.params.sheltersId;
+router.get('/species', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
 
-      const dictionarySpecies = await getAllSpecies(sheltersId);
-      res.json(dictionarySpecies);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+    const dictionarySpecies = await getAllSpecies(shelterId);
+    res.json(dictionarySpecies as SpeciesResponse[]);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
-router.get(
-  '/settingsBreed/:sheltersId',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const sheltersId = req.params.sheltersId;
+router.get('/breed', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
 
-      const dictionaryBreed = await getAllBreed(sheltersId);
-      res.json(dictionaryBreed);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+    const dictionaryBreed = await getAllBreed(shelterId);
+    res.json(dictionaryBreed as BreedResponse[]);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
-router.get(
-  '/settingsColor/:sheltersId',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const sheltersId = req.params.sheltersId;
+router.get('/colors', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
 
-      const dictionaryColor = await getAllColor(sheltersId);
-      res.json(dictionaryColor);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+    const dictionaryColor = await getAllColor(shelterId);
+    res.json(dictionaryColor as ColorResponse[]);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
-router.get(
-  '/settingsArea/:sheltersId',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const sheltersId = req.params.sheltersId;
+router.get('/area', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
 
-      const dictionaryArea = await getAllArea(sheltersId);
-      res.json(dictionaryArea);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+    const dictionaryArea = await getAllArea(shelterId);
+    res.json(dictionaryArea as AreaResponse[]);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
 router.get(
-  '/settingsTypeAdoption/:sheltersId',
+  '/typeAdoption',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
     try {
-      const sheltersId = req.params.sheltersId;
-      const dictionaryTypeAdoption = await getAllTypeAdoption(sheltersId);
-      res.json(dictionaryTypeAdoption);
+      const shelterId: string = req.headers['shelters_id'] as string;
+
+      const dictionaryTypeAdoption = await getAllTypeAdoption(shelterId);
+      res.json(dictionaryTypeAdoption as TypeAdoptionResponse[]);
     } catch (error) {
       res.sendStatus(500);
     }
@@ -467,115 +455,92 @@ router.put(
 
 //POST
 
-router.post(
-  '/settingsAddCity/',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const shelters_id: string = req.headers['shelters_id'] as string;
-      const updateCityModel = new City(req.body.city, req.body.zip_code);
-      //to debug
-      // const dictionaryAddCity = await postCity(updateCityModel, shelters_id);
-      res.json([]);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+router.post('/city', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelters_id: string = req.headers['shelters_id'] as string;
+    const cityModel: CityRequest = {
+      city: req.body.city,
+      zip_code: req.body.zip_code,
+    };
+    const newCity = await addCity(cityModel, shelters_id);
+    res.json(newCity as CityResponse);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
-router.post(
-  '/settingsAddCommune/',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const shelters_id: string = req.headers['shelters_id'] as string;
-      const addCommune = req.body.commune;
-      const dictionaryAddCommune = await postCommune(addCommune, shelters_id);
-      res.json(dictionaryAddCommune);
-    } catch (error) {
-      console.error(error);
-      res.sendStatus(500);
-    }
+router.post('/commune', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
+    const commune: string = req.body.commune;
+    const dictionaryAddCommune = await addComune({ commune }, shelterId);
+    res.json(dictionaryAddCommune as CommuneResponse);
+  } catch (error) {
+    console.error(error);
+    res.sendStatus(500);
   }
-);
+});
 
-router.post(
-  '/settingsAddSpecies/',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const shelters_id: string = req.headers['shelters_id'] as string;
-      const addSpecies = req.body.species;
-      const dictionaryAddSpeciesd = await postSpecies(addSpecies, shelters_id);
-      res.json(dictionaryAddSpeciesd);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+router.post('/species', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
+    const species: string = req.body.species;
+    const dictionaryAddSpeciesd = await addSpecies({ species }, shelterId);
+    res.json(dictionaryAddSpeciesd as SpeciesResponse);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
-// router.post('/settingsAddBreed/', authenticate, async (req, res) => {
-//   try {
-//     const shelters_id: string = req.headers['shelters_id'] as string;
-//     const updateBreedModel = new Breed(
-//       req.body.breed,
-//       parseInt(req.body.species_id)
-//     );
-//     const dictionaryAddBreed = await postBreed(updateBreedModel, shelters_id);
-//     res.json(dictionaryAddBreed);
-//   } catch (error) {
-//     res.sendStatus(500);
-//   }
-// });
-
-router.post(
-  '/settingsAddColor/',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const shelters_id: string = req.headers['shelters_id'] as string;
-      const addColor = req.body.color;
-      const dictionaryAddColor = await postColor(addColor, shelters_id);
-      res.json(dictionaryAddColor);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+router.post('/breed', authenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
+    const breedModel: BreedRequest = {
+      breed: req.body.breed,
+      species_id: req.body.species_id,
+    };
+    const dictionaryAddBreed = await addBreed(breedModel, shelterId);
+    res.json(dictionaryAddBreed as BreedResponse);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
-router.post(
-  '/settingsAddArea/',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const shelters_id: string = req.headers['shelters_id'] as string;
-      const addArea = req.body.area;
-      const dictionaryAddArea = await postArea(addArea, shelters_id);
-      res.json(dictionaryAddArea);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+router.post('/color', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
+    const color: string = req.body.color;
+    const dictionaryAddColor = await addColor({ color }, shelterId);
+    res.json(dictionaryAddColor as ColorResponse);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
+
+router.post('/area', authenticate, shelterAuthenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
+    const area: string = req.body.area;
+    const dictionaryAddArea = await addArea({ area }, shelterId);
+    res.json(dictionaryAddArea as AreaResponse);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
 
 router.post(
-  '/settingsTypeAdoption/',
+  '/typeAdoption',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
     try {
-      const shelters_id: string = req.headers['shelters_id'] as string;
-      const addTypeAdoption = req.body.type_adoption;
-      const dictionaryTypeAdoptionUpdate = await postTypeAdoption(
-        addTypeAdoption,
-        shelters_id
+      const shelterId: string = req.headers['shelters_id'] as string;
+      const typeAdoption: string = req.body.type_adoption;
+      const dictionaryTypeAdoptionUpdate = await addTypeAdoption(
+        { type_adoption: typeAdoption },
+        shelterId
       );
-      res.json(dictionaryTypeAdoptionUpdate);
+      res.json(dictionaryTypeAdoptionUpdate as TypeAdoptionResponse);
     } catch (error) {
       res.sendStatus(500);
     }
