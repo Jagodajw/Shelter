@@ -23,6 +23,17 @@ export class DataPetRegisterComponent implements OnInit {
     { id: 0, name: 'kot' },
     { id: 1, name: 'pies' },
   ];
+
+  public sizeList: Select[] = [
+    { id: 'small', name: 'size.small' },
+    { id: 'medium', name: 'size.medium' },
+    { id: 'large', name: 'size.large' },
+  ];
+
+  public genderList: Select[] = [
+    { id: 'female', name: 'gender.female' },
+    { id: 'male', name: 'gender.male' },
+  ];
   chooseSelect(event: Select) {
     console.log(event);
   }

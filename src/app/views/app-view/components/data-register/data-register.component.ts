@@ -15,9 +15,9 @@ export class DataRegisterComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  public arrayOfSpecies: Select[] = [
-    { id: 0, name: 'kot' },
-    { id: 1, name: 'pies' },
+  public castratedList: Select[] = [
+    { id: 'castrated', name: 'pets.filterNoCastrated' },
+    { id: 'noCastrated', name: 'pets.filterCastrated' },
   ];
   chooseSelect(event: Select) {
     console.log(event);

@@ -1,126 +1,73 @@
-<div class="dataPerson" formGroupName="dataPersonRegister">
+<div class="dataPerson" formGroupName="registerPeople">
   <h2>{{ "people.dataPerson" | translate }}</h2>
   <!--  need as formControlName  type_of_person -->
-  <app-button-filter
-    [filters]="filtersPeople"
-    [initialValue]="personType"
-    (change)="onChangeSelect($event)"
-  ></app-button-filter>
+  <app-button-filter [filters]="filtersPeople" [initialValue]="personType"
+    (change)="onChangeSelect($event)"></app-button-filter>
 
   <div class="input-row">
     <mat-form-field class="input-five">
-      <mat-label *ngIf="personType === 'found' || personType === 'natural'">
+      <mat-label *ngIf="personType === 'none' || personType === 'private'">
         {{ "people.personName" | translate }}
       </mat-label>
       <mat-label *ngIf="personType === 'legal'">
         {{ "people.name" | translate }}
       </mat-label>
-      <input
-        formControlName="name"
-        matInput
-        placeholder="{{ 'people.personName' | translate }}"
-      />
+      <input formControlName="name" matInput placeholder="{{ 'people.personName' | translate }}" />
     </mat-form-field>
     <mat-form-field class="input-five">
       <mat-label>{{ "people.IDnumber" | translate }}</mat-label>
-      <input
-        formControlName="id_number"
-        [disabled]="blockInput"
-        matInput
-        placeholder=" {{ 'people.IDnumber' | translate }}"
-      />
+      <input formControlName="id_number" [disabled]="blockInput" matInput
+        placeholder=" {{ 'people.IDnumber' | translate }}" />
     </mat-form-field>
-    <mat-form-field
-      class="input-five"
-      *ngIf="personType === 'natural' || personType === 'found'"
-    >
+    <mat-form-field class="input-five" *ngIf="personType === 'private' || personType === 'none'">
       <mat-label>{{ "people.pesel" | translate }}</mat-label>
 
-      <input
-        formControlName="pesel"
-        matInput
-        placeholder="{{ 'people.pesel' | translate }}"
-      />
+      <input formControlName="pesel" matInput placeholder="{{ 'people.pesel' | translate }}" />
     </mat-form-field>
 
     <mat-form-field *ngIf="personType === 'legal'" class="input-five">
       <mat-label>{{ "people.nip" | translate }}</mat-label>
-      <input
-        matInput
-        formControlName="nip"
-        placeholder="{{ 'people.nip' | translate }}"
-      />
+      <input matInput formControlName="nip" placeholder="{{ 'people.nip' | translate }}" />
     </mat-form-field>
 
     <mat-form-field class="input-five">
       <mat-label>{{ "people.email" | translate }}</mat-label>
-      <input
-        formControlName="email"
-        type="email"
-        matInput
-        placeholder="{{ 'people.email' | translate }}"
-      />
+      <input formControlName="email" type="email" matInput placeholder="{{ 'people.email' | translate }}" />
     </mat-form-field>
 
     <mat-form-field class="input-five">
       <mat-label>{{ "people.tel" | translate }}</mat-label>
       <span matPrefix>+48 &nbsp;</span>
-      <input
-        formControlName="telephone"
-        type="tel"
-        matInput
-        placeholder="{{ 'people.tel' | translate }}"
-      />
+      <input formControlName="telephone" type="tel" matInput placeholder="{{ 'people.tel' | translate }}" />
     </mat-form-field>
   </div>
 
   <div class="input-row">
     <mat-form-field class="input-quarter">
       <mat-label>{{ "people.adress" | translate }}</mat-label>
-      <input
-        formControlName="adress"
-        matInput
-        placeholder="{{ 'people.adress' | translate }}"
-      />
+      <input formControlName="adress" matInput placeholder="{{ 'people.adress' | translate }}" />
     </mat-form-field>
 
     <div class="inline input-quarter">
-      <app-autocomplete
-        formControlName="city_id"
-        (change)="chooseAutocomplete($event)"
-        [values]="arrayOfSpecies"
-        placeholder="people.city"
-      >
+      <app-autocomplete formControlName="city_id" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+        placeholder="people.city">
       </app-autocomplete>
     </div>
     <mat-form-field class="input-quarter">
       <mat-label>{{ "people.zip-code" | translate }}</mat-label>
-      <input
-        formControlName="zipCode"
-        matInput
-        placeholder="{{ 'people.zip-code' | translate }}"
-      />
+      <input formControlName="zipCode" matInput placeholder="{{ 'people.zip-code' | translate }}" />
     </mat-form-field>
 
     <div class="inline input-quarter">
-      <app-autocomplete
-        formControlName="province_id"
-        (change)="chooseAutocomplete($event)"
-        [values]="arrayOfSpecies"
-        placeholder="people.province"
-      >
+      <app-autocomplete formControlName="province_id" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+        placeholder="people.province">
       </app-autocomplete>
     </div>
   </div>
   <div class="input-row">
     <mat-form-field class="input-full">
       <mat-label>{{ "pets.commentsRegister" | translate }}</mat-label>
-      <textarea
-        formControlName="description"
-        matInput
-        rows="1"
-        placeholder="{{ 'pets.comments' | translate }}"
-      >
+      <textarea formControlName="description" matInput rows="1" placeholder="{{ 'pets.comments' | translate }}">
       </textarea>
     </mat-form-field>
   </div>

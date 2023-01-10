@@ -46,12 +46,12 @@
             </app-autocomplete>
         </span>
         <div class="input-quarter">
-            <app-select formControlName="gender" (change)="chooseSelect($event)" [values]="arrayOfSpecies"
+            <app-select formControlName="gender" (change)="chooseSelect($event)" [values]="genderList"
                 placeholder="pets.gender">
             </app-select>
         </div>
         <div class="input-quarter">
-            <app-select formControlName="size" (change)="chooseSelect($event)" [values]="filtersAddPets"
+            <app-select formControlName="size" (change)="chooseSelect($event)" [values]="sizeList"
                 placeholder="pets.size">
             </app-select>
         </div>
@@ -61,7 +61,7 @@
             </app-select>
         </div>
         <div class="input-quarter">
-            <app-search  formControlName="search" placeholder="pets.searchPlaceholder"></app-search>
+            <app-search formControlName="search" placeholder="pets.searchPlaceholder"></app-search>
         </div>
         <div class="input-quarter">
             <app-data-picker formControlName="datePickerBirthFromTo" placeholder="pets.datePickerBirthFromTo"

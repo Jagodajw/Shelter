@@ -3,7 +3,7 @@
   <mat-select [formControl]="controlSelect" (selectionChange)="selection($event)">
     <mat-option></mat-option>
     <mat-option *ngFor="let value of values" [value]="value">
-      {{value.name}}
+      {{value.name | translate}}
     </mat-option>
   </mat-select>
 </mat-form-field>
