@@ -1,6 +1,18 @@
-import { tableAnimals } from '@prisma/client';
+import {
+  dataRegisterAnimal,
+  dataRegisterPeople,
+  dataRegistration,
+  tableAnimals,
+} from '@prisma/client';
 import { prisma } from '..';
-import { Animals, People, Registration } from '../models/DataRegister';
+import {
+  AnimalDetailResponse,
+  RegisterAddAnimalRequest,
+  RegisterAddAnimalResponse,
+  RegisterAnimalResponse,
+  RegisterPeopleResponse,
+  RegistrationResponse,
+} from '../models/AnimalsModel';
 
 export async function getAllAnimalsByShelterId(
   shelterId: string
@@ -16,32 +28,39 @@ export async function getAnimalById(
   return await prisma.tableAnimals.findUnique({ where: { ID: animalId } });
 }
 
-export async function getAnimalDataRegister(animalId: string) {
-  const dataRegisterAnimal = await prisma.dataRegisterAnimal.findMany({
-    where: {
-      animals_id: animalId,
-    },
-  });
-  const dataRegisterPeople = await prisma.dataRegisterPeople.findUnique({
-    where: {
-      animals_id: animalId,
-    },
-  });
-  const dataRegistration = await prisma.dataRegistration.findUnique({
-    where: {
-      animals_id: animalId,
-    },
-  });
+export async function getAnimalDataRegister(
+  animalId: string
+): Promise<AnimalDetailResponse> {
+  const registerAnimal: dataRegisterAnimal | null =
+    (await prisma.dataRegisterAnimal.findUnique({
+      where: {
+        animals_id: animalId,
+      },
+    })) as RegisterAnimalResponse | null;
+  const registerPeople: dataRegisterPeople | null =
+    (await prisma.dataRegisterPeople.findUnique({
+      where: {
+        animals_id: animalId,
+      },
+    })) as RegisterPeopleResponse | null;
+  const register: dataRegistration | null =
+    (await prisma.dataRegistration.findUnique({
+      where: {
+        animals_id: animalId,
+      },
+    })) as RegistrationResponse | null;
 
-  return { dataRegisterAnimal, dataRegisterPeople, dataRegistration };
+  return { registerAnimal, registerPeople, register };
 }
 
 export async function postAnimalDataRegister(
   shelterId: string,
-  updateDataRegisterAnimal: Animals,
-  updateDataRegisterPeople: People,
-  updateDataRegistration: Registration
-) {
+  {
+    registerAnimal: updateDataRegisterAnimal,
+    registerPeople: updateDataRegisterPeople,
+    register: updateDataRegistration,
+  }: RegisterAddAnimalRequest
+): Promise<RegisterAddAnimalResponse> {
   const registerAnimal = await prisma.animals.create({
     data: {
       name: updateDataRegisterAnimal.name,

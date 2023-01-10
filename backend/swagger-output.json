@@ -228,7 +228,7 @@
         }
       }
     },
-    "/settingsCity/{sheltersId}": {
+    "/cities": {
       "get": {
         "tags": [
           "Dictonary"
@@ -236,18 +236,12 @@
         "description": "",
         "parameters": [
           {
-            "name": "sheltersId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           },
           {
-            "name": "shelters_id",
+            "name": "authorization",
             "in": "header",
             "type": "string"
           }

@@ -2,6 +2,12 @@ import express from 'express';
 import { authenticate } from '../middlewares/authentication';
 import { shelterAuthenticate } from '../middlewares/shelterAuthentication';
 import {
+  RegisterAddAnimalResponse,
+  RegisterAnimalAddRequest,
+  RegisterPersonAddRequest,
+  RegistrationAddRequest,
+} from '../models/AnimalsModel';
+import {
   getAllAnimalsByShelterId,
   getAnimalById,
   getAnimalDataAdoption,
@@ -71,16 +77,17 @@ router.post(
   async (req, res) => {
     try {
       const shelters_id: string = req.headers['shelters_id'] as string;
-      const registerAnimal = req.body.registerAnimal;
-      const registerPeople = req.body.registerPeople;
-      const register = req.body.register;
-      const registrationAnimal = await postAnimalDataRegister(
-        shelters_id,
+      const registerAnimal = req.body
+        .registerAnimal as RegisterAnimalAddRequest;
+      const registerPeople = req.body
+        .registerPeople as RegisterPersonAddRequest;
+      const register = req.body.register as RegistrationAddRequest;
+      const registrationAnimal = await postAnimalDataRegister(shelters_id, {
         registerAnimal,
         registerPeople,
-        register
-      );
-      res.json(registrationAnimal);
+        register,
+      });
+      res.json(registrationAnimal as RegisterAddAnimalResponse);
     } catch (error) {
       console.error(error);
       res.sendStatus(500);
