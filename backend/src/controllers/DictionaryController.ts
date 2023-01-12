@@ -35,6 +35,7 @@ import {
   getAllCommune,
   getAllSpecies,
   getAllTypeAdoption,
+  getProvince,
   updateArea,
   updateBreed,
   updateColor,
@@ -546,5 +547,14 @@ router.post(
     }
   }
 );
+
+router.get('/province', authenticate, async (req, res) => {
+  try {
+    const provinces = await getProvince();
+    res.json(provinces);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
 
 export default router;

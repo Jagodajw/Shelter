@@ -4,6 +4,7 @@ import {
   City,
   Color,
   Commune,
+  Province,
   Species,
   TypeAdoption,
 } from '@prisma/client';
@@ -28,3 +29,5 @@ export type AreaRequest = Omit<Area, 'ID' | 'shelters_id'>;
 
 export type TypeAdoptionResponse = TypeAdoption;
 export type TypeAdoptionRequest = Omit<TypeAdoption, 'ID' | 'shelters_id'>;
+
+export type ProvinceResponse = Province;

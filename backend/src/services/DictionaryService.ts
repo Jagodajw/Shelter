@@ -11,6 +11,7 @@ import {
   ColorResponse,
   CommuneRequest,
   CommuneResponse,
+  ProvinceResponse,
   SpeciesRequest,
   SpeciesResponse,
   TypeAdoptionRequest,
@@ -307,4 +308,8 @@ export async function addTypeAdoption(
       shelters_id,
     },
   });
+}
+
+export async function getProvince(): Promise<ProvinceResponse[]> {
+  return await prisma.province.findMany();
 }

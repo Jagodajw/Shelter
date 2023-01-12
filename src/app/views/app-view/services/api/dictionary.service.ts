@@ -11,6 +11,7 @@ import {
   ColorResponse,
   CommuneRequest,
   CommuneResponse,
+  ProvinceResponse,
   SpeciesRequest,
   SpeciesResponse,
   TypeAdoptionRequest,
@@ -88,5 +89,9 @@ export class DictionaryService extends ApiService {
       `${this.rootUrl}/typeAdoption`,
       model
     );
+  }
+
+  public getProvince(): Observable<ProvinceResponse[]> {
+    return this.http.get<ProvinceResponse[]>(`${this.rootUrl}/province`);
   }
 }
