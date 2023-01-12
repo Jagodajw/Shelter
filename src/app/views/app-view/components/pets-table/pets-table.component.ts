@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
+import { AnimalTableResponse } from 'backend/src/models/AnimalsModel';
 import { mergeMap, Observable } from 'rxjs';
-import { AnimalsService } from 'src/api/services';
 import { PetService } from '../../services/api/pet.service';
 import { ShelterService } from '../../services/shelter.service';
 import { PopupOutAnimalComponent } from '../../Views/pets/components/popup-out-animal/popup-out-animal.component';
@@ -15,7 +15,7 @@ import { PopupOutAnimalComponent } from '../../Views/pets/components/popup-out-a
 })
 export class PetsTableComponent implements OnInit {
   @Input() public isVisibiltyHeader: boolean = true;
-  public petsTable = new MatTableDataSource<any[]>();
+  public petsTable = new MatTableDataSource<AnimalTableResponse>();
   public displayedColumns: string[] = [
     'name',
     'species',
@@ -32,9 +32,8 @@ export class PetsTableComponent implements OnInit {
   constructor(
     public readonly router: Router,
     public readonly dialog: MatDialog,
-    private readonly api: AnimalsService,
     private readonly shelter: ShelterService,
-    private readonly apiv2: PetService
+    private readonly api: PetService
   ) {}
 
   ngOnInit(): void {
@@ -44,18 +43,13 @@ export class PetsTableComponent implements OnInit {
   private shelterChangeDetector(): void {
     // have to unsubscribe, mayby @UntilDestory
     this.shelter.selectedShelterChangeDetector$
-      .pipe(mergeMap(() => this.getAnimalsTableList2()))
+      .pipe(mergeMap(() => this.api.getPets()))
       .subscribe(
-        (petsData) => (this.petsTable = new MatTableDataSource<any[]>(petsData))
+        (petsData: AnimalTableResponse[]) =>
+          (this.petsTable = new MatTableDataSource<AnimalTableResponse>(
+            petsData
+          ))
       );
-  }
-
-  private getAnimalsTableList(): Observable<any> {
-    return this.api.getAnimals();
-  }
-
-  private getAnimalsTableList2(): Observable<any> {
-    return this.apiv2.getPets();
   }
 
   public openPetDetail(petId: number) {

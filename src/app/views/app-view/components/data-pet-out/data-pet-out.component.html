@@ -6,15 +6,12 @@
             <input matInput formControlName="name" placeholder="{{'pets.name' | translate}}">
         </mat-form-field>
         <div class="input-quarter">
-            <app-autocomplete formControlName="species" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-                placeholder="pets.species">
-            </app-autocomplete>
+            <app-species-autocomplete formControlName="species_id"></app-species-autocomplete>
         </div>
 
         <div class="input-quarter">
             <app-autocomplete formControlName="typeOut" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
                 placeholder="pets.out.type">
-
             </app-autocomplete>
         </div>
         <div class="input-quarter">

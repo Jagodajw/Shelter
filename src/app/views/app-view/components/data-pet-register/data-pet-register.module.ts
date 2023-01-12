@@ -12,6 +12,11 @@ import { DataPetRegisterComponent } from './data-pet-register.component';
 import { PetAvatarModule } from '../pet-avatar/pet-avatar.module';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { SpeciesAutocompleteModule } from '../species-autocomplete/species-autocomplete.module';
+import { AreaAutocompleteModule } from '../area-autocomplete/area-autocomplete.module';
+import { CommunityAutocompleteModule } from '../community-autocomplete/community-autocomplete.module';
+import { ColorAutocompleteModule } from '../color-autocomplete/color-autocomplete.module';
+import { BreedAutocompleteModule } from '../breed-autocomplete/breed-autocomplete.module';
 
 @NgModule({
   declarations: [DataPetRegisterComponent],
@@ -29,6 +34,11 @@ import { MatButtonModule } from '@angular/material/button';
     DataPickerModule,
     PetAvatarModule,
     MatIconModule,
+    SpeciesAutocompleteModule,
+    AreaAutocompleteModule,
+    CommunityAutocompleteModule,
+    ColorAutocompleteModule,
+    BreedAutocompleteModule,
   ],
 })
 export class DataPetRegisterModule {}

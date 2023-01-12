@@ -96,7 +96,8 @@
   "action": {
     "cancel": "Anuluj",
     "accept": "Zarejestruj",
-    "edit": "Edytuj"
+    "edit": "Edytuj",
+    "save": "Zapisz"
   },
   "deleteDialog": {
     "beSure": "Czy na pewno chcesz usunąć?",

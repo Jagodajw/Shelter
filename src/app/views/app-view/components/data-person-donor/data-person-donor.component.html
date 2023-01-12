@@ -49,9 +49,8 @@
     </mat-form-field>
 
     <div class="inline input-quarter">
-      <app-autocomplete formControlName="city_id" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-        placeholder="people.city">
-      </app-autocomplete>
+      <app-city-autocomplete formControlName="city_id">
+      </app-city-autocomplete>
     </div>
     <mat-form-field class="input-quarter">
       <mat-label>{{ "people.zip-code" | translate }}</mat-label>

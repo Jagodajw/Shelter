@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   forwardRef,
@@ -30,41 +31,43 @@ export class AutocompleteComponent
   implements OnInit
 {
   @Input() placeholder: string = '';
-  @Input() values: Select[] = [];
+  @Input() set values(newValues: Select[]) {
+    this.filteredValues = this.controlAutoSelect.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(newValues, value || ''))
+    );
+    this.cd.markForCheck();
+  }
   @Output() change: EventEmitter<Select> = new EventEmitter<Select>();
-  constructor() {
+  public controlAutoSelect = new FormControl('');
+  public filteredValues!: Observable<Select[]>;
+
+  constructor(private readonly cd: ChangeDetectorRef) {
     super();
   }
 
-  public writeValue(value: unknown): void {}
-  public controlAutoSelect = new FormControl('');
+  ngOnInit() {}
 
-  selection(event: MatAutocompleteSelectedEvent): void {
+  public selection(event: MatAutocompleteSelectedEvent): void {
     this.change.emit(event.option.value);
   }
 
-  filteredValues!: Observable<Select[]>;
-
-  ngOnInit() {
-    this.filteredValues = this.controlAutoSelect.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value || ''))
-    );
-  }
-
-  private _filter(value: string | Select): Select[] {
+  private _filter(values: Select[], value: string | Select): Select[] {
     const filterValue =
       typeof value === 'object'
         ? value.name.toLowerCase()
         : value.toLowerCase();
-
-    return this.values.filter((value) =>
+    return values.filter((value) =>
       value.name.toLowerCase().includes(filterValue)
     );
   }
 
   public displayFn(value: Select): string {
     return value ? value.name : '';
+  }
+
+  public writeValue(value: any): void {
+    this.controlAutoSelect.patchValue(value);
   }
 
   public setDisabledState(isDisabled: boolean): void {

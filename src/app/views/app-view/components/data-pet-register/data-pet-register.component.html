@@ -9,15 +9,11 @@
       </mat-form-field>
 
       <span class="inline input-third">
-        <app-autocomplete formControlName="species_id" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-          placeholder="pets.species">
-        </app-autocomplete>
+        <app-species-autocomplete formControlName="species_id"></app-species-autocomplete>
       </span>
 
       <span class="inline input-third">
-        <app-autocomplete formControlName="breed_id" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-          placeholder="pets.breed">
-        </app-autocomplete>
+        <app-breed-autocomplete formControlName="breed_id"></app-breed-autocomplete>
       </span>
     </div>
 
@@ -27,21 +23,15 @@
         <input formControlName="id_number" matInput placeholder="{{ 'pets.ID' | translate }}" />
       </mat-form-field>
       <div class="input-third">
-        <app-autocomplete formControlName="commune_id" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-          placeholder="pets.community">
-        </app-autocomplete>
+        <app-community-autocomplite formControlName="commune_id"></app-community-autocomplite>
       </div>
       <div class="input-third">
-        <app-autocomplete formControlName="area_id" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-          placeholder="pets.area">
-        </app-autocomplete>
+        <app-area-autocomplete formControlName="area_id"></app-area-autocomplete>
       </div>
     </div>
     <div class="input-row">
       <div class="input-third">
-        <app-autocomplete formControlName="color_id" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-          placeholder="pets.color">
-        </app-autocomplete>
+        <app-color-autocomplite formControlName="color_id"></app-color-autocomplite>
       </div>
       <div class="input-third">
         <app-select formControlName="size" (change)="chooseSelect($event)" [values]="sizeList" placeholder="pets.size">
