@@ -1,9 +1,15 @@
-import { Component, OnInit, SkipSelf } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  SkipSelf,
+} from '@angular/core';
 import { ControlContainer } from '@angular/forms';
 import { ButtonFilter } from '../button-filter/button-filter';
 import { Select } from '../select/select';
 
-type PersonType = 'natural' | 'legal' | 'found';
+type PersonType = 'private' | 'legal' | 'none';
 
 @Component({
   selector: 'app-data-person-donor',
@@ -18,15 +24,17 @@ type PersonType = 'natural' | 'legal' | 'found';
   ],
 })
 export class DataPersonDonorComponent implements OnInit {
-  public personType: PersonType = 'natural';
+  @Output() personTypeEmit: EventEmitter<PersonType> =
+    new EventEmitter<PersonType>();
+  public personType: PersonType = 'private';
   public blockInput: boolean = false;
   constructor() {}
 
   ngOnInit(): void {}
   public filtersPeople: ButtonFilter<PersonType>[] = [
-    { id: 'natural', name: 'Osoba fizyczna' },
+    { id: 'private', name: 'Osoba fizyczna' },
     { id: 'legal', name: 'Osoba prawna' },
-    { id: 'found', name: 'znaleziony' },
+    { id: 'none', name: 'znaleziony' },
   ];
   public arrayOfSpecies: Select[] = [
     { id: 0, name: 'kot' },
@@ -40,6 +48,7 @@ export class DataPersonDonorComponent implements OnInit {
   }
 
   onChangeSelect(event: PersonType): void {
+    this.personTypeEmit.emit(event);
     this.personType = event;
     if (this.personType === 'legal') {
       this.blockInput = true;

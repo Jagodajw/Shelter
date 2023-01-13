@@ -37,9 +37,7 @@
         </mat-form-field>
 
         <div class="inline input-quarter">
-            <app-autocomplete formControlName="city" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-                placeholder="people.city">
-            </app-autocomplete>
+            <app-city-autocomplete formControlName="city"></app-city-autocomplete>
         </div>
         <mat-form-field class="input-quarter">
             <mat-label>{{'people.zip-code' | translate}}</mat-label>
@@ -47,9 +45,7 @@
         </mat-form-field>
 
         <div class="inline input-quarter">
-            <app-autocomplete formControlName="province" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-                placeholder="people.province">
-            </app-autocomplete>
+            <app-province-autocomplete formControlName="province"></app-province-autocomplete>
         </div>
     </div>
     <div class="input-row">

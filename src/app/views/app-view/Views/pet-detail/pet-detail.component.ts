@@ -39,34 +39,36 @@ export class PetDetailComponent implements OnInit {
   }
   public buildForm(): void {
     this.detailPetsForm = this._form.group({
-      dataPetRegister: this._form.group({
+      registerAnimal: this._form.group({
         name: ['', Validators.required],
-        species: ['', Validators.required],
-        breed: ['', Validators.required],
-        ID: ['', Validators.required],
-        community: [''],
-        area: [''],
-        color: [''],
+        species_id: ['', Validators.required],
+        breed_id: ['', Validators.required],
+        id_number: ['', Validators.required],
+        commune_id: [''],
+        area_id: [''],
+        color_id: [''],
         size: ['', Validators.required],
         gender: ['', Validators.required],
-        nrChip: ['', Validators.required],
-        dateBirth: ['', Validators.required],
-        description: [''],
+        nr_chip: ['', Validators.required],
+        date_of_birth: ['', Validators.required],
+        description_animal: [''],
         // DateGraft: [''],
       }),
-      dataPersonRegister: this._form.group({
-        personName: [''],
-        IDnumber: [''],
-        pesel: [''],
+      registerPeople: this._form.group({
+        name: [''],
+        id_number: [''],
+        pesel: [null],
+        nip: [null],
         email: [''],
-        tel: [''],
+        telephone: [''],
         adress: [''],
-        city: [''],
+        city_id: [''],
+        province_id: [''],
+        description: [''],
+        //not sure, zipCode is in city object, or isn't?
         zipCode: [''],
-        province: [''],
-        comments: [''],
       }),
-      dataRegister: this._form.group({
+      register: this._form.group({
         dateRegister: ['', Validators.required],
         dateCuarantineTo: ['', Validators.required],
         castred: ['', Validators.required],

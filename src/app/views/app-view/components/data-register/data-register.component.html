@@ -1,4 +1,4 @@
-<div class="dataRegister" formGroupName="dataRegister">
+<div class="dataRegister" formGroupName="register">
     <h2>{{'pets.dataRegister' | translate}}</h2>
 
 
@@ -10,7 +10,7 @@
             <app-data-picker placeholder="pets.dateCuarantineTo" formControlName="dateCuarantineTo"></app-data-picker>
         </div>
         <div class="input-quarter">
-            <app-select (change)="chooseSelect($event)" [values]="arrayOfSpecies" placeholder="pets.castred"
+            <app-select (change)="chooseSelect($event)" [values]="castratedList" placeholder="pets.castred"
                 formControlName="castred">
             </app-select>
         </div>
@@ -22,20 +22,19 @@
     <div class="input-row">
 
         <div class="input-third">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="castratedList"
                 placeholder="pets.registerType" formControlName="registerType">
             </app-autocomplete>
         </div>
 
         <div class="input-third">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-                formControlName="introduced" placeholder="pets.introduced">
-            </app-autocomplete>
+            <app-employees-autocomplete formControlName="introduced"
+                placeholder="pets.introduced"></app-employees-autocomplete>
         </div>
+        
         <div class="input-third">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies" formControlName="accepted"
-                placeholder="pets.accepted">
-            </app-autocomplete>
+            <app-employees-autocomplete formControlName="accepted"
+                placeholder="pets.accepted"></app-employees-autocomplete>
         </div>
 
     </div>

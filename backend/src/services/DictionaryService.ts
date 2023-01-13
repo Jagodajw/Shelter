@@ -1,9 +1,25 @@
-import { Breed } from '@prisma/client';
+import { City } from '@prisma/client';
 import { prisma } from '..';
-import { City } from '../models/CityModel';
+import {
+  AreaRequest,
+  AreaResponse,
+  BreedRequest,
+  BreedResponse,
+  CityRequest,
+  CityResponse,
+  ColorRequest,
+  ColorResponse,
+  CommuneRequest,
+  CommuneResponse,
+  ProvinceResponse,
+  SpeciesRequest,
+  SpeciesResponse,
+  TypeAdoptionRequest,
+  TypeAdoptionResponse,
+} from '../models/DictionaryModel';
 
 //GET
-export async function getAllCity(sheltersId: string) {
+export async function getAllCity(sheltersId: string): Promise<CityResponse[]> {
   return await prisma.city.findMany({
     where: {
       shelters_id: sheltersId,
@@ -11,7 +27,9 @@ export async function getAllCity(sheltersId: string) {
   });
 }
 
-export async function getAllCommune(sheltersId: string) {
+export async function getAllCommune(
+  sheltersId: string
+): Promise<CommuneResponse[]> {
   return await prisma.commune.findMany({
     where: {
       shelters_id: sheltersId,
@@ -19,7 +37,9 @@ export async function getAllCommune(sheltersId: string) {
   });
 }
 
-export async function getAllSpecies(sheltersId: string) {
+export async function getAllSpecies(
+  sheltersId: string
+): Promise<SpeciesResponse[]> {
   return await prisma.species.findMany({
     where: {
       shelters_id: sheltersId,
@@ -27,7 +47,9 @@ export async function getAllSpecies(sheltersId: string) {
   });
 }
 
-export async function getAllBreed(sheltersId: string) {
+export async function getAllBreed(
+  sheltersId: string
+): Promise<BreedResponse[]> {
   return await prisma.breed.findMany({
     where: {
       shelters_id: sheltersId,
@@ -35,7 +57,9 @@ export async function getAllBreed(sheltersId: string) {
   });
 }
 
-export async function getAllColor(sheltersId: string) {
+export async function getAllColor(
+  sheltersId: string
+): Promise<ColorResponse[]> {
   return await prisma.color.findMany({
     where: {
       shelters_id: sheltersId,
@@ -43,7 +67,7 @@ export async function getAllColor(sheltersId: string) {
   });
 }
 
-export async function getAllArea(sheltersId: string) {
+export async function getAllArea(sheltersId: string): Promise<AreaResponse[]> {
   return await prisma.area.findMany({
     where: {
       shelters_id: sheltersId,
@@ -51,7 +75,9 @@ export async function getAllArea(sheltersId: string) {
   });
 }
 
-export async function getAllTypeAdoption(sheltersId: string) {
+export async function getAllTypeAdoption(
+  sheltersId: string
+): Promise<TypeAdoptionResponse[]> {
   return await prisma.typeAdoption.findMany({
     where: {
       shelters_id: sheltersId,
@@ -123,7 +149,7 @@ export async function updateCity(cityId: number, updateCityModel: City) {
     },
     data: {
       city: updateCityModel.city,
-      zip_code: updateCityModel.zipCode,
+      zip_code: updateCityModel.zip_code,
     },
   });
 }
@@ -199,70 +225,91 @@ export async function updateTypeAdoption(
 
 //POST
 
-export async function postCity(updateCityModel: City, shelters_id: string) {
+export async function addCity(
+  cityModel: CityRequest,
+  shelters_id: string
+): Promise<CityResponse> {
   return await prisma.city.create({
     data: {
-      city: updateCityModel.city,
-      zip_code: updateCityModel.zipCode,
-      shelters_id: shelters_id,
+      ...cityModel,
+      shelters_id,
     },
   });
 }
 
-export async function postCommune(addCommune: string, shelters_id: string) {
+export async function addComune(
+  communeModel: CommuneRequest,
+  shelters_id: string
+): Promise<CommuneResponse> {
   return await prisma.commune.create({
     data: {
-      commune: addCommune,
-      shelters_id: shelters_id,
+      ...communeModel,
+      shelters_id,
     },
   });
 }
 
-export async function postSpecies(addSpecies: string, shelters_id: string) {
+export async function addSpecies(
+  speciesModel: SpeciesRequest,
+  shelters_id: string
+): Promise<SpeciesResponse> {
   return await prisma.species.create({
     data: {
-      species: addSpecies,
-      shelters_id: shelters_id,
+      ...speciesModel,
+      shelters_id,
     },
   });
 }
 
-export async function postBreed(updateBreedModel: Breed, shelters_id: string) {
+export async function addBreed(
+  breedModel: BreedRequest,
+  shelters_id: string
+): Promise<BreedResponse> {
   return await prisma.breed.create({
     data: {
-      breed: updateBreedModel.breed,
-      species_id: updateBreedModel.species_id,
+      breed: breedModel.breed,
+      species_id: breedModel.species_id,
       shelters_id: shelters_id,
     },
   });
 }
 
-export async function postColor(addColor: string, shelters_id: string) {
+export async function addColor(
+  colorModel: ColorRequest,
+  shelters_id: string
+): Promise<ColorResponse> {
   return await prisma.color.create({
     data: {
-      color: addColor,
-      shelters_id: shelters_id,
+      ...colorModel,
+      shelters_id,
     },
   });
 }
 
-export async function postArea(addArea: string, shelters_id: string) {
+export async function addArea(
+  areaModel: AreaRequest,
+  shelters_id: string
+): Promise<AreaResponse> {
   return await prisma.area.create({
     data: {
-      area: addArea,
-      shelters_id: shelters_id,
+      ...areaModel,
+      shelters_id,
     },
   });
 }
 
-export async function postTypeAdoption(
-  addTypeAdoption: string,
+export async function addTypeAdoption(
+  typeAdoptionModel: TypeAdoptionRequest,
   shelters_id: string
-) {
+): Promise<TypeAdoptionResponse> {
   return await prisma.typeAdoption.create({
     data: {
-      type_adoption: addTypeAdoption,
-      shelters_id: shelters_id,
+      ...typeAdoptionModel,
+      shelters_id,
     },
   });
+}
+
+export async function getProvince(): Promise<ProvinceResponse[]> {
+  return await prisma.province.findMany();
 }

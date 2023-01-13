@@ -10,6 +10,7 @@ import { AutocompleteModule } from '../autocomplete/autocomplete.module';
 import { SelectModule } from '../select/select.module';
 import { DataPickerModule } from '../../Views/pets/components/data-picker/data-picker.module';
 import { DataRegisterComponent } from './data-register.component';
+import { EmployeesAutocompleteModule } from '../employees-autocomplete/employees-autocomplete.module';
 
 @NgModule({
   declarations: [DataRegisterComponent],
@@ -26,6 +27,7 @@ import { DataRegisterComponent } from './data-register.component';
     AutocompleteModule,
     SelectModule,
     DataPickerModule,
+    EmployeesAutocompleteModule
   ],
 })
 export class DataRegisterModule {}

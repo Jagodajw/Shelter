@@ -96,7 +96,8 @@
   "action": {
     "cancel": "Anuluj",
     "accept": "Zarejestruj",
-    "edit": "Edytuj"
+    "edit": "Edytuj",
+    "save": "Zapisz"
   },
   "deleteDialog": {
     "beSure": "Czy na pewno chcesz usunąć?",
@@ -114,5 +115,14 @@
     "UNKNOWN_ERROR": "Nieznany błąd",
     "FORBIDDEN": "Brak dostępu",
     "WRONG_LOGIN_DATA": "Błędne dane logownia, spróbuj ponownie"
+  },
+  "size": {
+    "small": "Mały",
+    "medium": "Średni",
+    "large": "Duży"
+  },
+  "gender": {
+    "female": "Samica",
+    "male": "Samiec"
   }
 }

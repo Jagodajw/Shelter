@@ -17,7 +17,16 @@ export class SearchEngineComponent implements OnInit {
     { id: 0, name: 'pets.filterNoCastrated' },
     { id: 1, name: 'pets.filterCastrated' },
   ];
+  public sizeList: Select[] = [
+    { id: 'small', name: 'size.small' },
+    { id: 'medium', name: 'size.medium' },
+    { id: 'large', name: 'size.large' },
+  ];
 
+  public genderList: Select[] = [
+    { id: 'female', name: 'gender.female' },
+    { id: 'male', name: 'gender.male' },
+  ];
   constructor(private _form: FormBuilder) {
     this.buildForm();
   }
