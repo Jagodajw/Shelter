@@ -4,7 +4,9 @@ import { ShelterResponse } from 'backend/src/models/ShelterModel';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class ShelterApiService extends ApiService {
   constructor(private readonly http: HttpClient) {
     super();

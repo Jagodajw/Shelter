@@ -15,9 +15,11 @@ router.get('/employee', authenticate, shelterAuthenticate, async (req, res) => {
   try {
     const shelterId: string = req.headers['shelters_id'] as string;
     const employeeList = await getEmployee(shelterId);
-
-    res.json(employeeList as EmployeeResponse[]);
+    console.log(employeeList);
+    res.status(200).json(employeeList as EmployeeResponse[]);
   } catch {
     res.sendStatus(500);
   }
 });
+
+export default router;
