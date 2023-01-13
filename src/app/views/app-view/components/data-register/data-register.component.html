@@ -28,14 +28,13 @@
         </div>
 
         <div class="input-third">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="castratedList"
-                formControlName="introduced" placeholder="pets.introduced">
-            </app-autocomplete>
+            <app-employees-autocomplete formControlName="introduced"
+                placeholder="pets.introduced"></app-employees-autocomplete>
         </div>
+        
         <div class="input-third">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="castratedList" formControlName="accepted"
-                placeholder="pets.accepted">
-            </app-autocomplete>
+            <app-employees-autocomplete formControlName="accepted"
+                placeholder="pets.accepted"></app-employees-autocomplete>
         </div>
 
     </div>

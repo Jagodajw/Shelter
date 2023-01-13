@@ -1,8 +1,10 @@
 import { Component, forwardRef, Input, OnInit } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { EmployeeResponse } from 'backend/src/models/EmployeeModel';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
+import { EmployeeService } from '../../services/api/employee.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
@@ -23,10 +25,10 @@ export class EmployeesAutocompleteComponent
   implements OnInit
 {
   @Input() placeholder!: string;
-  // public  employeesList$: Observable<Select[]>;
+  public employeesList$!: Observable<Select[]>;
   public readonly control: FormControl = new FormControl();
   constructor(
-    private readonly api: DictionaryService,
+    private readonly api: EmployeeService,
     private readonly shelter: ShelterService
   ) {
     super();
@@ -40,15 +42,15 @@ export class EmployeesAutocompleteComponent
     this.shelter.selectedShelterChangeDetector$
       .pipe(
         tap(() => {
-          // this.employeesList$ = this.api.getEmployees().pipe(
-          //   map(
-          //     (employeesResponse: EmployeesResponse[]) =>
-          //       employeesResponse.map((employees: EmployeesResponse) => ({
-          //         id: employees.ID,
-          //         name: `${employees.name} ${employees.surname}`,
-          //       })) as Select[]
-          //   )
-          // );
+          this.employeesList$ = this.api.getEmployee().pipe(
+            map(
+              (employeesResponse: EmployeeResponse[]) =>
+                employeesResponse.map((employees: EmployeeResponse) => ({
+                  id: employees.ID,
+                  name: `${employees.name} ${employees.surname}`,
+                })) as Select[]
+            )
+          );
         })
       )
       .subscribe();

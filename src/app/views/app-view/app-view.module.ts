@@ -12,12 +12,12 @@ import { PetAvatarModule } from './components/pet-avatar/pet-avatar.module';
 import { SearchModule } from './components/search/search.module';
 import { DictionaryService } from './services/api/dictionary.service';
 import { PetService } from './services/api/pet.service';
-import { EmployeesAutocompleteComponent } from './components/employees-autocomplete/employees-autocomplete.component';
 import { ShelterService } from './services/shelter.service';
+import { EmployeeService } from './services/api/employee.service';
 
 @NgModule({
   declarations: [AppViewComponent, HeaderComponent],
-  providers: [PetService, DictionaryService, ShelterService],
+  providers: [PetService, DictionaryService, ShelterService, EmployeeService],
   imports: [
     CommonModule,
     AppViewRoutingModule,

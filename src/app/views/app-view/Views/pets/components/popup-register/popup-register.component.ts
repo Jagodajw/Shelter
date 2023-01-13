@@ -16,14 +16,14 @@ interface Data {
   styleUrls: ['./popup-register.component.scss'],
 })
 export class PopupRegisterComponent implements OnInit {
-  public registerPetsForm!: FormGroup<RegisterAddAnimalRequest>;
+  public registerPetsForm!: FormGroup;
   private typePerson!: PersonType;
 
   constructor(
     private readonly _form: FormBuilder,
     private readonly animalApi: AnimalsService,
     private readonly dialogRef: MatDialogRef<PopupRegisterComponent, undefined>,
-    @Inject(MAT_DIALOG_DATA) private readonly data: Data,
+    @Inject(MAT_DIALOG_DATA) private readonly data: Data
   ) {}
 
   ngOnInit(): void {
