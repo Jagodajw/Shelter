@@ -12,6 +12,7 @@ import {
   getAnimalById,
   getAnimalDataAdoption,
   getAnimalDataRegister,
+  isAuthorizedShelterInUpdatedAnimalModel,
   postAnimalDataRegister,
 } from '../services/AnimalsService';
 
@@ -76,18 +77,43 @@ router.post(
   shelterAuthenticate,
   async (req, res) => {
     try {
-      const shelters_id: string = req.headers['shelters_id'] as string;
+      const shelterId: string = req.headers['shelters_id'] as string;
       const registerAnimal = req.body
         .registerAnimal as RegisterAnimalAddRequest;
       const registerPeople = req.body
         .registerPeople as RegisterPersonAddRequest;
       const register = req.body.register as RegistrationAddRequest;
-      const registrationAnimal = await postAnimalDataRegister(shelters_id, {
+      const registrationAnimal = await postAnimalDataRegister(shelterId, {
         registerAnimal,
         registerPeople,
         register,
       });
       res.json(registrationAnimal as RegisterAddAnimalResponse);
+    } catch (error) {
+      console.error(error);
+      res.sendStatus(500);
+    }
+  }
+);
+
+router.put(
+  '/animalRegistration',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const shelterId: string = req.headers['shelters_id'] as string;
+      const updatedAnimalRegistrationModel: RegisterAddAnimalResponse =
+        req.body;
+
+      if (
+        !isAuthorizedShelterInUpdatedAnimalModel(
+          shelterId,
+          updatedAnimalRegistrationModel
+        )
+      ) {
+        throw new Error();
+      }
     } catch (error) {
       console.error(error);
       res.sendStatus(500);
