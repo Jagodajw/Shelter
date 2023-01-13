@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, map, Observable } from 'rxjs';
+import { filter, map, Observable, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { SheltersResponse } from 'src/api/models';
 import { ShelterService as ShelterHttpService } from 'src/api/services';
@@ -45,6 +45,7 @@ export class ShelterService {
 
   public get selectedShelterChangeDetector$(): Observable<Shelters> {
     return this.getSelectedShelter$.pipe(
+      tap((a) => console.log(a)),
       filter((shelter: Nullable<Shelters>) => shelter !== null),
       map((shelter: Nullable<Shelters>) => shelter as Shelters)
     );
