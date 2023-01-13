@@ -11,6 +11,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { AreaAutocompleteModule } from 'src/app/views/app-view/components/area-autocomplete/area-autocomplete.module';
+import { SpeciesAutocompleteModule } from 'src/app/views/app-view/components/species-autocomplete/species-autocomplete.module';
+import { CommunityAutocompleteModule } from 'src/app/views/app-view/components/community-autocomplete/community-autocomplete.module';
+import { BreedAutocompleteModule } from 'src/app/views/app-view/components/breed-autocomplete/breed-autocomplete.module';
+import { ColorAutocompleteModule } from 'src/app/views/app-view/components/color-autocomplete/color-autocomplete.module';
 
 @NgModule({
   declarations: [SearchEngineComponent],
@@ -28,6 +33,11 @@ import { TranslateModule } from '@ngx-translate/core';
     MatButtonModule,
     MatIconModule,
     TranslateModule,
+    AreaAutocompleteModule,
+    SpeciesAutocompleteModule,
+    BreedAutocompleteModule,
+    CommunityAutocompleteModule,
+    ColorAutocompleteModule,
   ],
 })
 export class SearchEngineModule {}

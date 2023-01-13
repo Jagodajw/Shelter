@@ -19,39 +19,29 @@
 
     <div style="font-size: 14px" class="search__primary">
         <span class="input-quarter">
-            <app-autocomplete formControlName="species" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-                placeholder="pets.species">
-            </app-autocomplete>
+            <app-species-autocomplete formControlName="species"></app-species-autocomplete>
         </span>
 
         <span class="input-quarter">
-            <app-autocomplete formControlName="breed" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-                placeholder="pets.breed">
-            </app-autocomplete>
+            <app-breed-autocomplete formControlName="breed"></app-breed-autocomplete>
         </span>
 
         <span class="input-quarter">
-            <app-autocomplete formControlName="community" (change)="chooseAutocomplete($event)"
-                [values]="arrayOfSpecies" placeholder="pets.community">
-            </app-autocomplete>
+            <app-community-autocomplete formControlName="community"></app-community-autocomplete>
         </span>
         <span class="input-quarter">
-            <app-autocomplete formControlName="area" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-                placeholder="pets.area">
-            </app-autocomplete>
+            <app-area-autocomplete formControlName="area"></app-area-autocomplete>
         </span>
         <span class="input-quarter">
-            <app-autocomplete formControlName="color" (change)="chooseAutocomplete($event)" [values]="filtersAddPets"
-                placeholder="pets.color">
-            </app-autocomplete>
+            <app-color-autocomplete formControlName="color"></app-color-autocomplete>
         </span>
         <div class="input-quarter">
-            <app-select formControlName="gender" (change)="chooseSelect($event)" [values]="arrayOfSpecies"
+            <app-select formControlName="gender" (change)="chooseSelect($event)" [values]="genderList"
                 placeholder="pets.gender">
             </app-select>
         </div>
         <div class="input-quarter">
-            <app-select formControlName="size" (change)="chooseSelect($event)" [values]="filtersAddPets"
+            <app-select formControlName="size" (change)="chooseSelect($event)" [values]="sizeList"
                 placeholder="pets.size">
             </app-select>
         </div>
@@ -61,7 +51,7 @@
             </app-select>
         </div>
         <div class="input-quarter">
-            <app-search  formControlName="search" placeholder="pets.searchPlaceholder"></app-search>
+            <app-search formControlName="search" placeholder="pets.searchPlaceholder"></app-search>
         </div>
         <div class="input-quarter">
             <app-data-picker formControlName="datePickerBirthFromTo" placeholder="pets.datePickerBirthFromTo"

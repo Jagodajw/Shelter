@@ -9,6 +9,8 @@ import { AutocompleteModule } from '../autocomplete/autocomplete.module';
 import { ButtonFilterModule } from '../button-filter/button-filter.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { DataPersonTakeAwayComponent } from './data-person-take-away.component';
+import { CityAutocompleteModule } from '../city-autocomplete/city-autocomplete.module';
+import { ProvinceAutocompleteModule } from '../province-autocomplete/province-autocomplete.module';
 
 @NgModule({
   declarations: [DataPersonTakeAwayComponent],
@@ -24,6 +26,8 @@ import { DataPersonTakeAwayComponent } from './data-person-take-away.component';
     AutocompleteModule,
     ButtonFilterModule,
     MatTabsModule,
+    CityAutocompleteModule,
+    ProvinceAutocompleteModule,
   ],
 })
 export class DataPersonTakeAwayModule {}

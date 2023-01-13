@@ -11,12 +11,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { PetAvatarModule } from './components/pet-avatar/pet-avatar.module';
 import { SearchModule } from './components/search/search.module';
 import { DictionaryService } from './services/api/dictionary.service';
+import { EmployeeService } from './services/api/employee.service';
 import { PetService } from './services/api/pet.service';
-import { ShelterService } from './services/shelter.service';
 
 @NgModule({
   declarations: [AppViewComponent, HeaderComponent],
-  providers: [PetService, DictionaryService, ShelterService],
+  providers: [PetService, DictionaryService, EmployeeService],
   imports: [
     CommonModule,
     AppViewRoutingModule,

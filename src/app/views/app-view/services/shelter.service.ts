@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, map, Observable, tap } from 'rxjs';
+import { filter, map, Observable, share, tap } from 'rxjs';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { SheltersResponse } from 'src/api/models';
 import { ShelterService as ShelterHttpService } from 'src/api/services';
@@ -8,7 +8,7 @@ import { StorageService } from 'src/app/services/storage.service';
 import { Shelters } from '../components/choose-shelter-popup/choose-shelter-popup';
 import { ChooseShelterPopupComponenet } from '../components/choose-shelter-popup/choose-shelter-popup.componenet';
 @Injectable()
-export class ShelterService {
+export class ShelterService implements OnDestroy {
   private readonly selectedShelter$: BehaviorSubject<Shelters | null> =
     new BehaviorSubject<Shelters | null>(null);
 
@@ -19,6 +19,10 @@ export class ShelterService {
   ) {
     const shelter: Shelters = this.storage.get('shelter') as Shelters;
     this.selectedShelter$.next(shelter ?? null);
+  }
+
+  ngOnDestroy(): void {
+    console.log('eO');
   }
 
   public init(): void {
@@ -52,6 +56,6 @@ export class ShelterService {
   }
 
   public get getSelectedShelter$(): Observable<Nullable<Shelters>> {
-    return this.selectedShelter$.asObservable();
+    return this.selectedShelter$.asObservable().pipe(share());
   }
 }
