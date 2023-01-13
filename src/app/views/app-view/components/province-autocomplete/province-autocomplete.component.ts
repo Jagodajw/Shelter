@@ -1,10 +1,11 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
+import { Select } from '../select/select';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
-import { Select } from '../select/select';
-
+import { ProvinceResponse } from 'backend/src/models/DictionaryModel';
+import { ShelterService } from '../../services/shelter.service';
 @Component({
   selector: 'app-province-autocomplete',
   templateUrl: './province-autocomplete.component.html',
@@ -17,25 +18,45 @@ import { Select } from '../select/select';
     },
   ],
 })
-export class ProvinceAutocompleteComponent  extends ControlValueAccessorsAbstract implements OnInit {
- public readonly provinceList$: Observable<Select[]>;
+export class ProvinceAutocompleteComponent
+  extends ControlValueAccessorsAbstract
+  implements OnInit
+{
+  public provinceList$!: Observable<Select[]>;
   public readonly control: FormControl = new FormControl();
-  constructor(private readonly api: DictionaryService) {
+  constructor(
+    private readonly api: DictionaryService,
+    private readonly shelter: ShelterService
+  ) {
     super();
-    this.provinceList$ = this.api.getP().pipe(
-      map(
-        (speciesResponse: ProvinceResponse[]) =>
-          speciesResponse.map((species: ProvinceResponse) => ({
-            id: species.ID,
-            name: species.species,
-          })) as Select[]
-      )
-    );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.shelterChangeDetector();
+  }
 
+  private shelterChangeDetector(): void {
+    this.shelter.selectedShelterChangeDetector$
+      .pipe(
+        tap(() => {
+          this.provinceList$ = this.api.getProvince().pipe(
+            map(
+              (provinceResponse: ProvinceResponse[]) =>
+                provinceResponse.map((province: ProvinceResponse) => ({
+                  id: province.ID,
+                  name: province.province,
+                })) as Select[]
+            )
+          );
+        })
+      )
+      .subscribe();
+  }
   public writeValue(value: unknown): void {
     this.control.patchValue(value);
+  }
+  public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) return this.control.disable();
+    this.control.enable();
   }
 }

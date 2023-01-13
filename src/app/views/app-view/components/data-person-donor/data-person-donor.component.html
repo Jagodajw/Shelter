@@ -58,9 +58,7 @@
     </mat-form-field>
 
     <div class="inline input-quarter">
-      <app-autocomplete formControlName="province_id" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
-        placeholder="people.province">
-      </app-autocomplete>
+      <app-province-autocomplete formControlName="province_id"></app-province-autocomplete>
     </div>
   </div>
   <div class="input-row">

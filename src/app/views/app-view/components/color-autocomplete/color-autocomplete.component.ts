@@ -1,9 +1,10 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ColorResponse } from 'backend/src/models/DictionaryModel';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
+import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
 @Component({
@@ -22,24 +23,42 @@ export class ColorAutocompleteComponent
   extends ControlValueAccessorsAbstract
   implements OnInit
 {
-  public readonly colorList$: Observable<Select[]>;
+  public colorList$!: Observable<Select[]>;
   public readonly control: FormControl = new FormControl();
-  constructor(private readonly api: DictionaryService) {
+  constructor(
+    private readonly api: DictionaryService,
+    private readonly shelter: ShelterService
+  ) {
     super();
-    this.colorList$ = this.api.getColors().pipe(
-      map(
-        (ColorResponse: ColorResponse[]) =>
-          ColorResponse.map((color: ColorResponse) => ({
-            id: color.ID,
-            name: color.color,
-          })) as Select[]
-      )
-    );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.shelterChangeDetector();
+  }
+
+  private shelterChangeDetector(): void {
+    this.shelter.selectedShelterChangeDetector$
+      .pipe(
+        tap(() => {
+          this.colorList$ = this.api.getColors().pipe(
+            map(
+              (ColorResponse: ColorResponse[]) =>
+                ColorResponse.map((color: ColorResponse) => ({
+                  id: color.ID,
+                  name: color.color,
+                })) as Select[]
+            )
+          );
+        })
+      )
+      .subscribe();
+  }
 
   public writeValue(value: unknown): void {
     this.control.patchValue(value);
+  }
+  public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) return this.control.disable();
+    this.control.enable();
   }
 }

@@ -1,13 +1,10 @@
-import {
-  Component,
-  forwardRef,
-  OnInit,
-} from '@angular/core';
+import { Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SpeciesResponse } from 'backend/src/models/DictionaryModel';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
+import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
 @Component({
@@ -26,24 +23,42 @@ export class SpeciesAutocompleteComponent
   extends ControlValueAccessorsAbstract
   implements OnInit
 {
-  public readonly speciesList$: Observable<Select[]>;
+  public speciesList$!: Observable<Select[]>;
   public readonly control: FormControl = new FormControl();
-  constructor(private readonly api: DictionaryService) {
+  constructor(
+    private readonly api: DictionaryService,
+    private readonly shelter: ShelterService
+  ) {
     super();
-    this.speciesList$ = this.api.getSpecies().pipe(
-      map(
-        (speciesResponse: SpeciesResponse[]) =>
-          speciesResponse.map((species: SpeciesResponse) => ({
-            id: species.ID,
-            name: species.species,
-          })) as Select[]
-      )
-    );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.shelterChangeDetector();
+  }
+
+  private shelterChangeDetector(): void {
+    this.shelter.selectedShelterChangeDetector$
+      .pipe(
+        tap(() => {
+          this.speciesList$ = this.api.getSpecies().pipe(
+            map(
+              (speciesResponse: SpeciesResponse[]) =>
+                speciesResponse.map((species: SpeciesResponse) => ({
+                  id: species.ID,
+                  name: species.species,
+                })) as Select[]
+            )
+          );
+        })
+      )
+      .subscribe();
+  }
 
   public writeValue(value: unknown): void {
     this.control.patchValue(value);
+  }
+  public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) return this.control.disable();
+    this.control.enable();
   }
 }

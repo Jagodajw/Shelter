@@ -11,7 +11,6 @@ import { DataPickerModule } from '../../Views/pets/components/data-picker/data-p
 import { DataPetRegisterComponent } from './data-pet-register.component';
 import { PetAvatarModule } from '../pet-avatar/pet-avatar.module';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { SpeciesAutocompleteModule } from '../species-autocomplete/species-autocomplete.module';
 import { AreaAutocompleteModule } from '../area-autocomplete/area-autocomplete.module';
 import { CommunityAutocompleteModule } from '../community-autocomplete/community-autocomplete.module';

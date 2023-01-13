@@ -1,24 +1,29 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
-import { AnimalsService } from 'src/api/services';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { RegisterAddAnimalRequest } from 'backend/src/models/AnimalsModel';
+import { AnimalsService, ShelterService } from 'src/api/services';
 import { Select } from 'src/app/views/app-view/components/select/select';
+import { PetService } from 'src/app/views/app-view/services/api/pet.service';
 
 type PersonType = 'private' | 'legal' | 'none';
-
+interface Data {
+  shelter: ShelterService;
+}
 @Component({
   selector: 'app-popup-register',
   templateUrl: './popup-register.component.html',
   styleUrls: ['./popup-register.component.scss'],
 })
 export class PopupRegisterComponent implements OnInit {
-  public registerPetsForm!: FormGroup;
+  public registerPetsForm!: FormGroup<RegisterAddAnimalRequest>;
   private typePerson!: PersonType;
 
   constructor(
     private readonly _form: FormBuilder,
     private readonly animalApi: AnimalsService,
-    private readonly dialogRef: MatDialogRef<PopupRegisterComponent, undefined>
+    private readonly dialogRef: MatDialogRef<PopupRegisterComponent, undefined>,
+    @Inject(MAT_DIALOG_DATA) private readonly data: Data,
   ) {}
 
   ngOnInit(): void {

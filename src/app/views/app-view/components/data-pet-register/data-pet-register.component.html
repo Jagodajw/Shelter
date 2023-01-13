@@ -23,7 +23,7 @@
         <input formControlName="id_number" matInput placeholder="{{ 'pets.ID' | translate }}" />
       </mat-form-field>
       <div class="input-third">
-        <app-community-autocomplite formControlName="commune_id"></app-community-autocomplite>
+        <app-community-autocomplete formControlName="commune_id"></app-community-autocomplete>
       </div>
       <div class="input-third">
         <app-area-autocomplete formControlName="area_id"></app-area-autocomplete>
@@ -31,7 +31,7 @@
     </div>
     <div class="input-row">
       <div class="input-third">
-        <app-color-autocomplite formControlName="color_id"></app-color-autocomplite>
+        <app-color-autocomplete formControlName="color_id"></app-color-autocomplete>
       </div>
       <div class="input-third">
         <app-select formControlName="size" (change)="chooseSelect($event)" [values]="sizeList" placeholder="pets.size">

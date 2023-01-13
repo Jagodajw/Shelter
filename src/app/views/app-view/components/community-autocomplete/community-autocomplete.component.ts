@@ -1,9 +1,10 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CommuneResponse } from 'backend/src/models/DictionaryModel';
-import { map, Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
+import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
 @Component({
@@ -22,24 +23,42 @@ export class CommunityAutocompleteComponent
   extends ControlValueAccessorsAbstract
   implements OnInit
 {
-  public readonly communityList$: Observable<Select[]>;
+  public communityList$!: Observable<Select[]>;
   public readonly control: FormControl = new FormControl();
-  constructor(private readonly api: DictionaryService) {
+  constructor(
+    private readonly api: DictionaryService,
+    private readonly shelter: ShelterService
+  ) {
     super();
-    this.communityList$ = this.api.getCommune().pipe(
-      map(
-        (communeResponse: CommuneResponse[]) =>
-          communeResponse.map((commune: CommuneResponse) => ({
-            id: commune.ID,
-            name: commune.commune,
-          })) as Select[]
-      )
-    );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.shelterChangeDetector();
+  }
+
+  private shelterChangeDetector(): void {
+    this.shelter.selectedShelterChangeDetector$
+      .pipe(
+        tap(() => {
+          this.communityList$ = this.api.getCommune().pipe(
+            map(
+              (communeResponse: CommuneResponse[]) =>
+                communeResponse.map((commune: CommuneResponse) => ({
+                  id: commune.ID,
+                  name: commune.commune,
+                })) as Select[]
+            )
+          );
+        })
+      )
+      .subscribe();
+  }
 
   public writeValue(value: unknown): void {
     this.control.patchValue(value);
+  }
+  public setDisabledState(isDisabled: boolean): void {
+    if (isDisabled) return this.control.disable();
+    this.control.enable();
   }
 }
