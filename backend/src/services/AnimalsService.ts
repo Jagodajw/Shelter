@@ -130,3 +130,14 @@ export async function getAnimalDataAdoption(animalId: string) {
 
   return { dataAdoptionAnimal, dataRegisterPeople };
 }
+
+export function isAuthorizedShelterInUpdatedAnimalModel(
+  shelterId: string,
+  { register, registerAnimal, registerPeople }: RegisterAddAnimalResponse
+): boolean {
+  return (
+    shelterId === register.shelters_id &&
+    shelterId === registerAnimal.shelters_id &&
+    shelterId === registerPeople.shelters_id
+  );
+}
