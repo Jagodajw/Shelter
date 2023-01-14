@@ -9,6 +9,7 @@ import {
   AnimalDetailResponse,
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
+  RegisterAnimalAddRequest,
   RegisterAnimalResponse,
   RegisterPeopleResponse,
   RegistrationResponse,
@@ -140,4 +141,18 @@ export function isAuthorizedShelterInUpdatedAnimalModel(
     shelterId === registerAnimal.shelters_id &&
     shelterId === registerPeople.shelters_id
   );
+}
+
+export function addNonExistentDictionaries({
+  register,
+  registerAnimal,
+  registerPeople,
+}: RegisterAddAnimalRequest): void {
+  const registerAnimalDicionariesKeys: Array<keyof RegisterAnimalAddRequest> = [
+    'area_id',
+    'commune_id',
+    'color_id',
+    'species_id',
+    'breed_id',
+  ];
 }
