@@ -7,6 +7,7 @@ import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
+type ReturnValue = string | null | Select;
 @Component({
   selector: 'app-breed-autocomplete',
   templateUrl: './breed-autocomplete.component.html',
@@ -20,7 +21,7 @@ import { Select } from '../select/select';
   ],
 })
 export class BreedAutocompleteComponent
-  extends ControlValueAccessorsAbstract
+  extends ControlValueAccessorsAbstract<ReturnValue>
   implements OnInit
 {
   public breedList$!: Observable<Select[]>;
@@ -34,6 +35,11 @@ export class BreedAutocompleteComponent
 
   ngOnInit(): void {
     this.shelterChangeDetector();
+    this.control.valueChanges.subscribe({
+      next: (value) => {
+        if (this.onChange) this.onChange(value);
+      },
+    });
   }
 
   private shelterChangeDetector(): void {
