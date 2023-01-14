@@ -54,10 +54,4 @@ export class SearchEngineComponent implements OnInit {
   add(event: number) {
     console.log(event);
   }
-  chooseSelect(event: Select) {
-    console.log(event);
-  }
-  chooseAutocomplete(event: Select) {
-    console.log(event);
-  }
 }

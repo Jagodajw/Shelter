@@ -10,7 +10,7 @@
         </div>
 
         <div class="input-quarter">
-            <app-autocomplete formControlName="typeOut" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+            <app-autocomplete formControlName="typeOut"  [values]="arrayOfSpecies"
                 placeholder="pets.out.type">
             </app-autocomplete>
         </div>
@@ -21,12 +21,12 @@
 
     <div class="input-row">
         <div class="input-quarter">
-            <app-autocomplete formControlName="introduced" (change)="chooseAutocomplete($event)"
+            <app-autocomplete formControlName="introduced"
                 [values]="arrayOfSpecies" placeholder="pets.introduced">
             </app-autocomplete>
         </div>
         <div class="input-quarter">
-            <app-autocomplete formControlName="accepted" (change)="chooseAutocomplete($event)" [values]="arrayOfSpecies"
+            <app-autocomplete formControlName="accepted"[values]="arrayOfSpecies"
                 placeholder="pets.accepted">
             </app-autocomplete>
         </div>

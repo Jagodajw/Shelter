@@ -69,12 +69,9 @@ export class DataPickerComponent<DatePicker>
   }
 
   public changedDate(): void {
-    // if (this.dateGroup.invalid) return;
-    // Object.entries(this.dateGroup.value).forEach(
-    //   ([key, value]: [string, Date]) => (this.dateGroup.value[key] = this._func.fixDate(value)),
-    // );
-    // if (this.pickerType === 'normal') return this.onChange(this.dateGroup.value.Value);
-    // this.onChange(this.dateGroup.value);
+    if (this.pickerType === 'normal')
+      return this.onChange(this.dateGroup.value.Value);
+    this.onChange(this.dateGroup.value);
   }
 
   public setDisabledState(isDisabled: boolean): void {

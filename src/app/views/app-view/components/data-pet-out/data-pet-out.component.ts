@@ -22,10 +22,4 @@ export class DataPetOutComponent implements OnInit {
     { id: 0, name: 'kot' },
     { id: 1, name: 'pies' },
   ];
-  chooseSelect(event: Select) {
-    console.log(event);
-  }
-  chooseAutocomplete(event: Select) {
-    console.log(event);
-  }
 }

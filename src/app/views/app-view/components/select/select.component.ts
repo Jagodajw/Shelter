@@ -29,7 +29,7 @@ export class SelectComponent
 {
   @Input() values: Select[] = [];
   @Input() placeholder: string = '';
-  @Output() change: EventEmitter<Select> = new EventEmitter<Select>();
+  @Output() change: EventEmitter<string> = new EventEmitter<string>();
   public controlSelect = new FormControl('');
 
   constructor() {
@@ -39,7 +39,9 @@ export class SelectComponent
   ngOnInit(): void {}
 
   selection(event: MatSelectChange): void {
-    this.change.emit(event.value);
+    const valueId: string = (event.value as Select).id as string;
+    this.change.emit(valueId);
+    this.onChange(valueId);
   }
   public setDisabledState(isDisabled: boolean): void {
     if (isDisabled) return this.controlSelect.disable();
