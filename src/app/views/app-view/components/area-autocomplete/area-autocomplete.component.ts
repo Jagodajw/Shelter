@@ -1,12 +1,13 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AreaResponse } from 'backend/src/models/DictionaryModel';
-import { map,  Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
+type ReturnValue = string | null | Select;
 @Component({
   selector: 'app-area-autocomplete',
   templateUrl: './area-autocomplete.component.html',
@@ -20,7 +21,7 @@ import { Select } from '../select/select';
   ],
 })
 export class AreaAutocompleteComponent
-  extends ControlValueAccessorsAbstract
+  extends ControlValueAccessorsAbstract<ReturnValue>
   implements OnInit
 {
   public areaList$!: Observable<Select[]>;
@@ -34,6 +35,11 @@ export class AreaAutocompleteComponent
 
   ngOnInit(): void {
     this.shelterChangeDetector();
+    this.control.valueChanges.subscribe({
+      next: (value) => {
+        if (this.onChange) this.onChange(value);
+      },
+    });
   }
 
   private shelterChangeDetector(): void {
@@ -56,7 +62,7 @@ export class AreaAutocompleteComponent
   public writeValue(value: unknown): void {
     this.control.patchValue(value);
   }
-    public setDisabledState(isDisabled: boolean): void {
+  public setDisabledState(isDisabled: boolean): void {
     if (isDisabled) return this.control.disable();
     this.control.enable();
   }

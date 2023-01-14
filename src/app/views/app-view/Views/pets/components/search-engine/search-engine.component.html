@@ -36,17 +36,17 @@
             <app-color-autocomplete formControlName="color"></app-color-autocomplete>
         </span>
         <div class="input-quarter">
-            <app-select formControlName="gender" (change)="chooseSelect($event)" [values]="genderList"
+            <app-select formControlName="gender"  [values]="genderList"
                 placeholder="pets.gender">
             </app-select>
         </div>
         <div class="input-quarter">
-            <app-select formControlName="size" (change)="chooseSelect($event)" [values]="sizeList"
+            <app-select formControlName="size" [values]="sizeList"
                 placeholder="pets.size">
             </app-select>
         </div>
         <div class="input-quarter">
-            <app-select formControlName="castred" (change)="chooseSelect($event)" [values]="filtersAddPets"
+            <app-select formControlName="castred" [values]="filtersAddPets"
                 placeholder="pets.castred">
             </app-select>
         </div>

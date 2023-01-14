@@ -7,6 +7,7 @@ import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
+type ReturnValue = string | null | Select;
 @Component({
   selector: 'app-city-autocomplete',
   templateUrl: './city-autocomplete.component.html',
@@ -20,7 +21,7 @@ import { Select } from '../select/select';
   ],
 })
 export class CityAutocompleteComponent
-  extends ControlValueAccessorsAbstract
+  extends ControlValueAccessorsAbstract<ReturnValue>
   implements OnInit
 {
   public cityList$!: Observable<Select[]>;
@@ -34,6 +35,11 @@ export class CityAutocompleteComponent
 
   ngOnInit(): void {
     this.shelterChangeDetector();
+    this.control.valueChanges.subscribe({
+      next: (value) => {
+        if (this.onChange) this.onChange(value);
+      },
+    });
   }
 
   private shelterChangeDetector(): void {

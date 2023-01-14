@@ -34,10 +34,4 @@ export class DataPetRegisterComponent implements OnInit {
     { id: 'female', name: 'gender.female' },
     { id: 'male', name: 'gender.male' },
   ];
-  chooseSelect(event: Select) {
-    console.log(event);
-  }
-  chooseAutocomplete(event: Select) {
-    console.log(event);
-  }
 }

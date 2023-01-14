@@ -19,10 +19,5 @@ export class DataRegisterComponent implements OnInit {
     { id: 'castrated', name: 'pets.filterNoCastrated' },
     { id: 'noCastrated', name: 'pets.filterCastrated' },
   ];
-  chooseSelect(event: Select) {
-    console.log(event);
-  }
-  chooseAutocomplete(event: Select) {
-    console.log(event);
-  }
+
 }

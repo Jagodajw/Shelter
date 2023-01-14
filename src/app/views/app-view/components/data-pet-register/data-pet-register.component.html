@@ -34,12 +34,11 @@
         <app-color-autocomplete formControlName="color_id"></app-color-autocomplete>
       </div>
       <div class="input-third">
-        <app-select formControlName="size" (change)="chooseSelect($event)" [values]="sizeList" placeholder="pets.size">
+        <app-select formControlName="size" [values]="sizeList" placeholder="pets.size">
         </app-select>
       </div>
       <div class="input-third">
-        <app-select formControlName="gender" (change)="chooseSelect($event)" [values]="genderList"
-          placeholder="pets.gender">
+        <app-select formControlName="gender" [values]="genderList" placeholder="pets.gender">
         </app-select>
       </div>
     </div>
