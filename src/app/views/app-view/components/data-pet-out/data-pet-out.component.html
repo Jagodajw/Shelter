@@ -6,12 +6,11 @@
             <input matInput formControlName="name" placeholder="{{'pets.name' | translate}}">
         </mat-form-field>
         <div class="input-quarter">
-            <app-species-autocomplete formControlName="species"></app-species-autocomplete>
+            <app-species-autocomplete formControlName="species_id"></app-species-autocomplete>
         </div>
 
         <div class="input-quarter">
-            <app-autocomplete formControlName="typeOut"  [values]="arrayOfSpecies"
-                placeholder="pets.out.type">
+            <app-autocomplete formControlName="typeOut" [values]="arrayOfSpecies" placeholder="pets.out.type">
             </app-autocomplete>
         </div>
         <div class="input-quarter">
@@ -21,12 +20,12 @@
 
     <div class="input-row">
         <div class="input-quarter">
-            <app-autocomplete formControlName="introduced"
-                [values]="arrayOfSpecies" placeholder="pets.introduced">
+            <app-autocomplete formControlName="introduced_employees_id" [values]="arrayOfSpecies"
+                placeholder="pets.introduced">
             </app-autocomplete>
         </div>
         <div class="input-quarter">
-            <app-autocomplete formControlName="accepted"[values]="arrayOfSpecies"
+            <app-autocomplete formControlName="accepted_employees_id" [values]="arrayOfSpecies"
                 placeholder="pets.accepted">
             </app-autocomplete>
         </div>

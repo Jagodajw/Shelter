@@ -39,7 +39,8 @@ export class PopupRegisterComponent implements OnInit {
         nr_chip: ['', Validators.required],
         date_of_birth: ['', Validators.required],
         description_animal: [''],
-        // DateGraft: [''],
+        vaccination: [''],
+        date_vaccination: [{ value: '', disabled: true }, [Validators.required]],
       }),
       registerPeople: this._form.group({
         name: [''],
@@ -50,19 +51,21 @@ export class PopupRegisterComponent implements OnInit {
         telephone: [''],
         adress: [''],
         city_id: [''],
+        commune_id: [''],
         province_id: [''],
         description: [''],
+
         //not sure, zipCode is in city object, or isn't?
         zipCode: [''],
       }),
       register: this._form.group({
         dateRegister: ['', Validators.required],
         dateCuarantineTo: ['', Validators.required],
-        castred: ['', Validators.required],
-        dateCastred: ['', Validators.required],
+        sterilization: ['', Validators.required],
+        date_sterilization: [{ value: '', disabled: true }, [Validators.required]],
         registerType: [''],
-        introduced: [''],
-        accepted: [''],
+        introduced_employees_id: [''],
+        accepted_employees_id: [''],
         commentsRegister: [''],
       }),
     });

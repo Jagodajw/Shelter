@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import {
+  ControlContainer,
+  FormGroup,
+  FormGroupDirective,
+} from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Select } from '../select/select';
 
 @Component({
@@ -11,13 +16,20 @@ import { Select } from '../select/select';
   ],
 })
 export class DataRegisterComponent implements OnInit {
-  constructor() {}
+  public sterilization: boolean = false;
+  constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
   ngOnInit(): void {}
 
-  public castratedList: Select[] = [
-    { id: 'castrated', name: 'pets.filterNoCastrated' },
-    { id: 'noCastrated', name: 'pets.filterCastrated' },
-  ];
-
+  Sterilization({ checked }: MatCheckboxChange): void {
+    if (checked) {
+      (this.formGroupDirective.control.get('register') as FormGroup)
+        .get('date_sterilization')
+        ?.enable();
+    } else {
+      (this.formGroupDirective.control.get('register') as FormGroup)
+        .get('date_sterilization')
+        ?.disable();
+    }
+  }
 }

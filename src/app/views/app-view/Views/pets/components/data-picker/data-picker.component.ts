@@ -75,6 +75,7 @@ export class DataPickerComponent<DatePicker>
   }
 
   public setDisabledState(isDisabled: boolean): void {
+    console.log(isDisabled);
     if (isDisabled) return this.dateGroup.disable();
     this.dateGroup.enable();
   }

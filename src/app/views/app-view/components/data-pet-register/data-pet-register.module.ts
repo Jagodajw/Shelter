@@ -16,6 +16,7 @@ import { AreaAutocompleteModule } from '../area-autocomplete/area-autocomplete.m
 import { CommunityAutocompleteModule } from '../community-autocomplete/community-autocomplete.module';
 import { ColorAutocompleteModule } from '../color-autocomplete/color-autocomplete.module';
 import { BreedAutocompleteModule } from '../breed-autocomplete/breed-autocomplete.module';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [DataPetRegisterComponent],
@@ -38,6 +39,7 @@ import { BreedAutocompleteModule } from '../breed-autocomplete/breed-autocomplet
     CommunityAutocompleteModule,
     ColorAutocompleteModule,
     BreedAutocompleteModule,
+    MatCheckboxModule,
   ],
 })
 export class DataPetRegisterModule {}

@@ -43,21 +43,23 @@
   </div>
 
   <div class="input-row">
-    <mat-form-field class="input-quarter">
+    <mat-form-field class="input-five">
       <mat-label>{{ "people.adress" | translate }}</mat-label>
       <input formControlName="adress" matInput placeholder="{{ 'people.adress' | translate }}" />
     </mat-form-field>
 
-    <div class="inline input-quarter">
+    <div class="inline input-five">
       <app-city-autocomplete formControlName="city_id">
       </app-city-autocomplete>
     </div>
-    <mat-form-field class="input-quarter">
+    <mat-form-field class="input-five">
       <mat-label>{{ "people.zip-code" | translate }}</mat-label>
       <input formControlName="zipCode" matInput placeholder="{{ 'people.zip-code' | translate }}" />
     </mat-form-field>
-
-    <div class="inline input-quarter">
+    <div class="inline input-five">
+      <app-community-autocomplete formControlName="commune_id"></app-community-autocomplete>
+    </div>
+    <div class="inline input-five">
       <app-province-autocomplete formControlName="province_id"></app-province-autocomplete>
     </div>
   </div>
