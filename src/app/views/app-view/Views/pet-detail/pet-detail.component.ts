@@ -30,6 +30,11 @@ export class PetDetailComponent implements OnInit {
   public editButtonClick() {
     this.edit = true;
     this.detailPetsForm.enable();
+    this.detailPetsForm
+      .get('registerAnimal')
+      ?.get('date_vaccination')
+      ?.disable();
+    this.detailPetsForm.get('register')?.get('date_sterilization')?.disable();
     this.detailPetsOutForm.enable();
   }
   public saveEditButtonClick() {

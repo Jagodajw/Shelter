@@ -1,5 +1,10 @@
 import { Component, Input, OnInit, SkipSelf } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import {
+  ControlContainer,
+  FormGroup,
+  FormGroupDirective,
+} from '@angular/forms';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { Select } from '../select/select';
 
 @Component({
@@ -34,4 +39,16 @@ export class DataPetRegisterComponent implements OnInit {
     { id: 'female', name: 'gender.female' },
     { id: 'male', name: 'gender.male' },
   ];
+
+  Vaccination({ checked }: MatCheckboxChange): void {
+    if (checked) {
+      (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
+        .get('date_vaccination')
+        ?.enable();
+    } else {
+      (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
+        .get('date_vaccination')
+        ?.disable();
+    }
+  }
 }
