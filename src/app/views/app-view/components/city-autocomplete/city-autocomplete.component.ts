@@ -51,7 +51,9 @@ export class CityAutocompleteComponent
               (cityResponse: CityResponse[]) =>
                 cityResponse.map((city: CityResponse) => ({
                   id: city.ID,
-                  name: `${city.city} ${city.zip_code}`,
+                  // name: `${city.city} ${city.zip_code}`,
+                  name: city.city,
+                  zip_code: city.zip_code,
                 })) as Select[]
             )
           );

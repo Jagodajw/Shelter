@@ -38,7 +38,7 @@ export class AutocompleteComponent
     );
     this.cd.markForCheck();
   }
-  @Output() change: EventEmitter<string> = new EventEmitter<string>();
+  @Output() change: EventEmitter<Select> = new EventEmitter<Select>();
   public controlAutoSelect = new FormControl('');
   public filteredValues!: Observable<Select[]>;
 
@@ -49,9 +49,9 @@ export class AutocompleteComponent
   ngOnInit() {}
 
   public selection(event: MatAutocompleteSelectedEvent): void {
-    const valueId: string = (event.option.value as Select).id as string;
-    this.change.emit(valueId);
-    this.onChange(valueId);
+    const value: Select = event.option.value as Select;
+    this.change.emit(value);
+    this.onChange(value);
   }
 
   public inputValue(event: Event): void {

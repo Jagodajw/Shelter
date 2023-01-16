@@ -29,20 +29,25 @@ export class SelectComponent
 {
   @Input() values: Select[] = [];
   @Input() placeholder: string = '';
-  @Output() change: EventEmitter<string> = new EventEmitter<string>();
+  @Output() change: EventEmitter<Select> = new EventEmitter<Select>();
   public controlSelect = new FormControl('');
 
   constructor() {
     super();
   }
-  public writeValue(value: unknown): void {}
+
   ngOnInit(): void {}
 
   selection(event: MatSelectChange): void {
-    const valueId: string = (event.value as Select).id as string;
-    this.change.emit(valueId);
-    this.onChange(valueId);
+    const value: Select = event.value as Select;
+    this.change.emit(value);
+    this.onChange(value);
   }
+
+  public writeValue(value: any): void {
+    this.controlSelect.patchValue(value);
+  }
+
   public setDisabledState(isDisabled: boolean): void {
     if (isDisabled) return this.controlSelect.disable();
     this.controlSelect.enable();

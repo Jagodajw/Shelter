@@ -5,7 +5,11 @@ import {
   Output,
   SkipSelf,
 } from '@angular/core';
-import { ControlContainer } from '@angular/forms';
+import {
+  ControlContainer,
+  FormGroup,
+  FormGroupDirective,
+} from '@angular/forms';
 import { ButtonFilter } from '../button-filter/button-filter';
 import { Select } from '../select/select';
 
@@ -28,9 +32,17 @@ export class DataPersonDonorComponent implements OnInit {
     new EventEmitter<PersonType>();
   public personType: PersonType = 'private';
   public blockInput: boolean = false;
-  constructor() {}
+  constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    (this.formGroupDirective.control.get('registerPeople') as FormGroup)
+      .get('city')
+      ?.valueChanges.subscribe((city) => {
+        (this.formGroupDirective.control.get('registerPeople') as FormGroup)
+          .get('zip_code')
+          ?.patchValue(city.zip_code);
+      });
+  }
   public filtersPeople: ButtonFilter<PersonType>[] = [
     { id: 'private', name: 'Osoba fizyczna' },
     { id: 'legal', name: 'Osoba prawna' },
@@ -40,12 +52,6 @@ export class DataPersonDonorComponent implements OnInit {
     { id: 0, name: 'kot' },
     { id: 1, name: 'pies' },
   ];
-  chooseSelect(event: Select) {
-    console.log(event);
-  }
-  chooseAutocomplete(event: Select) {
-    console.log(event);
-  }
 
   onChangeSelect(event: PersonType): void {
     this.personTypeEmit.emit(event);

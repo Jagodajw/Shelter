@@ -9,11 +9,11 @@
       </mat-form-field>
 
       <span class="inline input-third">
-        <app-species-autocomplete formControlName="species_id"></app-species-autocomplete>
+        <app-species-autocomplete formControlName="species"></app-species-autocomplete>
       </span>
 
       <span class="inline input-third">
-        <app-breed-autocomplete formControlName="breed_id"></app-breed-autocomplete>
+        <app-breed-autocomplete formControlName="breed"></app-breed-autocomplete>
       </span>
     </div>
 
@@ -23,15 +23,15 @@
         <input formControlName="id_number" matInput placeholder="{{ 'pets.ID' | translate }}" />
       </mat-form-field>
       <div class="input-third">
-        <app-community-autocomplete formControlName="commune_id"></app-community-autocomplete>
+        <app-community-autocomplete formControlName="commune"></app-community-autocomplete>
       </div>
       <div class="input-third">
-        <app-area-autocomplete formControlName="area_id"></app-area-autocomplete>
+        <app-area-autocomplete formControlName="area"></app-area-autocomplete>
       </div>
     </div>
     <div class="input-row">
       <div class="input-third">
-        <app-color-autocomplete formControlName="color_id"></app-color-autocomplete>
+        <app-color-autocomplete formControlName="color"></app-color-autocomplete>
       </div>
       <div class="input-third">
         <app-select formControlName="size" [values]="sizeList" placeholder="pets.size">

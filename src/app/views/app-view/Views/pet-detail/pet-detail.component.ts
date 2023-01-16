@@ -10,6 +10,7 @@ import { ApiService } from 'src/api/services';
 export class PetDetailComponent implements OnInit {
   detailPetsForm!: FormGroup;
   detailPetsOutForm!: FormGroup;
+
   public edit: boolean = false;
   constructor(
     private readonly _form: FormBuilder,
@@ -46,12 +47,12 @@ export class PetDetailComponent implements OnInit {
     this.detailPetsForm = this._form.group({
       registerAnimal: this._form.group({
         name: ['', Validators.required],
-        species_id: ['', Validators.required],
-        breed_id: ['', Validators.required],
+        species: ['', Validators.required],
+        breed: ['', Validators.required],
         id_number: ['', Validators.required],
-        commune_id: [''],
-        area_id: [''],
-        color_id: [''],
+        commune: [''],
+        area: [''],
+        color: [''],
         size: ['', Validators.required],
         gender: ['', Validators.required],
         nr_chip: ['', Validators.required],
@@ -71,15 +72,14 @@ export class PetDetailComponent implements OnInit {
         email: [''],
         telephone: [''],
         adress: [''],
-        city_id: [''],
-        commune_id: [''],
-        province_id: [''],
+        city: [''],
+        zip_code: [''],
+        commune: [''],
+        province: [''],
         description: [''],
-        //not sure, zipCode is in city object, or isn't?
-        zipCode: [''],
       }),
       register: this._form.group({
-        date_of_registration: ['', Validators.required],
+        date_of_registration: [ new Date() , [Validators.required]],
         quarantine: ['', Validators.required],
         sterilization: ['', Validators.required],
         date_sterilization: [
@@ -87,19 +87,19 @@ export class PetDetailComponent implements OnInit {
           [Validators.required],
         ],
         registerType: [''],
-        introduced_employees_id: [''],
-        accepted_employees_id: [''],
+        introduced_employees: [''],
+        accepted_employees: [''],
         commentsRegister: [''],
       }),
     });
     this.detailPetsOutForm = this._form.group({
       dataPetOut: this._form.group({
         name: ['', Validators.required],
-        species_id: ['', Validators.required],
+        species: ['', Validators.required],
         typeOut: ['', Validators.required],
         dateOut: ['', Validators.required],
-        introduced_employees_id: ['', Validators.required],
-        accepted_employees_id: ['', Validators.required],
+        introduced_employees: ['', Validators.required],
+        accepted_employees: ['', Validators.required],
         commentsOut: [''],
       }),
       dataPersonTakeAway: this._form.group({
@@ -109,12 +109,11 @@ export class PetDetailComponent implements OnInit {
         email: [''],
         telephone: [''],
         adress: [''],
-        city_id: [''],
-        commune_id: [''],
-        province_id: [''],
+        city: [''],
+        zip_code: [''],
+        commune: [''],
+        province: [''],
         comments: [''],
-
-        zipCode: [''],
       }),
     });
   }
