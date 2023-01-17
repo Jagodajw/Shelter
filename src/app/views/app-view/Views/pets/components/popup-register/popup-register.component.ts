@@ -103,7 +103,7 @@ export class PopupRegisterComponent implements OnInit {
           ...this.registerPetsForm.value,
           registerPeople: {
             ...this.registerPetsForm.value.registerPeople,
-            type_of_person: this.personType,
+            // type_of_person: this.personType,
           },
         },
       })

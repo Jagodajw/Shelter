@@ -4,11 +4,6 @@ import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'auth-view',
-    pathMatch: 'full',
-  },
-  {
     path: 'auth-view',
     loadChildren: () =>
       import('./views/auth-view/auth-view.module').then(
@@ -19,6 +14,11 @@ const routes: Routes = [
     path: 'app-view',
     loadChildren: () =>
       import('./views/app-view/app-view.module').then((m) => m.AppViewModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'auth-view',
+    // pathMatch: 'full',
   },
 ];
 @NgModule({

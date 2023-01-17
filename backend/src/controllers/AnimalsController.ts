@@ -8,7 +8,6 @@ import {
   RegistrationAddRequest,
 } from '../models/AnimalsModel';
 import {
-  addNonExistentDictionaries,
   getAllAnimalsByShelterId,
   getAnimalById,
   getAnimalDataAdoption,
@@ -85,17 +84,6 @@ router.post(
         .registerPeople as RegisterPersonAddRequest;
       const register = req.body.register as RegistrationAddRequest;
 
-      addNonExistentDictionaries({
-        registerAnimal,
-        registerPeople,
-        register,
-      });
-
-      console.log({
-        registerAnimal,
-        registerPeople,
-        register,
-      });
       const registrationAnimal = await postAnimalDataRegister(shelterId, {
         registerAnimal,
         registerPeople,

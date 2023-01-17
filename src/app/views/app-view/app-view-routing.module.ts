@@ -44,9 +44,8 @@ const routes: Routes = [
           ),
       },
       {
-        path: '',
+        path: '**',
         redirectTo: 'pets',
-        pathMatch: 'full',
       },
     ],
   },
