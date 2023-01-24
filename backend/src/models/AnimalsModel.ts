@@ -9,6 +9,15 @@ import {
   Size as PrismaSize,
   Type_of_person as PrismaTypeOfPerson,
 } from '@prisma/client';
+import {
+  AreaResponse,
+  BreedResponse,
+  CityResponse,
+  ColorResponse,
+  CommuneResponse,
+  ProvinceResponse,
+  SpeciesResponse,
+} from './DictionaryModel';
 
 export interface AnimalTableResponse {
   ID: string;
@@ -50,8 +59,36 @@ export interface RegisterAddAnimalRequest {
   register: RegistrationAddRequest;
 }
 
-export type RegisterAnimalAddRequest = Omit<Animals, 'ID' | 'shelters_id'>;
+export type RegisterAnimalAddRequest = Omit<
+  Animals,
+  | 'ID'
+  | 'shelters_id'
+  | 'id_number'
+  | 'sterilization'
+  | 'date_sterilization'
+  | 'species_id'
+  | 'breed_id'
+  | 'commune_id'
+  | 'area_id'
+  | 'color_id'
+> & {
+  species: SpeciesResponse;
+  breed: BreedResponse;
+  commune: CommuneResponse;
+  area: AreaResponse;
+  color: ColorResponse;
+};
 
-export type RegisterPersonAddRequest = Omit<People, 'ID' | 'shelters_id'>;
+export type RegisterPersonAddRequest = Omit<
+  People,
+  'ID' | 'shelters_id' | 'city_id' | 'province_id' | 'commune_id'
+> & {
+  city: CityResponse;
+  province: ProvinceResponse;
+  commune: CommuneResponse;
+};
 
-export type RegistrationAddRequest = Omit<Registration, 'ID' | 'shelters_id'>;
+export type RegistrationAddRequest = Omit<
+  Registration,
+  'ID' | 'shelters_id'
+> & { sterilization: boolean; date_sterilization: Date };

@@ -24,13 +24,17 @@ import { Select } from './select';
   ],
 })
 export class SelectComponent
-  extends ControlValueAccessorsAbstract
+  extends ControlValueAccessorsAbstract<string | number | null>
   implements OnInit
 {
   @Input() values: Select[] = [];
   @Input() placeholder: string = '';
-  @Output() change: EventEmitter<Select> = new EventEmitter<Select>();
-  public controlSelect = new FormControl('');
+  @Output() change: EventEmitter<string | number | null> = new EventEmitter<
+    string | number | null
+  >();
+  public controlSelect: FormControl<string | number | null> = new FormControl(
+    null
+  );
 
   constructor() {
     super();
@@ -39,12 +43,12 @@ export class SelectComponent
   ngOnInit(): void {}
 
   selection(event: MatSelectChange): void {
-    const value: Select = event.value as Select;
+    const value: string | number = (event.value as Select).ID;
     this.change.emit(value);
     this.onChange(value);
   }
 
-  public writeValue(value: any): void {
+  public writeValue(value: string | number | null): void {
     this.controlSelect.patchValue(value);
   }
 

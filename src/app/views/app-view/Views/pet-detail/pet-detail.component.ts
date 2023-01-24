@@ -1,6 +1,6 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Location } from '@angular/common';
 import { ApiService } from 'src/api/services';
 @Component({
   selector: 'app-pet-detail',
@@ -79,7 +79,7 @@ export class PetDetailComponent implements OnInit {
         description: [''],
       }),
       register: this._form.group({
-        date_of_registration: [ new Date() , [Validators.required]],
+        date_of_registration: [new Date(), [Validators.required]],
         quarantine: ['', Validators.required],
         sterilization: ['', Validators.required],
         date_sterilization: [
@@ -87,8 +87,8 @@ export class PetDetailComponent implements OnInit {
           [Validators.required],
         ],
         registerType: [''],
-        introduced_employees: [''],
-        accepted_employees: [''],
+        introduced_employees_id: [''],
+        accepted_employees_id: [''],
         commentsRegister: [''],
       }),
     });
@@ -98,8 +98,8 @@ export class PetDetailComponent implements OnInit {
         species: ['', Validators.required],
         typeOut: ['', Validators.required],
         dateOut: ['', Validators.required],
-        introduced_employees: ['', Validators.required],
-        accepted_employees: ['', Validators.required],
+        introduced_employees_id: ['', Validators.required],
+        accepted_employees_id: ['', Validators.required],
         commentsOut: [''],
       }),
       dataPersonTakeAway: this._form.group({

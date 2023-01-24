@@ -83,11 +83,7 @@ router.post(
       const registerPeople = req.body
         .registerPeople as RegisterPersonAddRequest;
       const register = req.body.register as RegistrationAddRequest;
-      console.log({
-        registerAnimal,
-        registerPeople,
-        register,
-      });
+
       const registrationAnimal = await postAnimalDataRegister(shelterId, {
         registerAnimal,
         registerPeople,

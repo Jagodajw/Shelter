@@ -50,7 +50,7 @@ export class CityAutocompleteComponent
             map(
               (cityResponse: CityResponse[]) =>
                 cityResponse.map((city: CityResponse) => ({
-                  id: city.ID,
+                  ID: city.ID,
                   // name: `${city.city} ${city.zip_code}`,
                   name: city.city,
                   zip_code: city.zip_code,

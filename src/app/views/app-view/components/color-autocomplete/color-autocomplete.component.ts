@@ -50,7 +50,7 @@ export class ColorAutocompleteComponent
             map(
               (ColorResponse: ColorResponse[]) =>
                 ColorResponse.map((color: ColorResponse) => ({
-                  id: color.ID,
+                  ID: color.ID,
                   name: color.color,
                 })) as Select[]
             )

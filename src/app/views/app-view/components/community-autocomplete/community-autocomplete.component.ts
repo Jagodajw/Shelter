@@ -50,7 +50,7 @@ export class CommunityAutocompleteComponent
             map(
               (communeResponse: CommuneResponse[]) =>
                 communeResponse.map((commune: CommuneResponse) => ({
-                  id: commune.ID,
+                  ID: commune.ID,
                   name: commune.commune,
                 })) as Select[]
             )

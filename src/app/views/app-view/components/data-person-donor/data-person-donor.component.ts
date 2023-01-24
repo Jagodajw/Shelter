@@ -35,6 +35,7 @@ export class DataPersonDonorComponent implements OnInit {
   constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
   ngOnInit(): void {
+    this.personTypeEmit.emit(this.personType);
     (this.formGroupDirective.control.get('registerPeople') as FormGroup)
       .get('city')
       ?.valueChanges.subscribe((city) => {
@@ -49,8 +50,8 @@ export class DataPersonDonorComponent implements OnInit {
     { id: 'none', name: 'znaleziony' },
   ];
   public arrayOfSpecies: Select[] = [
-    { id: 0, name: 'kot' },
-    { id: 1, name: 'pies' },
+    { ID: 0, name: 'kot' },
+    { ID: 1, name: 'pies' },
   ];
 
   onChangeSelect(event: PersonType): void {

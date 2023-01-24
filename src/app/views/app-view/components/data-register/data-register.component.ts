@@ -32,4 +32,9 @@ export class DataRegisterComponent implements OnInit {
         ?.disable();
     }
   }
+
+  public castratedList: Select[] = [
+    { ID: 'castrated', name: 'pets.filterNoCastrated' },
+    { ID: 'noCastrated', name: 'pets.filterCastrated' },
+  ];
 }

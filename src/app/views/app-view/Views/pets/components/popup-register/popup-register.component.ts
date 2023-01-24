@@ -68,30 +68,31 @@ export class PopupRegisterComponent implements OnInit {
           [Validators.required],
         ],
         registerType: [''],
-        introduced_employees: [''],
-        accepted_employees: [''],
+        introduced_employees_id: [''],
+        accepted_employees_id: [''],
         commentsRegister: [''],
       }),
     });
   }
   public personType(event: PersonType) {
+    console.log(event);
     this.typePerson = event;
   }
 
   public arrayOfSpecies: Select[] = [
-    { id: 0, name: 'kot' },
-    { id: 1, name: 'pies' },
+    { ID: 0, name: 'kot' },
+    { ID: 1, name: 'pies' },
   ];
 
   public sizeList: Select[] = [
-    { id: 'small', name: 'size.small' },
-    { id: 'medium', name: 'size.medium' },
-    { id: 'large', name: 'size.large' },
+    { ID: 'small', name: 'size.small' },
+    { ID: 'medium', name: 'size.medium' },
+    { ID: 'large', name: 'size.large' },
   ];
 
   public genderList: Select[] = [
-    { id: 'female', name: 'gender.female' },
-    { id: 'male', name: 'gender.male' },
+    { ID: 'female', name: 'gender.female' },
+    { ID: 'male', name: 'gender.male' },
   ];
 
   chooseSelect(event: Select) {
@@ -110,7 +111,7 @@ export class PopupRegisterComponent implements OnInit {
           ...this.registerPetsForm.value,
           registerPeople: {
             ...this.registerPetsForm.value.registerPeople,
-            type_of_person: this.personType,
+            type_of_person: this.typePerson,
           },
         },
       })

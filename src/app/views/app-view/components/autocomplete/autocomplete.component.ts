@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Select } from '../select/select';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
+import { Select } from '../select/select';
 
 @Component({
   selector: 'app-autocomplete',
@@ -27,7 +27,7 @@ import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-acce
   ],
 })
 export class AutocompleteComponent
-  extends ControlValueAccessorsAbstract
+  extends ControlValueAccessorsAbstract<Select | string | null>
   implements OnInit
 {
   @Input() placeholder: string = '';
