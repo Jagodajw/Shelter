@@ -35,12 +35,19 @@ export class SelectComponent
   constructor() {
     super();
   }
-  public writeValue(value: unknown): void {}
+
   ngOnInit(): void {}
 
   selection(event: MatSelectChange): void {
-    this.change.emit(event.value);
+    const value: Select = event.value as Select;
+    this.change.emit(value);
+    this.onChange(value);
   }
+
+  public writeValue(value: any): void {
+    this.controlSelect.patchValue(value);
+  }
+
   public setDisabledState(isDisabled: boolean): void {
     if (isDisabled) return this.controlSelect.disable();
     this.controlSelect.enable();

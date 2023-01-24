@@ -36,19 +36,16 @@
             <app-color-autocomplete formControlName="color"></app-color-autocomplete>
         </span>
         <div class="input-quarter">
-            <app-select formControlName="gender" (change)="chooseSelect($event)" [values]="genderList"
-                placeholder="pets.gender">
+            <app-select formControlName="gender" [values]="genderList" placeholder="pets.gender">
             </app-select>
         </div>
         <div class="input-quarter">
-            <app-select formControlName="size" (change)="chooseSelect($event)" [values]="sizeList"
-                placeholder="pets.size">
+            <app-select formControlName="size" [values]="sizeList" placeholder="pets.size">
             </app-select>
         </div>
-        <div class="input-quarter">
-            <app-select formControlName="castred" (change)="chooseSelect($event)" [values]="filtersAddPets"
-                placeholder="pets.castred">
-            </app-select>
+        <div class="input-quarter search__castred" >
+            <mat-checkbox  formControlName="castred">{{"pets.filterCastrated" | translate}}
+            </mat-checkbox>
         </div>
         <div class="input-quarter">
             <app-search formControlName="search" placeholder="pets.searchPlaceholder"></app-search>

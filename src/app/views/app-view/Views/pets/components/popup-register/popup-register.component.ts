@@ -1,15 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { RegisterAddAnimalRequest } from 'backend/src/models/AnimalsModel';
-import { AnimalsService, ShelterService } from 'src/api/services';
+import { MatDialogRef } from '@angular/material/dialog';
+import { AnimalsService } from 'src/api/services';
 import { Select } from 'src/app/views/app-view/components/select/select';
-import { PetService } from 'src/app/views/app-view/services/api/pet.service';
 
 type PersonType = 'private' | 'legal' | 'none';
-interface Data {
-  shelter: ShelterService;
-}
 @Component({
   selector: 'app-popup-register',
   templateUrl: './popup-register.component.html',
@@ -22,8 +17,7 @@ export class PopupRegisterComponent implements OnInit {
   constructor(
     private readonly _form: FormBuilder,
     private readonly animalApi: AnimalsService,
-    private readonly dialogRef: MatDialogRef<PopupRegisterComponent, undefined>,
-    @Inject(MAT_DIALOG_DATA) private readonly data: Data
+    private readonly dialogRef: MatDialogRef<PopupRegisterComponent, undefined>
   ) {}
 
   ngOnInit(): void {
@@ -34,18 +28,22 @@ export class PopupRegisterComponent implements OnInit {
     this.registerPetsForm = this._form.group({
       registerAnimal: this._form.group({
         name: ['', Validators.required],
-        species_id: ['', Validators.required],
-        breed_id: ['', Validators.required],
+        species: ['', Validators.required],
+        breed: ['', Validators.required],
         id_number: ['', Validators.required],
-        commune_id: [''],
-        area_id: [''],
-        color_id: [''],
+        commune: [''],
+        area: [''],
+        color: [''],
         size: ['', Validators.required],
         gender: ['', Validators.required],
         nr_chip: ['', Validators.required],
         date_of_birth: ['', Validators.required],
         description_animal: [''],
-        // DateGraft: [''],
+        vaccination: [''],
+        date_vaccination: [
+          { value: '', disabled: true },
+          [Validators.required],
+        ],
       }),
       registerPeople: this._form.group({
         name: [''],
@@ -55,20 +53,23 @@ export class PopupRegisterComponent implements OnInit {
         email: [''],
         telephone: [''],
         adress: [''],
-        city_id: [''],
-        province_id: [''],
+        city: [''],
+        zip_code: [''],
+        commune: [''],
+        province: [''],
         description: [''],
-        //not sure, zipCode is in city object, or isn't?
-        zipCode: [''],
       }),
       register: this._form.group({
-        dateRegister: ['', Validators.required],
-        dateCuarantineTo: ['', Validators.required],
-        castred: ['', Validators.required],
-        dateCastred: ['', Validators.required],
+        date_of_registration: [new Date(), Validators.required],
+        quarantine: ['', Validators.required],
+        sterilization: ['', Validators.required],
+        date_sterilization: [
+          { value: '', disabled: true },
+          [Validators.required],
+        ],
         registerType: [''],
-        introduced: [''],
-        accepted: [''],
+        introduced_employees: [''],
+        accepted_employees: [''],
         commentsRegister: [''],
       }),
     });

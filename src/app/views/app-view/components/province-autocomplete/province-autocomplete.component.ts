@@ -6,6 +6,8 @@ import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-acce
 import { DictionaryService } from '../../services/api/dictionary.service';
 import { ProvinceResponse } from 'backend/src/models/DictionaryModel';
 import { ShelterService } from '../../services/shelter.service';
+
+type ReturnValue = string | null | Select;
 @Component({
   selector: 'app-province-autocomplete',
   templateUrl: './province-autocomplete.component.html',
@@ -19,7 +21,7 @@ import { ShelterService } from '../../services/shelter.service';
   ],
 })
 export class ProvinceAutocompleteComponent
-  extends ControlValueAccessorsAbstract
+  extends ControlValueAccessorsAbstract<ReturnValue>
   implements OnInit
 {
   public provinceList$!: Observable<Select[]>;
@@ -33,6 +35,11 @@ export class ProvinceAutocompleteComponent
 
   ngOnInit(): void {
     this.shelterChangeDetector();
+    this.control.valueChanges.subscribe({
+      next: (value) => {
+        if (this.onChange) this.onChange(value);
+      },
+    });
   }
 
   private shelterChangeDetector(): void {

@@ -6,11 +6,11 @@
     <div class="input-row">
         <mat-form-field class="input-five">
             <mat-label> {{'people.personName' | translate}} </mat-label>
-            <input formControlName="personName" matInput placeholder="{{'people.personName' | translate}}">
+            <input formControlName="name" matInput placeholder="{{'people.personName' | translate}}">
         </mat-form-field>
         <mat-form-field class="input-five">
             <mat-label>{{'people.IDnumber' | translate}}</mat-label>
-            <input formControlName="IDnumber" matInput placeholder="{{'people.IDnumber' | translate}}">
+            <input formControlName="id_number" matInput placeholder="{{'people.IDnumber' | translate}}">
         </mat-form-field>
         <mat-form-field class="input-five">
             <mat-label>{{'people.pesel' | translate}}</mat-label>
@@ -25,26 +25,30 @@
         <mat-form-field class="input-five">
             <mat-label>{{'people.tel' | translate}}</mat-label>
             <span matPrefix>+48 &nbsp;</span>
-            <input formControlName="tel" type="tel" matInput placeholder="{{'people.tel' | translate}}">
+            <input formControlName="telephone" type="tel" matInput placeholder="{{'people.tel' | translate}}">
         </mat-form-field>
 
     </div>
 
     <div class="input-row">
-        <mat-form-field class="input-quarter">
+        <mat-form-field class="input-five">
             <mat-label>{{'people.adress' | translate}}</mat-label>
             <input formControlName="adress" matInput placeholder="{{'people.adress' | translate}}">
         </mat-form-field>
 
-        <div class="inline input-quarter">
+        <div class="inline input-five">
             <app-city-autocomplete formControlName="city"></app-city-autocomplete>
         </div>
-        <mat-form-field class="input-quarter">
+        <mat-form-field class="input-five">
             <mat-label>{{'people.zip-code' | translate}}</mat-label>
-            <input formControlName="zipCode" matInput placeholder="{{'people.zip-code' | translate}}">
+            <input formControlName="zip_code" matInput placeholder="{{'people.zip-code' | translate}}">
         </mat-form-field>
 
-        <div class="inline input-quarter">
+        <div class="inline input-five">
+            <app-community-autocomplete formControlName="commune"></app-community-autocomplete>
+        </div>
+
+        <div class="inline input-five">
             <app-province-autocomplete formControlName="province"></app-province-autocomplete>
         </div>
     </div>

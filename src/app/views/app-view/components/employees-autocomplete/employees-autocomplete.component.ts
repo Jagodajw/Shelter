@@ -3,11 +3,11 @@ import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EmployeeResponse } from 'backend/src/models/EmployeeModel';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
-import { DictionaryService } from '../../services/api/dictionary.service';
 import { EmployeeService } from '../../services/api/employee.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
+type ReturnValue = string | null | Select;
 @Component({
   selector: 'app-employees-autocomplete',
   templateUrl: './employees-autocomplete.component.html',
@@ -21,7 +21,7 @@ import { Select } from '../select/select';
   ],
 })
 export class EmployeesAutocompleteComponent
-  extends ControlValueAccessorsAbstract
+  extends ControlValueAccessorsAbstract<ReturnValue>
   implements OnInit
 {
   @Input() placeholder!: string;
@@ -36,6 +36,11 @@ export class EmployeesAutocompleteComponent
 
   ngOnInit(): void {
     this.shelterChangeDetector();
+    this.control.valueChanges.subscribe({
+      next: (value) => {
+        if (this.onChange) this.onChange(value);
+      },
+    });
   }
 
   private shelterChangeDetector(): void {

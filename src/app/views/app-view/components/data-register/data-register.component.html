@@ -3,37 +3,34 @@
 
 
     <div class="input-row">
-        <div class="input-quarter">
-            <app-data-picker formControlName="dateRegister" placeholder="pets.dateRegister"></app-data-picker>
+        <div class="input-third">
+            <app-data-picker formControlName="date_of_registration" placeholder="pets.dateRegister"></app-data-picker>
         </div>
-        <div class="input-quarter">
-            <app-data-picker placeholder="pets.dateCuarantineTo" formControlName="dateCuarantineTo"></app-data-picker>
+        <div class="input-third">
+            <app-data-picker placeholder="pets.dateCuarantineTo" formControlName="quarantine"></app-data-picker>
         </div>
-        <div class="input-quarter">
-            <app-select (change)="chooseSelect($event)" [values]="castratedList" placeholder="pets.castred"
-                formControlName="castred">
-            </app-select>
-        </div>
-        <div class="input-quarter">
-            <app-data-picker placeholder="pets.dateCastred" formControlName="dateCastred"></app-data-picker>
+        <div class="input-third">
+            <mat-checkbox (change)="Sterilization($event)" class="dataRegister__checkbox-castred"
+                formControlName="sterilization"></mat-checkbox>
+            <app-data-picker class="dataRegister__data-castred" placeholder="pets.dateCastred"
+                formControlName="date_sterilization"></app-data-picker>
         </div>
     </div>
 
     <div class="input-row">
 
         <div class="input-third">
-            <app-autocomplete (change)="chooseAutocomplete($event)" [values]="castratedList"
-                placeholder="pets.registerType" formControlName="registerType">
+            <app-autocomplete placeholder="pets.registerType" formControlName="registerType">
             </app-autocomplete>
         </div>
 
         <div class="input-third">
-            <app-employees-autocomplete formControlName="introduced"
+            <app-employees-autocomplete formControlName="introduced_employees"
                 placeholder="pets.introduced"></app-employees-autocomplete>
         </div>
-        
+
         <div class="input-third">
-            <app-employees-autocomplete formControlName="accepted"
+            <app-employees-autocomplete formControlName="accepted_employees"
                 placeholder="pets.accepted"></app-employees-autocomplete>
         </div>
 

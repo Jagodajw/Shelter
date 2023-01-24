@@ -1,3 +1,12 @@
 .dataRegister {
   display: block;
+  &__data-castred {
+    display: inline-block;
+    width: 89%;
+  }
+  &__checkbox-castred {
+    display: inline-block;
+    width: 11%;
+    padding-left: 15px;
+  }
 }

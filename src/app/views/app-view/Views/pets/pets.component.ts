@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterAddAnimalRequest } from 'backend/src/models/AnimalsModel';
 import { filter, mergeMap } from 'rxjs';
-import { ShelterService } from 'src/api/services';
 import { PetService } from '../../services/api/pet.service';
 import { PopupRegisterComponent } from './components/popup-register/popup-register.component';
 
@@ -14,11 +13,7 @@ import { PopupRegisterComponent } from './components/popup-register/popup-regist
 export class PetsComponent implements OnInit {
   public status: boolean = false;
 
-  constructor(
-    private dialog: MatDialog,
-    private shelter: ShelterService,
-    private readonly api: PetService
-  ) {}
+  constructor(private dialog: MatDialog, private readonly api: PetService) {}
 
   ngOnInit(): void {}
 
@@ -31,7 +26,6 @@ export class PetsComponent implements OnInit {
       .open(PopupRegisterComponent, {
         panelClass: ['input-70', 'modal-without-padding'],
         disableClose: true,
-        data: { shelter: this.shelter },
       })
       .afterClosed()
       .pipe(

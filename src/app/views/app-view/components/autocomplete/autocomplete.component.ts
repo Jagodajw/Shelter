@@ -49,9 +49,14 @@ export class AutocompleteComponent
   ngOnInit() {}
 
   public selection(event: MatAutocompleteSelectedEvent): void {
-    this.change.emit(event.option.value);
+    const value: Select = event.option.value as Select;
+    this.change.emit(value);
+    this.onChange(value);
   }
 
+  public inputValue(event: Event): void {
+    this.onChange((event.target as HTMLInputElement).value);
+  }
   private _filter(values: Select[], value: string | Select): Select[] {
     const filterValue =
       typeof value === 'object'

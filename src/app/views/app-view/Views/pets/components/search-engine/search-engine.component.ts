@@ -13,10 +13,6 @@ export class SearchEngineComponent implements OnInit {
     { id: 0, name: 'kot' },
     { id: 1, name: 'pies' },
   ];
-  public filtersAddPets: Select[] = [
-    { id: 0, name: 'pets.filterNoCastrated' },
-    { id: 1, name: 'pets.filterCastrated' },
-  ];
   public sizeList: Select[] = [
     { id: 'small', name: 'size.small' },
     { id: 'medium', name: 'size.medium' },
@@ -52,12 +48,6 @@ export class SearchEngineComponent implements OnInit {
   ngOnInit(): void {}
 
   add(event: number) {
-    console.log(event);
-  }
-  chooseSelect(event: Select) {
-    console.log(event);
-  }
-  chooseAutocomplete(event: Select) {
     console.log(event);
   }
 }
