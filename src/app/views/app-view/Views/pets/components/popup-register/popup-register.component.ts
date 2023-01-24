@@ -30,7 +30,7 @@ export class PopupRegisterComponent implements OnInit {
         name: ['', Validators.required],
         species: ['', Validators.required],
         breed: ['', Validators.required],
-        id_number: ['', Validators.required],
+        id_number: [{ value: '', disabled: true }],
         commune: [''],
         area: [''],
         color: [''],
@@ -75,7 +75,6 @@ export class PopupRegisterComponent implements OnInit {
     });
   }
   public personType(event: PersonType) {
-    console.log(event);
     this.typePerson = event;
   }
 
@@ -120,5 +119,9 @@ export class PopupRegisterComponent implements OnInit {
           this.dialogRef.close();
         },
       });
+  }
+
+  public close(): void {
+    this.dialogRef.close();
   }
 }

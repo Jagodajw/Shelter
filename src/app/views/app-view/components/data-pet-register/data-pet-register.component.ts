@@ -49,6 +49,9 @@ export class DataPetRegisterComponent implements OnInit {
       (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
         .get('date_vaccination')
         ?.disable();
+      (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
+        .get('date_vaccination')
+        ?.reset();
     }
   }
 }

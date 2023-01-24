@@ -5,39 +5,25 @@
     <div class="input-row">
       <mat-form-field class="input-third">
         <mat-label>{{ "pets.name" | translate }}</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          placeholder="{{ 'pets.name' | translate }}"
-        />
+        <input matInput formControlName="name" placeholder="{{ 'pets.name' | translate }}" />
       </mat-form-field>
 
       <span class="inline input-third">
-        <app-species-autocomplete
-          formControlName="species"
-        ></app-species-autocomplete>
+        <app-species-autocomplete formControlName="species"></app-species-autocomplete>
       </span>
 
       <span class="inline input-third">
-        <app-breed-autocomplete
-          formControlName="breed"
-        ></app-breed-autocomplete>
+        <app-breed-autocomplete formControlName="breed"></app-breed-autocomplete>
       </span>
     </div>
 
     <div class="input-row">
       <mat-form-field class="input-third">
         <mat-label>{{ "pets.ID" | translate }}</mat-label>
-        <input
-          formControlName="id_number"
-          matInput
-          placeholder="{{ 'pets.ID' | translate }}"
-        />
+        <input formControlName="id_number" matInput placeholder="{{ 'pets.ID' | translate }}" />
       </mat-form-field>
       <div class="input-third">
-        <app-community-autocomplete
-          formControlName="commune"
-        ></app-community-autocomplete>
+        <app-community-autocomplete formControlName="commune"></app-community-autocomplete>
       </div>
       <div class="input-third">
         <app-area-autocomplete formControlName="area"></app-area-autocomplete>
@@ -45,24 +31,14 @@
     </div>
     <div class="input-row">
       <div class="input-third">
-        <app-color-autocomplete
-          formControlName="color"
-        ></app-color-autocomplete>
+        <app-color-autocomplete formControlName="color"></app-color-autocomplete>
       </div>
       <div class="input-third">
-        <app-select
-          formControlName="size"
-          [values]="sizeList"
-          placeholder="pets.size"
-        >
+        <app-select formControlName="size" [values]="sizeList" placeholder="pets.size">
         </app-select>
       </div>
       <div class="input-third">
-        <app-select
-          formControlName="gender"
-          [values]="genderList"
-          placeholder="pets.gender"
-        >
+        <app-select formControlName="gender" [values]="genderList" placeholder="pets.gender">
         </app-select>
       </div>
     </div>
@@ -70,31 +46,18 @@
     <div class="input-row">
       <mat-form-field class="input-third">
         <mat-label>{{ "pets.nr-chip" | translate }}</mat-label>
-        <input
-          formControlName="nr_chip"
-          matInput
-          placeholder="{{ 'pets.nr-chip' | translate }}"
-        />
+        <input formControlName="nr_chip" matInput placeholder="{{ 'pets.nr-chip' | translate }}" />
       </mat-form-field>
 
       <div class="input-third">
-        <app-data-picker
-          formControlName="date_of_birth"
-          placeholder="pets.datePickerBirth"
-        ></app-data-picker>
+        <app-data-picker formControlName="date_of_birth" placeholder="pets.datePickerBirth"></app-data-picker>
       </div>
 
       <div class="input-third">
-        <mat-checkbox
-          (change)="Vaccination($event)"
-          class="dataPet__checkbox-vaccination"
-          formControlName="vaccination"
-        ></mat-checkbox>
-        <app-data-picker
-          class="dataPet__data-vaccination"
-          formControlName="date_vaccination"
-          placeholder="pets.dateVaccination"
-        ></app-data-picker>
+        <mat-checkbox (change)="Vaccination($event)" class="dataPet__checkbox-vaccination"
+          formControlName="vaccination"></mat-checkbox>
+        <app-data-picker class="dataPet__data-vaccination" formControlName="date_vaccination"
+          placeholder="pets.dateVaccination"></app-data-picker>
       </div>
     </div>
   </div>
@@ -106,11 +69,7 @@
   <div class="input-row">
     <mat-form-field class="input-full">
       <mat-label>{{ "pets.description" | translate }}</mat-label>
-      <textarea
-        formControlName="description_animal"
-        rows="1"
-        matInput
-      ></textarea>
+      <textarea formControlName="description_animal" rows="1" matInput></textarea>
     </mat-form-field>
   </div>
 </div>

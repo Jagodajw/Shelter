@@ -38,7 +38,7 @@ export class EmployeesAutocompleteComponent
     this.shelterChangeDetector();
     this.control.valueChanges.subscribe({
       next: (value) => {
-        if (this.onChange) this.onChange(value);
+        if (this.onChange) this.onChange(value.ID);
       },
     });
   }

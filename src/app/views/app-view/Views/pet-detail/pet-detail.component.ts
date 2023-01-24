@@ -14,8 +14,7 @@ export class PetDetailComponent implements OnInit {
   public edit: boolean = false;
   constructor(
     private readonly _form: FormBuilder,
-    private _location: Location,
-    private readonly api: ApiService
+    private _location: Location
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +34,7 @@ export class PetDetailComponent implements OnInit {
       .get('registerAnimal')
       ?.get('date_vaccination')
       ?.disable();
+    this.detailPetsForm.get('registerAnimal')?.get('id_number')?.disable();
     this.detailPetsForm.get('register')?.get('date_sterilization')?.disable();
     this.detailPetsOutForm.enable();
   }
@@ -49,7 +49,7 @@ export class PetDetailComponent implements OnInit {
         name: ['', Validators.required],
         species: ['', Validators.required],
         breed: ['', Validators.required],
-        id_number: ['', Validators.required],
+        id_number: [{ value: '', disabled: true }],
         commune: [''],
         area: [''],
         color: [''],
@@ -58,7 +58,7 @@ export class PetDetailComponent implements OnInit {
         nr_chip: ['', Validators.required],
         date_of_birth: ['', Validators.required],
         description_animal: [''],
-        vaccination: [''],
+        vaccination: [false],
         date_vaccination: [
           { value: '', disabled: true },
           [Validators.required],
@@ -81,7 +81,7 @@ export class PetDetailComponent implements OnInit {
       register: this._form.group({
         date_of_registration: [new Date(), [Validators.required]],
         quarantine: ['', Validators.required],
-        sterilization: ['', Validators.required],
+        sterilization: [false, Validators.required],
         date_sterilization: [
           { value: '', disabled: true },
           [Validators.required],

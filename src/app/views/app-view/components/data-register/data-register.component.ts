@@ -30,6 +30,9 @@ export class DataRegisterComponent implements OnInit {
       (this.formGroupDirective.control.get('register') as FormGroup)
         .get('date_sterilization')
         ?.disable();
+      (this.formGroupDirective.control.get('register') as FormGroup)
+        .get('date_sterilization')
+        ?.reset();
     }
   }
 
