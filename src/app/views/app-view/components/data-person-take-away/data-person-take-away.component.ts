@@ -22,8 +22,8 @@ export class DataPersonTakeAwayComponent implements OnInit {
 
   ngOnInit(): void {}
   public arrayOfSpecies: Select[] = [
-    { id: 0, name: 'kot' },
-    { id: 1, name: 'pies' },
+    { ID: 0, name: 'kot' },
+    { ID: 1, name: 'pies' },
   ];
   chooseSelect(event: Select) {
     console.log(event);

@@ -37,8 +37,8 @@ export class DataPersonDonorComponent implements OnInit {
     { id: 'none', name: 'znaleziony' },
   ];
   public arrayOfSpecies: Select[] = [
-    { id: 0, name: 'kot' },
-    { id: 1, name: 'pies' },
+    { ID: 0, name: 'kot' },
+    { ID: 1, name: 'pies' },
   ];
   chooseSelect(event: Select) {
     console.log(event);

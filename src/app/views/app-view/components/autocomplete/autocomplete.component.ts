@@ -9,10 +9,10 @@ import {
 } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
-import { Select } from '../select/select';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
+import { Select } from '../select/select';
 
 @Component({
   selector: 'app-autocomplete',
@@ -27,7 +27,7 @@ import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-acce
   ],
 })
 export class AutocompleteComponent
-  extends ControlValueAccessorsAbstract
+  extends ControlValueAccessorsAbstract<Select | string | null>
   implements OnInit
 {
   @Input() placeholder: string = '';
@@ -38,7 +38,7 @@ export class AutocompleteComponent
     );
     this.cd.markForCheck();
   }
-  @Output() change: EventEmitter<string> = new EventEmitter<string>();
+  @Output() change: EventEmitter<Select> = new EventEmitter<Select>();
   public controlAutoSelect = new FormControl('');
   public filteredValues!: Observable<Select[]>;
 
@@ -49,9 +49,9 @@ export class AutocompleteComponent
   ngOnInit() {}
 
   public selection(event: MatAutocompleteSelectedEvent): void {
-    const valueId: string = (event.option.value as Select).id as string;
-    this.change.emit(valueId);
-    this.onChange(valueId);
+    const value: Select = event.option.value as Select;
+    this.change.emit(value);
+    this.onChange(value);
   }
 
   public inputValue(event: Event): void {

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, SkipSelf } from '@angular/core';
+import { Component, OnInit, SkipSelf } from '@angular/core';
 import { ControlContainer, FormGroupDirective } from '@angular/forms';
 import { Select } from '../select/select';
 
@@ -20,18 +20,18 @@ export class DataPetRegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   public arrayOfSpecies: Select[] = [
-    { id: 0, name: 'kot' },
-    { id: 1, name: 'pies' },
+    { ID: 0, name: 'kot' },
+    { ID: 1, name: 'pies' },
   ];
 
   public sizeList: Select[] = [
-    { id: 'small', name: 'size.small' },
-    { id: 'medium', name: 'size.medium' },
-    { id: 'large', name: 'size.large' },
+    { ID: 'small', name: 'size.small' },
+    { ID: 'medium', name: 'size.medium' },
+    { ID: 'large', name: 'size.large' },
   ];
 
   public genderList: Select[] = [
-    { id: 'female', name: 'gender.female' },
-    { id: 'male', name: 'gender.male' },
+    { ID: 'female', name: 'gender.female' },
+    { ID: 'male', name: 'gender.male' },
   ];
 }

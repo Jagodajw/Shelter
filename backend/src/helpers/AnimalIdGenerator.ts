@@ -7,10 +7,8 @@ interface DateCreator {
 }
 
 export class AnimalIdGenerator {
-  private static actualYear: number;
-  constructor() {
-    AnimalIdGenerator.actualYear = new Date().getFullYear();
-  }
+  private static readonly actualYear: number = new Date().getFullYear();
+  constructor() {}
 
   public static async getGeneratedAnimalId(speciesId: number): Promise<string> {
     const speciesSign: string = await this.getSpeciesSign(speciesId);
@@ -19,7 +17,7 @@ export class AnimalIdGenerator {
     );
     const newNumberForPet: number = numberOfPets + 1;
 
-    return `${speciesSign}/${newNumberForPet}/${this.actualYear}`;
+    return `${speciesSign}/${newNumberForPet}/${AnimalIdGenerator.actualYear}`;
   }
 
   private static async getNumberOfPetsInActualYear(
@@ -43,11 +41,15 @@ export class AnimalIdGenerator {
     firstDate: Date;
     lastDate: Date;
   } {
-    const firstDate = this.getDate({ day: 1, month: 1, year: this.actualYear });
+    const firstDate = this.getDate({
+      day: 1,
+      month: 1,
+      year: AnimalIdGenerator.actualYear,
+    });
     const lastDate = this.getDate({
       day: 31,
       month: 12,
-      year: this.actualYear,
+      year: AnimalIdGenerator.actualYear,
     });
 
     return { firstDate, lastDate };
@@ -75,6 +77,7 @@ export class AnimalIdGenerator {
 
     const species = await prisma.species.findUnique({
       where: { ID: speciesId },
+      select: { species: true },
     });
     if (species === null) return speciesSign.other;
     const formatedSpeciesName: string = species.species.toLocaleLowerCase();

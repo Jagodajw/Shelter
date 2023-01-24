@@ -25,6 +25,7 @@ export class MissingDictionaryAdder {
     shelterId: string,
     extraData?: any
   ): Promise<number> {
+    console.log(data, !this.isPrimitiveTypeOf(data));
     if (!this.isPrimitiveTypeOf(data)) return data.ID;
 
     switch (key) {

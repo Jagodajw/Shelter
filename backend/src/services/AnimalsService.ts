@@ -64,14 +64,14 @@ export async function postAnimalDataRegister(
   }: RegisterAddAnimalRequest
 ): Promise<RegisterAddAnimalResponse> {
   return await prisma.$transaction(async (tx) => {
-    const generatedAnimalId = await AnimalIdGenerator.getGeneratedAnimalId(
-      updateDataRegisterAnimal.species.ID
-    );
-
     const speciesId = await MissingDictionaryAdder.getDictonaryField(
       'species',
       updateDataRegisterAnimal.species,
       shelterId
+    );
+    console.log('spec id', speciesId);
+    const generatedAnimalId = await AnimalIdGenerator.getGeneratedAnimalId(
+      speciesId
     );
     const breedId = await MissingDictionaryAdder.getDictonaryField(
       'breed',

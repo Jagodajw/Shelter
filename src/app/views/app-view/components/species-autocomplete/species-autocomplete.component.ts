@@ -50,7 +50,7 @@ export class SpeciesAutocompleteComponent
             map(
               (speciesResponse: SpeciesResponse[]) =>
                 speciesResponse.map((species: SpeciesResponse) => ({
-                  id: species.ID,
+                  ID: species.ID,
                   name: species.species,
                 })) as Select[]
             )

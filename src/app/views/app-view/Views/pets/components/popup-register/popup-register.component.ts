@@ -28,17 +28,18 @@ export class PopupRegisterComponent implements OnInit {
     this.registerPetsForm = this._form.group({
       registerAnimal: this._form.group({
         name: ['', Validators.required],
-        species_id: ['', Validators.required],
-        breed_id: ['', Validators.required],
-        id_number: ['', Validators.required],
-        commune_id: [''],
-        area_id: [''],
-        color_id: [''],
+        species: ['', Validators.required],
+        breed: ['', Validators.required],
+        id_number: [''],
+        commune: [''],
+        area: [''],
+        color: [''],
         size: ['', Validators.required],
         gender: ['', Validators.required],
         nr_chip: ['', Validators.required],
         date_of_birth: ['', Validators.required],
         description_animal: [''],
+        vaccination: [false],
         // DateGraft: [''],
       }),
       registerPeople: this._form.group({
@@ -49,14 +50,15 @@ export class PopupRegisterComponent implements OnInit {
         email: [''],
         telephone: [''],
         adress: [''],
-        city_id: [''],
-        province_id: [''],
+        city: [''],
+        commune: [{ ID: 1, name: 'Commune' }],
+        province: [''],
         description: [''],
         //not sure, zipCode is in city object, or isn't?
         zipCode: [''],
       }),
       register: this._form.group({
-        dateRegister: ['', Validators.required],
+        date_of_registration: ['', Validators.required],
         dateCuarantineTo: ['', Validators.required],
         castred: ['', Validators.required],
         dateCastred: ['', Validators.required],
@@ -64,6 +66,7 @@ export class PopupRegisterComponent implements OnInit {
         introduced: [''],
         accepted: [''],
         commentsRegister: [''],
+        sterilization: [false],
       }),
     });
   }
@@ -72,19 +75,19 @@ export class PopupRegisterComponent implements OnInit {
   }
 
   public arrayOfSpecies: Select[] = [
-    { id: 0, name: 'kot' },
-    { id: 1, name: 'pies' },
+    { ID: 0, name: 'kot' },
+    { ID: 1, name: 'pies' },
   ];
 
   public sizeList: Select[] = [
-    { id: 'small', name: 'size.small' },
-    { id: 'medium', name: 'size.medium' },
-    { id: 'large', name: 'size.large' },
+    { ID: 'small', name: 'size.small' },
+    { ID: 'medium', name: 'size.medium' },
+    { ID: 'large', name: 'size.large' },
   ];
 
   public genderList: Select[] = [
-    { id: 'female', name: 'gender.female' },
-    { id: 'male', name: 'gender.male' },
+    { ID: 'female', name: 'gender.female' },
+    { ID: 'male', name: 'gender.male' },
   ];
 
   chooseSelect(event: Select) {

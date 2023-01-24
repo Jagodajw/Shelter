@@ -50,7 +50,7 @@ export class AreaAutocompleteComponent
             map(
               (areaResponse: AreaResponse[]) =>
                 areaResponse.map((area: AreaResponse) => ({
-                  id: area.ID,
+                  ID: area.ID,
                   name: area.area,
                 })) as Select[]
             )

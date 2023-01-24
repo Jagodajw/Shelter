@@ -51,7 +51,7 @@ export class EmployeesAutocompleteComponent
             map(
               (employeesResponse: EmployeeResponse[]) =>
                 employeesResponse.map((employees: EmployeeResponse) => ({
-                  id: employees.ID,
+                  ID: employees.ID,
                   name: `${employees.name} ${employees.surname}`,
                 })) as Select[]
             )

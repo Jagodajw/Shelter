@@ -16,8 +16,7 @@ export class DataRegisterComponent implements OnInit {
   ngOnInit(): void {}
 
   public castratedList: Select[] = [
-    { id: 'castrated', name: 'pets.filterNoCastrated' },
-    { id: 'noCastrated', name: 'pets.filterCastrated' },
+    { ID: 'castrated', name: 'pets.filterNoCastrated' },
+    { ID: 'noCastrated', name: 'pets.filterCastrated' },
   ];
-
 }

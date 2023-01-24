@@ -39,7 +39,7 @@ export class SelectComponent
   ngOnInit(): void {}
 
   selection(event: MatSelectChange): void {
-    const valueId: string = (event.value as Select).id as string;
+    const valueId: string = (event.value as Select).ID as string;
     this.change.emit(valueId);
     this.onChange(valueId);
   }
