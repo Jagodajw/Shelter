@@ -5,22 +5,22 @@
     <div class="input-row">
       <mat-form-field class="input-third">
         <mat-label>{{ "pets.name" | translate }}</mat-label>
-        <input matInput formControlName="name" placeholder="{{ 'pets.name' | translate }}" />
+        <input matInput formControlName="name" placeholder="{{ 'pets.name' | translate }}" required />
       </mat-form-field>
 
       <span class="inline input-third">
-        <app-species-autocomplete formControlName="species"></app-species-autocomplete>
+        <app-species-autocomplete formControlName="species" ></app-species-autocomplete>
       </span>
 
       <span class="inline input-third">
-        <app-breed-autocomplete formControlName="breed"></app-breed-autocomplete>
+        <app-breed-autocomplete formControlName="breed" ></app-breed-autocomplete>
       </span>
     </div>
 
     <div class="input-row">
       <mat-form-field class="input-third">
         <mat-label>{{ "pets.ID" | translate }}</mat-label>
-        <input formControlName="id_number" matInput placeholder="{{ 'pets.ID' | translate }}" />
+        <input formControlName="id_number" matInput placeholder="{{ 'pets.IDgen' | translate }}" />
       </mat-form-field>
       <div class="input-third">
         <app-community-autocomplete formControlName="commune"></app-community-autocomplete>

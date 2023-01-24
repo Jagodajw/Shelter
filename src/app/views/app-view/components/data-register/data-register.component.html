@@ -3,63 +3,40 @@
 
   <div class="input-row">
     <div class="input-third">
-      <app-data-picker
-        formControlName="date_of_registration"
-        placeholder="pets.dateRegister"
-      ></app-data-picker>
+      <app-data-picker formControlName="date_of_registration" placeholder="pets.dateRegister"></app-data-picker>
     </div>
     <div class="input-third">
-      <app-data-picker
-        placeholder="pets.dateCuarantineTo"
-        formControlName="quarantine"
-      ></app-data-picker>
+      <app-data-picker placeholder="pets.dateCuarantineTo" formControlName="quarantine"></app-data-picker>
     </div>
     <div class="input-third">
-      <mat-checkbox
-        (change)="Sterilization($event)"
-        class="dataRegister__checkbox-castred"
-        formControlName="sterilization"
-      ></mat-checkbox>
-      <app-data-picker
-        class="dataRegister__data-castred"
-        placeholder="pets.dateCastred"
-        formControlName="date_sterilization"
-      ></app-data-picker>
+      <mat-checkbox (change)="Sterilization($event)" class="dataRegister__checkbox-castred"
+        formControlName="sterilization"></mat-checkbox>
+      <app-data-picker class="dataRegister__data-castred" placeholder="pets.dateCastred"
+        formControlName="date_sterilization"></app-data-picker>
     </div>
   </div>
 
   <div class="input-row">
     <div class="input-third">
-      <app-type-adoption-autocomplete
-        formControlName="registerType"
-        placeholder="pets.registerType"
-      ></app-type-adoption-autocomplete>
+      <app-type-adoption-autocomplete formControlName="type_of_acceptance"
+        placeholder="pets.registerType"></app-type-adoption-autocomplete>
     </div>
 
     <div class="input-third">
-      <app-employees-autocomplete
-        formControlName="introduced_employees_id"
-        placeholder="pets.introduced"
-      ></app-employees-autocomplete>
+      <app-employees-autocomplete formControlName="introduced_employees_id"
+        placeholder="pets.introduced"></app-employees-autocomplete>
     </div>
 
     <div class="input-third">
-      <app-employees-autocomplete
-        formControlName="accepted_employees_id"
-        placeholder="pets.accepted"
-      ></app-employees-autocomplete>
+      <app-employees-autocomplete formControlName="accepted_employees_id"
+        placeholder="pets.accepted"></app-employees-autocomplete>
     </div>
   </div>
 
   <div class="input-row">
     <mat-form-field class="input-full">
       <mat-label>{{ "pets.commentsRegister" | translate }}</mat-label>
-      <textarea
-        formControlName="commentsRegister"
-        rows="1"
-        matInput
-        placeholder="{{ 'pets.comments' | translate }}"
-      >
+      <textarea formControlName="commentsRegister" rows="1" matInput placeholder="{{ 'pets.comments' | translate }}">
       </textarea>
     </mat-form-field>
   </div>
