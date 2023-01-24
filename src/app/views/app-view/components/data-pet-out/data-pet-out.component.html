@@ -1,40 +1,63 @@
 <div class="data-pet-out" formGroupName="dataPetOut">
-    <h2>{{'pets.out.data' | translate}}</h2>
-    <div class="input-row">
-        <mat-form-field class="input-quarter">
-            <mat-label>{{'pets.name' | translate}}</mat-label>
-            <input matInput formControlName="name" placeholder="{{'pets.name' | translate}}">
-        </mat-form-field>
-        <div class="input-quarter">
-            <app-species-autocomplete formControlName="species"></app-species-autocomplete>
-        </div>
-
-        <div class="input-quarter">
-            <app-autocomplete formControlName="typeOut"  [values]="arrayOfSpecies"
-                placeholder="pets.out.type">
-            </app-autocomplete>
-        </div>
-        <div class="input-quarter">
-            <app-data-picker formControlName="dateOut" placeholder="pets.out.date"></app-data-picker>
-        </div>
+  <h2>{{ "pets.out.data" | translate }}</h2>
+  <div class="input-row">
+    <mat-form-field class="input-quarter">
+      <mat-label>{{ "pets.name" | translate }}</mat-label>
+      <input
+        matInput
+        formControlName="name"
+        placeholder="{{ 'pets.name' | translate }}"
+      />
+    </mat-form-field>
+    <div class="input-quarter">
+      <app-species-autocomplete
+        formControlName="species"
+      ></app-species-autocomplete>
     </div>
 
-    <div class="input-row">
-        <div class="input-quarter">
-            <app-autocomplete formControlName="introduced"
-                [values]="arrayOfSpecies" placeholder="pets.introduced">
-            </app-autocomplete>
-        </div>
-        <div class="input-quarter">
-            <app-autocomplete formControlName="accepted"[values]="arrayOfSpecies"
-                placeholder="pets.accepted">
-            </app-autocomplete>
-        </div>
-
-        <mat-form-field class="input-half">
-            <mat-label>{{'pets.out.comments' | translate}}</mat-label>
-            <textarea formControlName="commentsOut" matInput rows="1" placeholder="{{'pets.out.comments' | translate}}">
-                </textarea>
-        </mat-form-field>
+    <div class="input-quarter">
+      <app-autocomplete
+        formControlName="typeOut"
+        [values]="arrayOfSpecies"
+        placeholder="pets.out.type"
+      >
+      </app-autocomplete>
     </div>
+    <div class="input-quarter">
+      <app-data-picker
+        formControlName="dateOut"
+        placeholder="pets.out.date"
+      ></app-data-picker>
+    </div>
+  </div>
+
+  <div class="input-row">
+    <div class="input-quarter">
+      <app-autocomplete
+        formControlName="introduced_employees_id"
+        [values]="arrayOfSpecies"
+        placeholder="pets.introduced"
+      >
+      </app-autocomplete>
+    </div>
+    <div class="input-quarter">
+      <app-autocomplete
+        formControlName="accepted_employees_id"
+        [values]="arrayOfSpecies"
+        placeholder="pets.accepted"
+      >
+      </app-autocomplete>
+    </div>
+
+    <mat-form-field class="input-half">
+      <mat-label>{{ "pets.out.comments" | translate }}</mat-label>
+      <textarea
+        formControlName="commentsOut"
+        matInput
+        rows="1"
+        placeholder="{{ 'pets.out.comments' | translate }}"
+      >
+      </textarea>
+    </mat-form-field>
+  </div>
 </div>

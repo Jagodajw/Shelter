@@ -11,6 +11,7 @@ import { ButtonFilterModule } from '../button-filter/button-filter.module';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CityAutocompleteModule } from '../city-autocomplete/city-autocomplete.module';
 import { ProvinceAutocompleteModule } from '../province-autocomplete/province-autocomplete.module';
+import { CommunityAutocompleteModule } from '../community-autocomplete/community-autocomplete.module';
 
 @NgModule({
   declarations: [DataPersonDonorComponent],
@@ -28,6 +29,7 @@ import { ProvinceAutocompleteModule } from '../province-autocomplete/province-au
     MatTabsModule,
     CityAutocompleteModule,
     ProvinceAutocompleteModule,
+    CommunityAutocompleteModule
   ],
 })
 export class DataPersonDonorModule {}

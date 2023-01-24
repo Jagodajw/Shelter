@@ -24,25 +24,34 @@ import { Select } from './select';
   ],
 })
 export class SelectComponent
-  extends ControlValueAccessorsAbstract
+  extends ControlValueAccessorsAbstract<string | number | null>
   implements OnInit
 {
   @Input() values: Select[] = [];
   @Input() placeholder: string = '';
-  @Output() change: EventEmitter<string> = new EventEmitter<string>();
-  public controlSelect = new FormControl('');
+  @Output() change: EventEmitter<string | number | null> = new EventEmitter<
+    string | number | null
+  >();
+  public controlSelect: FormControl<string | number | null> = new FormControl(
+    null
+  );
 
   constructor() {
     super();
   }
-  public writeValue(value: unknown): void {}
+
   ngOnInit(): void {}
 
   selection(event: MatSelectChange): void {
-    const valueId: string = (event.value as Select).ID as string;
-    this.change.emit(valueId);
-    this.onChange(valueId);
+    const value: string | number = (event.value as Select).ID;
+    this.change.emit(value);
+    this.onChange(value);
   }
+
+  public writeValue(value: string | number | null): void {
+    this.controlSelect.patchValue(value);
+  }
+
   public setDisabledState(isDisabled: boolean): void {
     if (isDisabled) return this.controlSelect.disable();
     this.controlSelect.enable();

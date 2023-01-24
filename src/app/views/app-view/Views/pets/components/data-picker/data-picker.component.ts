@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { DateRange } from '@angular/material/datepicker';
+import { Data } from '@angular/router';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 
 interface DateScope {

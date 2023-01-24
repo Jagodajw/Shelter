@@ -1,5 +1,9 @@
 import { Component, OnInit, SkipSelf } from '@angular/core';
-import { ControlContainer } from '@angular/forms';
+import {
+  ControlContainer,
+  FormGroup,
+  FormGroupDirective,
+} from '@angular/forms';
 import { ButtonFilter } from '../button-filter/button-filter';
 import { Select } from '../select/select';
 
@@ -18,24 +22,28 @@ import { Select } from '../select/select';
 export class DataPersonTakeAwayComponent implements OnInit {
   public personType: number = 0;
   public blockInput: boolean = false;
-  constructor() {}
+  constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    (this.formGroupDirective.control.get('dataPersonTakeAway') as FormGroup)
+      .get('city')
+      ?.valueChanges.subscribe((city) => {
+        (this.formGroupDirective.control.get('dataPersonTakeAway') as FormGroup)
+          .get('zip_code')
+          ?.patchValue(city.zip_code);
+      });
+  }
   public arrayOfSpecies: Select[] = [
     { ID: 0, name: 'kot' },
     { ID: 1, name: 'pies' },
   ];
-  chooseSelect(event: Select) {
-    console.log(event);
-  }
-  chooseAutocomplete(event: Select) {
-    console.log(event);
-  }
+
   public filtersPeople: ButtonFilter[] = [
     { id: 0, name: 'Osoba fizyczna' },
     { id: 1, name: 'Osoba prawna' },
     { id: 2, name: 'znaleziony' },
   ];
+
   onChangeSelect(event: number): void {
     this.personType = event;
     if (this.personType === 1) {

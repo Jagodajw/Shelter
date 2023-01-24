@@ -13,10 +13,6 @@ export class SearchEngineComponent implements OnInit {
     { ID: 0, name: 'kot' },
     { ID: 1, name: 'pies' },
   ];
-  public filtersAddPets: Select[] = [
-    { ID: 0, name: 'pets.filterNoCastrated' },
-    { ID: 1, name: 'pets.filterCastrated' },
-  ];
   public sizeList: Select[] = [
     { ID: 'small', name: 'size.small' },
     { ID: 'medium', name: 'size.medium' },

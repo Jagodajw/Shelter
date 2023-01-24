@@ -77,10 +77,23 @@
         />
       </mat-form-field>
 
-      <div class="input-third-complement">
+      <div class="input-third">
         <app-data-picker
           formControlName="date_of_birth"
           placeholder="pets.datePickerBirth"
+        ></app-data-picker>
+      </div>
+
+      <div class="input-third">
+        <mat-checkbox
+          (change)="Vaccination($event)"
+          class="dataPet__checkbox-vaccination"
+          formControlName="vaccination"
+        ></mat-checkbox>
+        <app-data-picker
+          class="dataPet__data-vaccination"
+          formControlName="date_vaccination"
+          placeholder="pets.dateVaccination"
         ></app-data-picker>
       </div>
     </div>

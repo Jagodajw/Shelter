@@ -9,7 +9,7 @@
     "gender": "Płeć",
     "size": "Rozmiar",
     "color": "Maść",
-    "castred": "Sterylizacja",
+    "castred": "Kastracja/Sterylizacja",
     "ID": "Identyfikator",
     "registerType": "Typ przyjęcia",
     "introduced": "Wprowadził",
@@ -38,7 +38,7 @@
     "commentsRegister": "Uwagi rejestacji",
     "dataRegisterAnimal": "Dane przyjmowanego zwierzęcia",
     "dataRegister": "Informacje rejestracji",
-    "dateCastred": "Data kastracji",
+    "dateCastred": "Data kastracja/sterylizacja",
     "deleteSelectedPosition": "Usuń wybrane zwierzę",
     "titleRegisterAnimal": "Rejestracja zwierzęcia",
     "out": {
@@ -46,7 +46,9 @@
       "type": "Rodzaj wydania",
       "date": " Data wydania",
       "comments": "Uwagi wydania"
-    }
+    },
+    "vaccination": "Szczepienie",
+    "dateVaccination": "Data szczepienia"
   },
   "people": {
     "title": "Osoby",

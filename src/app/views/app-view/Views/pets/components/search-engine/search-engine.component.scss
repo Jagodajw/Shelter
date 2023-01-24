@@ -13,7 +13,10 @@
     & h2 {
       color: #514edd;
     }
-
+    &__castred {
+      display: flex;
+      justify-content: center;
+    }
     &__primary {
       margin-top: 10px;
       display: flex;

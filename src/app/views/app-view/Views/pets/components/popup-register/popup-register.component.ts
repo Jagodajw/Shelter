@@ -30,7 +30,7 @@ export class PopupRegisterComponent implements OnInit {
         name: ['', Validators.required],
         species: ['', Validators.required],
         breed: ['', Validators.required],
-        id_number: [''],
+        id_number: ['', Validators.required],
         commune: [''],
         area: [''],
         color: [''],
@@ -39,8 +39,11 @@ export class PopupRegisterComponent implements OnInit {
         nr_chip: ['', Validators.required],
         date_of_birth: ['', Validators.required],
         description_animal: [''],
-        vaccination: [false],
-        // DateGraft: [''],
+        vaccination: [''],
+        date_vaccination: [
+          { value: '', disabled: true },
+          [Validators.required],
+        ],
       }),
       registerPeople: this._form.group({
         name: [''],
@@ -51,26 +54,28 @@ export class PopupRegisterComponent implements OnInit {
         telephone: [''],
         adress: [''],
         city: [''],
-        commune: [{ ID: 1, name: 'Commune' }],
+        zip_code: [''],
+        commune: [''],
         province: [''],
         description: [''],
-        //not sure, zipCode is in city object, or isn't?
-        zipCode: [''],
       }),
       register: this._form.group({
-        date_of_registration: ['', Validators.required],
-        dateCuarantineTo: ['', Validators.required],
-        castred: ['', Validators.required],
-        dateCastred: ['', Validators.required],
+        date_of_registration: [new Date(), Validators.required],
+        quarantine: ['', Validators.required],
+        sterilization: ['', Validators.required],
+        date_sterilization: [
+          { value: '', disabled: true },
+          [Validators.required],
+        ],
         registerType: [''],
-        introduced: [''],
-        accepted: [''],
+        introduced_employees_id: [''],
+        accepted_employees_id: [''],
         commentsRegister: [''],
-        sterilization: [false],
       }),
     });
   }
   public personType(event: PersonType) {
+    console.log(event);
     this.typePerson = event;
   }
 
@@ -106,7 +111,7 @@ export class PopupRegisterComponent implements OnInit {
           ...this.registerPetsForm.value,
           registerPeople: {
             ...this.registerPetsForm.value.registerPeople,
-            // type_of_person: this.personType,
+            type_of_person: this.typePerson,
           },
         },
       })
