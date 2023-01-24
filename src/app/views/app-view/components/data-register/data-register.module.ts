@@ -12,6 +12,7 @@ import { DataPickerModule } from '../../Views/pets/components/data-picker/data-p
 import { DataRegisterComponent } from './data-register.component';
 import { EmployeesAutocompleteModule } from '../employees-autocomplete/employees-autocomplete.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { TypeAdoptionAutocompleteModule } from '../type-adoption-autocomplete/type-adoption-autocomplete.module';
 
 @NgModule({
   declarations: [DataRegisterComponent],
@@ -30,6 +31,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     DataPickerModule,
     EmployeesAutocompleteModule,
     MatCheckboxModule,
+    TypeAdoptionAutocompleteModule,
   ],
 })
 export class DataRegisterModule {}
