@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   AnimalDetailResponse,
+  AnimalStatus,
   AnimalTableResponse,
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
@@ -15,8 +16,12 @@ export class PetService extends ApiService {
     super();
   }
 
-  public getPets(): Observable<AnimalTableResponse[]> {
-    return this.http.get<AnimalTableResponse[]>(`${this.rootUrl}/animals`);
+  public getPets(
+    status: AnimalStatus = 'staying'
+  ): Observable<AnimalTableResponse[]> {
+    return this.http.get<AnimalTableResponse[]>(
+      `${this.rootUrl}/animals/${status}`
+    );
   }
 
   public getPetById(petId: string): Observable<AnimalDetailResponse> {

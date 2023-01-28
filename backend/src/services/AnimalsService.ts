@@ -9,6 +9,7 @@ import { AnimalIdGenerator } from '../helpers/AnimalIdGenerator';
 import { MissingDictionaryAdder } from '../helpers/MissingDictionaryAdder';
 import {
   AnimalDetailResponse,
+  AnimalStatus,
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
   RegisterAnimalResponse,
@@ -17,10 +18,11 @@ import {
 } from '../models/AnimalsModel';
 
 export async function getAllAnimalsByShelterId(
-  shelterId: string
+  shelterId: string,
+  animalStatus: AnimalStatus
 ): Promise<tableAnimals[]> {
   return await prisma.tableAnimals.findMany({
-    where: { shelters_id: shelterId },
+    where: { shelters_id: shelterId, adopted: animalStatus === 'adopted' },
   });
 }
 
@@ -154,6 +156,12 @@ export async function postAnimalDataRegister(
       },
     });
 
+    const typeOfAcceptanceId = await MissingDictionaryAdder.getDictonaryField(
+      'type_of_acceptance',
+      updateDataRegistration.type_of_acceptance,
+      shelterId
+    );
+
     const register = await tx.registration.create({
       data: {
         date_of_registration: updateDataRegistration.date_of_registration,
@@ -161,7 +169,7 @@ export async function postAnimalDataRegister(
         accepted_employees_id: updateDataRegistration.accepted_employees_id,
         introduced_employees_id: updateDataRegistration.introduced_employees_id,
         decription_registration: updateDataRegistration.decription_registration,
-        type_of_acceptance: updateDataRegistration.type_of_acceptance,
+        type_of_acceptance_id: typeOfAcceptanceId,
         animals_id: registerAnimal.ID,
         people_id: registerPeople.ID,
         shelters_id: shelterId,

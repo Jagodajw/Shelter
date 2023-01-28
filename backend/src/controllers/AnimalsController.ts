@@ -2,6 +2,7 @@ import express from 'express';
 import { authenticate } from '../middlewares/authentication';
 import { shelterAuthenticate } from '../middlewares/shelterAuthentication';
 import {
+  AnimalStatus,
   RegisterAddAnimalResponse,
   RegisterAnimalAddRequest,
   RegisterPersonAddRequest,
@@ -26,16 +27,23 @@ router.use((req, res, next) => {
 //REQUEST - ep/endpoint
 // req- ządanie z frontu
 // Response res - odpowiedź z backu
-router.get('/animals', authenticate, shelterAuthenticate, async (req, res) => {
-  try {
-    const shelters_id: string = req.headers['shelters_id'] as string;
-    const animals = await getAllAnimalsByShelterId(shelters_id);
+router.get(
+  '/animals/:status',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const shelters_id: string = req.headers['shelters_id'] as string;
+      const status: AnimalStatus = req.params.status as AnimalStatus;
+      const animals = await getAllAnimalsByShelterId(shelters_id, status);
 
-    res.status(200).json(animals);
-  } catch (error) {
-    res.sendStatus(500);
+      res.status(200).json(animals);
+    } catch (error) {
+      console.log(error);
+      res.sendStatus(500);
+    }
   }
-});
+);
 
 router.get(
   '/animalDataRegister/:animalId',

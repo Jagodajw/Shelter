@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -74,7 +74,7 @@ model Animals {
   nr_chip            String
   id_number          String
   date_vaccination   DateTime? @db.Date
-  vaccination        Boolean
+  vaccination        Boolean? @default(false)
   date_of_birth      DateTime  @db.Date
   size               Size
   gender             Gender
@@ -85,8 +85,9 @@ model Animals {
   species_id         Int
   breed_id           Int
   shelters_id        String
-  sterilization      Boolean
+  sterilization      Boolean? @default(false)
   date_sterilization DateTime? @db.Date
+  adopted Boolean? @default(false)
 
   adoption     Adoption[]
   registration Registration[]
@@ -110,6 +111,7 @@ model tableAnimals {
   id_number   String
   nr_chip     String
   shelters_id String
+  adopted Boolean
 }
 
 model dataRegisterAnimal {
@@ -171,7 +173,7 @@ model Registration {
   ID                      Int      @id @default(autoincrement())
   date_of_registration    DateTime @db.Date
   quarantine              DateTime @db.Date
-  type_of_acceptance      String
+  type_of_acceptance_id      Int?
   decription_registration String?  @default("")
   introduced_employees_id Int
   accepted_employees_id   Int
@@ -182,6 +184,7 @@ model Registration {
   // relations
   introduced_employees Employees? @relation(name: "Registraion_introduced_employees_id_fkey", fields: [introduced_employees_id], references: [ID])
   spent_employees      Employees? @relation(name: "Registraion_accepted_employees_id_fkey", fields: [accepted_employees_id], references: [ID])
+  type_of_acceptance TypeAcceptance? @relation(fields: [type_of_acceptance_id], references: [ID])
 
   people   People?   @relation(fields: [people_id], references: [ID])
   animals  Animals?  @relation(fields: [animals_id], references: [ID])
@@ -292,6 +295,15 @@ model TypeAdoption {
   shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
+model   TypeAcceptance {
+  ID Int @id @unique @default(autoincrement())
+  type_acceptance String
+  shelters_id String
+  registraion Registration[]
+
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
+}
+
 model Employees {
   ID          Int    @id @unique @default(autoincrement())
   name        String
@@ -322,6 +334,7 @@ model Shelters {
   registration Registration[]
   commune      Commune[]
   typeAdoption TypeAdoption[]
+  typeAcceptance TypeAcceptance[]
 }
 
 model Account {

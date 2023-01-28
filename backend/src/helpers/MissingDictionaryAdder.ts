@@ -10,6 +10,7 @@ import {
   addColor,
   addComune,
   addSpecies,
+  addTypeAcceptance,
 } from '../services/DictionaryService';
 
 type RequestKeys =
@@ -71,6 +72,15 @@ export class MissingDictionaryAdder {
         const newCity = await addCity({ city: data, ...extraData }, shelterId);
 
         return newCity.ID;
+      }
+
+      case 'type_of_acceptance': {
+        const newTypeOfAcceptance = await addTypeAcceptance(
+          { type_acceptance: data, ...extraData },
+          shelterId
+        );
+
+        return newTypeOfAcceptance.ID;
       }
 
       default:

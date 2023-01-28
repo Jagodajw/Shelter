@@ -6,6 +6,7 @@ import {
   Commune,
   Province,
   Species,
+  TypeAcceptance,
   TypeAdoption,
 } from '@prisma/client';
 
@@ -31,3 +32,6 @@ export type TypeAdoptionResponse = TypeAdoption;
 export type TypeAdoptionRequest = Omit<TypeAdoption, 'ID' | 'shelters_id'>;
 
 export type ProvinceResponse = Province;
+
+export type TypeAcceptanceResponse = TypeAcceptance;
+export type TypeAcceptanceRequest = Omit<TypeAcceptance, 'ID' | 'shelters_id'>;
