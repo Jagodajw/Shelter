@@ -21,13 +21,9 @@
         </span>
     </div>
 
-
-
-
-
     <div class="people_container-table">
         <span class="input-full">
-            <app-search placeholder="people.searchPlaceholder"></app-search>
+            <app-search placeholder="people.searchPlaceholder" [formControl]="search"></app-search>
         </span>
         <table mat-table [dataSource]="dataPeople" multiTemplateDataRows class="mat-elevation-z8">
 
@@ -36,18 +32,15 @@
                 <td mat-cell *matCellDef="let element"> {{element.name}} {{element.surname}} </td>
             </ng-container>
 
-
             <ng-container matColumnDef="city">
                 <th mat-header-cell *matHeaderCellDef> {{"people.city" | translate}} </th>
                 <td mat-cell *matCellDef="let element"> {{element.city}} </td>
             </ng-container>
 
-
             <ng-container matColumnDef="adress">
                 <th mat-header-cell *matHeaderCellDef> {{"people.adress" | translate}} </th>
                 <td mat-cell *matCellDef="let element"> {{element.adress}} </td>
             </ng-container>
-
 
             <ng-container matColumnDef="peselNip">
                 <th mat-header-cell *matHeaderCellDef> {{"people.pesel" | translate}} </th>
@@ -68,7 +61,6 @@
                 <th mat-header-cell *matHeaderCellDef> {{"people.blackList" | translate}} </th>
                 <td mat-cell *matCellDef="let element"> {{element.blackList}} </td>
             </ng-container>
-
 
             <ng-container matColumnDef="action">
                 <th mat-header-cell *matHeaderCellDef>
@@ -99,8 +91,6 @@
                 </td>
             </ng-container>
 
-
-
             <ng-container matColumnDef="ExpandedDetail">
                 <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
                     <h3>
@@ -112,17 +102,13 @@
                     </div>
                 </td>
             </ng-container>
-
             <tr mat-header-row *matHeaderRowDef="displayedColumns;  sticky: true"></tr>
-
             <tr mat-row *matRowDef="let peopleRowModel; columns: displayedColumns;"
                 (click)="expandedElement = expandedElement === peopleRowModel ? null : peopleRowModel"
                 [class.containers__is-expanded-row]="expandedElement === peopleRowModel">
             </tr>
             <tr mat-row *matRowDef="let peopleRowModel; columns: ['ExpandedDetail']" class="containers__expanded-row"
                 [@extension]="peopleRowModel == expandedElement ? 'expand' : 'collapse'"></tr>
-
-
         </table>
     </div>
 

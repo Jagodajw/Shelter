@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormControlName } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { PeopleTableInterface, peopleType } from './people-table-interface';
@@ -31,6 +31,7 @@ export class PeopleComponent implements OnInit {
   public status: boolean = false;
   public peopleType: PeopleTableInterface[] = [];
   public expandedElement!: PetsTableInterface | null;
+  public search = new FormControl();
   public peopleTable = new MatTableDataSource<PeopleTableInterface>(
     this.peopleType
   );

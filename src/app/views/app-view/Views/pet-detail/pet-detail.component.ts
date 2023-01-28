@@ -1,20 +1,29 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Params } from '@angular/router';
+import { AnimalDetailResponse } from 'backend/src/models/AnimalsModel';
+import { filter, merge, mergeMap, tap } from 'rxjs';
 import { ApiService } from 'src/api/services';
+import { PetService } from '../../services/api/pet.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+@UntilDestroy()
 @Component({
   selector: 'app-pet-detail',
   templateUrl: './pet-detail.component.html',
   styleUrls: ['./pet-detail.component.scss'],
 })
 export class PetDetailComponent implements OnInit {
+  pet: any = [];
   detailPetsForm!: FormGroup;
   detailPetsOutForm!: FormGroup;
 
   public edit: boolean = false;
   constructor(
     private readonly _form: FormBuilder,
-    private _location: Location
+    private _location: Location,
+    private readonly api: PetService,
+    private readonly activatedRoute: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
@@ -23,6 +32,7 @@ export class PetDetailComponent implements OnInit {
       this.detailPetsForm.disable();
       this.detailPetsOutForm.disable();
     }
+    this.getPetData();
   }
   backClicked() {
     this._location.back();
@@ -111,5 +121,21 @@ export class PetDetailComponent implements OnInit {
         comments: [''],
       }),
     });
+  }
+
+  private getPetData(): void {
+    this.activatedRoute.params
+      .pipe(
+        filter((params: Params) => !!params['id']),
+        mergeMap((params: Params) =>
+          this.api.getPetById(params['id']).pipe(
+            tap((pet: AnimalDetailResponse) => {
+              this.detailPetsForm.patchValue(pet);
+            })
+          )
+        ),
+        untilDestroyed(this)
+      )
+      .subscribe();
   }
 }
