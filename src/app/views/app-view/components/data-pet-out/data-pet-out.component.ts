@@ -18,8 +18,5 @@ export class DataPetOutComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-  public arrayOfSpecies: Select[] = [
-    { ID: 0, name: 'kot' },
-    { ID: 1, name: 'pies' },
-  ];
+
 }

@@ -10,6 +10,8 @@ import { AutocompleteModule } from '../autocomplete/autocomplete.module';
 import { DataPickerModule } from '../../Views/pets/components/data-picker/data-picker.module';
 import { DataPetOutComponent } from './data-pet-out.component';
 import { SpeciesAutocompleteModule } from '../species-autocomplete/species-autocomplete.module';
+import { EmployeesAutocompleteModule } from '../employees-autocomplete/employees-autocomplete.module';
+import { TypeAdoptionAutocompleteModule } from '../type-adoption-autocomplete/type-adoption-autocomplete.module';
 
 @NgModule({
   declarations: [DataPetOutComponent],
@@ -26,6 +28,8 @@ import { SpeciesAutocompleteModule } from '../species-autocomplete/species-autoc
     AutocompleteModule,
     DataPickerModule,
     SpeciesAutocompleteModule,
+    EmployeesAutocompleteModule,
+    TypeAdoptionAutocompleteModule,
   ],
 })
 export class DataPetOutModule {}

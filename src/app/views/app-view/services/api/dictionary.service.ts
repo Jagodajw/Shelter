@@ -14,6 +14,7 @@ import {
   ProvinceResponse,
   SpeciesRequest,
   SpeciesResponse,
+  TypeAcceptanceResponse,
   TypeAdoptionRequest,
   TypeAdoptionResponse,
 } from 'backend/src/models/DictionaryModel';
@@ -93,5 +94,11 @@ export class DictionaryService extends ApiService {
 
   public getProvince(): Observable<ProvinceResponse[]> {
     return this.http.get<ProvinceResponse[]>(`${this.rootUrl}/province`);
+  }
+
+  public getTypeAcceptance(): Observable<TypeAcceptanceResponse[]> {
+    return this.http.get<TypeAcceptanceResponse[]>(
+      `${this.rootUrl}/typeAcceptance`
+    );
   }
 }

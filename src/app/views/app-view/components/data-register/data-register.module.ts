@@ -13,6 +13,7 @@ import { DataRegisterComponent } from './data-register.component';
 import { EmployeesAutocompleteModule } from '../employees-autocomplete/employees-autocomplete.module';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { TypeAdoptionAutocompleteModule } from '../type-adoption-autocomplete/type-adoption-autocomplete.module';
+import { TypeAcceptanceAutocompleteModule } from '../type-acceptance-autocomplete/type-acceptance-autocomplete.module';
 
 @NgModule({
   declarations: [DataRegisterComponent],
@@ -32,6 +33,7 @@ import { TypeAdoptionAutocompleteModule } from '../type-adoption-autocomplete/ty
     EmployeesAutocompleteModule,
     MatCheckboxModule,
     TypeAdoptionAutocompleteModule,
+    TypeAcceptanceAutocompleteModule,
   ],
 })
 export class DataRegisterModule {}

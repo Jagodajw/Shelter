@@ -90,7 +90,7 @@ export class PetDetailComponent implements OnInit {
       dataPetOut: this._form.group({
         name: ['', Validators.required],
         species: ['', Validators.required],
-        typeOut: ['', Validators.required],
+        type_adoption: ['', Validators.required],
         dateOut: ['', Validators.required],
         introduced_employees_id: ['', Validators.required],
         accepted_employees_id: ['', Validators.required],

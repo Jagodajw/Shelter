@@ -1,6 +1,7 @@
 import { Component, OnInit, Self } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { TypeAcceptanceResponse } from 'backend/src/models/DictionaryModel';
+import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
@@ -26,7 +27,7 @@ export class TypeAcceptanceAutocompleteComponent
   }
 
   ngOnInit(): void {
-    // this.shelterChangeDetector();
+    this.shelterChangeDetector();
     this.control.valueChanges.subscribe({
       next: (value) => {
         if (value) this.value = value;
@@ -34,25 +35,25 @@ export class TypeAcceptanceAutocompleteComponent
     });
   }
 
-  // private shelterChangeDetector(): void {
-  //   this.shelter.selectedShelterChangeDetector$
-  //     .pipe(
-  //       tap(() => {
-  //         this.typeAdoptionList$ = this.api.getTypeAdoptation().pipe(
-  //           map(
-  //             (typeAdoptionResponse: TypeAdoptionResponse[]) =>
-  //               typeAdoptionResponse.map(
-  //                 (typeAdoption: TypeAdoptionResponse) => ({
-  //                   ID: typeAdoption.ID,
-  //                   name: typeAdoption.type_adoption,
-  //                 })
-  //               ) as Select[]
-  //           )
-  //         );
-  //       })
-  //     )
-  //     .subscribe();
-  // }
+  private shelterChangeDetector(): void {
+    this.shelter.selectedShelterChangeDetector$
+      .pipe(
+        tap(() => {
+          this.typeAcceptanceList$ = this.api.getTypeAcceptance().pipe(
+            map(
+              (typeAcceptaceResponse: TypeAcceptanceResponse[]) =>
+                typeAcceptaceResponse.map(
+                  (typeAcceptace: TypeAcceptanceResponse) => ({
+                    ID: typeAcceptace.ID,
+                    name: typeAcceptace.type_acceptance,
+                  })
+                ) as Select[]
+            )
+          );
+        })
+      )
+      .subscribe();
+  }
 
   protected override handleSetDisabledStateFromOutside(): void {
     if (this.isDisabled) return this.control.disable();

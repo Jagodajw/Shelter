@@ -19,9 +19,8 @@ export class PopupOutAnimalComponent implements OnInit {
       dataPetOut: this._form.group({
         name: ['', Validators.required],
         species: ['', Validators.required],
-        typeOut: ['', Validators.required],
-        dateOut: ['', Validators.required],
         type_adoption: ['', Validators.required],
+        dateOut: ['', Validators.required],
         introduced_employees: ['', Validators.required],
         accepted_employees: ['', Validators.required],
         commentsOut: [''],
