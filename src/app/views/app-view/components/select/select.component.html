@@ -6,4 +6,5 @@
       {{value.name | translate}}
     </mat-option>
   </mat-select>
+  <mat-hint *ngIf="isInvalid">{{ getErrorMessages() | translate }}</mat-hint>
 </mat-form-field>

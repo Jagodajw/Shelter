@@ -99,7 +99,6 @@ export class PeopleComponent implements OnInit {
   deletePeople() {}
 
   public openPetDetail(petId: number) {
-    console.log(petId);
     this.router.navigate(['/app-view/pet-detail/', petId]);
   }
 }

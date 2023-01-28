@@ -1,11 +1,16 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, Self } from '@angular/core';
 import {
   FormBuilder,
+  FormControl,
   FormGroup,
+  NgControl,
   NG_VALUE_ACCESSOR,
   Validators,
 } from '@angular/forms';
-import { DateRange } from '@angular/material/datepicker';
+import {
+  DateRange,
+  MatDatepickerInputEvent,
+} from '@angular/material/datepicker';
 import { Data } from '@angular/router';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 
@@ -20,18 +25,19 @@ type DatePicker = DateScope | Date | null;
   selector: 'app-data-picker',
   templateUrl: './data-picker.component.html',
   styleUrls: ['./data-picker.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => DataPickerComponent),
-      multi: true,
-    },
-  ],
+  // providers: [
+  //   {
+  //     provide: NG_VALUE_ACCESSOR,
+  //     useExisting: forwardRef(() => DataPickerComponent),
+  //     multi: true,
+  //   },
+  // ],
 })
 export class DataPickerComponent<DatePicker>
   extends ControlValueAccessorsAbstract
   implements OnInit
 {
+  @Input() required: boolean = false;
   @Input() placeholder = '';
   @Input() public pickerType: 'normal' | 'range' = 'normal';
   @Input() set minDate(date: Date | string | null) {
@@ -39,44 +45,24 @@ export class DataPickerComponent<DatePicker>
     this.min = new Date(date);
   }
   public min!: Date;
-  public dateGroup!: FormGroup;
 
-  constructor(private readonly _form: FormBuilder) {
-    super();
+  constructor(
+    @Self() ngControl: NgControl,
+    private readonly _form: FormBuilder
+  ) {
+    super(ngControl);
   }
 
   ngOnInit(): void {
-    this.initDateGroupByPickerType();
+    this.handleSetDisabledStateFromOutside();
   }
 
-  private initDateGroupByPickerType(): void {
-    if (this.pickerType === 'range') {
-      this.dateGroup = this._form.group({
-        From: [null, Validators.required],
-        To: [null, Validators.required],
-      });
-      return;
-    }
-
-    this.dateGroup = this._form.group({ Value: [null] });
+  public changedDate(event: MatDatepickerInputEvent<unknown>): void {
+    this.value = event.value;
   }
 
-  public writeValue(value: DatePicker): void {
-    if (value === null) return this.dateGroup.reset();
-
-    if (this.pickerType === 'range')
-      return this.dateGroup.patchValue(value as any);
-    this.dateGroup.patchValue({ Value: value });
-  }
-
-  public changedDate(): void {
-    if (this.pickerType === 'normal')
-      return this.onChange(this.dateGroup.value.Value);
-    this.onChange(this.dateGroup.value);
-  }
-
-  public setDisabledState(isDisabled: boolean): void {
-    if (isDisabled) return this.dateGroup.disable();
-    this.dateGroup.enable();
-  }
+  // protected override handleSetDisabledStateFromOutside(): void {
+  //   if (this.isDisabled) return this.dateGroup.disable();
+  //   this.dateGroup.enable();
+  // }
 }

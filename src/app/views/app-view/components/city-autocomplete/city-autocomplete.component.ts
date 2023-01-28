@@ -1,5 +1,5 @@
-import { Component, forwardRef, OnInit } from '@angular/core';
-import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, OnInit, Self } from '@angular/core';
+import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { CityResponse } from 'backend/src/models/DictionaryModel';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
@@ -12,13 +12,13 @@ type ReturnValue = string | null | Select;
   selector: 'app-city-autocomplete',
   templateUrl: './city-autocomplete.component.html',
   styleUrls: ['./city-autocomplete.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => CityAutocompleteComponent),
-      multi: true,
-    },
-  ],
+  // providers: [
+  //   {
+  //     provide: NG_VALUE_ACCESSOR,
+  //     useExisting: forwardRef(() => CityAutocompleteComponent),
+  //     multi: true,
+  //   },
+  // ],
 })
 export class CityAutocompleteComponent
   extends ControlValueAccessorsAbstract<ReturnValue>
@@ -27,17 +27,18 @@ export class CityAutocompleteComponent
   public cityList$!: Observable<Select[]>;
   public readonly control: FormControl = new FormControl();
   constructor(
+    @Self() ngControl: NgControl,
     private readonly api: DictionaryService,
     private readonly shelter: ShelterService
   ) {
-    super();
+    super(ngControl);
   }
 
   ngOnInit(): void {
     this.shelterChangeDetector();
     this.control.valueChanges.subscribe({
       next: (value) => {
-        if (this.onChange) this.onChange(value);
+        if (value) this.value = value;
       },
     });
   }
@@ -62,11 +63,8 @@ export class CityAutocompleteComponent
       .subscribe();
   }
 
-  public writeValue(value: unknown): void {
-    this.control.patchValue(value);
-  }
-  public setDisabledState(isDisabled: boolean): void {
-    if (isDisabled) return this.control.disable();
+  protected override handleSetDisabledStateFromOutside(): void {
+    if (this.isDisabled) return this.control.disable();
     this.control.enable();
   }
 }

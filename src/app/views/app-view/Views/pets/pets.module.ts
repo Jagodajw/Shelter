@@ -12,6 +12,7 @@ import { SearchEngineModule } from './components/search-engine/search-engine.mod
 import { PetsRoutingModule } from './pets-routing.module';
 import { PetsComponent } from './pets.component';
 
+
 @NgModule({
   declarations: [PetsComponent],
   imports: [

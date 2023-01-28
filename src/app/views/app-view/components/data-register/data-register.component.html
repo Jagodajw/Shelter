@@ -3,10 +3,12 @@
 
   <div class="input-row">
     <div class="input-third">
-      <app-data-picker formControlName="date_of_registration" placeholder="pets.dateRegister"></app-data-picker>
+      <app-data-picker [required]="true" formControlName="date_of_registration"
+        placeholder="pets.dateRegister"></app-data-picker>
     </div>
     <div class="input-third">
-      <app-data-picker placeholder="pets.dateCuarantineTo" formControlName="quarantine"></app-data-picker>
+      <app-data-picker [required]="true" placeholder="pets.dateCuarantineTo"
+        formControlName="quarantine"></app-data-picker>
     </div>
     <div class="input-third">
       <mat-checkbox (change)="Sterilization($event)" class="dataRegister__checkbox-castred"

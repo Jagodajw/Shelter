@@ -1,6 +1,11 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { map, Observable } from 'rxjs';
+import { Component, forwardRef, Input, OnInit, Self } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  NgControl,
+  NG_VALUE_ACCESSOR,
+} from '@angular/forms';
+import { Observable } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { SearchResult } from './search.interface';
 
@@ -8,13 +13,13 @@ import { SearchResult } from './search.interface';
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SearchComponent),
-      multi: true,
-    },
-  ],
+  // providers: [
+  //   {
+  //     provide: NG_VALUE_ACCESSOR,
+  //     useExisting: forwardRef(() => SearchComponent),
+  //     multi: true,
+  //   },
+  // ],
 })
 export class SearchComponent
   extends ControlValueAccessorsAbstract
@@ -25,12 +30,9 @@ export class SearchComponent
   // public searchResults: Observable<SearchResult[]> | undefined;
   // public minimumChars: Observable<boolean> | undefined;
   // public noFound: Observable<boolean> | undefined;
-  constructor(private formBuilder: FormBuilder) {
-    super();
+  constructor(@Self() ngControl: NgControl, private formBuilder: FormBuilder) {
+    super(ngControl);
   }
-
-  
-  public writeValue(value: unknown): void {}
 
   ngOnInit(): void {}
 

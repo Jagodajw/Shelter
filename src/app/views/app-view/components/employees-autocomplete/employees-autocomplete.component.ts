@@ -1,5 +1,5 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
-import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, forwardRef, Input, OnInit, Self } from '@angular/core';
+import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { EmployeeResponse } from 'backend/src/models/EmployeeModel';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
@@ -12,13 +12,13 @@ type ReturnValue = string | null | Select;
   selector: 'app-employees-autocomplete',
   templateUrl: './employees-autocomplete.component.html',
   styleUrls: ['./employees-autocomplete.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EmployeesAutocompleteComponent),
-      multi: true,
-    },
-  ],
+  // providers: [
+  //   {
+  //     provide: NG_VALUE_ACCESSOR,
+  //     useExisting: forwardRef(() => EmployeesAutocompleteComponent),
+  //     multi: true,
+  //   },
+  // ],
 })
 export class EmployeesAutocompleteComponent
   extends ControlValueAccessorsAbstract<ReturnValue>
@@ -28,17 +28,18 @@ export class EmployeesAutocompleteComponent
   public employeesList$!: Observable<Select[]>;
   public readonly control: FormControl = new FormControl();
   constructor(
+    @Self() ngControl: NgControl,
     private readonly api: EmployeeService,
     private readonly shelter: ShelterService
   ) {
-    super();
+    super(ngControl);
   }
 
   ngOnInit(): void {
     this.shelterChangeDetector();
     this.control.valueChanges.subscribe({
       next: (value) => {
-        if (this.onChange) this.onChange(value.ID);
+        if (value) this.value = value;
       },
     });
   }
@@ -61,11 +62,8 @@ export class EmployeesAutocompleteComponent
       .subscribe();
   }
 
-  public writeValue(value: unknown): void {
-    this.control.patchValue(value);
-  }
-  public setDisabledState(isDisabled: boolean): void {
-    if (isDisabled) return this.control.disable();
+  protected override handleSetDisabledStateFromOutside(): void {
+    if (this.isDisabled) return this.control.disable();
     this.control.enable();
   }
 }

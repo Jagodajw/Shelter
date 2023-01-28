@@ -21,6 +21,7 @@ export class PopupOutAnimalComponent implements OnInit {
         species: ['', Validators.required],
         typeOut: ['', Validators.required],
         dateOut: ['', Validators.required],
+        type_adoption: ['', Validators.required],
         introduced_employees: ['', Validators.required],
         accepted_employees: ['', Validators.required],
         commentsOut: [''],
@@ -45,10 +46,4 @@ export class PopupOutAnimalComponent implements OnInit {
     { ID: 0, name: 'kot' },
     { ID: 1, name: 'pies' },
   ];
-  chooseSelect(event: Select) {
-    console.log(event);
-  }
-  chooseAutocomplete(event: Select) {
-    console.log(event);
-  }
 }

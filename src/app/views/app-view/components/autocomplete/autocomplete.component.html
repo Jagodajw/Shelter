@@ -1,10 +1,11 @@
 <mat-form-field class="input-full">
-    <mat-label>{{placeholder | translate}}</mat-label>
-    <input (input)="inputValue($event)" type="text"  matInput [formControl]="controlAutoSelect" [matAutocomplete]="auto">
-    <mat-autocomplete [displayWith]="displayFn" autoActiveFirstOption #auto="matAutocomplete"
-        (optionSelected)="selection($event)">
-        <mat-option *ngFor="let value of filteredValues | async" [value]="value">
-            {{value.name}}
-        </mat-option>
-    </mat-autocomplete>
+  <mat-label>{{ placeholder | translate }}</mat-label>
+  <input (input)="inputValue($event)" type="text" matInput [formControl]="controlAutoSelect" [matAutocomplete]="auto" />
+  <mat-autocomplete [displayWith]="displayFn" autoActiveFirstOption #auto="matAutocomplete"
+    (optionSelected)="selection($event)">
+    <mat-option *ngFor="let value of filteredValues | async" [value]="value">
+      {{ value.name }}
+    </mat-option>
+  </mat-autocomplete>
+  <mat-hint *ngIf="isInvalid">{{ getErrorMessages() | translate }}</mat-hint>
 </mat-form-field>

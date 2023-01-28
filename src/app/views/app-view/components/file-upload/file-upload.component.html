@@ -2,5 +2,5 @@
     <button type="button" mat-raised-button (click)="inputFileUpload.click()">
         <ng-content></ng-content>
     </button>
-    <input hidden (change)="onFileSelected($event)" #inputFileUpload type="file" id="file">
+    <input hidden [value]="value" (change)="onFileSelected($event)" #inputFileUpload type="file" id="file">
 </div>

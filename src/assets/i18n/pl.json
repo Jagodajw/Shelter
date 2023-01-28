@@ -12,7 +12,8 @@
     "castred": "Kastracja/Sterylizacja",
     "ID": "Identyfikator ",
     "IDgen": "Identyfikator - generowany automatycznie",
-    "registerType": "Typ przyjęcia",
+    "acceptanceType": "Typ przyjęcia",
+    "adoptionType": "Typ wydania",
     "introduced": "Wprowadził",
     "accepted": "Przyjął",
     "handOverTheAnimal": "Wydaj zwierzę",
@@ -127,5 +128,8 @@
   "gender": {
     "female": "Samica",
     "male": "Samiec"
+  },
+  "validators": {
+    "required": "Pole jest wymagane"
   }
 }

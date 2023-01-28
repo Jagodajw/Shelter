@@ -6,8 +6,9 @@ import {
   Input,
   OnInit,
   Output,
+  Self,
 } from '@angular/core';
-import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -18,13 +19,13 @@ import { Select } from '../select/select';
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => AutocompleteComponent),
-      multi: true,
-    },
-  ],
+  // providers: [
+  //   {
+  //     provide: NG_VALUE_ACCESSOR,
+  //     useExisting: forwardRef(() => AutocompleteComponent),
+  //     multi: true,
+  //   },
+  // ],
 })
 export class AutocompleteComponent
   extends ControlValueAccessorsAbstract<Select | string | null>
@@ -39,23 +40,29 @@ export class AutocompleteComponent
     this.cd.markForCheck();
   }
   @Output() change: EventEmitter<Select> = new EventEmitter<Select>();
-  public controlAutoSelect = new FormControl('');
+  public controlAutoSelect: FormControl<string | null | Select> =
+    new FormControl('');
   public filteredValues!: Observable<Select[]>;
 
-  constructor(private readonly cd: ChangeDetectorRef) {
-    super();
+  constructor(
+    @Self() ngControl: NgControl,
+    private readonly cd: ChangeDetectorRef
+  ) {
+    super(ngControl);
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.controlAutoSelect.patchValue(this.value);
+  }
 
   public selection(event: MatAutocompleteSelectedEvent): void {
     const value: Select = event.option.value as Select;
     this.change.emit(value);
-    this.onChange(value);
+    this.value = value;
   }
 
   public inputValue(event: Event): void {
-    this.onChange((event.target as HTMLInputElement).value);
+    this.value = (event.target as HTMLInputElement).value;
   }
   private _filter(values: Select[], value: string | Select): Select[] {
     const filterValue =
@@ -70,13 +77,8 @@ export class AutocompleteComponent
   public displayFn(value: Select): string {
     return value ? value.name : '';
   }
-
-  public writeValue(value: any): void {
-    this.controlAutoSelect.patchValue(value);
-  }
-
-  public setDisabledState(isDisabled: boolean): void {
-    if (isDisabled) return this.controlAutoSelect.disable();
+  protected override handleSetDisabledStateFromOutside(): void {
+    if (this.isDisabled) return this.controlAutoSelect.disable();
     this.controlAutoSelect.enable();
   }
 }

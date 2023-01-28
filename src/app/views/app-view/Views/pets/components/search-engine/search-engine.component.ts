@@ -46,8 +46,4 @@ export class SearchEngineComponent implements OnInit {
   }
 
   ngOnInit(): void {}
-
-  add(event: number) {
-    console.log(event);
-  }
 }

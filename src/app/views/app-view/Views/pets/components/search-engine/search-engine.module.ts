@@ -4,7 +4,6 @@ import { AutocompleteModule } from 'src/app/views/app-view/components/autocomple
 import { SearchEngineComponent } from './search-engine.component';
 import { SelectModule } from 'src/app/views/app-view/components/select/select.module';
 import { SearchModule } from 'src/app/views/app-view/components/search/search.module';
-import { DataPickerModule } from '../data-picker/data-picker.module';
 import { MatBadgeModule } from '@angular/material/badge';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatCheckboxModule } from '@angular/material/checkbox';
@@ -16,6 +15,7 @@ import { SpeciesAutocompleteModule } from 'src/app/views/app-view/components/spe
 import { CommunityAutocompleteModule } from 'src/app/views/app-view/components/community-autocomplete/community-autocomplete.module';
 import { BreedAutocompleteModule } from 'src/app/views/app-view/components/breed-autocomplete/breed-autocomplete.module';
 import { ColorAutocompleteModule } from 'src/app/views/app-view/components/color-autocomplete/color-autocomplete.module';
+import { DatePickerRangeModule } from '../date-picker-range/date-picker-range.module';
 
 @NgModule({
   declarations: [SearchEngineComponent],
@@ -25,7 +25,6 @@ import { ColorAutocompleteModule } from 'src/app/views/app-view/components/color
     AutocompleteModule,
     SearchModule,
     SelectModule,
-    DataPickerModule,
     MatBadgeModule,
     ReactiveFormsModule,
     MatCheckboxModule,
@@ -38,6 +37,7 @@ import { ColorAutocompleteModule } from 'src/app/views/app-view/components/color
     BreedAutocompleteModule,
     CommunityAutocompleteModule,
     ColorAutocompleteModule,
+    DatePickerRangeModule,
   ],
 })
 export class SearchEngineModule {}

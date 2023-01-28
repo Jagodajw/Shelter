@@ -16,7 +16,7 @@ import { PetService } from './services/api/pet.service';
 import { ShelterService } from './services/shelter.service';
 
 @NgModule({
-  declarations: [AppViewComponent, HeaderComponent],
+  declarations: [AppViewComponent, HeaderComponent ],
   providers: [PetService, DictionaryService, EmployeeService, ShelterService],
   imports: [
     CommonModule,

@@ -43,22 +43,20 @@
             <app-select formControlName="size" [values]="sizeList" placeholder="pets.size">
             </app-select>
         </div>
-        <div class="input-quarter search__castred" >
-            <mat-checkbox  formControlName="castred">{{"pets.filterCastrated" | translate}}
+        <div class="input-quarter search__castred">
+            <mat-checkbox formControlName="castred">{{"pets.filterCastrated" | translate}}
             </mat-checkbox>
         </div>
         <div class="input-quarter">
             <app-search formControlName="search" placeholder="pets.searchPlaceholder"></app-search>
         </div>
         <div class="input-quarter">
-            <app-data-picker formControlName="datePickerBirthFromTo" placeholder="pets.datePickerBirthFromTo"
-                pickerType="range">
-            </app-data-picker>
+            <app-date-picker-range formControlName="datePickerBirthFromTo" placeholder="pets.datePickerBirthFromTo">
+            </app-date-picker-range>
         </div>
         <div class="input-quarter">
-            <app-data-picker formControlName="datePickerAccepted" placeholder="pets.datePickerAccepted"
-                pickerType="range">
-            </app-data-picker>
+            <app-date-picker-range formControlName="datePickerAccepted" placeholder="pets.datePickerAccepted">
+            </app-date-picker-range>
         </div>
         <div class="search__primary-checkbox input-quarter">
             <p class="inline">
