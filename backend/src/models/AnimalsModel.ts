@@ -17,6 +17,7 @@ import {
   CommuneResponse,
   ProvinceResponse,
   SpeciesResponse,
+  TypeAcceptanceResponse,
 } from './DictionaryModel';
 
 export interface AnimalTableResponse {
@@ -90,5 +91,11 @@ export type RegisterPersonAddRequest = Omit<
 
 export type RegistrationAddRequest = Omit<
   Registration,
-  'ID' | 'shelters_id'
-> & { sterilization: boolean; date_sterilization: Date };
+  'ID' | 'shelters_id' | 'type_of_acceptance_id'
+> & {
+  sterilization: boolean;
+  date_sterilization: Date;
+  type_of_acceptance: TypeAcceptanceResponse;
+};
+
+export type AnimalStatus = 'adopted' | 'staying';

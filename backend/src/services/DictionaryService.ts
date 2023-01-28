@@ -1,4 +1,4 @@
-import { City } from '@prisma/client';
+import { City, TypeAcceptance } from '@prisma/client';
 import { prisma } from '..';
 import {
   AreaRequest,
@@ -14,6 +14,8 @@ import {
   ProvinceResponse,
   SpeciesRequest,
   SpeciesResponse,
+  TypeAcceptanceRequest,
+  TypeAcceptanceResponse,
   TypeAdoptionRequest,
   TypeAdoptionResponse,
 } from '../models/DictionaryModel';
@@ -312,4 +314,35 @@ export async function addTypeAdoption(
 
 export async function getProvince(): Promise<ProvinceResponse[]> {
   return await prisma.province.findMany();
+}
+
+export async function getTypeAcceptance(): Promise<TypeAcceptanceResponse[]> {
+  return await prisma.typeAcceptance.findMany();
+}
+
+export async function addTypeAcceptance(
+  typeAcceptanceRequest: TypeAcceptanceRequest,
+  shelters_id: string
+): Promise<TypeAcceptanceResponse> {
+  return await prisma.typeAcceptance.create({
+    data: { ...typeAcceptanceRequest, shelters_id },
+  });
+}
+
+export async function deleteTypeAcceptance(
+  acceptanceTypeId: number
+): Promise<TypeAcceptanceResponse> {
+  return await prisma.typeAcceptance.delete({
+    where: { ID: acceptanceTypeId },
+  });
+}
+
+export async function updateTypeAcceptance(
+  typeAcceptanceId: number,
+  typeAcceptanceModel: TypeAcceptance
+): Promise<TypeAcceptance> {
+  return await prisma.typeAcceptance.update({
+    where: { ID: typeAcceptanceId },
+    data: typeAcceptanceModel,
+  });
 }
