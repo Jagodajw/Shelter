@@ -560,7 +560,7 @@ router.get('/province', authenticate, async (req, res) => {
 });
 
 router.get(
-  '/typeAceptance',
+  '/typeAcceptance',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
