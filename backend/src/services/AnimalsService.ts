@@ -78,7 +78,7 @@ export async function postAnimalDataRegister(
     );
     const breedId = await MissingDictionaryAdder.getDictonaryField(
       'breed',
-      updateDataRegisterAnimal.species,
+      updateDataRegisterAnimal.breed,
       shelterId,
       { species_id: speciesId }
     );
