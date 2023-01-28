@@ -98,4 +98,46 @@ export type RegistrationAddRequest = Omit<
   type_of_acceptance: TypeAcceptanceResponse;
 };
 
+export interface RegisterEditAnimalRequest {
+  registerAnimal: RegisterAnimalEditRequest;
+  registerPeople: RegisterPersonEditRequest;
+  register: RegistrationEditRequest;
+}
+
+export type RegisterAnimalEditRequest = Omit<
+  Animals,
+  | 'id_number'
+  | 'sterilization'
+  | 'date_sterilization'
+  | 'species_id'
+  | 'breed_id'
+  | 'commune_id'
+  | 'area_id'
+  | 'color_id'
+> & {
+  species: SpeciesResponse;
+  breed: BreedResponse;
+  commune: CommuneResponse;
+  area: AreaResponse;
+  color: ColorResponse;
+};
+
+export type RegisterPersonEditRequest = Omit<
+  People,
+  'city_id' | 'province_id' | 'commune_id'
+> & {
+  city: CityResponse;
+  province: ProvinceResponse;
+  commune: CommuneResponse;
+};
+
+export type RegistrationEditRequest = Omit<
+  Registration,
+  'type_of_acceptance_id'
+> & {
+  sterilization: boolean;
+  date_sterilization: Date;
+  type_of_acceptance: TypeAcceptanceResponse;
+};
+
 export type AnimalStatus = 'adopted' | 'staying';

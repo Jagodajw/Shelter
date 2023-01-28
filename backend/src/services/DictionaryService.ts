@@ -316,8 +316,10 @@ export async function getProvince(): Promise<ProvinceResponse[]> {
   return await prisma.province.findMany();
 }
 
-export async function getTypeAcceptance(): Promise<TypeAcceptanceResponse[]> {
-  return await prisma.typeAcceptance.findMany();
+export async function getTypeAcceptance(
+  shelters_id: string
+): Promise<TypeAcceptanceResponse[]> {
+  return await prisma.typeAcceptance.findMany({ where: { shelters_id } });
 }
 
 export async function addTypeAcceptance(

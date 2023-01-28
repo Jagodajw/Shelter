@@ -12,6 +12,7 @@ import {
   ColorResponse,
   CommuneResponse,
   SpeciesResponse,
+  TypeAcceptanceResponse,
   TypeAdoptionResponse,
 } from '../models/DictionaryModel';
 import {
@@ -36,6 +37,7 @@ import {
   getAllSpecies,
   getAllTypeAdoption,
   getProvince,
+  getTypeAcceptance,
   updateArea,
   updateBreed,
   updateColor,
@@ -556,5 +558,21 @@ router.get('/province', authenticate, async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+router.get(
+  '/typeAceptance',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const shelterId: string = req.headers['shelters_id'] as string;
+
+      const typeAcceptance = await getTypeAcceptance(shelterId);
+      res.json(typeAcceptance as TypeAcceptanceResponse[]);
+    } catch (error) {
+      res.sendStatus(500);
+    }
+  }
+);
 
 export default router;

@@ -2,7 +2,7 @@ import {
   dataRegisterAnimal,
   dataRegisterPeople,
   dataRegistration,
-  tableAnimals,
+  tableAnimals
 } from '@prisma/client';
 import { prisma } from '..';
 import { AnimalIdGenerator } from '../helpers/AnimalIdGenerator';
@@ -13,8 +13,9 @@ import {
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
   RegisterAnimalResponse,
+  RegisterEditAnimalRequest,
   RegisterPeopleResponse,
-  RegistrationResponse,
+  RegistrationResponse
 } from '../models/AnimalsModel';
 
 export async function getAllAnimalsByShelterId(
