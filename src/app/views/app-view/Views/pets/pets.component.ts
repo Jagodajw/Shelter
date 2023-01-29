@@ -25,8 +25,8 @@ export class PetsComponent implements OnInit {
   public addPet(): void {
     this.root.addPet();
   }
-  public outPet(): void {
-    this.root.outPet();
+  public outPet(petId: string): void {
+    this.root.outPet(petId);
   }
   public deletePosition(): void {
     this.root.deletePosition();

@@ -7,7 +7,7 @@ import { EmployeeService } from '../../services/api/employee.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
-type ReturnValue = string | null | Select;
+type ReturnValue = string | null | Select | EmployeeResponse;
 @Component({
   selector: 'app-employees-autocomplete',
   templateUrl: './employees-autocomplete.component.html',
@@ -65,5 +65,15 @@ export class EmployeesAutocompleteComponent
   protected override handleSetDisabledStateFromOutside(): void {
     if (this.isDisabled) return this.control.disable();
     this.control.enable();
+  }
+
+  override handleValueChangeFromOutside(): void {
+    const value = this.value as EmployeeResponse;
+    if (value) {
+      this.control.patchValue({
+        ...value,
+        name: `${value.name} ${value.surname}`,
+      });
+    }
   }
 }

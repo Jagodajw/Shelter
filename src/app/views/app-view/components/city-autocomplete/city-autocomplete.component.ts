@@ -7,7 +7,7 @@ import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
-type ReturnValue = string | null | Select;
+type ReturnValue = string | null | Select | CityResponse;
 @Component({
   selector: 'app-city-autocomplete',
   templateUrl: './city-autocomplete.component.html',
@@ -66,5 +66,9 @@ export class CityAutocompleteComponent
   protected override handleSetDisabledStateFromOutside(): void {
     if (this.isDisabled) return this.control.disable();
     this.control.enable();
+  }
+  override handleValueChangeFromOutside(): void {
+    const value = this.value as CityResponse;
+    this.control.patchValue({ ...value, name: value.city });
   }
 }

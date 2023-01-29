@@ -7,7 +7,7 @@ import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
-type ReturnValue = string | null | Select;
+type ReturnValue = string | null | Select | AreaResponse;
 @Component({
   selector: 'app-area-autocomplete',
   templateUrl: './area-autocomplete.component.html',
@@ -64,5 +64,10 @@ export class AreaAutocompleteComponent
   protected override handleSetDisabledStateFromOutside(): void {
     if (this.isDisabled) return this.control.disable();
     this.control.enable();
+  }
+
+  override handleValueChangeFromOutside(): void {
+    const value = this.value as AreaResponse;
+    this.control.patchValue({ ...value, name: value.area });
   }
 }

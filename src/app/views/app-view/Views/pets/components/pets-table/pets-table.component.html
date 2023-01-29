@@ -66,7 +66,7 @@
       </button>
 
       <mat-menu #tableMenuAction="matMenu" xPosition="before">
-        <button mat-menu-item (click)="outPet()">
+        <button mat-menu-item (click)="outPet(peopleRowModel.ID)">
           <mat-icon> home</mat-icon>
           {{ "pets.handOverTheAnimal" | translate }}
         </button>
