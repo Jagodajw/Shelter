@@ -65,7 +65,7 @@ export class PopupRegisterComponent implements OnInit {
         city: ['', Validators.required],
         zip_code: [''],
         commune: ['', Validators.required],
-        province: ['', Validators.required],
+        province_id: ['', Validators.required],
         description: [''],
       }),
       register: this._form.group({

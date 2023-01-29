@@ -1,14 +1,12 @@
 import {
   ChangeDetectorRef,
   Component,
-  EventEmitter,
-  forwardRef,
-  Input,
+  EventEmitter, Input,
   OnInit,
   Output,
-  Self,
+  Self
 } from '@angular/core';
-import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormControl, NgControl } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
@@ -80,5 +78,9 @@ export class AutocompleteComponent
   protected override handleSetDisabledStateFromOutside(): void {
     if (this.isDisabled) return this.controlAutoSelect.disable();
     this.controlAutoSelect.enable();
+  }
+
+  override handleValueChangeFromOutside(): void {
+    this.controlAutoSelect.patchValue(this.value);
   }
 }

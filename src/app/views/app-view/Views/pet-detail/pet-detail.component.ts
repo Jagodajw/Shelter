@@ -2,11 +2,10 @@ import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
-import { AnimalDetailResponse } from 'backend/src/models/AnimalsModel';
-import { filter, merge, mergeMap, tap } from 'rxjs';
-import { ApiService } from 'src/api/services';
-import { PetService } from '../../services/api/pet.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { AnimalDetailResponse } from 'backend/src/models/AnimalsModel';
+import { filter, mergeMap, tap } from 'rxjs';
+import { PetService } from '../../services/api/pet.service';
 @UntilDestroy()
 @Component({
   selector: 'app-pet-detail',
@@ -89,7 +88,7 @@ export class PetDetailComponent implements OnInit {
         city: ['', Validators.required],
         zip_code: [''],
         commune: ['', Validators.required],
-        province: ['', Validators.required],
+        province_id: ['', Validators.required],
         description: [''],
       }),
       register: this._form.group({
@@ -124,7 +123,7 @@ export class PetDetailComponent implements OnInit {
         city: ['', Validators.required],
         zip_code: [''],
         commune: ['', Validators.required],
-        province: ['', Validators.required],
+        province_id: ['', Validators.required],
         comments: [''],
       }),
     });

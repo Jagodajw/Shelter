@@ -35,7 +35,7 @@ export class PopupOutAnimalComponent implements OnInit {
         city: [''],
         zip_code: [''],
         commune: [''],
-        province: [''],
+        province_id: [''],
         comments: [''],
       }),
     });

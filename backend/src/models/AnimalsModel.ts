@@ -1,13 +1,19 @@
 import {
   Animals,
-  dataRegisterAnimal,
-  dataRegisterPeople,
-  dataRegistration,
+  Area,
+  Breed,
+  City,
+  Color,
+  Commune,
+  Employees,
   Gender as PrismaGender,
   People,
+  Province,
   Registration,
   Size as PrismaSize,
-  Type_of_person as PrismaTypeOfPerson,
+  Species,
+  TypeAcceptance,
+  Type_of_person as PrismaTypeOfPerson
 } from '@prisma/client';
 import {
   AreaResponse,
@@ -15,9 +21,8 @@ import {
   CityResponse,
   ColorResponse,
   CommuneResponse,
-  ProvinceResponse,
   SpeciesResponse,
-  TypeAcceptanceResponse,
+  TypeAcceptanceResponse
 } from './DictionaryModel';
 
 export interface AnimalTableResponse {
@@ -41,9 +46,23 @@ export interface AnimalDetailResponse {
   register: RegistrationResponse | null;
 }
 
-export type RegisterAnimalResponse = dataRegisterAnimal;
-export type RegisterPeopleResponse = dataRegisterPeople;
-export type RegistrationResponse = dataRegistration;
+export type RegisterAnimalResponse = Animals & {
+    commune: Commune | null;
+    species: Species | null;
+    breed: Breed | null;
+    color: Color | null;
+    area: Area | null;
+}
+export type RegisterPeopleResponse = People & {
+  city: City | null;
+  province: Province | null;
+  commune: Commune | null;
+};
+export type RegistrationResponse = Registration & {
+  type_of_acceptance: TypeAcceptance | null;
+  introduced_employees: Employees | null;
+  accepted_employees: Employees | null;
+};
 
 export type Type_of_person = PrismaTypeOfPerson;
 export type Size = PrismaSize;
@@ -82,11 +101,11 @@ export type RegisterAnimalAddRequest = Omit<
 
 export type RegisterPersonAddRequest = Omit<
   People,
-  'ID' | 'shelters_id' | 'city_id' | 'province_id' | 'commune_id'
+  'ID' | 'shelters_id' | 'city_id' | 'commune_id'
 > & {
   city: CityResponse;
-  province: ProvinceResponse;
   commune: CommuneResponse;
+  zip_code: string;
 };
 
 export type RegistrationAddRequest = Omit<
@@ -124,11 +143,11 @@ export type RegisterAnimalEditRequest = Omit<
 
 export type RegisterPersonEditRequest = Omit<
   People,
-  'city_id' | 'province_id' | 'commune_id'
+  'city_id' | 'commune_id'
 > & {
   city: CityResponse;
-  province: ProvinceResponse;
   commune: CommuneResponse;
+  zip_code: string;
 };
 
 export type RegistrationEditRequest = Omit<

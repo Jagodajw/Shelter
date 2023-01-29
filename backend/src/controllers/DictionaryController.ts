@@ -570,6 +570,7 @@ router.get(
       const typeAcceptance = await getTypeAcceptance(shelterId);
       res.json(typeAcceptance as TypeAcceptanceResponse[]);
     } catch (error) {
+      console.log(error);
       res.sendStatus(500);
     }
   }

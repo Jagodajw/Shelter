@@ -24,7 +24,7 @@ export class DataPersonActionPopupComponent implements OnInit {
         adress: [''],
         city: [''],
         zipCode: [''],
-        province: [''],
+        province_id: [''],
         comments: [''],
       }),
     });

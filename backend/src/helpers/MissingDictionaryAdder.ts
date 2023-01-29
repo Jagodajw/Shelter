@@ -1,3 +1,4 @@
+import { prisma } from '..';
 import {
   RegisterAnimalAddRequest,
   RegisterPersonAddRequest,
@@ -11,6 +12,7 @@ import {
   addComune,
   addSpecies,
   addTypeAcceptance,
+  PrismaClientType,
 } from '../services/DictionaryService';
 
 type RequestKeys =
@@ -19,8 +21,8 @@ type RequestKeys =
   | keyof RegistrationAddRequest;
 
 export class MissingDictionaryAdder {
-  constructor() {}
-  public static async getDictonaryField<TData extends { ID: number }>(
+  constructor(private readonly prismaClient: PrismaClientType = prisma) {}
+  public async getDictonaryField<TData extends { ID: number }>(
     key: RequestKeys,
     data: TData | string,
     shelterId: string,
@@ -33,14 +35,16 @@ export class MissingDictionaryAdder {
       case 'species': {
         const newSpecies = await addSpecies(
           { species: data, ...extraData },
-          shelterId
+          shelterId,
+          this.prismaClient
         );
         return newSpecies.ID;
       }
       case 'breed': {
         const newBreed = await addBreed(
           { breed: data, ...extraData },
-          shelterId
+          shelterId,
+          this.prismaClient
         );
         return newBreed.ID;
       }
@@ -48,13 +52,18 @@ export class MissingDictionaryAdder {
       case 'commune': {
         const newCommune = await addComune(
           { commune: data, ...extraData },
-          shelterId
+          shelterId,
+          this.prismaClient
         );
         return newCommune.ID;
       }
 
       case 'area': {
-        const newArea = await addArea({ area: data, ...extraData }, shelterId);
+        const newArea = await addArea(
+          { area: data, ...extraData },
+          shelterId,
+          this.prismaClient
+        );
 
         return newArea.ID;
       }
@@ -62,14 +71,19 @@ export class MissingDictionaryAdder {
       case 'color': {
         const newColor = await addColor(
           { color: data, ...extraData },
-          shelterId
+          shelterId,
+          this.prismaClient
         );
 
         return newColor.ID;
       }
 
       case 'city': {
-        const newCity = await addCity({ city: data, ...extraData }, shelterId);
+        const newCity = await addCity(
+          { city: data, ...extraData },
+          shelterId,
+          this.prismaClient
+        );
 
         return newCity.ID;
       }
@@ -77,7 +91,8 @@ export class MissingDictionaryAdder {
       case 'type_of_acceptance': {
         const newTypeOfAcceptance = await addTypeAcceptance(
           { type_acceptance: data, ...extraData },
-          shelterId
+          shelterId,
+          this.prismaClient
         );
 
         return newTypeOfAcceptance.ID;
@@ -88,7 +103,7 @@ export class MissingDictionaryAdder {
     }
   }
 
-  private static isPrimitiveTypeOf(dictionary: unknown): dictionary is string {
+  private isPrimitiveTypeOf(dictionary: unknown): dictionary is string {
     return typeof dictionary === 'string';
   }
 }
