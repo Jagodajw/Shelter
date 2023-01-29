@@ -107,10 +107,10 @@ export class PetDetailComponent implements OnInit {
         name: ['', Validators.required],
         species: ['', Validators.required],
         type_adoption: ['', Validators.required],
-        dateOut: [, Validators.required],
+        date_of_adoption: [, Validators.required],
         introduced_employees_id: ['', Validators.required],
         accepted_employees_id: ['', Validators.required],
-        commentsOut: [''],
+        description: [''],
       }),
       dataPersonTakeAway: this._form.group({
         name: ['', Validators.required],

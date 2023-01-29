@@ -1,4 +1,5 @@
 import {
+  Adoption,
   Animals,
   Area,
   Breed,
@@ -13,7 +14,7 @@ import {
   Size as PrismaSize,
   Species,
   TypeAcceptance,
-  Type_of_person as PrismaTypeOfPerson
+  Type_of_person as PrismaTypeOfPerson,
 } from '@prisma/client';
 import {
   AreaResponse,
@@ -22,7 +23,7 @@ import {
   ColorResponse,
   CommuneResponse,
   SpeciesResponse,
-  TypeAcceptanceResponse
+  TypeAcceptanceResponse,
 } from './DictionaryModel';
 
 export interface AnimalTableResponse {
@@ -47,12 +48,12 @@ export interface AnimalDetailResponse {
 }
 
 export type RegisterAnimalResponse = Animals & {
-    commune: Commune | null;
-    species: Species | null;
-    breed: Breed | null;
-    color: Color | null;
-    area: Area | null;
-}
+  commune: Commune | null;
+  species: Species | null;
+  breed: Breed | null;
+  color: Color | null;
+  area: Area | null;
+};
 export type RegisterPeopleResponse = People & {
   city: City | null;
   province: Province | null;
@@ -160,3 +161,10 @@ export type RegistrationEditRequest = Omit<
 };
 
 export type AnimalStatus = 'adopted' | 'staying';
+
+export type AnimalAdoptionRequest = Omit<
+  Adoption,
+  'ID' | 'type_adoption_id'
+> & { type_adoption: TypeAcceptanceResponse };
+
+export type AdoptionResponse = Adoption;

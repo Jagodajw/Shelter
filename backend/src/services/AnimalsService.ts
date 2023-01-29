@@ -3,6 +3,8 @@ import { prisma } from '..';
 import { AnimalIdGenerator } from '../helpers/AnimalIdGenerator';
 import { MissingDictionaryAdder } from '../helpers/MissingDictionaryAdder';
 import {
+  AdoptionResponse,
+  AnimalAdoptionRequest,
   AnimalDetailResponse,
   AnimalStatus,
   RegisterAddAnimalRequest,
@@ -10,7 +12,8 @@ import {
   RegisterAnimalResponse,
   RegisterEditAnimalRequest,
   RegisterPeopleResponse,
-  RegistrationResponse
+  RegisterPersonAddRequest,
+  RegistrationResponse,
 } from '../models/AnimalsModel';
 
 export async function getAllAnimalsByShelterId(
@@ -32,43 +35,46 @@ export async function getAnimalDataRegister(
   animalId: string
 ): Promise<AnimalDetailResponse> {
   return await prisma.$transaction(async (tx) => {
-    const register: RegistrationResponse | null = (await tx.registration.findUnique({
-      where: {
-        animals_id: animalId,
-      },
-      include: {
-        type_of_acceptance: true,
-        introduced_employees: true,
-        accepted_employees: true
-      }
-    })) as RegistrationResponse | null;
+    const register: RegistrationResponse | null =
+      (await tx.registration.findUnique({
+        where: {
+          animals_id: animalId,
+        },
+        include: {
+          type_of_acceptance: true,
+          introduced_employees: true,
+          accepted_employees: true,
+        },
+      })) as RegistrationResponse | null;
 
     if (register === null)
       throw new Error('REGISTRATION_OF_ANIMAL_DOESNT_EXIST');
 
-    const registerAnimal: RegisterAnimalResponse | null = (await tx.animals.findUnique({
-      where: {
-        ID: register.animals_id,
-      },
-      include: {
-        species: true,
-        breed: true,
-        commune: true,
-        area: true,
-        color: true,
-      }
-    })) as RegisterAnimalResponse | null;
+    const registerAnimal: RegisterAnimalResponse | null =
+      (await tx.animals.findUnique({
+        where: {
+          ID: register.animals_id,
+        },
+        include: {
+          species: true,
+          breed: true,
+          commune: true,
+          area: true,
+          color: true,
+        },
+      })) as RegisterAnimalResponse | null;
 
-    const registerPeople: RegisterPeopleResponse | null = (await tx.people.findUnique({
-      where: {
-        ID: register.people_id,
-      },
-      include: {
-        city: true,
-        commune: true,
-        province: true
-      }
-    })) as RegisterPeopleResponse | null  ;
+    const registerPeople: RegisterPeopleResponse | null =
+      (await tx.people.findUnique({
+        where: {
+          ID: register.people_id,
+        },
+        include: {
+          city: true,
+          commune: true,
+          province: true,
+        },
+      })) as RegisterPeopleResponse | null;
 
     return { registerAnimal, registerPeople, register };
   });
@@ -308,10 +314,10 @@ export async function updateAnimalDataRegister(
         email: updateDataRegisterPeople.email,
         telephone: updateDataRegisterPeople.telephone,
         adress: updateDataRegisterPeople.adress,
-        city_id: cityId,
         province_id: updateDataRegisterPeople.province_id,
-        commune_id: peopleCommuneId,
         description: updateDataRegisterPeople.description,
+        city_id: cityId,
+        commune_id: peopleCommuneId,
         shelters_id: shelterId,
       },
     });
@@ -338,5 +344,73 @@ export async function updateAnimalDataRegister(
     });
 
     return { registerAnimal, registerPeople, register };
+  });
+}
+
+export async function adoptAnimal(
+  animalId: string,
+  sheltersId: string,
+  adoptionRequest: AnimalAdoptionRequest,
+  personRequest: RegisterPersonAddRequest
+): Promise<AdoptionResponse> {
+  return await prisma.$transaction(async (tx) => {
+    const dictionaryAdder = new MissingDictionaryAdder(tx);
+
+    const cityId = await dictionaryAdder.getDictonaryField(
+      'city',
+      personRequest.city,
+      sheltersId,
+      { zip_code: personRequest.zip_code }
+    );
+
+    const communeId = await dictionaryAdder.getDictonaryField(
+      'commune',
+      personRequest.commune,
+      sheltersId
+    );
+
+    const personRespnse = await tx.people.create({
+      data: {
+        type_of_person: personRequest.type_of_person,
+        name: personRequest.name,
+        id_number: personRequest.id_number,
+        pesel: personRequest.pesel,
+        nip: personRequest.nip,
+        email: personRequest.email,
+        telephone: personRequest.telephone,
+        adress: personRequest.adress,
+        province_id: personRequest.province_id,
+        description: personRequest.description,
+        shelters_id: sheltersId,
+        city_id: cityId,
+        commune_id: communeId,
+      },
+    });
+
+    const typeAdoptionId = await dictionaryAdder.getDictonaryField(
+      'type_adoption',
+      adoptionRequest.type_adoption,
+      sheltersId
+    );
+
+    const adoptionResponse = await tx.adoption.create({
+      data: {
+        date_of_adoption: adoptionRequest.date_of_adoption,
+        description: adoptionRequest.description,
+        introduced_employee_id: adoptionRequest.introduced_employee_id,
+        accepted_employees_id: adoptionRequest.accepted_employees_id,
+        type_adoption_id: typeAdoptionId,
+        animals_id: animalId,
+        shelters_id: sheltersId,
+        people_id: personRespnse.ID,
+      },
+    });
+
+    await tx.animals.update({
+      where: { ID: animalId },
+      data: { adopted: true },
+    });
+
+    return adoptionResponse;
   });
 }

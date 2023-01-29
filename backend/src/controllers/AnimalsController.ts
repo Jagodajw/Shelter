@@ -2,6 +2,8 @@ import express from 'express';
 import { authenticate } from '../middlewares/authentication';
 import { shelterAuthenticate } from '../middlewares/shelterAuthentication';
 import {
+  AdoptionResponse,
+  AnimalAdoptionRequest,
   AnimalStatus,
   RegisterAddAnimalResponse,
   RegisterAnimalAddRequest,
@@ -9,6 +11,7 @@ import {
   RegistrationAddRequest,
 } from '../models/AnimalsModel';
 import {
+  adoptAnimal,
   getAllAnimalsByShelterId,
   getAnimalById,
   getAnimalDataAdoption,
@@ -73,6 +76,31 @@ router.get(
       const animalId = req.params.animalId;
       const animalDataAdoption = await getAnimalDataAdoption(animalId);
       res.status(200).json(animalDataAdoption);
+    } catch (error) {
+      res.sendStatus(500);
+    }
+  }
+);
+
+router.post(
+  '/adoptAnimal/:animalId',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const animalId = req.params.animalId;
+      const shelterId: string = req.headers['shelters_id'] as string;
+      const adoptionRequest: AnimalAdoptionRequest = req.body.dataPetOut;
+      const personnRequest: RegisterPersonAddRequest =
+        req.body.dataPersonTakeAway;
+
+      const adoptAnimalResponse: AdoptionResponse = await adoptAnimal(
+        animalId,
+        shelterId,
+        adoptionRequest,
+        personnRequest
+      );
+      res.status(200).json(adoptAnimalResponse);
     } catch (error) {
       res.sendStatus(500);
     }

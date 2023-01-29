@@ -1,11 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  AdoptionResponse,
+  AnimalAdoptionRequest,
   AnimalDetailResponse,
   AnimalStatus,
   AnimalTableResponse,
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
+  RegisterPersonAddRequest,
 } from 'backend/src/models/AnimalsModel';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
@@ -35,6 +38,19 @@ export class PetService extends ApiService {
   ): Observable<RegisterAddAnimalResponse> {
     return this.http.post<RegisterAddAnimalResponse>(
       `${this.rootUrl}/animalRegistration`,
+      model
+    );
+  }
+
+  public adoptPet(
+    petId: string,
+    model: {
+      dataPetOut: AnimalAdoptionRequest;
+      dataPersonTakeAway: RegisterPersonAddRequest;
+    }
+  ): Observable<AdoptionResponse> {
+    return this.http.post<AdoptionResponse>(
+      `${this.rootUrl}/adoptAnimal/${petId}`,
       model
     );
   }
