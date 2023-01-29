@@ -1,5 +1,6 @@
 import { prisma } from '..';
 import {
+  AnimalAdoptionRequest,
   RegisterAnimalAddRequest,
   RegisterPersonAddRequest,
   RegistrationAddRequest,
@@ -12,13 +13,15 @@ import {
   addComune,
   addSpecies,
   addTypeAcceptance,
+  addTypeAdoption,
   PrismaClientType,
 } from '../services/DictionaryService';
 
 type RequestKeys =
   | keyof RegisterAnimalAddRequest
   | keyof RegisterPersonAddRequest
-  | keyof RegistrationAddRequest;
+  | keyof RegistrationAddRequest
+  | keyof AnimalAdoptionRequest;
 
 export class MissingDictionaryAdder {
   constructor(private readonly prismaClient: PrismaClientType = prisma) {}
@@ -96,6 +99,16 @@ export class MissingDictionaryAdder {
         );
 
         return newTypeOfAcceptance.ID;
+      }
+
+      case 'type_adoption': {
+        const newTypeOfAdoption = await addTypeAdoption(
+          { type_adoption: data, ...extraData },
+          shelterId,
+          this.prismaClient
+        );
+
+        return newTypeOfAdoption.ID;
       }
 
       default:

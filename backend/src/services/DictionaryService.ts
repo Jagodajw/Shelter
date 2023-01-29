@@ -61,6 +61,15 @@ export async function getAllBreed(
   });
 }
 
+export async function getAllBreedBySpeciesId(
+  shelterId: string,
+  speciesId: number
+): Promise<BreedResponse[]> {
+  return await prisma.breed.findMany({
+    where: { shelters_id: shelterId, species_id: speciesId },
+  });
+}
+
 export async function getAllColor(
   sheltersId: string
 ): Promise<ColorResponse[]> {

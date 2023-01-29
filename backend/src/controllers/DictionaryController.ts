@@ -31,6 +31,7 @@ import {
   deleteTypeAdoption,
   getAllArea,
   getAllBreed,
+  getAllBreedBySpeciesId,
   getAllCity,
   getAllColor,
   getAllCommune,
@@ -87,16 +88,30 @@ router.get('/species', authenticate, shelterAuthenticate, async (req, res) => {
   }
 });
 
-router.get('/breed', authenticate, shelterAuthenticate, async (req, res) => {
-  try {
-    const shelterId: string = req.headers['shelters_id'] as string;
+router.get(
+  '/breed?speciesId',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const shelterId: string = req.headers['shelters_id'] as string;
+      const speciesId: string = req.query.speciesId as string;
 
-    const dictionaryBreed = await getAllBreed(shelterId);
-    res.json(dictionaryBreed as BreedResponse[]);
-  } catch (error) {
-    res.sendStatus(500);
+      if (speciesId === undefined) {
+        const dictionaryBreed = await getAllBreed(shelterId);
+        res.json(dictionaryBreed as BreedResponse[]);
+      } else {
+        const dictionaryBreed = await getAllBreedBySpeciesId(
+          shelterId,
+          Number.parseInt(speciesId)
+        );
+        res.json(dictionaryBreed as BreedResponse[]);
+      }
+    } catch (error) {
+      res.sendStatus(500);
+    }
   }
-});
+);
 
 router.get('/colors', authenticate, shelterAuthenticate, async (req, res) => {
   try {
