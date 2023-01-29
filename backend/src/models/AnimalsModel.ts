@@ -1,13 +1,19 @@
 import {
   Animals,
-  dataRegisterAnimal,
-  dataRegisterPeople,
-  dataRegistration,
+  Area,
+  Breed,
+  City,
+  Color,
+  Commune,
+  Employees,
   Gender as PrismaGender,
   People,
+  Province,
   Registration,
   Size as PrismaSize,
-  Type_of_person as PrismaTypeOfPerson,
+  Species,
+  TypeAcceptance,
+  Type_of_person as PrismaTypeOfPerson
 } from '@prisma/client';
 import {
   AreaResponse,
@@ -16,7 +22,7 @@ import {
   ColorResponse,
   CommuneResponse,
   SpeciesResponse,
-  TypeAcceptanceResponse,
+  TypeAcceptanceResponse
 } from './DictionaryModel';
 
 export interface AnimalTableResponse {
@@ -40,9 +46,23 @@ export interface AnimalDetailResponse {
   register: RegistrationResponse | null;
 }
 
-export type RegisterAnimalResponse = dataRegisterAnimal;
-export type RegisterPeopleResponse = dataRegisterPeople;
-export type RegistrationResponse = dataRegistration;
+export type RegisterAnimalResponse = Animals & {
+    commune: Commune | null;
+    species: Species | null;
+    breed: Breed | null;
+    color: Color | null;
+    area: Area | null;
+}
+export type RegisterPeopleResponse = People & {
+  city: City | null;
+  province: Province | null;
+  commune: Commune | null;
+};
+export type RegistrationResponse = Registration & {
+  type_of_acceptance: TypeAcceptance | null;
+  introduced_employees: Employees | null;
+  accepted_employees: Employees | null;
+};
 
 export type Type_of_person = PrismaTypeOfPerson;
 export type Size = PrismaSize;

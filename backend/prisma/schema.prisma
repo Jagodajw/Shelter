@@ -74,7 +74,7 @@ model Animals {
   nr_chip            String
   id_number          String
   date_vaccination   DateTime? @db.Date
-  vaccination        Boolean? @default(false)
+  vaccination        Boolean?  @default(false)
   date_of_birth      DateTime  @db.Date
   size               Size
   gender             Gender
@@ -85,9 +85,9 @@ model Animals {
   species_id         Int
   breed_id           Int
   shelters_id        String
-  sterilization      Boolean? @default(false)
+  sterilization      Boolean?  @default(false)
   date_sterilization DateTime? @db.Date
-  adopted Boolean? @default(false)
+  adopted            Boolean?  @default(false)
 
   adoption     Adoption[]
   registration Registration[]
@@ -101,7 +101,7 @@ model Animals {
 }
 
 model tableAnimals {
-  ID          String @id @default(uuid())
+  ID          String  @id @default(uuid())
   name        String
   species     String
   breed       String
@@ -111,7 +111,7 @@ model tableAnimals {
   id_number   String
   nr_chip     String
   shelters_id String
-  adopted Boolean
+  adopted     Boolean
 }
 
 model dataRegisterAnimal {
@@ -173,18 +173,18 @@ model Registration {
   ID                      Int      @id @default(autoincrement())
   date_of_registration    DateTime @db.Date
   quarantine              DateTime @db.Date
-  type_of_acceptance_id      Int?
+  type_of_acceptance_id   Int?
   decription_registration String?  @default("")
   introduced_employees_id Int
   accepted_employees_id   Int
   people_id               Int
-  animals_id              String
+  animals_id              String   @unique()
   shelters_id             String
 
   // relations
-  introduced_employees Employees? @relation(name: "Registraion_introduced_employees_id_fkey", fields: [introduced_employees_id], references: [ID])
-  spent_employees      Employees? @relation(name: "Registraion_accepted_employees_id_fkey", fields: [accepted_employees_id], references: [ID])
-  type_of_acceptance TypeAcceptance? @relation(fields: [type_of_acceptance_id], references: [ID])
+  introduced_employees Employees?      @relation(name: "Registraion_introduced_employees_id_fkey", fields: [introduced_employees_id], references: [ID])
+  accepted_employees   Employees?      @relation(name: "Registraion_accepted_employees_id_fkey", fields: [accepted_employees_id], references: [ID])
+  type_of_acceptance   TypeAcceptance? @relation(fields: [type_of_acceptance_id], references: [ID])
 
   people   People?   @relation(fields: [people_id], references: [ID])
   animals  Animals?  @relation(fields: [animals_id], references: [ID])
@@ -295,11 +295,11 @@ model TypeAdoption {
   shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
-model   TypeAcceptance {
-  ID Int @id @unique @default(autoincrement())
+model TypeAcceptance {
+  ID              Int            @id @unique @default(autoincrement())
   type_acceptance String
-  shelters_id String
-  registraion Registration[]
+  shelters_id     String
+  registraion     Registration[]
 
   shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
@@ -320,20 +320,20 @@ model Employees {
 model Shelters {
   ID   String @id @default(uuid())
   name String
-  img Bytes? 
+  img  Bytes?
 
-  adoption     Adoption[]
-  animals      Animals[]
-  area         Area[]
-  city         City[]
-  breed        Breed[]
-  color        Color[]
-  employees    Employees[]
-  people       People[]
-  species      Species[]
-  registration Registration[]
-  commune      Commune[]
-  typeAdoption TypeAdoption[]
+  adoption       Adoption[]
+  animals        Animals[]
+  area           Area[]
+  city           City[]
+  breed          Breed[]
+  color          Color[]
+  employees      Employees[]
+  people         People[]
+  species        Species[]
+  registration   Registration[]
+  commune        Commune[]
+  typeAdoption   TypeAdoption[]
   typeAcceptance TypeAcceptance[]
 }
 

@@ -1,9 +1,7 @@
-import { Component, forwardRef, OnInit, Self } from '@angular/core';
+import { Component, OnInit, Self } from '@angular/core';
 import {
   FormControl,
-  NgControl,
-  NG_VALUE_ACCESSOR,
-  Validators,
+  NgControl, Validators
 } from '@angular/forms';
 import { SpeciesResponse } from 'backend/src/models/DictionaryModel';
 import { map, Observable, tap } from 'rxjs';
@@ -12,7 +10,7 @@ import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
-type ReturnValue = string | null | Select;
+type ReturnValue = string | null | Select | SpeciesResponse;
 @Component({
   selector: 'app-species-autocomplete',
   templateUrl: './species-autocomplete.component.html',
@@ -72,5 +70,10 @@ export class SpeciesAutocompleteComponent
   protected override handleSetDisabledStateFromOutside(): void {
     if (this.isDisabled) return this.control.disable();
     this.control.enable();
+  }
+
+  override handleValueChangeFromOutside(): void {
+    const value = this.value  as SpeciesResponse;
+    this.control.patchValue({...value, name: value.species});
   }
 }

@@ -1,9 +1,4 @@
-import {
-  dataRegisterAnimal,
-  dataRegisterPeople,
-  dataRegistration,
-  tableAnimals,
-} from '@prisma/client';
+import { tableAnimals } from '@prisma/client';
 import { prisma } from '..';
 import { AnimalIdGenerator } from '../helpers/AnimalIdGenerator';
 import { MissingDictionaryAdder } from '../helpers/MissingDictionaryAdder';
@@ -15,7 +10,7 @@ import {
   RegisterAnimalResponse,
   RegisterEditAnimalRequest,
   RegisterPeopleResponse,
-  RegistrationResponse,
+  RegistrationResponse
 } from '../models/AnimalsModel';
 
 export async function getAllAnimalsByShelterId(
@@ -36,26 +31,47 @@ export async function getAnimalById(
 export async function getAnimalDataRegister(
   animalId: string
 ): Promise<AnimalDetailResponse> {
-  const registerAnimal: dataRegisterAnimal | null =
-    (await prisma.dataRegisterAnimal.findUnique({
+  return await prisma.$transaction(async (tx) => {
+    const register: RegistrationResponse | null = (await tx.registration.findUnique({
       where: {
         animals_id: animalId,
       },
-    })) as RegisterAnimalResponse | null;
-  const registerPeople: dataRegisterPeople | null =
-    (await prisma.dataRegisterPeople.findUnique({
-      where: {
-        animals_id: animalId,
-      },
-    })) as RegisterPeopleResponse | null;
-  const register: dataRegistration | null =
-    (await prisma.dataRegistration.findUnique({
-      where: {
-        animals_id: animalId,
-      },
+      include: {
+        type_of_acceptance: true,
+        introduced_employees: true,
+        accepted_employees: true
+      }
     })) as RegistrationResponse | null;
 
-  return { registerAnimal, registerPeople, register };
+    if (register === null)
+      throw new Error('REGISTRATION_OF_ANIMAL_DOESNT_EXIST');
+
+    const registerAnimal: RegisterAnimalResponse | null = (await tx.animals.findUnique({
+      where: {
+        ID: register.animals_id,
+      },
+      include: {
+        species: true,
+        breed: true,
+        commune: true,
+        area: true,
+        color: true,
+      }
+    })) as RegisterAnimalResponse | null;
+
+    const registerPeople: RegisterPeopleResponse | null = (await tx.people.findUnique({
+      where: {
+        ID: register.people_id,
+      },
+      include: {
+        city: true,
+        commune: true,
+        province: true
+      }
+    })) as RegisterPeopleResponse | null  ;
+
+    return { registerAnimal, registerPeople, register };
+  });
 }
 
 export async function postAnimalDataRegister(
