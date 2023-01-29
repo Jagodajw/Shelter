@@ -2,7 +2,7 @@ import {
   dataRegisterAnimal,
   dataRegisterPeople,
   dataRegistration,
-  tableAnimals
+  tableAnimals,
 } from '@prisma/client';
 import { prisma } from '..';
 import { AnimalIdGenerator } from '../helpers/AnimalIdGenerator';
@@ -15,7 +15,7 @@ import {
   RegisterAnimalResponse,
   RegisterEditAnimalRequest,
   RegisterPeopleResponse,
-  RegistrationResponse
+  RegistrationResponse,
 } from '../models/AnimalsModel';
 
 export async function getAllAnimalsByShelterId(
@@ -67,7 +67,8 @@ export async function postAnimalDataRegister(
   }: RegisterAddAnimalRequest
 ): Promise<RegisterAddAnimalResponse> {
   return await prisma.$transaction(async (tx) => {
-    const speciesId = await MissingDictionaryAdder.getDictonaryField(
+    const dictionaryAdder = new MissingDictionaryAdder(tx);
+    const speciesId = await dictionaryAdder.getDictonaryField(
       'species',
       updateDataRegisterAnimal.species,
       shelterId
@@ -76,24 +77,24 @@ export async function postAnimalDataRegister(
     const generatedAnimalId = await AnimalIdGenerator.getGeneratedAnimalId(
       speciesId
     );
-    const breedId = await MissingDictionaryAdder.getDictonaryField(
+    const breedId = await dictionaryAdder.getDictonaryField(
       'breed',
       updateDataRegisterAnimal.breed,
       shelterId,
       { species_id: speciesId }
     );
-    const animalCommuneId = await MissingDictionaryAdder.getDictonaryField(
+    const animalCommuneId = await dictionaryAdder.getDictonaryField(
       'commune',
       updateDataRegisterAnimal.commune,
       shelterId
     );
-    const areaId = await MissingDictionaryAdder.getDictonaryField(
+    const areaId = await dictionaryAdder.getDictonaryField(
       'area',
       updateDataRegisterAnimal.area,
       shelterId
     );
 
-    const colorId = await MissingDictionaryAdder.getDictonaryField(
+    const colorId = await dictionaryAdder.getDictonaryField(
       'color',
       updateDataRegisterAnimal.color,
       shelterId
@@ -121,19 +122,14 @@ export async function postAnimalDataRegister(
       },
     });
 
-    const cityId = await MissingDictionaryAdder.getDictonaryField(
+    const cityId = await dictionaryAdder.getDictonaryField(
       'city',
       updateDataRegisterPeople.city,
-      shelterId
+      shelterId,
+      { zip_code: updateDataRegisterPeople.zip_code }
     );
 
-    const provinceId = await MissingDictionaryAdder.getDictonaryField(
-      'province',
-      updateDataRegisterPeople.province,
-      shelterId
-    );
-
-    const peopleCommuneId = await MissingDictionaryAdder.getDictonaryField(
+    const peopleCommuneId = await dictionaryAdder.getDictonaryField(
       'commune',
       updateDataRegisterPeople.commune,
       shelterId
@@ -150,14 +146,14 @@ export async function postAnimalDataRegister(
         telephone: updateDataRegisterPeople.telephone,
         adress: updateDataRegisterPeople.adress,
         city_id: cityId,
-        province_id: provinceId,
+        province_id: updateDataRegisterPeople.province_id,
         commune_id: peopleCommuneId,
         description: updateDataRegisterPeople.description,
         shelters_id: shelterId,
       },
     });
 
-    const typeOfAcceptanceId = await MissingDictionaryAdder.getDictonaryField(
+    const typeOfAcceptanceId = await dictionaryAdder.getDictonaryField(
       'type_of_acceptance',
       updateDataRegistration.type_of_acceptance,
       shelterId
@@ -205,4 +201,126 @@ export function isAuthorizedShelterInUpdatedAnimalModel(
     shelterId === registerAnimal.shelters_id &&
     shelterId === registerPeople.shelters_id
   );
+}
+
+export async function updateAnimalDataRegister(
+  shelterId: string,
+  {
+    registerAnimal: updateDataRegisterAnimal,
+    registerPeople: updateDataRegisterPeople,
+    register: updateDataRegistration,
+  }: RegisterEditAnimalRequest
+): Promise<RegisterAddAnimalResponse> {
+  return await prisma.$transaction(async (tx) => {
+    const dictionaryAdder = new MissingDictionaryAdder(tx);
+    const speciesId = await dictionaryAdder.getDictonaryField(
+      'species',
+      updateDataRegisterAnimal.species,
+      shelterId
+    );
+    console.log('spec id', speciesId);
+    const generatedAnimalId = await AnimalIdGenerator.getGeneratedAnimalId(
+      speciesId
+    );
+    const breedId = await dictionaryAdder.getDictonaryField(
+      'breed',
+      updateDataRegisterAnimal.species,
+      shelterId,
+      { species_id: speciesId }
+    );
+    const animalCommuneId = await dictionaryAdder.getDictonaryField(
+      'commune',
+      updateDataRegisterAnimal.commune,
+      shelterId
+    );
+    const areaId = await dictionaryAdder.getDictonaryField(
+      'area',
+      updateDataRegisterAnimal.area,
+      shelterId
+    );
+
+    const colorId = await dictionaryAdder.getDictonaryField(
+      'color',
+      updateDataRegisterAnimal.color,
+      shelterId
+    );
+
+    const registerAnimal = await tx.animals.update({
+      where: { ID: updateDataRegisterAnimal.ID },
+      data: {
+        name: updateDataRegisterAnimal.name,
+        species_id: speciesId,
+        breed_id: breedId,
+        id_number: generatedAnimalId,
+        commune_id: animalCommuneId,
+        area_id: areaId,
+        color_id: colorId,
+        size: updateDataRegisterAnimal.size,
+        gender: updateDataRegisterAnimal.gender,
+        nr_chip: updateDataRegisterAnimal.nr_chip,
+        date_of_birth: updateDataRegisterAnimal.date_of_birth,
+        description_animal: updateDataRegisterAnimal.description_animal,
+        date_vaccination: updateDataRegisterAnimal.date_vaccination,
+        vaccination: updateDataRegisterAnimal.vaccination,
+        sterilization: updateDataRegistration.sterilization,
+        date_sterilization: updateDataRegistration.date_sterilization,
+        shelters_id: shelterId,
+      },
+    });
+
+    const cityId = await dictionaryAdder.getDictonaryField(
+      'city',
+      updateDataRegisterPeople.city,
+      shelterId,
+      { zip_code: updateDataRegisterPeople.zip_code }
+    );
+
+    const peopleCommuneId = await dictionaryAdder.getDictonaryField(
+      'commune',
+      updateDataRegisterPeople.commune,
+      shelterId
+    );
+
+    const registerPeople = await tx.people.update({
+      where: { ID: updateDataRegisterPeople.ID },
+      data: {
+        type_of_person: updateDataRegisterPeople.type_of_person,
+        name: updateDataRegisterPeople.name,
+        id_number: updateDataRegisterPeople.id_number,
+        pesel: updateDataRegisterPeople.pesel,
+        nip: updateDataRegisterPeople.nip,
+        email: updateDataRegisterPeople.email,
+        telephone: updateDataRegisterPeople.telephone,
+        adress: updateDataRegisterPeople.adress,
+        city_id: cityId,
+        province_id: updateDataRegisterPeople.province_id,
+        commune_id: peopleCommuneId,
+        description: updateDataRegisterPeople.description,
+        shelters_id: shelterId,
+      },
+    });
+
+    const typeOfAcceptanceId = await dictionaryAdder.getDictonaryField(
+      'type_of_acceptance',
+      updateDataRegistration.type_of_acceptance,
+      shelterId
+    );
+
+    const register = await tx.registration.update({
+      where: { ID: updateDataRegistration.ID },
+      data: {
+        date_of_registration: updateDataRegistration.date_of_registration,
+        quarantine: updateDataRegistration.quarantine,
+        accepted_employees_id: updateDataRegistration.accepted_employees_id,
+        introduced_employees_id: updateDataRegistration.introduced_employees_id,
+        decription_registration: updateDataRegistration.decription_registration,
+        type_of_acceptance_id: typeOfAcceptanceId,
+        animals_id: registerAnimal.ID,
+        people_id: registerPeople.ID,
+        shelters_id: shelterId,
+      },
+    });
+
+    return { registerAnimal, registerPeople, register };
+  });
 }

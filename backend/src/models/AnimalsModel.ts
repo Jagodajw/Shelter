@@ -15,7 +15,6 @@ import {
   CityResponse,
   ColorResponse,
   CommuneResponse,
-  ProvinceResponse,
   SpeciesResponse,
   TypeAcceptanceResponse,
 } from './DictionaryModel';
@@ -82,11 +81,11 @@ export type RegisterAnimalAddRequest = Omit<
 
 export type RegisterPersonAddRequest = Omit<
   People,
-  'ID' | 'shelters_id' | 'city_id' | 'province_id' | 'commune_id'
+  'ID' | 'shelters_id' | 'city_id' | 'commune_id'
 > & {
   city: CityResponse;
-  province: ProvinceResponse;
   commune: CommuneResponse;
+  zip_code: string;
 };
 
 export type RegistrationAddRequest = Omit<
@@ -124,11 +123,11 @@ export type RegisterAnimalEditRequest = Omit<
 
 export type RegisterPersonEditRequest = Omit<
   People,
-  'city_id' | 'province_id' | 'commune_id'
+  'city_id' | 'commune_id'
 > & {
   city: CityResponse;
-  province: ProvinceResponse;
   commune: CommuneResponse;
+  zip_code: string;
 };
 
 export type RegistrationEditRequest = Omit<

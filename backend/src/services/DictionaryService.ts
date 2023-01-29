@@ -1,4 +1,4 @@
-import { City, TypeAcceptance } from '@prisma/client';
+import { City, Prisma, PrismaClient, TypeAcceptance } from '@prisma/client';
 import { prisma } from '..';
 import {
   AreaRequest,
@@ -19,6 +19,8 @@ import {
   TypeAdoptionRequest,
   TypeAdoptionResponse,
 } from '../models/DictionaryModel';
+
+export type PrismaClientType = PrismaClient | Prisma.TransactionClient;
 
 //GET
 export async function getAllCity(sheltersId: string): Promise<CityResponse[]> {
@@ -229,9 +231,10 @@ export async function updateTypeAdoption(
 
 export async function addCity(
   cityModel: CityRequest,
-  shelters_id: string
+  shelters_id: string,
+  prismaClient: PrismaClientType = prisma
 ): Promise<CityResponse> {
-  return await prisma.city.create({
+  return await prismaClient.city.create({
     data: {
       ...cityModel,
       shelters_id,
@@ -241,9 +244,10 @@ export async function addCity(
 
 export async function addComune(
   communeModel: CommuneRequest,
-  shelters_id: string
+  shelters_id: string,
+  prismaClient: PrismaClientType = prisma
 ): Promise<CommuneResponse> {
-  return await prisma.commune.create({
+  return await prismaClient.commune.create({
     data: {
       ...communeModel,
       shelters_id,
@@ -253,9 +257,10 @@ export async function addComune(
 
 export async function addSpecies(
   speciesModel: SpeciesRequest,
-  shelters_id: string
+  shelters_id: string,
+  prismaClient: PrismaClientType = prisma
 ): Promise<SpeciesResponse> {
-  return await prisma.species.create({
+  return await prismaClient.species.create({
     data: {
       ...speciesModel,
       shelters_id,
@@ -265,9 +270,10 @@ export async function addSpecies(
 
 export async function addBreed(
   breedModel: BreedRequest,
-  shelters_id: string
+  shelters_id: string,
+  prismaClient: PrismaClientType = prisma
 ): Promise<BreedResponse> {
-  return await prisma.breed.create({
+  return await prismaClient.breed.create({
     data: {
       breed: breedModel.breed,
       species_id: breedModel.species_id,
@@ -278,9 +284,10 @@ export async function addBreed(
 
 export async function addColor(
   colorModel: ColorRequest,
-  shelters_id: string
+  shelters_id: string,
+  prismaClient: PrismaClientType = prisma
 ): Promise<ColorResponse> {
-  return await prisma.color.create({
+  return await prismaClient.color.create({
     data: {
       ...colorModel,
       shelters_id,
@@ -290,9 +297,10 @@ export async function addColor(
 
 export async function addArea(
   areaModel: AreaRequest,
-  shelters_id: string
+  shelters_id: string,
+  prismaClient: PrismaClientType = prisma
 ): Promise<AreaResponse> {
-  return await prisma.area.create({
+  return await prismaClient.area.create({
     data: {
       ...areaModel,
       shelters_id,
@@ -302,9 +310,10 @@ export async function addArea(
 
 export async function addTypeAdoption(
   typeAdoptionModel: TypeAdoptionRequest,
-  shelters_id: string
+  shelters_id: string,
+  prismaClient: PrismaClientType = prisma
 ): Promise<TypeAdoptionResponse> {
-  return await prisma.typeAdoption.create({
+  return await prismaClient.typeAdoption.create({
     data: {
       ...typeAdoptionModel,
       shelters_id,
@@ -324,7 +333,8 @@ export async function getTypeAcceptance(
 
 export async function addTypeAcceptance(
   typeAcceptanceRequest: TypeAcceptanceRequest,
-  shelters_id: string
+  shelters_id: string,
+  prismaClient: PrismaClientType = prisma
 ): Promise<TypeAcceptanceResponse> {
   return await prisma.typeAcceptance.create({
     data: { ...typeAcceptanceRequest, shelters_id },

@@ -1,7 +1,6 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from 'src/api/services';
 @Component({
   selector: 'app-pet-detail',
   templateUrl: './pet-detail.component.html',
@@ -72,7 +71,7 @@ export class PetDetailComponent implements OnInit {
         city: ['', Validators.required],
         zip_code: [''],
         commune: ['', Validators.required],
-        province: ['', Validators.required],
+        province_id: ['', Validators.required],
         description: [''],
       }),
       register: this._form.group({
@@ -107,7 +106,7 @@ export class PetDetailComponent implements OnInit {
         city: ['', Validators.required],
         zip_code: [''],
         commune: ['', Validators.required],
-        province: ['', Validators.required],
+        province_id: ['', Validators.required],
         comments: [''],
       }),
     });

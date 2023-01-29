@@ -1,5 +1,5 @@
-import { Component, forwardRef, OnInit, Self } from '@angular/core';
-import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit, Self } from '@angular/core';
+import { FormControl, NgControl } from '@angular/forms';
 import { ProvinceResponse } from 'backend/src/models/DictionaryModel';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
@@ -38,7 +38,7 @@ export class ProvinceAutocompleteComponent
     this.shelterChangeDetector();
     this.control.valueChanges.subscribe({
       next: (value) => {
-        if (value) this.value = value;
+        if (value && typeof value === 'object') this.value = value.ID;
       },
     });
   }
