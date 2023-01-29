@@ -5,11 +5,8 @@
         {{ "pets.title" | translate }}
       </h1>
 
-      <div
-        class="toggle-item-container"
-        (click)="togglePetsView()"
-        [ngClass]="status ? '' : 'toggle-item-container-animated'"
-      >
+      <div class="toggle-item-container" (click)="togglePetsView()"
+        [ngClass]="status ? '' : 'toggle-item-container-animated'">
         <div class="toggle-item-2">{{ "pets.current" | translate }}</div>
         <div class="toggle-item-2">{{ "pets.past" | translate }}</div>
       </div>
@@ -29,6 +26,7 @@
   </div>
 
   <div class="pets_container-tabble">
-    <app-pets-table></app-pets-table>
+    <app-pets-table [pets]="pets$ | async" (outPetEmitter)=" outPet()"
+      (deletePositionEmitter)="deletePosition()"></app-pets-table>
   </div>
 </div>

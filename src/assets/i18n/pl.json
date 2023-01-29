@@ -120,6 +120,7 @@
     "FORBIDDEN": "Brak dostępu",
     "WRONG_LOGIN_DATA": "Błędne dane logownia, spróbuj ponownie"
   },
+
   "size": {
     "small": "Mały",
     "medium": "Średni",
@@ -128,6 +129,11 @@
   "gender": {
     "female": "Samica",
     "male": "Samiec"
+  },
+  "typePerson": {
+    "legal": "Osoba prawna",
+    "private": "Osoba fizyczna",
+    "none": "znaleziony"
   },
   "validators": {
     "required": "Pole jest wymagane"

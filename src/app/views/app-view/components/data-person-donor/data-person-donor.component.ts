@@ -45,16 +45,12 @@ export class DataPersonDonorComponent implements OnInit {
       });
   }
   public filtersPeople: ButtonFilter<PersonType>[] = [
-    { id: 'private', name: 'Osoba fizyczna' },
-    { id: 'legal', name: 'Osoba prawna' },
-    { id: 'none', name: 'znaleziony' },
-  ];
-  public arrayOfSpecies: Select[] = [
-    { ID: 0, name: 'kot' },
-    { ID: 1, name: 'pies' },
+    { id: 'private', name: 'typePerson.private' },
+    { id: 'legal', name: 'typePerson.legal' },
+    { id: 'none', name: 'typePerson.none' },
   ];
 
-  onChangeSelect(event: PersonType): void {
+  public onChangeSelect(event: PersonType): void {
     this.personTypeEmit.emit(event);
     this.personType = event;
     if (this.personType === 'legal') {

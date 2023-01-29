@@ -15,7 +15,7 @@ import { SpeciesAutocompleteModule } from 'src/app/views/app-view/components/spe
 import { CommunityAutocompleteModule } from 'src/app/views/app-view/components/community-autocomplete/community-autocomplete.module';
 import { BreedAutocompleteModule } from 'src/app/views/app-view/components/breed-autocomplete/breed-autocomplete.module';
 import { ColorAutocompleteModule } from 'src/app/views/app-view/components/color-autocomplete/color-autocomplete.module';
-import { DatePickerRangeModule } from '../date-picker-range/date-picker-range.module';
+import { DatePickerRangeModule } from '../../../../components/date-picker-range/date-picker-range.module';
 
 @NgModule({
   declarations: [SearchEngineComponent],

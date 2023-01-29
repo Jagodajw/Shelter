@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { AnimalsService } from 'src/api/services';
+import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from 'src/app/views/app-view/components/select/select';
 
 type PersonType = 'private' | 'legal' | 'none';
@@ -13,11 +14,15 @@ type PersonType = 'private' | 'legal' | 'none';
 export class PopupRegisterComponent implements OnInit {
   public registerPetsForm!: FormGroup;
   private typePerson!: PersonType;
+  public quarantineDate!: Date;
 
   constructor(
     private readonly _form: FormBuilder,
     private readonly animalApi: AnimalsService,
-    private readonly dialogRef: MatDialogRef<PopupRegisterComponent, undefined>
+    private readonly dialogRef: MatDialogRef<
+      PopupRegisterComponent,
+      { isAdded: boolean }
+    >
   ) {}
 
   ngOnInit(): void {
@@ -36,8 +41,15 @@ export class PopupRegisterComponent implements OnInit {
         color: ['', Validators.required],
         size: ['', Validators.required],
         gender: ['', Validators.required],
-        nr_chip: ['', Validators.required],
-        date_of_birth: ['', Validators.required],
+        nr_chip: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(15),
+            Validators.maxLength(15),
+          ],
+        ],
+        date_of_birth: [''],
         description_animal: [''],
         vaccination: [false],
         date_vaccination: [{ value: '', disabled: true }],
@@ -45,10 +57,10 @@ export class PopupRegisterComponent implements OnInit {
       registerPeople: this._form.group({
         name: ['', Validators.required],
         id_number: [''],
-        pesel: [null],
+        pesel: [null, [Validators.minLength(9), Validators.maxLength(9)]],
         nip: [null],
-        email: [''],
-        telephone: [''],
+        email: ['', Validators.email],
+        telephone: ['', [Validators.minLength(9), Validators.maxLength(9)]],
         adress: ['', Validators.required],
         city: ['', Validators.required],
         zip_code: [''],
@@ -58,7 +70,7 @@ export class PopupRegisterComponent implements OnInit {
       }),
       register: this._form.group({
         date_of_registration: [new Date(), Validators.required],
-        quarantine: ['', Validators.required],
+        quarantine: [this.setQuarantineDate(), Validators.required],
         sterilization: [false],
         date_sterilization: [{ value: '', disabled: true }],
         type_of_acceptance: [''],
@@ -72,32 +84,7 @@ export class PopupRegisterComponent implements OnInit {
     this.typePerson = event;
   }
 
-  public arrayOfSpecies: Select[] = [
-    { ID: 0, name: 'kot' },
-    { ID: 1, name: 'pies' },
-  ];
-
-  public sizeList: Select[] = [
-    { ID: 'small', name: 'size.small' },
-    { ID: 'medium', name: 'size.medium' },
-    { ID: 'large', name: 'size.large' },
-  ];
-
-  public genderList: Select[] = [
-    { ID: 'female', name: 'gender.female' },
-    { ID: 'male', name: 'gender.male' },
-  ];
-
-  chooseSelect(event: Select) {
-    console.log(event);
-  }
-
-  chooseAutocomplete(event: Select) {
-    console.log(event);
-  }
-
   public addPet(): void {
-    // to test, basic implementation without
     this.animalApi
       .postAnimalRegistration({
         body: {
@@ -110,12 +97,19 @@ export class PopupRegisterComponent implements OnInit {
       })
       .subscribe({
         next: () => {
-          this.dialogRef.close();
+          this.dialogRef.close({ isAdded: true });
         },
       });
   }
 
   public close(): void {
-    this.dialogRef.close();
+    this.dialogRef.close({ isAdded: false });
+  }
+
+  private setQuarantineDate(): Date {
+    this.quarantineDate = new Date();
+    const day = this.quarantineDate.getDate() + 14;
+    this.quarantineDate.setDate(day);
+    return this.quarantineDate;
   }
 }

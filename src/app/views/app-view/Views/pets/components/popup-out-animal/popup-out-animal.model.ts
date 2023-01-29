@@ -11,6 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { PopupOutAnimalComponent } from './popup-out-animal.component';
 import { DataPetOutModule } from 'src/app/views/app-view/components/data-pet-out/date-pet-out.module';
 import { DataPersonTakeAwayModule } from 'src/app/views/app-view/components/data-person-take-away/data-person-take-away.module';
+import { TypeAdoptionAutocompleteModule } from 'src/app/views/app-view/components/type-adoption-autocomplete/type-adoption-autocomplete.module';
 
 @NgModule({
   declarations: [PopupOutAnimalComponent],
@@ -28,6 +29,7 @@ import { DataPersonTakeAwayModule } from 'src/app/views/app-view/components/data
     MatDialogModule,
     DataPetOutModule,
     DataPersonTakeAwayModule,
+    TypeAdoptionAutocompleteModule,
   ],
 })
 export class PopupOutAnimalModule {}

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Select } from 'src/app/views/app-view/components/select/select';
 
 @Component({
   selector: 'app-popup-out-animal',
@@ -20,17 +19,18 @@ export class PopupOutAnimalComponent implements OnInit {
         name: ['', Validators.required],
         species: ['', Validators.required],
         type_adoption: ['', Validators.required],
-        dateOut: ['', Validators.required],
-        introduced_employees: ['', Validators.required],
-        accepted_employees: ['', Validators.required],
+        dateOut: [new Date(), Validators.required],
+        introduced_employees_id: ['', Validators.required],
+        accepted_employees_id: ['', Validators.required],
         commentsOut: [''],
       }),
       dataPersonTakeAway: this._form.group({
         name: [''],
         id_number: [''],
-        pesel: [''],
-        email: [''],
-        telephone: [''],
+        pesel: [null, [Validators.minLength(9), Validators.maxLength(9)]],
+        nip: [null],
+        email: ['', Validators.email],
+        telephone: ['', [Validators.minLength(9), Validators.maxLength(9)]],
         adress: [''],
         city: [''],
         zip_code: [''],
@@ -40,9 +40,4 @@ export class PopupOutAnimalComponent implements OnInit {
       }),
     });
   }
-
-  public arrayOfSpecies: Select[] = [
-    { ID: 0, name: 'kot' },
-    { ID: 1, name: 'pies' },
-  ];
 }

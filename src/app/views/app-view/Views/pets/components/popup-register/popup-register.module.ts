@@ -5,7 +5,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { PopupRegisterComponent } from './popup-register.component';
 import { AutocompleteModule } from 'src/app/views/app-view/components/autocomplete/autocomplete.module';
 import { SelectModule } from 'src/app/views/app-view/components/select/select.module';
-import { DataPickerModule } from '../data-picker/data-picker.module';
+import { DataPickerModule } from '../../../../components/data-picker/data-picker.module';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { DataPersonDonorModule } from 'src/app/views/app-view/components/data-person-donor/data-person-donor.module';

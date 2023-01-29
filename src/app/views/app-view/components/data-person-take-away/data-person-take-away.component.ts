@@ -1,12 +1,17 @@
-import { Component, OnInit, SkipSelf } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  SkipSelf,
+} from '@angular/core';
 import {
   ControlContainer,
   FormGroup,
   FormGroupDirective,
 } from '@angular/forms';
 import { ButtonFilter } from '../button-filter/button-filter';
-import { Select } from '../select/select';
-
+type PersonType = 'private' | 'legal' | 'none';
 @Component({
   selector: 'app-data-person-take-away',
   templateUrl: './data-person-take-away.component.html',
@@ -20,8 +25,10 @@ import { Select } from '../select/select';
   ],
 })
 export class DataPersonTakeAwayComponent implements OnInit {
-  public personType: number = 0;
+  public personType: PersonType = 'private';
   public blockInput: boolean = false;
+  @Output() personTypeEmit: EventEmitter<PersonType> =
+    new EventEmitter<PersonType>();
   constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
   ngOnInit(): void {
@@ -33,20 +40,17 @@ export class DataPersonTakeAwayComponent implements OnInit {
           ?.patchValue(city.zip_code);
       });
   }
-  public arrayOfSpecies: Select[] = [
-    { ID: 0, name: 'kot' },
-    { ID: 1, name: 'pies' },
+
+  public filtersPeople: ButtonFilter<PersonType>[] = [
+    { id: 'private', name: 'typePerson.private' },
+    { id: 'legal', name: 'typePerson.legal' },
+    { id: 'none', name: 'typePerson.none' },
   ];
 
-  public filtersPeople: ButtonFilter[] = [
-    { id: 0, name: 'Osoba fizyczna' },
-    { id: 1, name: 'Osoba prawna' },
-    { id: 2, name: 'znaleziony' },
-  ];
-
-  onChangeSelect(event: number): void {
+  onChangeSelect(event: PersonType): void {
+    this.personTypeEmit.emit(event);
     this.personType = event;
-    if (this.personType === 1) {
+    if (this.personType === 'legal') {
       this.blockInput = true;
     } else {
       this.blockInput = false;

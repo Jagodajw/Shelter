@@ -5,6 +5,7 @@ import {
   FormGroupDirective,
 } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from '../select/select';
 
 @Component({
@@ -20,25 +21,12 @@ import { Select } from '../select/select';
   ],
 })
 export class DataPetRegisterComponent implements OnInit {
+  public sizeList: Select[] = sizeList;
+  public genderList: Select[] = genderList;
+
   constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
   ngOnInit(): void {}
-
-  public arrayOfSpecies: Select[] = [
-    { ID: 0, name: 'kot' },
-    { ID: 1, name: 'pies' },
-  ];
-
-  public sizeList: Select[] = [
-    { ID: 'small', name: 'size.small' },
-    { ID: 'medium', name: 'size.medium' },
-    { ID: 'large', name: 'size.large' },
-  ];
-
-  public genderList: Select[] = [
-    { ID: 'female', name: 'gender.female' },
-    { ID: 'male', name: 'gender.male' },
-  ];
 
   Vaccination({ checked }: MatCheckboxChange): void {
     if (checked) {

@@ -1,6 +1,7 @@
 <div class="dataPerson" formGroupName="dataPersonTakeAway">
     <h2>{{'people.dataPersonTakeAway' | translate}}</h2>
-    <app-button-filter [filters]="filtersPeople" [disabled]="true" [initialValue]="0" (change)="onChangeSelect($event)">
+    <app-button-filter [filters]="filtersPeople" [disabled]="true" [initialValue]="personType"
+        (change)="onChangeSelect($event)">
     </app-button-filter>
 
     <div class="input-row">

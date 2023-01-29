@@ -7,7 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { AutocompleteModule } from '../autocomplete/autocomplete.module';
-import { DataPickerModule } from '../../Views/pets/components/data-picker/data-picker.module';
+import { DataPickerModule } from '../data-picker/data-picker.module';
 import { DataPetOutComponent } from './data-pet-out.component';
 import { SpeciesAutocompleteModule } from '../species-autocomplete/species-autocomplete.module';
 import { EmployeesAutocompleteModule } from '../employees-autocomplete/employees-autocomplete.module';
