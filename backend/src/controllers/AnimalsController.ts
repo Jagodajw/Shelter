@@ -7,8 +7,11 @@ import {
   AnimalStatus,
   RegisterAddAnimalResponse,
   RegisterAnimalAddRequest,
+  RegisterAnimalEditRequest,
   RegisterPersonAddRequest,
+  RegisterPersonEditRequest,
   RegistrationAddRequest,
+  RegistrationEditRequest,
 } from '../models/AnimalsModel';
 import {
   adoptAnimal,
@@ -18,6 +21,7 @@ import {
   getAnimalDataRegister,
   isAuthorizedShelterInUpdatedAnimalModel,
   postAnimalDataRegister,
+  updateAnimalDataRegister,
 } from '../services/AnimalsService';
 
 const router = express.Router();
@@ -149,11 +153,24 @@ router.put(
           updatedAnimalRegistrationModel
         )
       ) {
-        throw new Error();
+        throw new Error('BAD_SHELTER_ID');
       }
-    } catch (error) {
+      const registerAnimal = req.body
+        .registerAnimal as RegisterAnimalEditRequest;
+      const registerPeople = req.body
+        .registerPeople as RegisterPersonEditRequest;
+      const register = req.body.register as RegistrationEditRequest;
+      const updateAnimalResponse: RegisterAddAnimalResponse =
+        await updateAnimalDataRegister(shelterId, {
+          registerAnimal,
+          registerPeople,
+          register,
+        });
+
+      res.json(updateAnimalResponse as RegisterAddAnimalResponse);
+    } catch (error: any) {
       console.error(error);
-      res.sendStatus(500);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
     }
   }
 );

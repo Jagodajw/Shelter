@@ -8,6 +8,7 @@ import {
   AnimalTableResponse,
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
+  RegisterEditAnimalRequest,
   RegisterPersonAddRequest,
 } from 'backend/src/models/AnimalsModel';
 import { Observable } from 'rxjs';
@@ -52,6 +53,15 @@ export class PetService extends ApiService {
     return this.http.post<AdoptionResponse>(
       `${this.rootUrl}/adoptAnimal/${petId}`,
       model
+    );
+  }
+
+  public editPet(
+    updateModel: RegisterEditAnimalRequest
+  ): Observable<RegisterAddAnimalResponse> {
+    return this.http.put<RegisterAddAnimalResponse>(
+      `${this.rootUrl}/animalRegistration`,
+      updateModel
     );
   }
 }
