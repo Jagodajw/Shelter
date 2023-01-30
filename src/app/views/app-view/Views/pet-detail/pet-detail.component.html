@@ -5,10 +5,11 @@
         </button>
     </div>
     <div class="inline">
-        <app-button type="submit" variant="raised" (click)="editButtonClick()">
+        <app-button type="submit" variant="raised" [disabled]="!!(isEditMode$ | async)" (click)="editButtonClick()">
             <mat-icon>edit</mat-icon> {{ 'action.edit' | translate }}
         </app-button>
-        <app-button type="submit" variant="raised" (click)="saveEditButtonClick()">
+        <app-button type="submit" variant="raised" (click)="saveEditButtonClick()"
+            [disabled]="(isEditMode$ | async) === false">
             <mat-icon>star</mat-icon>{{'action.save' | translate}}
         </app-button>
     </div>

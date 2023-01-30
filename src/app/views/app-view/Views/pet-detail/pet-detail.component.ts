@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AnimalDetailResponse } from 'backend/src/models/AnimalsModel';
-import { filter, mergeMap, tap } from 'rxjs';
+import { BehaviorSubject, filter, mergeMap, tap } from 'rxjs';
 import { PetService } from '../../services/api/pet.service';
 @UntilDestroy()
 @Component({
@@ -16,7 +16,7 @@ export class PetDetailComponent implements OnInit {
   pet: any = [];
   detailPetsForm!: FormGroup;
   detailPetsOutForm!: FormGroup;
-
+  isEditMode$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public edit: boolean = false;
   constructor(
     private readonly _form: FormBuilder,
@@ -46,15 +46,18 @@ export class PetDetailComponent implements OnInit {
     this.detailPetsForm.get('registerAnimal')?.get('id_number')?.disable();
     this.detailPetsForm.get('register')?.get('date_sterilization')?.disable();
     this.detailPetsOutForm.enable();
+    this.isEditMode$.next(true);
   }
   public saveEditButtonClick() {
     this.edit = false;
     this.detailPetsForm.disable();
     this.detailPetsOutForm.disable();
+    this.editPet();
   }
   public buildForm(): void {
     this.detailPetsForm = this._form.group({
       registerAnimal: this._form.group({
+        ID: [],
         name: ['', Validators.required],
         species: ['', Validators.required],
         breed: ['', Validators.required],
@@ -78,6 +81,7 @@ export class PetDetailComponent implements OnInit {
         date_vaccination: [{ value: '', disabled: true }],
       }),
       registerPeople: this._form.group({
+        ID: [],
         name: ['', Validators.required],
         id_number: [''],
         pesel: [null, [Validators.minLength(9), Validators.maxLength(9)]],
@@ -92,6 +96,7 @@ export class PetDetailComponent implements OnInit {
         description: [''],
       }),
       register: this._form.group({
+        ID: [],
         date_of_registration: ['', Validators.required],
         quarantine: ['', Validators.required],
         sterilization: [false],
@@ -104,6 +109,7 @@ export class PetDetailComponent implements OnInit {
     });
     this.detailPetsOutForm = this._form.group({
       dataPetOut: this._form.group({
+        ID: [],
         name: ['', Validators.required],
         species: ['', Validators.required],
         type_adoption: ['', Validators.required],
@@ -113,6 +119,7 @@ export class PetDetailComponent implements OnInit {
         description: [''],
       }),
       dataPersonTakeAway: this._form.group({
+        ID: [],
         name: ['', Validators.required],
         id_number: [''],
         pesel: [null, [Validators.minLength(9), Validators.maxLength(9)]],
@@ -155,5 +162,13 @@ export class PetDetailComponent implements OnInit {
         untilDestroyed(this)
       )
       .subscribe();
+  }
+
+  private editPet(): void {
+    this.api.editPet(this.detailPetsForm.value).subscribe({
+      next: () => {
+        this.isEditMode$.next(false);
+      },
+    });
   }
 }
