@@ -1,8 +1,5 @@
 import { Component, OnInit, Self } from '@angular/core';
-import {
-  FormControl,
-  NgControl, Validators
-} from '@angular/forms';
+import { FormControl, NgControl, Validators } from '@angular/forms';
 import { SpeciesResponse } from 'backend/src/models/DictionaryModel';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
@@ -73,7 +70,7 @@ export class SpeciesAutocompleteComponent
   }
 
   override handleValueChangeFromOutside(): void {
-    const value = this.value  as SpeciesResponse;
-    this.control.patchValue({...value, name: value.species});
+    const value = this.value as SpeciesResponse;
+    this.control.patchValue({ ...value, name: value.species });
   }
 }

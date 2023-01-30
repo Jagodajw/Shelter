@@ -14,11 +14,10 @@ import { Select } from '../../../../components/select/select';
 export class PetsTableComponent {
   @Input() public isVisibiltyHeader: boolean = true;
   @Input() set pets(newPets: AnimalTableResponse[] | null) {
-    console.log('petstable', newPets);
     if (newPets === null) return;
     this.petsTable = new MatTableDataSource<AnimalTableResponse>(newPets);
   }
-  @Output() outPetEmitter: EventEmitter<void> = new EventEmitter<void>();
+  @Output() outPetEmitter: EventEmitter<string> = new EventEmitter<string>();
   @Output() deletePositionEmitter: EventEmitter<void> =
     new EventEmitter<void>();
   public genderList: Select[] = genderList;
@@ -38,12 +37,12 @@ export class PetsTableComponent {
 
   constructor(public readonly router: Router) {}
 
-  public openPetDetail(petId: number) {
+  public openPetDetail(petId: string) {
     this.router.navigate(['/app-view/pet-detail/', petId]);
   }
 
-  public outPet(): void {
-    this.outPetEmitter.emit();
+  public outPet(petId: string): void {
+    this.outPetEmitter.emit(petId);
   }
 
   public deletePosition(): void {

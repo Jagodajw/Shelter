@@ -7,7 +7,7 @@ import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
-type ReturnValue = string | null | Select;
+type ReturnValue = string | null | Select | TypeAdoptionResponse;
 
 @Component({
   selector: 'app-type-adoption-autocomplete',
@@ -67,5 +67,10 @@ export class TypeAdoptionAutocompleteComponent
   protected override handleSetDisabledStateFromOutside(): void {
     if (this.isDisabled) return this.control.disable();
     this.control.enable();
+  }
+
+  override handleValueChangeFromOutside(): void {
+    const value = this.value as TypeAdoptionResponse;
+    this.control.patchValue({ ...value, name: value.type_adoption });
   }
 }

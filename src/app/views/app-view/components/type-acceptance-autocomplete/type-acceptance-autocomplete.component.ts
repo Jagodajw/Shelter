@@ -6,7 +6,7 @@ import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-acce
 import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
-type ReturnValue = string | null | Select;
+type ReturnValue = string | null | Select | TypeAcceptanceResponse;
 @Component({
   selector: 'app-type-acceptance-autocomplete',
   templateUrl: './type-acceptance-autocomplete.component.html',
@@ -58,5 +58,10 @@ export class TypeAcceptanceAutocompleteComponent
   protected override handleSetDisabledStateFromOutside(): void {
     if (this.isDisabled) return this.control.disable();
     this.control.enable();
+  }
+
+  override handleValueChangeFromOutside(): void {
+    const value = this.value as TypeAcceptanceResponse;
+    this.control.patchValue({ ...value, name: value.type_acceptance });
   }
 }

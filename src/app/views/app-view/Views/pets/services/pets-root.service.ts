@@ -36,7 +36,6 @@ export class PetsRootService {
           this.api.getPets().pipe(
             tap((petsData: AnimalTableResponse[]) => {
               this.pets$.next(petsData);
-              console.log(petsData);
             })
           )
         )
@@ -56,9 +55,12 @@ export class PetsRootService {
       );
   }
 
-  public outPet(): void {
+  public outPet(petId: string): void {
+    const pet = this.pets$.value.find((pets) => pets.ID === petId);
+
     this.dialog.open(PopupOutAnimalComponent, {
       panelClass: ['input-70', 'modal-without-padding'],
+      data: { name: pet?.name, species: pet?.species },
       disableClose: true,
     });
   }

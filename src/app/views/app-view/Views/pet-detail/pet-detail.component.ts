@@ -137,6 +137,18 @@ export class PetDetailComponent implements OnInit {
           this.api.getPetById(params['id']).pipe(
             tap((pet: AnimalDetailResponse) => {
               this.detailPetsForm.patchValue(pet);
+              this.detailPetsForm
+                .get('register')
+                ?.get('accepted_employees_id')
+                ?.patchValue(pet.register?.accepted_employees);
+              this.detailPetsForm
+                .get('register')
+                ?.get('introduced_employees_id')
+                ?.patchValue(pet.register?.introduced_employees);
+              this.detailPetsForm
+                .get('registerPeople')
+                ?.get('province_id')
+                ?.patchValue(pet.registerPeople?.province);
             })
           )
         ),

@@ -7,7 +7,7 @@ import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
-type ReturnValue = string | null | Select;
+type ReturnValue = string | null | Select | BreedResponse;
 @Component({
   selector: 'app-breed-autocomplete',
   templateUrl: './breed-autocomplete.component.html',
@@ -63,5 +63,10 @@ export class BreedAutocompleteComponent
   protected override handleSetDisabledStateFromOutside(): void {
     if (this.isDisabled) return this.control.disable();
     this.control.enable();
+  }
+
+  override handleValueChangeFromOutside(): void {
+    const value = this.value as BreedResponse;
+    this.control.patchValue({ ...value, name: value.breed });
   }
 }

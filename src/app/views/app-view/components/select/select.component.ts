@@ -52,4 +52,11 @@ export class SelectComponent
     if (this.isDisabled) return this.controlSelect.disable();
     this.controlSelect.enable();
   }
+
+  public compareSelect(select1: Select, selectedId: string): boolean {
+    return select1 && select1.ID === selectedId;
+  }
+  override handleValueChangeFromOutside(): void {
+    this.controlSelect.patchValue(this.value);
+  }
 }
