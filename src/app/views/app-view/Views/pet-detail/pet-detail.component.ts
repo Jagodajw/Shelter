@@ -65,6 +65,7 @@ export class PetDetailComponent implements OnInit {
     this.detailPetsForm = this._form.group({
       registerAnimal: this._form.group({
         ID: [],
+        shelters_id: [],
         name: ['', Validators.required],
         species: ['', Validators.required],
         breed: ['', Validators.required],
@@ -89,6 +90,7 @@ export class PetDetailComponent implements OnInit {
       }),
       registerPeople: this._form.group({
         ID: [],
+        shelters_id: [],
         name: ['', Validators.required],
         id_number: [''],
         pesel: [null, [Validators.minLength(9), Validators.maxLength(9)]],
@@ -104,10 +106,11 @@ export class PetDetailComponent implements OnInit {
       }),
       register: this._form.group({
         ID: [],
+        shelters_id: [],
         date_of_registration: ['', Validators.required],
         quarantine: ['', Validators.required],
         sterilization: [false],
-        date_sterilization: [{ value: '', disabled: true }],
+        date_sterilization: [{ value: null, disabled: true }],
         type_of_acceptance: [''],
         introduced_employees_id: [''],
         accepted_employees_id: [''],
