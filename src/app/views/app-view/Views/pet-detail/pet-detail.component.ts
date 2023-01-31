@@ -20,10 +20,11 @@ import { PetService } from '../../services/api/pet.service';
   styleUrls: ['./pet-detail.component.scss'],
 })
 export class PetDetailComponent implements OnInit {
-  pet: any = [];
+  private pet: any = [];
   detailPetsForm!: FormGroup;
   detailPetsOutForm!: FormGroup;
   isEditMode$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isAdopted: boolean = false;
   public edit: boolean = false;
   constructor(
     private readonly _form: FormBuilder,
@@ -166,6 +167,7 @@ export class PetDetailComponent implements OnInit {
                 .get('registerPeople')
                 ?.get('province_id')
                 ?.patchValue(pet.registerPeople?.province);
+              this.isAdopted = !!pet.registerAnimal?.adopted;
             }),
             catchError((err) => {
               if (
