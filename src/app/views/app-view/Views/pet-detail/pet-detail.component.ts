@@ -4,7 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AnimalDetailResponse } from 'backend/src/models/AnimalsModel';
-import { BehaviorSubject, filter, mergeMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  filter,
+  mergeMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { PetService } from '../../services/api/pet.service';
 @UntilDestroy()
 @Component({
@@ -156,6 +163,13 @@ export class PetDetailComponent implements OnInit {
                 .get('registerPeople')
                 ?.get('province_id')
                 ?.patchValue(pet.registerPeople?.province);
+            }),
+            catchError((err) => {
+              if (
+                err.error.ERROR_CODE === 'REGISTRATION_OF_ANIMAL_DOESNT_EXIST'
+              )
+                this.backClicked();
+              return throwError(err);
             })
           )
         ),

@@ -9,15 +9,13 @@ import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TranslateService } from '@ngx-translate/core';
 import { catchError, Observable, throwError } from 'rxjs';
+import { SnackbarMessageService } from 'src/api/services/snackbar-message.service';
 import { AuthRootService } from '../services/auth-root.service';
 
 @Injectable()
 export class ErrorHandlerInteceptorService implements HttpInterceptor {
-  private static readonly SNACK_BAR_DURATION: number = 2000;
-
   constructor(
-    private readonly snackBar: MatSnackBar,
-    private readonly translate: TranslateService,
+    private readonly snackBarMessage: SnackbarMessageService,
     private readonly auth: AuthRootService
   ) {}
 
@@ -68,11 +66,6 @@ export class ErrorHandlerInteceptorService implements HttpInterceptor {
     defaultError: string = 'UNKNOWN_ERROR'
   ): void {
     const errorMessage: string = `errors.${errorCode ?? defaultError}`;
-
-    this.snackBar.open(this.translate.instant(errorMessage), 'X', {
-      duration: ErrorHandlerInteceptorService.SNACK_BAR_DURATION,
-      horizontalPosition: 'right',
-      verticalPosition: 'top',
-    });
+    this.snackBarMessage.showMessageSnackBar(errorMessage);
   }
 }
