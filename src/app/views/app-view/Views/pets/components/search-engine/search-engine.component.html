@@ -19,21 +19,21 @@
 
     <div style="font-size: 14px" class="search__primary">
         <span class="input-quarter">
-            <app-species-autocomplete formControlName="species"></app-species-autocomplete>
+            <app-species-autocomplete formControlName="species_id"></app-species-autocomplete>
         </span>
 
         <span class="input-quarter">
-            <app-breed-autocomplete formControlName="breed"></app-breed-autocomplete>
+            <app-breed-autocomplete formControlName="breed_id"></app-breed-autocomplete>
         </span>
 
         <span class="input-quarter">
-            <app-community-autocomplete formControlName="community"></app-community-autocomplete>
+            <app-community-autocomplete formControlName="commune_id"></app-community-autocomplete>
         </span>
         <span class="input-quarter">
-            <app-area-autocomplete formControlName="area"></app-area-autocomplete>
+            <app-area-autocomplete formControlName="area_id"></app-area-autocomplete>
         </span>
         <span class="input-quarter">
-            <app-color-autocomplete formControlName="color"></app-color-autocomplete>
+            <app-color-autocomplete formControlName="color_id"></app-color-autocomplete>
         </span>
         <div class="input-quarter">
             <app-select formControlName="gender" [values]="genderList" placeholder="pets.gender">
@@ -44,7 +44,7 @@
             </app-select>
         </div>
         <div class="input-quarter search__castred">
-            <mat-checkbox formControlName="castred">{{"pets.filterCastrated" | translate}}
+            <mat-checkbox formControlName="sterilization">{{"pets.filterCastrated" | translate}}
             </mat-checkbox>
         </div>
         <div class="input-quarter">

@@ -19,19 +19,19 @@ export class SearchEngineComponent implements OnInit {
 
   public buildForm(): void {
     this.searchEngineForm = this._form.group({
-      species: [''],
-      breed: [''],
-      community: [''],
-      area: [''],
-      color: [''],
-      gender: [''],
-      size: [''],
-      castred: [''],
-      search: [''],
+      species_id: [undefined],
+      breed_id: [undefined],
+      commune_id: [undefined],
+      area: [undefined],
+      color: [undefined],
+      gender: [undefined],
+      size: [undefined],
+      sterilization: [undefined],
+      search: [undefined],
       cuarantine: [false],
       unvaccinated: [false],
-      datePickerBirthFromTo: [''],
-      datePickerAccepted: [''],
+      datePickerBirthFromTo: [undefined],
+      datePickerAccepted: [undefined],
     });
   }
 

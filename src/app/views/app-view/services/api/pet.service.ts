@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  AdoptDataByAnimalIdResponse,
   AdoptionResponse,
   AnimalAdoptionRequest,
   AnimalDetailResponse,
@@ -62,6 +63,14 @@ export class PetService extends ApiService {
     return this.http.put<RegisterAddAnimalResponse>(
       `${this.rootUrl}/animalRegistration`,
       updateModel
+    );
+  }
+
+  public getPetAdoptDataById(
+    petId: string
+  ): Observable<AdoptDataByAnimalIdResponse> {
+    return this.http.get<AdoptDataByAnimalIdResponse>(
+      `${this.rootUrl}/adoptAnimal/${petId}`
     );
   }
 }

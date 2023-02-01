@@ -14,6 +14,7 @@ import {
   Size as PrismaSize,
   Species,
   TypeAcceptance,
+  TypeAdoption,
   Type_of_person as PrismaTypeOfPerson,
 } from '@prisma/client';
 import {
@@ -126,7 +127,6 @@ export interface RegisterEditAnimalRequest {
 
 export type RegisterAnimalEditRequest = Omit<
   Animals,
-  | 'id_number'
   | 'sterilization'
   | 'date_sterilization'
   | 'species_id'
@@ -168,3 +168,17 @@ export type AnimalAdoptionRequest = Omit<
 > & { type_adoption: TypeAcceptanceResponse };
 
 export type AdoptionResponse = Adoption;
+
+export type AdoptDataByAnimalIdResponse = {
+  dataPetOut: Adoption & {
+    typeAdoption: TypeAdoption | null;
+    introduced_employees: Employees | null;
+    accepted_employees: Employees | null;
+  };
+  dataPersonTakeAway:
+    | People & {
+        city: City | null;
+        province: Province | null;
+        commune: Commune | null;
+      };
+};
