@@ -87,7 +87,7 @@ export class PetDetailComponent implements OnInit {
         date_of_birth: [''],
         description_animal: [''],
         vaccination: [false],
-        date_vaccination: [{ value: '', disabled: true }],
+        date_vaccination: [{ value: null, disabled: true }],
       }),
       registerPeople: this._form.group({
         ID: [],

@@ -1,8 +1,9 @@
-import { tableAnimals } from '@prisma/client';
+import { Gender, Size, tableAnimals } from '@prisma/client';
 import { prisma } from '..';
 import { AnimalIdGenerator } from '../helpers/AnimalIdGenerator';
 import { MissingDictionaryAdder } from '../helpers/MissingDictionaryAdder';
 import {
+  AdoptDataByAnimalIdResponse,
   AdoptionResponse,
   AnimalAdoptionRequest,
   AnimalDetailResponse,
@@ -13,7 +14,7 @@ import {
   RegisterEditAnimalRequest,
   RegisterPeopleResponse,
   RegisterPersonAddRequest,
-  RegistrationResponse,
+  RegistrationResponse
 } from '../models/AnimalsModel';
 
 export async function getAllAnimalsByShelterId(
@@ -241,9 +242,6 @@ export async function updateAnimalDataRegister(
       shelterId
     );
     console.log('spec id', speciesId);
-    const generatedAnimalId = await AnimalIdGenerator.getGeneratedAnimalId(
-      speciesId
-    );
     const breedId = await dictionaryAdder.getDictonaryField(
       'breed',
       updateDataRegisterAnimal.breed,
@@ -273,7 +271,7 @@ export async function updateAnimalDataRegister(
         name: updateDataRegisterAnimal.name,
         species_id: speciesId,
         breed_id: breedId,
-        id_number: generatedAnimalId,
+        id_number: updateDataRegisterAnimal.id_number,
         commune_id: animalCommuneId,
         area_id: areaId,
         color_id: colorId,
@@ -397,7 +395,7 @@ export async function adoptAnimal(
       data: {
         date_of_adoption: adoptionRequest.date_of_adoption,
         description: adoptionRequest.description,
-        introduced_employee_id: adoptionRequest.introduced_employee_id,
+        introduced_employees_id: adoptionRequest.introduced_employees_id,
         accepted_employees_id: adoptionRequest.accepted_employees_id,
         type_adoption_id: typeAdoptionId,
         animals_id: animalId,
@@ -413,4 +411,58 @@ export async function adoptAnimal(
 
     return adoptionResponse;
   });
+}
+
+export async function getAdoptDataByAnimalId(
+  animalId: string
+): Promise<AdoptDataByAnimalIdResponse> {
+  return await prisma.$transaction(async (tx) => {
+    const dataPetOut = await tx.adoption.findUnique({
+      where: { animals_id: animalId },
+      include: {
+        typeAdoption: true,
+        introduced_employees: true,
+        accepted_employees: true,
+      },
+    });
+
+    if (dataPetOut === null) throw new Error('ADOPTION_OF_ANIMAL_DOESNT_EXIST');
+
+    const dataPersonTakeAway = await tx.people.findUnique({
+      where: { ID: dataPetOut.people_id },
+      include: {
+        city: true,
+        commune: true,
+        province: true,
+      },
+    });
+
+    if (dataPersonTakeAway === null) throw new Error('PERSON_DOESNT_EXIST');
+
+    return { dataPetOut, dataPersonTakeAway };
+  });
+}
+
+interface AnimalQuery {
+  species_id: number | undefined;
+  breed_id: number | undefined;
+  commune_id: number | undefined;
+  area_id: number | undefined;
+  color_id: number | undefined;
+  gender: Gender | undefined;
+  size: Size;
+}
+
+export async function getAllAnimalsByQuery(query: AnimalQuery) {
+  prisma.animals.findMany({ where: {AND: [
+    {
+      species_id: query.species_id,
+      breed_id: query.breed_id,
+      commune_id: query.commune_id,
+      area_id: query.area_id,
+      color_id: query.color_id,
+      gender: query.gender,
+      size: query.size,
+    }
+  ]} });
 }

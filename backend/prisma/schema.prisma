@@ -134,18 +134,18 @@ model dataRegisterAnimal {
 }
 
 model Adoption {
-  ID                     Int      @id @default(autoincrement())
-  date_of_adoption       DateTime @db.Date
-  description            String?  @default("")
-  introduced_employee_id Int
-  accepted_employees_id  Int
-  type_adoption_id       Int
-  people_id              Int
-  animals_id             String
-  shelters_id            String
+  ID                      Int      @id @default(autoincrement())
+  date_of_adoption        DateTime @db.Date
+  description             String?  @default("")
+  introduced_employees_id Int
+  accepted_employees_id   Int
+  type_adoption_id        Int
+  people_id               Int
+  animals_id              String   @unique
+  shelters_id             String
 
   // relations
-  introduced_employees Employees?    @relation(name: "Adoption_introduced_employees_id_fkey", fields: [introduced_employee_id], references: [ID])
+  introduced_employees Employees?    @relation(name: "Adoption_introduced_employees_id_fkey", fields: [introduced_employees_id], references: [ID])
   accepted_employees   Employees?    @relation(name: "Adoption_accepted_employees_id_fkey", fields: [accepted_employees_id], references: [ID])
   typeAdoption         TypeAdoption? @relation(fields: [type_adoption_id], references: [ID])
   people               People?       @relation(fields: [people_id], references: [ID])
