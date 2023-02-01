@@ -28,7 +28,7 @@
                 </div>
             </form>
         </mat-tab>
-        <mat-tab label="Dane wydanego zwierzęcia">
+        <mat-tab label="Dane wydanego zwierzęcia" [disabled]="!isAdopted">
             <form [formGroup]="detailPetsOutForm">
                 <div class="pet-detail_content">
 

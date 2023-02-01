@@ -149,6 +149,61 @@
         }
       }
     },
+    "/adoptAnimal/{animalId}": {
+      "post": {
+        "tags": [
+          "Animals"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "animalId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dataPetOut": {
+                  "example": "any"
+                },
+                "dataPersonTakeAway": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/animalRegistration": {
       "post": {
         "tags": [
@@ -215,9 +270,30 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "registerAnimal": {
+                  "example": "any"
+                },
+                "registerPeople": {
+                  "example": "any"
+                },
+                "register": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "401": {
             "description": "Unauthorized"
           },
@@ -466,6 +542,11 @@
             "type": "string"
           },
           {
+            "name": "speciesId",
+            "in": "query",
+            "type": "string"
+          },
+          {
             "name": "authorization",
             "in": "header",
             "type": "string"
@@ -516,6 +597,45 @@
                 }
               }
             }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/breed?speciesId": {
+      "get": {
+        "tags": [
+          "Dictonary"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "speciesId",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1450,6 +1570,40 @@
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/typeAcceptance": {
+      "get": {
+        "tags": [
+          "Dictonary"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "authorization",
             "in": "header",

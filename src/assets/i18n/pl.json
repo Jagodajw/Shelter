@@ -118,7 +118,8 @@
     "INTERNAL_SERVER_ERROR": "Błąd serwera",
     "UNKNOWN_ERROR": "Nieznany błąd",
     "FORBIDDEN": "Brak dostępu",
-    "WRONG_LOGIN_DATA": "Błędne dane logownia, spróbuj ponownie"
+    "WRONG_LOGIN_DATA": "Błędne dane logownia, spróbuj ponownie",
+    "REGISTRATION_OF_ANIMAL_DOESNT_EXIST": "Rejestracja dla zwierzęcia nie istnieje"
   },
 
   "size": {

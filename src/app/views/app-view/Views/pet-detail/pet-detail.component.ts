@@ -4,7 +4,14 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AnimalDetailResponse } from 'backend/src/models/AnimalsModel';
-import { BehaviorSubject, filter, mergeMap, tap } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  filter,
+  mergeMap,
+  tap,
+  throwError,
+} from 'rxjs';
 import { PetService } from '../../services/api/pet.service';
 @UntilDestroy()
 @Component({
@@ -13,10 +20,11 @@ import { PetService } from '../../services/api/pet.service';
   styleUrls: ['./pet-detail.component.scss'],
 })
 export class PetDetailComponent implements OnInit {
-  pet: any = [];
+  private pet: any = [];
   detailPetsForm!: FormGroup;
   detailPetsOutForm!: FormGroup;
   isEditMode$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public isAdopted: boolean = false;
   public edit: boolean = false;
   constructor(
     private readonly _form: FormBuilder,
@@ -159,6 +167,14 @@ export class PetDetailComponent implements OnInit {
                 .get('registerPeople')
                 ?.get('province_id')
                 ?.patchValue(pet.registerPeople?.province);
+              this.isAdopted = !!pet.registerAnimal?.adopted;
+            }),
+            catchError((err) => {
+              if (
+                err.error.ERROR_CODE === 'REGISTRATION_OF_ANIMAL_DOESNT_EXIST'
+              )
+                this.backClicked();
+              return throwError(err);
             })
           )
         ),
