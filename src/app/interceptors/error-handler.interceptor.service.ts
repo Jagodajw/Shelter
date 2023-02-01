@@ -6,8 +6,6 @@ import {
   HttpRequest,
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { TranslateService } from '@ngx-translate/core';
 import { catchError, Observable, throwError } from 'rxjs';
 import { SnackbarMessageService } from 'src/api/services/snackbar-message.service';
 import { AuthRootService } from '../services/auth-root.service';

@@ -21,7 +21,6 @@ export class PetsComponent implements OnInit {
   public togglePetsView() {
     this.status = !this.status;
   }
-
   public addPet(): void {
     this.root.addPet();
   }

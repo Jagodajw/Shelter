@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UntilDestroy } from '@ngneat/until-destroy';
+import { PetService } from 'src/app/views/app-view/services/api/pet.service';
 
+type PersonType = 'private' | 'legal' | 'none';
 @UntilDestroy()
 @Component({
   selector: 'app-popup-out-animal',
@@ -11,9 +13,16 @@ import { UntilDestroy } from '@ngneat/until-destroy';
 })
 export class PopupOutAnimalComponent implements OnInit {
   outPetForm!: FormGroup;
+  private typePerson: PersonType = 'private';
   constructor(
+    private readonly api: PetService,
     private readonly _form: FormBuilder,
-    @Inject(MAT_DIALOG_DATA) private data: { name: string; species: string }
+    @Inject(MAT_DIALOG_DATA)
+    private data: { name: string; species: string; ID: string },
+    private readonly dialogRef: MatDialogRef<
+      PopupOutAnimalComponent,
+      { isAdoption: boolean }
+    >
   ) {}
 
   ngOnInit(): void {
@@ -33,7 +42,7 @@ export class PopupOutAnimalComponent implements OnInit {
       dataPersonTakeAway: this._form.group({
         name: [''],
         id_number: [''],
-        pesel: [null, [Validators.minLength(9), Validators.maxLength(9)]],
+        pesel: ['', [Validators.minLength(9), Validators.maxLength(9)]],
         nip: [null],
         email: ['', Validators.email],
         telephone: ['', [Validators.minLength(9), Validators.maxLength(9)]],
@@ -45,5 +54,24 @@ export class PopupOutAnimalComponent implements OnInit {
         comments: [''],
       }),
     });
+  }
+
+  public outPet(): void {
+    this.api
+      .adoptPet(this.data.ID, {
+        dataPetOut: this.outPetForm.value.dataPetOut,
+        dataPersonTakeAway: {
+          ...this.outPetForm.value.dataPersonTakeAway,
+          type_of_person: this.typePerson,
+        },
+      })
+      .subscribe({
+        next: () => {
+          this.dialogRef.close({ isAdoption: true });
+        },
+      });
+  }
+  public close(): void {
+    this.dialogRef.close({ isAdoption: false });
   }
 }

@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import {
-  AnimalTableResponse,
-  RegisterAddAnimalRequest,
-} from 'backend/src/models/AnimalsModel';
+import { AnimalTableResponse } from 'backend/src/models/AnimalsModel';
 import { BehaviorSubject, filter, mergeMap, Observable, tap } from 'rxjs';
 import { PetService } from '../../../services/api/pet.service';
 import { ShelterService } from '../../../services/shelter.service';
@@ -58,11 +55,24 @@ export class PetsRootService {
   public outPet(petId: string): void {
     const pet = this.pets$.value.find((pets) => pets.ID === petId);
 
-    this.dialog.open(PopupOutAnimalComponent, {
-      panelClass: ['input-70', 'modal-without-padding'],
-      data: { name: pet?.name, species: pet?.species },
-      disableClose: true,
-    });
+    this.dialog
+      .open(PopupOutAnimalComponent, {
+        panelClass: ['input-70', 'modal-without-padding'],
+        data: { name: pet?.name, species: pet?.species, ID: petId },
+        disableClose: true,
+      })
+      .afterClosed()
+      .pipe(
+        filter((data: { isAdoption: boolean }) => data.isAdoption === true),
+        mergeMap(() =>
+          this.api.getPets().pipe(
+            tap((petsData: AnimalTableResponse[]) => {
+              this.pets$.next(petsData);
+            })
+          )
+        )
+      )
+      .subscribe();
   }
 
   public deletePosition(): void {}

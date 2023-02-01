@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { AnimalsService } from 'src/api/services';
-import { genderList, sizeList } from 'src/app/data/data-list';
-import { Select } from 'src/app/views/app-view/components/select/select';
+import { PetService } from 'src/app/views/app-view/services/api/pet.service';
 
 type PersonType = 'private' | 'legal' | 'none';
 @Component({
@@ -18,7 +16,7 @@ export class PopupRegisterComponent implements OnInit {
 
   constructor(
     private readonly _form: FormBuilder,
-    private readonly animalApi: AnimalsService,
+    private readonly api: PetService,
     private readonly dialogRef: MatDialogRef<
       PopupRegisterComponent,
       { isAdded: boolean }
@@ -85,14 +83,12 @@ export class PopupRegisterComponent implements OnInit {
   }
 
   public addPet(): void {
-    this.animalApi
-      .postAnimalRegistration({
-        body: {
-          ...this.registerPetsForm.value,
-          registerPeople: {
-            ...this.registerPetsForm.value.registerPeople,
-            type_of_person: this.typePerson,
-          },
+    this.api
+      .addPet({
+        ...this.registerPetsForm.value,
+        registerPeople: {
+          ...this.registerPetsForm.value.registerPeople,
+          type_of_person: this.typePerson,
         },
       })
       .subscribe({
