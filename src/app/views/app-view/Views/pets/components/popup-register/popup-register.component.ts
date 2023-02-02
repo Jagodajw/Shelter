@@ -55,7 +55,7 @@ export class PopupRegisterComponent implements OnInit {
       registerPeople: this._form.group({
         name: ['', Validators.required],
         id_number: [''],
-        pesel: [null, [Validators.minLength(9), Validators.maxLength(9)]],
+        pesel: [null, Validators.pattern('[0-9]{11}')],
         nip: [null],
         email: ['', Validators.email],
         telephone: ['', [Validators.minLength(9), Validators.maxLength(9)]],

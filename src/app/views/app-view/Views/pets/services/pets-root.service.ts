@@ -1,8 +1,19 @@
 import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { AnimalTableResponse } from 'backend/src/models/AnimalsModel';
-import { BehaviorSubject, filter, mergeMap, Observable, tap } from 'rxjs';
+import {
+  AnimalStatus,
+  AnimalTableResponse,
+} from 'backend/src/models/AnimalsModel';
+import {
+  BehaviorSubject,
+  combineLatest,
+  filter,
+  map,
+  mergeMap,
+  Observable,
+  tap,
+} from 'rxjs';
 import { PetService } from '../../../services/api/pet.service';
 import { ShelterService } from '../../../services/shelter.service';
 import { PopupOutAnimalComponent } from '../components/popup-out-animal/popup-out-animal.component';
@@ -12,6 +23,10 @@ import { PopupRegisterComponent } from '../components/popup-register/popup-regis
 export class PetsRootService {
   private readonly pets$: BehaviorSubject<AnimalTableResponse[]> =
     new BehaviorSubject<AnimalTableResponse[]>([]);
+  public status$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    false
+  );
+
   constructor(
     private dialog: MatDialog,
     private readonly api: PetService,
@@ -42,9 +57,29 @@ export class PetsRootService {
   }
 
   private shelterChangeDetector(): void {
-    this.shelter.selectedShelterChangeDetector$
+    // this.status$.subscribe({
+    //   next: (x) => console.log(x),
+    // });
+    // this.shelter.selectedShelterChangeDetector$
+    //   .pipe(
+    // mergeMap(() => this.api.getPets()),
+    //     untilDestroyed(this)
+    //   )
+    //   .subscribe((petsData: AnimalTableResponse[]) =>
+    //     this.pets$.next(petsData)
+    //   );
+
+    combineLatest(this.status$, this.shelter.selectedShelterChangeDetector$)
       .pipe(
-        mergeMap(() => this.api.getPets()),
+        map(
+          ([status]) =>
+            ({ status: status ? 'adopted' : 'staying' } as {
+              status: AnimalStatus;
+            })
+        ),
+        mergeMap(({ status }: { status: AnimalStatus }) =>
+          this.api.getPets(status)
+        ),
         untilDestroyed(this)
       )
       .subscribe((petsData: AnimalTableResponse[]) =>
@@ -76,6 +111,11 @@ export class PetsRootService {
   }
 
   public deletePosition(): void {}
+
+  // public changeStatusPet(): void{
+  //   this.api.getPets()
+
+  // }
 
   public get petsObservable$(): Observable<AnimalTableResponse[]> {
     return this.pets$.asObservable();

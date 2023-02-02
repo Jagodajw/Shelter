@@ -1,4 +1,4 @@
-import { Component, forwardRef, OnInit, Self } from '@angular/core';
+import { Component, forwardRef, Input, OnInit, Self } from '@angular/core';
 import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { BreedResponse } from 'backend/src/models/DictionaryModel';
 import { map, Observable, tap } from 'rxjs';
@@ -24,6 +24,17 @@ export class BreedAutocompleteComponent
   extends ControlValueAccessorsAbstract<ReturnValue>
   implements OnInit
 {
+  @Input() set speciesId(newSpeciesId: number | undefined | null) {
+    this.breedList$ = this.api.getBreed(newSpeciesId ?? undefined).pipe(
+      map(
+        (breedResponse: BreedResponse[]) =>
+          breedResponse.map((breed: BreedResponse) => ({
+            ID: breed.ID,
+            name: breed.breed,
+          })) as Select[]
+      )
+    );
+  }
   public breedList$!: Observable<Select[]>;
   public readonly control: FormControl = new FormControl();
   constructor(
@@ -47,7 +58,7 @@ export class BreedAutocompleteComponent
     this.shelter.selectedShelterChangeDetector$
       .pipe(
         tap(() => {
-          this.breedList$ = this.api.getBreed().pipe(
+          this.breedList$ = this.api.getBreed(this.speciesId ?? undefined).pipe(
             map(
               (breedResponse: BreedResponse[]) =>
                 breedResponse.map((breed: BreedResponse) => ({
