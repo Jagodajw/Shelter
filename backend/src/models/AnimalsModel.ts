@@ -39,6 +39,7 @@ export interface AnimalTableResponse {
   id_number: string;
   nr_chip: string;
   shelters_id: string;
+  adopted: boolean | null;
 }
 
 export type Gender = PrismaGender;
