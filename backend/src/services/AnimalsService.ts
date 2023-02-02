@@ -8,8 +8,8 @@ import {
   AnimalAdoptionRequest,
   AnimalDetailResponse,
   AnimalQuery,
-  AnimalQueryResponse,
   AnimalStatus,
+  AnimalTableResponse,
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
   RegisterAnimalResponse,
@@ -447,8 +447,8 @@ export async function getAdoptDataByAnimalId(
 
 export async function getAllAnimalsByQuery(
   query: AnimalQuery
-): Promise<AnimalQueryResponse[]> {
-  return prisma.animals.findMany({
+): Promise<AnimalTableResponse[]> {
+  const findResponse = await prisma.animals.findMany({
     where: {
       AND: [
         {
@@ -479,5 +479,26 @@ export async function getAllAnimalsByQuery(
         },
       ],
     },
+    select: {
+      ID: true,
+      name: true,
+      species: { select: { species: true } },
+      breed: { select: { breed: true } },
+      gender: true,
+      commune: { select: { commune: true } },
+      area: { select: { area: true } },
+      id_number: true,
+      nr_chip: true,
+      shelters_id: true,
+      adopted: true,
+    },
   });
+
+  return findResponse.map((response) => ({
+    ...response,
+    species: response.species?.species ?? '',
+    breed: response.breed?.breed ?? '',
+    commune: response.commune?.commune ?? '',
+    area: response.area?.area ?? '',
+  }));
 }

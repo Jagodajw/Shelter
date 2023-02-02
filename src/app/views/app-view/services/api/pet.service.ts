@@ -5,6 +5,7 @@ import {
   AdoptionResponse,
   AnimalAdoptionRequest,
   AnimalDetailResponse,
+  AnimalQuery,
   AnimalStatus,
   AnimalTableResponse,
   RegisterAddAnimalRequest,
@@ -71,6 +72,13 @@ export class PetService extends ApiService {
   ): Observable<AdoptDataByAnimalIdResponse> {
     return this.http.get<AdoptDataByAnimalIdResponse>(
       `${this.rootUrl}/adoptAnimal/${petId}`
+    );
+  }
+
+  public getPetsByQuery(query: AnimalQuery): Observable<AnimalTableResponse[]> {
+    return this.http.post<AnimalTableResponse[]>(
+      `${this.rootUrl}/animalsByQuery`,
+      query
     );
   }
 }

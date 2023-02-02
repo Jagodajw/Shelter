@@ -6,8 +6,8 @@ import {
   AdoptionResponse,
   AnimalAdoptionRequest,
   AnimalQuery,
-  AnimalQueryResponse,
   AnimalStatus,
+  AnimalTableResponse,
   RegisterAddAnimalResponse,
   RegisterAnimalAddRequest,
   RegisterAnimalEditRequest,
@@ -207,7 +207,7 @@ router.post(
       const query = req.body as AnimalQuery;
       const animalsByQueryResponse = await getAllAnimalsByQuery(query);
 
-      res.status(200).json(animalsByQueryResponse as AnimalQueryResponse[]);
+      res.status(200).json(animalsByQueryResponse as AnimalTableResponse[]);
     } catch (error: any) {
       console.log(error);
       res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
