@@ -1,4 +1,4 @@
-<form class="search" [formGroup]="searchEngineForm">
+<form class="search" [formGroup]="searchEngineForm" (submit)="searchAnimals()">
 
     <div class="search__main">
         <h2>Wyszukiwanie</h2>
@@ -23,7 +23,7 @@
         </span>
 
         <span class="input-quarter">
-            <app-breed-autocomplete formControlName="breed_id"></app-breed-autocomplete>
+            <app-breed-autocomplete [speciesId]="speciesId | async"  formControlName="breed_id"></app-breed-autocomplete>
         </span>
 
         <span class="input-quarter">
@@ -68,7 +68,7 @@
         </div>
     </div>
     <div class="search__btn-search">
-        <button mat-flat-button color="accent">
+        <button tpye="sumbit" mat-flat-button color="accent">
             {{"pets.search" | translate}}
         </button>
     </div>

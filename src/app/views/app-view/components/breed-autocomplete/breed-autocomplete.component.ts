@@ -77,7 +77,10 @@ export class BreedAutocompleteComponent
   }
 
   override handleValueChangeFromOutside(): void {
-    const value = this.value as BreedResponse;
-    this.control.patchValue({ ...value, name: value.breed });
+    this.control.patchValue(this.isValueAsBreedResponse(this.value) ?  { ...this.value, name: this.value.breed } : this.value);
+  }
+
+  private isValueAsBreedResponse(value: ReturnValue): value is BreedResponse {
+    return (value as BreedResponse)?.breed !== undefined;
   }
 }

@@ -1,5 +1,5 @@
-import { Component, forwardRef, OnInit, Self } from '@angular/core';
-import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit, Self } from '@angular/core';
+import { FormControl, NgControl } from '@angular/forms';
 import { AreaResponse } from 'backend/src/models/DictionaryModel';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
@@ -67,7 +67,10 @@ export class AreaAutocompleteComponent
   }
 
   override handleValueChangeFromOutside(): void {
-    const value = this.value as AreaResponse;
-    this.control.patchValue({ ...value, name: value.area });
+    this.control.patchValue(this.isValueAsAreaResponse(this.value) ?{ ...this.value, name: this.value.area } : this.value);
+  }
+
+  private isValueAsAreaResponse(value: ReturnValue): value is AreaResponse {
+    return (value as AreaResponse)?.area !== undefined;
   }
 }

@@ -13,7 +13,7 @@ import {
   CommuneResponse,
   SpeciesResponse,
   TypeAcceptanceResponse,
-  TypeAdoptionResponse,
+  TypeAdoptionResponse
 } from '../models/DictionaryModel';
 import {
   addArea,
@@ -44,7 +44,7 @@ import {
   updateColor,
   updateCommune,
   updateSpecies,
-  updateTypeAdoption,
+  updateTypeAdoption
 } from '../services/DictionaryService';
 
 const router = express.Router();
@@ -91,7 +91,6 @@ router.get('/species', authenticate, shelterAuthenticate, async (req, res) => {
 router.get('/breed', authenticate, shelterAuthenticate, async (req, res) => {
   try {
     const shelterId: string = req.headers['shelters_id'] as string;
-    const speciesId: string = req.query.speciesId as string;
     const dictionaryBreed = await getAllBreed(shelterId);
 
     res.json(dictionaryBreed as BreedResponse[]);
@@ -101,13 +100,13 @@ router.get('/breed', authenticate, shelterAuthenticate, async (req, res) => {
 });
 
 router.get(
-  '/breed?speciesId',
+  '/breed/:speciesId',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
     try {
       const shelterId: string = req.headers['shelters_id'] as string;
-      const speciesId: string = req.query.speciesId as string;
+      const speciesId: string = req.params.speciesId;
       const dictionaryBreed = await getAllBreedBySpeciesId(
         shelterId,
         Number.parseInt(speciesId)

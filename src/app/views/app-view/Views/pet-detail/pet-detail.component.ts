@@ -126,7 +126,7 @@ export class PetDetailComponent implements OnInit {
         ID: [],
         name: ['', Validators.required],
         species: ['', Validators.required],
-        type_adoption: ['', Validators.required],
+        typeAdoption: ['', Validators.required],
         date_of_adoption: [, Validators.required],
         introduced_employees_id: ['', Validators.required],
         accepted_employees_id: ['', Validators.required],
@@ -206,6 +206,20 @@ export class PetDetailComponent implements OnInit {
                 .get('dataPersonTakeAway')
                 ?.get('province_id')
                 ?.patchValue(petAdopted.dataPersonTakeAway?.province);
+
+              this.detailPetsOutForm
+                .get('dataPetOut')
+                ?.get('name')
+                ?.patchValue(
+                  this.detailPetsForm.get('registerAnimal')?.get('name')?.value
+                );
+              this.detailPetsOutForm
+                .get('dataPetOut')
+                ?.get('species')
+                ?.patchValue(
+                  this.detailPetsForm.get('registerAnimal')?.get('species')
+                    ?.value
+                );
             }),
             catchError((err) => {
               if (err.error.ERROR_CODE === 'ADOPTION_OF_ANIMAL_DOESNT_EXIST')

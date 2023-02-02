@@ -34,7 +34,9 @@ export class DataPetRegisterComponent implements OnInit {
         .get('species')
         ?.valueChanges.pipe(
           map((species: Select | null | string) => {
-            console.log(species);
+            (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
+              .get('breed')
+              ?.patchValue('');
             return ((species as Select)?.ID || undefined) as number | undefined;
           })
         ) ?? of(undefined);

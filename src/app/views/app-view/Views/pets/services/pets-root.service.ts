@@ -120,4 +120,8 @@ export class PetsRootService {
   public get petsObservable$(): Observable<AnimalTableResponse[]> {
     return this.pets$.asObservable();
   }
+
+  public getPetsByQuery(): void{
+    
+  }
 }
