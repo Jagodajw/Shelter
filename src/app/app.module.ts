@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import {
   HttpClient,
   HttpClientModule,
@@ -5,6 +6,7 @@ import {
 } from '@angular/common/http';
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -21,6 +23,8 @@ import { ErrorHandlerInteceptorService } from './interceptors/error-handler.inte
 import { ShelterInterceptorService } from './interceptors/shelter-interceptor.service';
 import { TokenApiRestInterceptorService } from './interceptors/token-api-rest-interceptor.service';
 import { AppInitService } from './services/app-init.service';
+import { registerLocaleData } from '@angular/common';
+import localePl from '@angular/common/locales/pl';
 
 export function appInit(appInitService: AppInitService): any {
   return () => appInitService.init();
@@ -37,6 +41,7 @@ export function appInit(appInitService: AppInitService): any {
     HttpClientModule,
     NoopAnimationsModule,
     MatSnackBarModule,
+    MatDatepickerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -46,7 +51,10 @@ export function appInit(appInitService: AppInitService): any {
     }),
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'pl' },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pl-PL',
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: ErrorHandlerInteceptorService,
@@ -62,10 +70,12 @@ export function appInit(appInitService: AppInitService): any {
       useClass: ShelterInterceptorService,
       multi: true,
     },
+    DatePipe,
   ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
+registerLocaleData(localePl);
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }

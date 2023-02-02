@@ -56,9 +56,7 @@ export class DictionaryService extends ApiService {
   public getBreed(speciesId?: number): Observable<BreedResponse[]> {
     if (speciesId === undefined)
       return this.http.get<BreedResponse[]>(`${this.rootUrl}/breed`);
-    return this.http.get<BreedResponse[]>(
-      `${this.rootUrl}/breed?speciesId=${speciesId}`
-    );
+    return this.http.get<BreedResponse[]>(`${this.rootUrl}/breed/${speciesId}`);
   }
 
   public addBreed(model: BreedRequest): Observable<BreedResponse> {

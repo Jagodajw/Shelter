@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -14,9 +14,10 @@ import { DictionaryService } from './services/api/dictionary.service';
 import { EmployeeService } from './services/api/employee.service';
 import { PetService } from './services/api/pet.service';
 import { ShelterService } from './services/shelter.service';
+import { ToolbarDateComponent } from './components/header/Components/toolbar-date/toolbar-date.component';
 
 @NgModule({
-  declarations: [AppViewComponent, HeaderComponent],
+  declarations: [AppViewComponent, HeaderComponent, ToolbarDateComponent],
   providers: [PetService, DictionaryService, EmployeeService, ShelterService],
   imports: [
     CommonModule,

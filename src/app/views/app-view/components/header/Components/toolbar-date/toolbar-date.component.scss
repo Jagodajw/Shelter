@@ -1,0 +1,30 @@
+:host {
+  display: block;
+  .toolbarDate {
+    color: white;
+    display: flex;
+    align-items: center;
+    line-height: 1;
+    &__text-h {
+      font-weight: 700;
+      font-size: 1.2rem;
+      padding-left: 2rem;
+      border-right-width: 1px;
+    }
+    &__date {
+      display: flex;
+      align-items: center;
+      margin-left: 0.5rem;
+      &span {
+        display: block;
+        font-weight: 700;
+      }
+      &-dayName {
+        text-transform: capitalize;
+      }
+      &-date {
+        margin-left: 0.5rem;
+      }
+    }
+  }
+}

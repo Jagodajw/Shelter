@@ -33,8 +33,8 @@ export class DatePickerRangeComponent
   }
   private initDateGroupByPickerType(): void {
     this.dateGroup = this._form.group({
-      From: [null],
-      To: [null],
+      from: [null],
+      to: [null],
     });
     return;
   }

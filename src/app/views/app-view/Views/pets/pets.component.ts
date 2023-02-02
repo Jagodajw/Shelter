@@ -10,16 +10,17 @@ import { PetsRootService } from './services/pets-root.service';
   providers: [PetsRootService],
 })
 export class PetsComponent implements OnInit {
-  public status: boolean = false;
+  public readonly status$: Observable<boolean>;
   public readonly pets$: Observable<AnimalTableResponse[]>;
   constructor(private readonly root: PetsRootService) {
     this.pets$ = this.root.petsObservable$;
+    this.status$ = this.root.status$.asObservable();
   }
 
   ngOnInit(): void {}
 
   public togglePetsView() {
-    this.status = !this.status;
+    this.root.status$.next(!this.root.status$.value);
   }
   public addPet(): void {
     this.root.addPet();

@@ -2,17 +2,13 @@
   <h1 class="header__logo">
     {{ "shelter.title" | translate }} {{ shelterName$ | async }}
   </h1>
-
+  <app-toolbar-date></app-toolbar-date>
   <span class="example-spacer"></span>
   <div class="header__link">
     <ul>
       <li *ngFor="let menuItem of menuItems">
-        <a
-          [routerLink]="['/app-view/' + menuItem.route]"
-          routerLinkActive
-          #link="routerLinkActive"
-          [ngClass]="{ active: link.isActive }"
-        >
+        <a [routerLink]="['/app-view/' + menuItem.route]" routerLinkActive #link="routerLinkActive"
+          [ngClass]="{ active: link.isActive }">
           <mat-icon>{{ menuItem.icon }}</mat-icon>
           <span class="nav-link">
             {{ menuItem.name | translate }}

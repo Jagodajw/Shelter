@@ -5,6 +5,7 @@ import {
   FormGroupDirective,
 } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { map, mergeMap, Observable, of } from 'rxjs';
 import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from '../select/select';
 
@@ -23,10 +24,23 @@ import { Select } from '../select/select';
 export class DataPetRegisterComponent implements OnInit {
   public sizeList: Select[] = sizeList;
   public genderList: Select[] = genderList;
+  public speciesId!: Observable<number | undefined>;
 
   constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.speciesId =
+      (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
+        .get('species')
+        ?.valueChanges.pipe(
+          map((species: Select | null | string) => {
+            (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
+              .get('breed')
+              ?.patchValue('');
+            return ((species as Select)?.ID || undefined) as number | undefined;
+          })
+        ) ?? of(undefined);
+  }
 
   Vaccination({ checked }: MatCheckboxChange): void {
     if (checked) {

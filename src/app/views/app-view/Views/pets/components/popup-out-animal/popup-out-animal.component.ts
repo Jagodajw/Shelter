@@ -42,7 +42,7 @@ export class PopupOutAnimalComponent implements OnInit {
       dataPersonTakeAway: this._form.group({
         name: [''],
         id_number: [''],
-        pesel: ['', [Validators.minLength(9), Validators.maxLength(9)]],
+        pesel: ['', Validators.pattern('[0-9]{11}')],
         nip: [null],
         email: ['', Validators.email],
         telephone: ['', [Validators.minLength(9), Validators.maxLength(9)]],

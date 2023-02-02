@@ -3,7 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { AnimalDetailResponse } from 'backend/src/models/AnimalsModel';
+import {
+  AdoptDataByAnimalIdResponse,
+  AnimalDetailResponse,
+} from 'backend/src/models/AnimalsModel';
 import {
   BehaviorSubject,
   catchError,
@@ -94,7 +97,7 @@ export class PetDetailComponent implements OnInit {
         shelters_id: [],
         name: ['', Validators.required],
         id_number: [''],
-        pesel: [null, [Validators.minLength(9), Validators.maxLength(9)]],
+        pesel: [null, Validators.pattern('[0-9]{11}')],
         nip: [null],
         email: ['', Validators.email],
         telephone: ['', [Validators.minLength(9), Validators.maxLength(9)]],
@@ -123,7 +126,7 @@ export class PetDetailComponent implements OnInit {
         ID: [],
         name: ['', Validators.required],
         species: ['', Validators.required],
-        type_adoption: ['', Validators.required],
+        typeAdoption: ['', Validators.required],
         date_of_adoption: [, Validators.required],
         introduced_employees_id: ['', Validators.required],
         accepted_employees_id: ['', Validators.required],
@@ -133,7 +136,7 @@ export class PetDetailComponent implements OnInit {
         ID: [],
         name: ['', Validators.required],
         id_number: [''],
-        pesel: [null, [Validators.minLength(9), Validators.maxLength(9)]],
+        pesel: [null, Validators.pattern('[0-9]{11}')],
         nip: [null],
         email: ['', Validators.email],
         telephone: ['', [Validators.minLength(9), Validators.maxLength(9)]],
@@ -168,11 +171,58 @@ export class PetDetailComponent implements OnInit {
                 ?.get('province_id')
                 ?.patchValue(pet.registerPeople?.province);
               this.isAdopted = !!pet.registerAnimal?.adopted;
+              if (this.isAdopted) this.getPetAdoptData();
             }),
             catchError((err) => {
               if (
                 err.error.ERROR_CODE === 'REGISTRATION_OF_ANIMAL_DOESNT_EXIST'
               )
+                this.backClicked();
+              return throwError(err);
+            })
+          )
+        ),
+        untilDestroyed(this)
+      )
+      .subscribe();
+  }
+  private getPetAdoptData(): void {
+    this.activatedRoute.params
+      .pipe(
+        filter((params: Params) => !!params['id']),
+        mergeMap((params: Params) =>
+          this.api.getPetAdoptDataById(params['id']).pipe(
+            tap((petAdopted: AdoptDataByAnimalIdResponse) => {
+              this.detailPetsOutForm.patchValue(petAdopted);
+              this.detailPetsOutForm
+                .get('dataPetOut')
+                ?.get('accepted_employees_id')
+                ?.patchValue(petAdopted.dataPetOut?.accepted_employees);
+              this.detailPetsOutForm
+                .get('dataPetOut')
+                ?.get('introduced_employees_id')
+                ?.patchValue(petAdopted.dataPetOut?.introduced_employees);
+              this.detailPetsOutForm
+                .get('dataPersonTakeAway')
+                ?.get('province_id')
+                ?.patchValue(petAdopted.dataPersonTakeAway?.province);
+
+              this.detailPetsOutForm
+                .get('dataPetOut')
+                ?.get('name')
+                ?.patchValue(
+                  this.detailPetsForm.get('registerAnimal')?.get('name')?.value
+                );
+              this.detailPetsOutForm
+                .get('dataPetOut')
+                ?.get('species')
+                ?.patchValue(
+                  this.detailPetsForm.get('registerAnimal')?.get('species')
+                    ?.value
+                );
+            }),
+            catchError((err) => {
+              if (err.error.ERROR_CODE === 'ADOPTION_OF_ANIMAL_DOESNT_EXIST')
                 this.backClicked();
               return throwError(err);
             })
