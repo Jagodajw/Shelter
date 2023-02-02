@@ -1,4 +1,4 @@
-import { Gender, Size, tableAnimals } from '@prisma/client';
+import { tableAnimals } from '@prisma/client';
 import { prisma } from '..';
 import { AnimalIdGenerator } from '../helpers/AnimalIdGenerator';
 import { MissingDictionaryAdder } from '../helpers/MissingDictionaryAdder';
@@ -7,6 +7,8 @@ import {
   AdoptionResponse,
   AnimalAdoptionRequest,
   AnimalDetailResponse,
+  AnimalQuery,
+  AnimalQueryResponse,
   AnimalStatus,
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
@@ -14,7 +16,7 @@ import {
   RegisterEditAnimalRequest,
   RegisterPeopleResponse,
   RegisterPersonAddRequest,
-  RegistrationResponse
+  RegistrationResponse,
 } from '../models/AnimalsModel';
 
 export async function getAllAnimalsByShelterId(
@@ -443,26 +445,39 @@ export async function getAdoptDataByAnimalId(
   });
 }
 
-interface AnimalQuery {
-  species_id: number | undefined;
-  breed_id: number | undefined;
-  commune_id: number | undefined;
-  area_id: number | undefined;
-  color_id: number | undefined;
-  gender: Gender | undefined;
-  size: Size;
-}
-
-export async function getAllAnimalsByQuery(query: AnimalQuery) {
-  prisma.animals.findMany({ where: {AND: [
-    {
-      species_id: query.species_id,
-      breed_id: query.breed_id,
-      commune_id: query.commune_id,
-      area_id: query.area_id,
-      color_id: query.color_id,
-      gender: query.gender,
-      size: query.size,
-    }
-  ]} });
+export async function getAllAnimalsByQuery(
+  query: AnimalQuery
+): Promise<AnimalQueryResponse[]> {
+  return prisma.animals.findMany({
+    where: {
+      AND: [
+        {
+          species_id: query.species_id,
+          breed_id: query.breed_id,
+          commune_id: query.commune_id,
+          area_id: query.area_id,
+          color_id: query.color_id,
+          gender: query.gender,
+          size: query.size,
+          sterilization: query.sterilization,
+        },
+        {
+          OR: [
+            { name: { contains: query.search } },
+            { nr_chip: { contains: query.search } },
+            { id_number: { contains: query.search } },
+          ],
+        },
+        {
+          date_of_birth:
+            query.datePickerBirthFromTo !== undefined
+              ? {
+                  gte: query.datePickerBirthFromTo?.from,
+                  lte: query.datePickerBirthFromTo?.to,
+                }
+              : undefined,
+        },
+      ],
+    },
+  });
 }

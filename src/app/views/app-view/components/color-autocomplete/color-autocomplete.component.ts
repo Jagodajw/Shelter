@@ -1,5 +1,5 @@
-import { Component, forwardRef, OnInit, Self } from '@angular/core';
-import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit, Self } from '@angular/core';
+import { FormControl, NgControl } from '@angular/forms';
 import { ColorResponse } from 'backend/src/models/DictionaryModel';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
@@ -65,8 +65,12 @@ export class ColorAutocompleteComponent
     if (this.isDisabled) return this.control.disable();
     this.control.enable();
   }
+
   override handleValueChangeFromOutside(): void {
-    const value = this.value as ColorResponse;
-    this.control.patchValue({ ...value, name: value.color });
+    this.control.patchValue(this.isValueAsColorResponse(this.value) ? { ...this.value, name: this.value.color } : this.value);
+  }
+
+  private isValueAsColorResponse(value: ReturnValue): value is ColorResponse {
+    return (value as ColorResponse)?.color !== undefined;
   }
 }

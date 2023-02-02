@@ -70,7 +70,14 @@ export class SpeciesAutocompleteComponent
   }
 
   override handleValueChangeFromOutside(): void {
-    const value = this.value as SpeciesResponse;
-    this.control.patchValue({ ...value, name: value.species });
+    this.control.patchValue(
+      this.isValueAsSpeciesResponse(this.value) ?
+      { ...this.value, name: this.value.species } 
+      : this.value
+    );
+  }
+
+  private isValueAsSpeciesResponse(value: ReturnValue): value is SpeciesResponse {
+    return (value as SpeciesResponse)?.species !== undefined;
   }
 }

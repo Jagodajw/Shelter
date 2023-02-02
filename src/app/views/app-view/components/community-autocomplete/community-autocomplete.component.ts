@@ -1,5 +1,5 @@
-import { Component, forwardRef, OnInit, Self } from '@angular/core';
-import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, OnInit, Self } from '@angular/core';
+import { FormControl, NgControl } from '@angular/forms';
 import { CommuneResponse } from 'backend/src/models/DictionaryModel';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
@@ -67,7 +67,10 @@ export class CommunityAutocompleteComponent
   }
 
   override handleValueChangeFromOutside(): void {
-    const value = this.value as CommuneResponse;
-    this.control.patchValue({ ...value, name: value.commune });
+    this.control.patchValue(this.isValueAsCommuneResponse(this.value) ? { ...this.value, name: this.value.commune } : this.value);
+  }
+
+  private isValueAsCommuneResponse(value: ReturnValue): value is CommuneResponse {
+    return (value as CommuneResponse)?.commune !== undefined;
   }
 }

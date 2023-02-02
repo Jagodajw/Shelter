@@ -17,6 +17,7 @@ import {
   TypeAdoption,
   Type_of_person as PrismaTypeOfPerson,
 } from '@prisma/client';
+import { RangeDate } from './CommonModel';
 import {
   AreaResponse,
   BreedResponse,
@@ -182,3 +183,21 @@ export type AdoptDataByAnimalIdResponse = {
         commune: Commune | null;
       };
 };
+
+export interface AnimalQuery {
+  species_id: number | undefined;
+  breed_id: number | undefined;
+  commune_id: number | undefined;
+  area_id: number | undefined;
+  color_id: number | undefined;
+  gender: Gender | undefined;
+  size: Size | undefined;
+  sterilization: boolean;
+  search: string | undefined;
+  cuarantine: boolean; //todo
+  unvaccinated: boolean; //todo
+  datePickerBirthFromTo: RangeDate | undefined;
+  datePickerAccepted: RangeDate | undefined; //todo;
+}
+
+export type AnimalQueryResponse = Animals;

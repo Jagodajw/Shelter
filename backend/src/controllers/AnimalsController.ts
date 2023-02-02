@@ -5,6 +5,8 @@ import {
   AdoptDataByAnimalIdResponse,
   AdoptionResponse,
   AnimalAdoptionRequest,
+  AnimalQuery,
+  AnimalQueryResponse,
   AnimalStatus,
   RegisterAddAnimalResponse,
   RegisterAnimalAddRequest,
@@ -17,6 +19,7 @@ import {
 import {
   adoptAnimal,
   getAdoptDataByAnimalId,
+  getAllAnimalsByQuery,
   getAllAnimalsByShelterId,
   getAnimalById,
   getAnimalDataAdoption,
@@ -190,6 +193,23 @@ router.put(
       res.json(updateAnimalResponse as RegisterAddAnimalResponse);
     } catch (error: any) {
       console.error(error);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
+    }
+  }
+);
+
+router.post(
+  '/animalsByQuery',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const query = req.body as AnimalQuery;
+      const animalsByQueryResponse = await getAllAnimalsByQuery(query);
+
+      res.status(200).json(animalsByQueryResponse as AnimalQueryResponse[]);
+    } catch (error: any) {
+      console.log(error);
       res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
     }
   }
