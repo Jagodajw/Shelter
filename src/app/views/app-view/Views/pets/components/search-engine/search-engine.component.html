@@ -23,7 +23,7 @@
         </span>
 
         <span class="input-quarter">
-            <app-breed-autocomplete [speciesId]="speciesId | async"  formControlName="breed_id"></app-breed-autocomplete>
+            <app-breed-autocomplete [speciesId]="speciesId | async" formControlName="breed_id"></app-breed-autocomplete>
         </span>
 
         <span class="input-quarter">
@@ -67,8 +67,11 @@
             </p>
         </div>
     </div>
-    <div class="search__btn-search">
-        <button tpye="sumbit" mat-flat-button color="accent">
+    <div class="search__btn">
+        <button (click)="resetSearch()" class="search__btn-reset" mat-flat-button color="accent">
+            {{"pets.resetSearch" | translate}}
+        </button>
+        <button class="search__btn-search" tpye="sumbit" mat-flat-button color="accent">
             {{"pets.search" | translate}}
         </button>
     </div>

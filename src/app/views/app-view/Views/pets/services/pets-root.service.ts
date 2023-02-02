@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
+  AnimalQuery,
   AnimalStatus,
   AnimalTableResponse,
 } from 'backend/src/models/AnimalsModel';
@@ -26,6 +27,8 @@ export class PetsRootService {
   public status$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
+  public readonly searchQuery$: BehaviorSubject<AnimalQuery | null> =
+    new BehaviorSubject<AnimalQuery | null>(null);
 
   constructor(
     private dialog: MatDialog,
@@ -57,28 +60,31 @@ export class PetsRootService {
   }
 
   private shelterChangeDetector(): void {
-    // this.status$.subscribe({
-    //   next: (x) => console.log(x),
-    // });
-    // this.shelter.selectedShelterChangeDetector$
-    //   .pipe(
-    // mergeMap(() => this.api.getPets()),
-    //     untilDestroyed(this)
-    //   )
-    //   .subscribe((petsData: AnimalTableResponse[]) =>
-    //     this.pets$.next(petsData)
-    //   );
-
-    combineLatest(this.status$, this.shelter.selectedShelterChangeDetector$)
+    combineLatest(
+      this.status$,
+      this.searchQuery$,
+      this.shelter.selectedShelterChangeDetector$
+    )
       .pipe(
         map(
-          ([status]) =>
-            ({ status: status ? 'adopted' : 'staying' } as {
+          ([status, searchQuery]) =>
+            ({ status: status ? 'adopted' : 'staying', searchQuery } as {
               status: AnimalStatus;
+              searchQuery: AnimalQuery | null;
             })
         ),
-        mergeMap(({ status }: { status: AnimalStatus }) =>
-          this.api.getPets(status)
+        mergeMap(
+          ({
+            status,
+            searchQuery,
+          }: {
+            status: AnimalStatus;
+            searchQuery: AnimalQuery | null;
+          }) => {
+            this.api.getPets(status);
+            if (searchQuery !== null)
+              return this.api.getPetsByQuery(searchQuery, status);
+          }
         ),
         untilDestroyed(this)
       )
@@ -112,16 +118,13 @@ export class PetsRootService {
 
   public deletePosition(): void {}
 
-  // public changeStatusPet(): void{
-  //   this.api.getPets()
-
-  // }
-
   public get petsObservable$(): Observable<AnimalTableResponse[]> {
     return this.pets$.asObservable();
   }
 
-  public getPetsByQuery(): void{
-    
+  public getPetsByQuery(query: AnimalQuery): void {
+    this.api.getPetsByQuery(query).subscribe({
+      next: (query) => this.pets$.next(query),
+    });
   }
 }

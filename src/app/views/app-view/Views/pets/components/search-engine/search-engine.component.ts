@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { AnimalQuery } from 'backend/src/models/AnimalsModel';
 import { map, Observable, of } from 'rxjs';
 import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from 'src/app/views/app-view/components/select/select';
+import { PetsRootService } from '../../services/pets-root.service';
 
 @Component({
   selector: 'app-search-engine',
@@ -14,7 +16,7 @@ export class SearchEngineComponent implements OnInit {
   public sizeList: Select[] = sizeList;
   public genderList: Select[] = genderList;
   public speciesId!: Observable<number | undefined>;
-  constructor(private _form: FormBuilder) {}
+  constructor(private _form: FormBuilder, private root: PetsRootService) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -47,23 +49,30 @@ export class SearchEngineComponent implements OnInit {
   }
 
   searchAnimals(): void {
-    const data = {
-      spspecies_id: this.searchEngineForm.get('species_id')?.value?.ID,
+    const data: AnimalQuery = {
+      species_id: this.searchEngineForm.get('species_id')?.value?.ID,
       breed_id: this.searchEngineForm.get('breed_id')?.value?.ID,
       commune_id: this.searchEngineForm.get('commune_id')?.value?.ID,
       area_id: this.searchEngineForm.get('area_id')?.value?.ID,
       color_id: this.searchEngineForm.get('color_id')?.value?.ID,
-      gender: this.searchEngineForm.get('gender')?.value,
-      size: this.searchEngineForm.get('size')?.value,
-      sterilization: this.searchEngineForm.get('sterilization')?.value,
-      search: this.searchEngineForm.get('search')?.value,
-      cuarantine: this.searchEngineForm.get('cuarantine')?.value,
-      unvaccinated: this.searchEngineForm.get('unvaccinated')?.value,
-      datePickerBirthFromTo: this.searchEngineForm.get('datePickerBirthFromTo')
-        ?.value,
+      gender: this.searchEngineForm.get('gender')?.value ?? undefined,
+      size: this.searchEngineForm.get('size')?.value ?? undefined,
+      sterilization:
+        this.searchEngineForm.get('sterilization')?.value ?? undefined,
+      search: this.searchEngineForm.get('search')?.value ?? undefined,
+      cuarantine: this.searchEngineForm.get('cuarantine')?.value ?? undefined,
+      unvaccinated:
+        this.searchEngineForm.get('unvaccinated')?.value ?? undefined,
+      datePickerBirthFromTo:
+        this.searchEngineForm.get('datePickerBirthFromTo')?.value ?? undefined,
       datePickerAccepted:
-        this.searchEngineForm.get('datePickerAccepted')?.value,
+        this.searchEngineForm.get('datePickerAccepted')?.value ?? undefined,
     };
-    console.log(data);
+    this.root.searchQuery$.next(data);
+  }
+
+  resetSearch(): void {
+    this.searchEngineForm.reset();
+    this.root.searchQuery$.next(null);
   }
 }

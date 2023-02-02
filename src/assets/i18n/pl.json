@@ -50,7 +50,8 @@
       "comments": "Uwagi wydania"
     },
     "vaccination": "Szczepienie",
-    "dateVaccination": "Data szczepienia"
+    "dateVaccination": "Data szczepienia",
+    "resetSearch": "Wyczyść"
   },
   "people": {
     "title": "Osoby",

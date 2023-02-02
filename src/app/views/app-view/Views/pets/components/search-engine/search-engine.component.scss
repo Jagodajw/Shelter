@@ -28,13 +28,22 @@
         justify-content: space-around;
       }
     }
-    &__btn-search {
+    &__btn {
       display: flex;
       justify-content: flex-end;
+
       & button {
+        margin: 20px;
         padding: 3px;
         width: 200px;
         letter-spacing: 5px;
+      }
+      &-reset {
+        background-color: white;
+        color: red;
+        border: 1px solid #514edd;
+      }
+      &-search {
         background-color: #514edd;
       }
     }
