@@ -199,13 +199,17 @@ router.put(
 );
 
 router.post(
-  '/animalsByQuery',
+  '/animalsByQuery/:status',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
     try {
+      const animalStatus: AnimalStatus = req.params.status as AnimalStatus;
       const query = req.body as AnimalQuery;
-      const animalsByQueryResponse = await getAllAnimalsByQuery(query);
+      const animalsByQueryResponse = await getAllAnimalsByQuery(
+        query,
+        animalStatus
+      );
 
       res.status(200).json(animalsByQueryResponse as AnimalTableResponse[]);
     } catch (error: any) {

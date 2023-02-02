@@ -22,7 +22,7 @@ import {
 export async function getAllAnimalsByShelterId(
   shelterId: string,
   animalStatus: AnimalStatus
-): Promise<tableAnimals[]> {
+) {
   return await prisma.tableAnimals.findMany({
     where: { shelters_id: shelterId, adopted: animalStatus === 'adopted' },
   });
@@ -446,7 +446,8 @@ export async function getAdoptDataByAnimalId(
 }
 
 export async function getAllAnimalsByQuery(
-  query: AnimalQuery
+  query: AnimalQuery,
+  animalStatus: AnimalStatus
 ): Promise<AnimalTableResponse[]> {
   const findResponse = await prisma.animals.findMany({
     where: {
@@ -460,6 +461,7 @@ export async function getAllAnimalsByQuery(
           gender: query.gender,
           size: query.size,
           sterilization: query.sterilization,
+          adopted: animalStatus === 'adopted',
         },
         {
           OR: [

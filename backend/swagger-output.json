@@ -344,13 +344,19 @@
         }
       }
     },
-    "/animalsByQuery": {
+    "/animalsByQuery/{status}": {
       "post": {
         "tags": [
           "Animals"
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
           {
             "name": "authorization",
             "in": "header",

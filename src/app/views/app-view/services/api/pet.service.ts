@@ -75,9 +75,12 @@ export class PetService extends ApiService {
     );
   }
 
-  public getPetsByQuery(query: AnimalQuery): Observable<AnimalTableResponse[]> {
+  public getPetsByQuery(
+    query: AnimalQuery,
+    status: AnimalStatus = 'staying'
+  ): Observable<AnimalTableResponse[]> {
     return this.http.post<AnimalTableResponse[]>(
-      `${this.rootUrl}/animalsByQuery`,
+      `${this.rootUrl}/animalsByQuery/${status}`,
       query
     );
   }
