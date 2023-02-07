@@ -18,6 +18,7 @@ export class ShelterService {
     private readonly api: ShelterApiService
   ) {
     const shelter: Shelters = this.storage.get('shelter') as Shelters;
+    console.log(shelter);
     this.selectedShelter$.next(shelter ?? null);
   }
 

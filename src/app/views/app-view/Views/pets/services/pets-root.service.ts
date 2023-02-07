@@ -121,7 +121,5 @@ export class PetsRootService {
     return this.pets$.asObservable();
   }
 
-  public getPetsByQuery(): void{
-    
-  }
+  public getPetsByQuery(): void {}
 }
