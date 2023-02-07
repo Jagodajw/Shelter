@@ -6,6 +6,7 @@ import {
   AdoptDataByAnimalIdResponse,
   AdoptionResponse,
   AnimalAdoptionRequest,
+  AnimalData,
   AnimalDetailResponse,
   AnimalQuery,
   AnimalStatus,
@@ -22,10 +23,35 @@ import {
 export async function getAllAnimalsByShelterId(
   shelterId: string,
   animalStatus: AnimalStatus
-) {
-  return await prisma.tableAnimals.findMany({
-    where: { shelters_id: shelterId, adopted: animalStatus === 'adopted' },
+): Promise<AnimalTableResponse[]> {
+  const response = await prisma.animals.findMany({
+    where: {
+      shelters_id: shelterId,
+      adopted: animalStatus === 'adopted',
+      archived: false,
+    },
+    select: {
+      ID: true,
+      name: true,
+      species: { select: { species: true } },
+      breed: { select: { breed: true } },
+      gender: true,
+      commune: { select: { commune: true } },
+      area: { select: { area: true } },
+      id_number: true,
+      nr_chip: true,
+      shelters_id: true,
+      adopted: true,
+    },
   });
+
+  return await response.map((response) => ({
+    ...response,
+    species: response.species?.species ?? '',
+    breed: response.breed?.breed ?? '',
+    commune: response.commune?.commune ?? '',
+    area: response.area?.area ?? '',
+  }));
 }
 
 export async function getAnimalById(
@@ -480,6 +506,7 @@ export async function getAllAnimalsByQuery(
               : undefined,
         },
       ],
+      archived: false,
     },
     select: {
       ID: true,
@@ -503,4 +530,11 @@ export async function getAllAnimalsByQuery(
     commune: response.commune?.commune ?? '',
     area: response.area?.area ?? '',
   }));
+}
+
+export async function archiveAnimal(animalId: string): Promise<AnimalData> {
+  return await prisma.animals.update({
+    where: { ID: animalId },
+    data: { archived: true },
+  });
 }

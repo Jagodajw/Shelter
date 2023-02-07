@@ -33,7 +33,6 @@ export class BreedAutocompleteComponent
   }
 
   ngOnInit(): void {
-    // this.shelterChangeDetector();
     this.control.valueChanges.subscribe({
       next: (value) => {
         if (value) this.value = value;
