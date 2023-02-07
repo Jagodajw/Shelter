@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AnimalQuery } from 'backend/src/models/AnimalsModel';
-import { map, Observable, of } from 'rxjs';
+import { filter, map, Observable, of } from 'rxjs';
 import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from 'src/app/views/app-view/components/select/select';
 import { PetsRootService } from '../../services/pets-root.service';
 
+@UntilDestroy()
 @Component({
   selector: 'app-search-engine',
   templateUrl: './search-engine.component.html',
@@ -20,7 +22,7 @@ export class SearchEngineComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-
+    this.resetSearchQuerDetector();
     this.speciesId =
       this.searchEngineForm.get('species_id')?.valueChanges.pipe(
         map((species: Select | null | string) => {
@@ -72,7 +74,18 @@ export class SearchEngineComponent implements OnInit {
   }
 
   resetSearch(): void {
-    this.searchEngineForm.reset();
     this.root.searchQuery$.next(null);
+  }
+
+  private resetSearchQuerDetector(): void {
+    this.root.searchQuery$
+      .asObservable()
+      .pipe(
+        filter((searchQuery: AnimalQuery | null) => searchQuery === null),
+        untilDestroyed(this)
+      )
+      .subscribe({
+        next: () => this.searchEngineForm.reset(),
+      });
   }
 }

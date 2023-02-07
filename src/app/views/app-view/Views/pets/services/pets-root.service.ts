@@ -19,6 +19,11 @@ import { PetService } from '../../../services/api/pet.service';
 import { ShelterService } from '../../../services/shelter.service';
 import { PopupOutAnimalComponent } from '../components/popup-out-animal/popup-out-animal.component';
 import { PopupRegisterComponent } from '../components/popup-register/popup-register.component';
+
+interface ChangesParams {
+  status: AnimalStatus;
+  searchQuery: AnimalQuery | null;
+}
 @UntilDestroy()
 @Injectable()
 export class PetsRootService {
@@ -35,7 +40,7 @@ export class PetsRootService {
     private readonly api: PetService,
     private readonly shelter: ShelterService
   ) {
-    this.shelterChangeDetector();
+    this.changeDetector();
   }
 
   public addPet(): void {
@@ -59,33 +64,30 @@ export class PetsRootService {
       .subscribe();
   }
 
-  private shelterChangeDetector(): void {
+  private changeDetector(): void {
     combineLatest(
       this.status$,
       this.searchQuery$,
-      this.shelter.selectedShelterChangeDetector$
+      this.shelter.selectedShelterChangeDetector$.pipe(
+        tap((x) => this.searchQuery$.next(null))
+      )
     )
       .pipe(
         map(
           ([status, searchQuery]) =>
-            ({ status: status ? 'adopted' : 'staying', searchQuery } as {
-              status: AnimalStatus;
-              searchQuery: AnimalQuery | null;
-            })
+            ({
+              status: status ? 'adopted' : 'staying',
+              searchQuery,
+            } as ChangesParams)
         ),
         mergeMap(
-          ({
-            status,
-            searchQuery,
-          }: {
-            status: AnimalStatus;
-            searchQuery: AnimalQuery | null;
-          }) => {
-            this.api.getPets(status);
+          ({ status, searchQuery }: ChangesParams) => {
             if (searchQuery !== null)
               return this.api.getPetsByQuery(searchQuery, status);
+            return this.api.getPets(status);
           }
         ),
+
         untilDestroyed(this)
       )
       .subscribe((petsData: AnimalTableResponse[]) =>
