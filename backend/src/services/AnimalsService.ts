@@ -546,7 +546,7 @@ export async function getNumberOfAnimalsVaccinationChecks(): Promise<number> {
     where: { vaccination: true, archived: false },
   });
 
-  return animals.filter(({ date_vaccination, name }: Animals) => {
+  return animals.filter(({ date_vaccination }: Animals) => {
     const vaccinationAlertDateFrom: Date = new Date(date_vaccination as Date);
     vaccinationAlertDateFrom.setFullYear(
       vaccinationAlertDateFrom.getFullYear() + 1
@@ -556,12 +556,23 @@ export async function getNumberOfAnimalsVaccinationChecks(): Promise<number> {
     );
 
     const actualDateTime: number = new Date().getTime();
-    console.log(name, vaccinationAlertDateFrom.getTime(), actualDateTime);
 
     return actualDateTime >= vaccinationAlertDateFrom.getTime();
   }).length;
 }
 
 export async function getNumberOfAnimalsReleaseControl(): Promise<number> {
-  return 0;
+  const adoption = await prisma.adoption.findMany({
+    where: { animals: { archived: false, adopted: true } },
+  });
+
+  return adoption.filter(({ date_of_adoption }) => {
+    const adoptionAlertDateFrom: Date = new Date(date_of_adoption);
+    adoptionAlertDateFrom.setFullYear(adoptionAlertDateFrom.getFullYear() + 1);
+
+    const actualDateTime: number = new Date().getTime();
+    const adoptionAlertDateFromTime: number = adoptionAlertDateFrom.getTime();
+
+    return actualDateTime >= adoptionAlertDateFromTime;
+  }).length;
 }
