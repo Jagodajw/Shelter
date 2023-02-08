@@ -9,7 +9,8 @@
                 </button>
             </div>
             <div class="demo-section">
-                <button mat-raised-button matBadge="8" type="button" matBadgePosition="before" matBadgeColor="accent">
+                <button mat-raised-button matBadge="{{numberOfAnimalsVaccinationChecks | async}}" type="button"
+                    matBadgePosition="before" matBadgeColor="accent">
                     {{"pets.controlToVaccination" | translate}}
                 </button>
             </div>

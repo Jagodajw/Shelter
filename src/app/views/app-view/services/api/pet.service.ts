@@ -89,4 +89,10 @@ export class PetService extends ApiService {
   public deletePet(petId: string): Observable<AnimalData> {
     return this.http.delete<AnimalData>(`${this.rootUrl}/animal/${petId}`);
   }
+
+  public getNumberOfAnimalsVaccinationChecks(): Observable<number> {
+    return this.http.get<number>(
+      `${this.rootUrl}/numberOfAnimalsVaccinationChecks`
+    );
+  }
 }

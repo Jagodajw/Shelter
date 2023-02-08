@@ -5,6 +5,7 @@ import { AnimalQuery } from 'backend/src/models/AnimalsModel';
 import { filter, map, Observable, of } from 'rxjs';
 import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from 'src/app/views/app-view/components/select/select';
+import { PetService } from 'src/app/views/app-view/services/api/pet.service';
 import { PetsRootService } from '../../services/pets-root.service';
 
 @UntilDestroy()
@@ -18,7 +19,12 @@ export class SearchEngineComponent implements OnInit {
   public sizeList: Select[] = sizeList;
   public genderList: Select[] = genderList;
   public speciesId!: Observable<number | undefined>;
-  constructor(private _form: FormBuilder, private root: PetsRootService) {}
+  public numberOfAnimalsVaccinationChecks!: Observable<number>;
+  constructor(
+    private _form: FormBuilder,
+    private root: PetsRootService,
+    private apiPet: PetService
+  ) {}
 
   ngOnInit(): void {
     this.buildForm();
@@ -30,6 +36,8 @@ export class SearchEngineComponent implements OnInit {
           return ((species as Select)?.ID || undefined) as number | undefined;
         })
       ) ?? of(undefined);
+
+    this.setNumberOfAnimalsVaccinationChecks();
   }
 
   public buildForm(): void {
@@ -87,5 +95,10 @@ export class SearchEngineComponent implements OnInit {
       .subscribe({
         next: () => this.searchEngineForm.reset(),
       });
+  }
+
+  private setNumberOfAnimalsVaccinationChecks(): void {
+    this.numberOfAnimalsVaccinationChecks =
+      this.apiPet.getNumberOfAnimalsVaccinationChecks();
   }
 }
