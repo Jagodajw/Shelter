@@ -141,5 +141,8 @@
   },
   "validators": {
     "required": "Pole jest wymagane"
+  },
+  "documents": {
+    "upload": "Dodaj załącznik"
   }
 }

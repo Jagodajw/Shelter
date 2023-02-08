@@ -1,6 +1,12 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormControlName,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
@@ -29,6 +35,7 @@ export class PetDetailComponent implements OnInit {
   isEditMode$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public isAdopted: boolean = false;
   public edit: boolean = false;
+  public attachments: FormControl = new FormControl();
   constructor(
     private readonly _form: FormBuilder,
     private _location: Location,
@@ -239,5 +246,40 @@ export class PetDetailComponent implements OnInit {
         this.isEditMode$.next(false);
       },
     });
+  }
+
+  downloadAttachment(attachmentId: string): void {
+    // if (!this.data?.id) {
+    //     this.notification.openFromComponent(NotificationComponent, {
+    //         data: {
+    //             title: this.translocoService.translate('settings.save'),
+    //             variant: 'error',
+    //         },
+    //     });
+    //     return;
+    // }
+    // this.customApi
+    //     .documentAttachmentAttachmentIdGet(attachmentId, this.data.id)
+    //     .subscribe((file: Blob) => FileSaver.saveAs(file));
+  }
+
+  deleteAttachment(attachmentId: string): void {
+    // if (!this.data?.id) return;
+    // this.iCApiDocumentService
+    //     .documentDeleteDocumentIdAttachmentDelete(
+    //         this.data.id,
+    //         attachmentId,
+    //     )
+    //     .subscribe(() => {
+    //         this.notification.openFromComponent(NotificationComponent, {
+    //             data: {
+    //                 title: this.translocoService.translate(
+    //                     'common.delete-success',
+    //                 ),
+    //                 variant: 'success',
+    //             },
+    //         });
+    //         this.sendModel.emit({ refreshPage: true });
+    //     });
   }
 }

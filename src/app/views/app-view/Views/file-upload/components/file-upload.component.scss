@@ -1,0 +1,28 @@
+:host {
+  display: block;
+
+  .input-attach {
+    width: 100%;
+    input {
+      display: none;
+    }
+    &-btn {
+      background-color: #514edd;
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 0.5rem;
+      transition-duration: 200ms;
+      border: none;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .list-attach {
+    margin-bottom: 10px;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+}

@@ -11,10 +11,10 @@ import { DataPetRegisterModule } from '../../components/data-pet-register/data-p
 import { DataRegisterModule } from '../../components/data-register/data-register.module';
 import { DataPetOutModule } from '../../components/data-pet-out/date-pet-out.module';
 import { DataPersonTakeAwayModule } from '../../components/data-person-take-away/data-person-take-away.module';
-import { FileUploadModule } from '../../components/file-upload/file-upload.module';
 import { MatIconModule } from '@angular/material/icon';
 import { ButtonModule } from '../../components/button/button.module';
 import { MatButtonModule } from '@angular/material/button';
+import { FileUploadModule } from '../file-upload/file-upload.module';
 
 @NgModule({
   declarations: [PetDetailComponent],
@@ -31,10 +31,10 @@ import { MatButtonModule } from '@angular/material/button';
     DataRegisterModule,
     DataPetOutModule,
     DataPersonTakeAwayModule,
-    FileUploadModule,
     MatIconModule,
     MatButtonModule,
     ButtonModule,
+    FileUploadModule,
   ],
 })
 export class PetDetailModule {}

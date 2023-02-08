@@ -1,0 +1,50 @@
+:host {
+  display: block;
+
+  .list-none {
+    &-content {
+      display: flex;
+      align-items: center;
+      &-icon {
+        width: 1.5rem;
+      }
+      &-text {
+        font-size: 1rem;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+      }
+      &-button {
+        display: flex;
+        margin-left: 0.5rem;
+        & mat-icon {
+          color: white;
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  .icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    height: 24px;
+    width: 24px;
+
+    &-download {
+      background-color: #5a6bff;
+    }
+
+    &-remove {
+      background-color: rgb(239 89 89);
+    }
+  }
+
+  .attachment {
+    color: aquamarine;
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    font-weight: 600;
+    cursor: pointer;
+  }
+}

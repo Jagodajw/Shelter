@@ -1,0 +1,14 @@
+<div class="input-attach">
+    <input type="file" multiple="multiple" (change)="onFileSelected($event)" #fileUpload />
+    <button (click)="fileUpload.click()"
+        class="input-attach-btn"
+        type="button">
+        {{ label | translate }}
+    </button>
+    <ng-container *ngIf="!!files?.length">
+        <ul class="list-attach">
+            <app-upload-attachment *ngFor="let file of files" [file]="file" (remove)="removeAttachment($event)"
+                (download)="downloadAttachment.emit($event)"></app-upload-attachment>
+        </ul>
+    </ng-container>
+</div>

@@ -80,13 +80,12 @@ export class PetsRootService {
               searchQuery,
             } as ChangesParams)
         ),
-        mergeMap(
-          ({ status, searchQuery }: ChangesParams) => {
-            if (searchQuery !== null)
-              return this.api.getPetsByQuery(searchQuery, status);
-            return this.api.getPets(status);
-          }
-        ),
+        mergeMap(({ status, searchQuery }: ChangesParams) => {
+          console.log(searchQuery);
+          if (searchQuery !== null)
+            return this.api.getPetsByQuery(searchQuery, status);
+          return this.api.getPets(status);
+        }),
 
         untilDestroyed(this)
       )

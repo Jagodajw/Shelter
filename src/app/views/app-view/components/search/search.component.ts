@@ -1,35 +1,17 @@
-import { Component, forwardRef, Input, OnInit, Self } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  NgControl,
-  NG_VALUE_ACCESSOR,
-} from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Component, Input, OnInit, Self } from '@angular/core';
+import { FormBuilder, FormControl, NgControl } from '@angular/forms';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
-import { SearchResult } from './search.interface';
 
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.scss'],
-  // providers: [
-  //   {
-  //     provide: NG_VALUE_ACCESSOR,
-  //     useExisting: forwardRef(() => SearchComponent),
-  //     multi: true,
-  //   },
-  // ],
 })
 export class SearchComponent
   extends ControlValueAccessorsAbstract
   implements OnInit
 {
   @Input() placeholder = '';
-  public search: FormControl = new FormControl();
-  // public searchResults: Observable<SearchResult[]> | undefined;
-  // public minimumChars: Observable<boolean> | undefined;
-  // public noFound: Observable<boolean> | undefined;
   constructor(@Self() ngControl: NgControl, private formBuilder: FormBuilder) {
     super(ngControl);
   }
@@ -37,12 +19,14 @@ export class SearchComponent
   ngOnInit(): void {}
 
   public clearForm(): void {
-    //zrobic wyszukiwanie tutaj po kliku + errror
-    this.search.setValue('');
+    this.value = '';
+  }
+
+  public onInput(event: Event): void {
+    this.value = (event.target as HTMLInputElement).value;
   }
 
   keyDownFunction(event: any) {
-    //zrobic wyszukiwanie tutaj po enterze + errror
     if (event.code === 'Enter') {
       this.clearForm();
     }

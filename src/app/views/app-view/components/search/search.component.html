@@ -1,6 +1,6 @@
 <mat-form-field class="input-full">
     <mat-label>{{placeholder | translate }}</mat-label>
-    <input [formControl]="search" matInput type="text" (keydown)="keyDownFunction($event)">
+    <input [value]="value" matInput type="text" (input)="onInput($event)"  (keydown)="keyDownFunction($event)">
     <button matSuffix mat-icon-button aria-label="Clear" (click)="clearForm()">
         <mat-icon>close</mat-icon>
     </button>
