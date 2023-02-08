@@ -12,9 +12,11 @@ import { PetsRootService } from './services/pets-root.service';
 export class PetsComponent implements OnInit {
   public readonly status$: Observable<boolean>;
   public readonly pets$: Observable<AnimalTableResponse[]>;
+  public isLoading$: Observable<boolean>;
   constructor(private readonly root: PetsRootService) {
     this.pets$ = this.root.petsObservable$;
     this.status$ = this.root.status$.asObservable();
+    this.isLoading$ = this.root.isLoading$.asObservable();
   }
 
   ngOnInit(): void {}
@@ -34,4 +36,5 @@ export class PetsComponent implements OnInit {
   public deletePosition(petId: string): void {
     this.root.deletePet(petId);
   }
+  
 }

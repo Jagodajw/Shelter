@@ -12,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ButtonItemDeleteModule } from '../../../../components/button-item-delete/button-item-delete.module';
 import { ButtonModule } from '../../../../components/button/button.module';
 import { EnumGenderPipe } from './enutm-transleted.pipe';
+import { EmptyDataModule } from 'src/app/views/app-view/components/empty-data/empty-data.module';
 
 @NgModule({
   declarations: [PetsTableComponent, EnumGenderPipe],
@@ -27,6 +28,7 @@ import { EnumGenderPipe } from './enutm-transleted.pipe';
     MatMenuModule,
     ButtonItemDeleteModule,
     ButtonModule,
+    EmptyDataModule,
   ],
 })
 export class PetsTableModule {}

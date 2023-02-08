@@ -33,6 +33,9 @@ export class PetsRootService {
   public status$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     false
   );
+  public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    true
+  );
   public readonly searchQuery$: BehaviorSubject<AnimalQuery | null> =
     new BehaviorSubject<AnimalQuery | null>(null);
 
@@ -68,6 +71,7 @@ export class PetsRootService {
       )
     )
       .pipe(
+        tap(() => this.isLoading$.next(true)),
         map(
           ([status, searchQuery]) =>
             ({
@@ -83,9 +87,13 @@ export class PetsRootService {
 
         untilDestroyed(this)
       )
-      .subscribe((petsData: AnimalTableResponse[]) =>
-        this.pets$.next(petsData)
-      );
+      .subscribe({
+        next: (petsData: AnimalTableResponse[]) => {
+          this.pets$.next(petsData);
+          this.isLoading$.next(false);
+        },
+        error: (err) => this.isLoading$.next(false),
+      });
   }
 
   public outPet(petId: string): void {

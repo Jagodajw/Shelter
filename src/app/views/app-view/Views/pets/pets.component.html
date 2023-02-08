@@ -26,7 +26,11 @@
   </div>
 
   <div class="pets_container-tabble">
-    <app-pets-table [pets]="pets$ | async" (outPetEmitter)="outPet($event)"
-      (deletePositionEmitter)="deletePosition($event)"></app-pets-table>
+    <ng-container *ngIf="{pets:pets$ |async, isLoading: isLoading$ | async} as vm">
+      <app-pets-table *ngIf="vm.pets?.length && vm.isLoading===false; else loadingView" [pets]="pets$ | async"
+        (outPetEmitter)="outPet($event)" (deletePositionEmitter)="deletePosition($event)"></app-pets-table>
+      <ng-template #loadingView> <app-empty-data [isLoading]="vm.isLoading"></app-empty-data></ng-template>
+    </ng-container>
+
   </div>
 </div>
