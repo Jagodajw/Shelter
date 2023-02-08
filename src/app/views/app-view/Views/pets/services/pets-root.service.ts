@@ -53,13 +53,7 @@ export class PetsRootService {
       .afterClosed()
       .pipe(
         filter((data: { isAdded: boolean }) => data.isAdded === true),
-        mergeMap(() =>
-          this.api.getPets().pipe(
-            tap((petsData: AnimalTableResponse[]) => {
-              this.pets$.next(petsData);
-            })
-          )
-        )
+        mergeMap(() => this.refreschGet())
       )
 
       .subscribe();
@@ -106,19 +100,16 @@ export class PetsRootService {
       .afterClosed()
       .pipe(
         filter((data: { isAdoption: boolean }) => data.isAdoption === true),
-        mergeMap(() =>
-          this.api.getPets().pipe(
-            tap((petsData: AnimalTableResponse[]) => {
-              this.pets$.next(petsData);
-            })
-          )
-        )
+        mergeMap(() => this.refreschGet())
       )
       .subscribe();
   }
 
   public deletePet(petId: string): void {
-    this.api.deletePet(petId).subscribe();
+    this.api
+      .deletePet(petId)
+      .pipe(mergeMap(() => this.refreschGet()))
+      .subscribe();
   }
 
   public get petsObservable$(): Observable<AnimalTableResponse[]> {
@@ -129,5 +120,13 @@ export class PetsRootService {
     this.api.getPetsByQuery(query).subscribe({
       next: (query) => this.pets$.next(query),
     });
+  }
+
+  private refreschGet(): Observable<AnimalTableResponse[]> {
+    return this.api.getPets().pipe(
+      tap((petsData: AnimalTableResponse[]) => {
+        this.pets$.next(petsData);
+      })
+    );
   }
 }

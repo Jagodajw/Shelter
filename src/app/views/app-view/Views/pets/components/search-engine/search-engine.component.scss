@@ -51,13 +51,10 @@
     &__main {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
 
       &-header {
         display: flex;
         .demo-section {
-          padding: 0px 0px 0px 20px;
-
           & button {
             color: #514edd;
             background-color: rgb(255, 255, 255);

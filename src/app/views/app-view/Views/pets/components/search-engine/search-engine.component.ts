@@ -20,6 +20,8 @@ export class SearchEngineComponent implements OnInit {
   public genderList: Select[] = genderList;
   public speciesId!: Observable<number | undefined>;
   public numberOfAnimalsVaccinationChecks!: Observable<number>;
+  public status$: Observable<boolean> = this.root
+    .status$ as Observable<boolean>;
   constructor(
     private _form: FormBuilder,
     private root: PetsRootService,
