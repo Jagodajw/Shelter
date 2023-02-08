@@ -95,4 +95,10 @@ export class PetService extends ApiService {
       `${this.rootUrl}/numberOfAnimalsVaccinationChecks`
     );
   }
+
+  public getNumberOfAnimalsReleaseControl(): Observable<number> {
+    return this.http.get<number>(
+      `${this.rootUrl}/numberOfAnimalsReleaseControl`
+    );
+  }
 }

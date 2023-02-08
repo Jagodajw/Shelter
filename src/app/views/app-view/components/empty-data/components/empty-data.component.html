@@ -1,0 +1,20 @@
+<ng-container *transloco="let t">
+    <div class="text-center">
+        <ng-container *ngIf="!isLoading; else loading">
+            <img
+                src="{{ '/assets/images/' }}"
+                class="mx-auto"
+                [ngStyle]="
+                    imageWidth !== undefined ? { width: imageWidth } : null
+                "
+            />
+            <span class="text-normal text-disabled block mt-8">{{
+                t(label)
+            }}</span>
+        </ng-container>
+
+        <ng-template #loading>
+            <mat-spinner diameter="50" class="m-auto"></mat-spinner>
+        </ng-template>
+    </div>
+</ng-container>

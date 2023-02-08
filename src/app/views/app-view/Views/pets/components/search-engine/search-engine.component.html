@@ -4,13 +4,15 @@
         <h2>Wyszukiwanie</h2>
         <div class="search__main-header">
             <div class="demo-section">
-                <button *ngIf="status$ | async" mat-raised-button matBadge="5" type="button" matBadgePosition="before" matBadgeColor="accent">
+                <button *ngIf="status$ | async" mat-raised-button matBadge="{{numberOfAnimalsReleaseControl | async}}"
+                    type="button" matBadgePosition="before" matBadgeColor="accent">
                     {{"pets.controlToOut" | translate}}
                 </button>
             </div>
             <div class="demo-section">
-                <button *ngIf="!(status$ | async)" mat-raised-button matBadge="{{numberOfAnimalsVaccinationChecks | async}}" type="button"
-                    matBadgePosition="before" matBadgeColor="accent">
+                <button *ngIf="!(status$ | async)" mat-raised-button
+                    matBadge="{{numberOfAnimalsVaccinationChecks | async}}" type="button" matBadgePosition="before"
+                    matBadgeColor="accent">
                     {{"pets.controlToVaccination" | translate}}
                 </button>
             </div>

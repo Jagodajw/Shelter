@@ -20,6 +20,7 @@ export class SearchEngineComponent implements OnInit {
   public genderList: Select[] = genderList;
   public speciesId!: Observable<number | undefined>;
   public numberOfAnimalsVaccinationChecks!: Observable<number>;
+  public numberOfAnimalsReleaseControl!: Observable<number>;
   public status$: Observable<boolean> = this.root
     .status$ as Observable<boolean>;
   constructor(
@@ -39,7 +40,7 @@ export class SearchEngineComponent implements OnInit {
         })
       ) ?? of(undefined);
 
-    this.setNumberOfAnimalsVaccinationChecks();
+    this.setNumberOfAnimals();
   }
 
   public buildForm(): void {
@@ -99,8 +100,11 @@ export class SearchEngineComponent implements OnInit {
       });
   }
 
-  private setNumberOfAnimalsVaccinationChecks(): void {
+  private setNumberOfAnimals(): void {
     this.numberOfAnimalsVaccinationChecks =
       this.apiPet.getNumberOfAnimalsVaccinationChecks();
+
+    this.numberOfAnimalsReleaseControl =
+      this.apiPet.getNumberOfAnimalsReleaseControl();
   }
 }
