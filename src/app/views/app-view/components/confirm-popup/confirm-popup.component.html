@@ -8,7 +8,7 @@
     <app-button type="button" variant="cancelable" (clickEvent)="onNoClick()">
       {{ 'global.action.no' | translate }}
     </app-button>
-    <app-button type="button" variant="raised" [mat-dialog-close]="true">
+    <app-button type="button" variant="raised" (clickEvent)="onYesClick()">
       {{ 'global.action.yes' | translate }}
     </app-button>
   </div>

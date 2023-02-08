@@ -27,6 +27,6 @@
 
   <div class="pets_container-tabble">
     <app-pets-table [pets]="pets$ | async" (outPetEmitter)="outPet($event)"
-      (deletePositionEmitter)="deletePosition()"></app-pets-table>
+      (deletePositionEmitter)="deletePosition($event)"></app-pets-table>
   </div>
 </div>

@@ -22,7 +22,7 @@ export class PetsComponent implements OnInit {
   public togglePetsView() {
     this.root.status$.next(!this.root.status$.value);
   }
-  
+
   public addPet(): void {
     this.root.addPet();
   }
@@ -31,7 +31,7 @@ export class PetsComponent implements OnInit {
     this.root.outPet(petId);
   }
 
-  public deletePosition(): void {
-    this.root.deletePosition();
+  public deletePosition(petId: string): void {
+    this.root.deletePet(petId);
   }
 }

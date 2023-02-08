@@ -71,7 +71,7 @@
           {{ "pets.handOverTheAnimal" | translate }}
         </button>
 
-        <app-button-item-delete (onDelete)="deletePosition()">
+        <app-button-item-delete (onDelete)="deletePosition(petRowModel.ID)">
           <mat-icon>delete</mat-icon>
           {{ "pets.deleteSelectedPosition" | translate }}
         </app-button-item-delete>

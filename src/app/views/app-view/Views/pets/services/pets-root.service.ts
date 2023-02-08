@@ -15,6 +15,7 @@ import {
   Observable,
   tap,
 } from 'rxjs';
+import { ConfirmPopupComponent } from '../../../components/confirm-popup/confirm-popup.component';
 import { PetService } from '../../../services/api/pet.service';
 import { ShelterService } from '../../../services/shelter.service';
 import { PopupOutAnimalComponent } from '../components/popup-out-animal/popup-out-animal.component';
@@ -116,7 +117,9 @@ export class PetsRootService {
       .subscribe();
   }
 
-  public deletePosition(): void {}
+  public deletePet(petId: string): void {
+    this.api.deletePet(petId).subscribe();
+  }
 
   public get petsObservable$(): Observable<AnimalTableResponse[]> {
     return this.pets$.asObservable();

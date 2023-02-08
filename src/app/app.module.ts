@@ -42,6 +42,7 @@ export function appInit(appInitService: AppInitService): any {
     NoopAnimationsModule,
     MatSnackBarModule,
     MatDatepickerModule,
+    MatDialogModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

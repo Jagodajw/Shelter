@@ -18,8 +18,8 @@ export class PetsTableComponent {
     this.petsTable = new MatTableDataSource<AnimalTableResponse>(newPets);
   }
   @Output() outPetEmitter: EventEmitter<string> = new EventEmitter<string>();
-  @Output() deletePositionEmitter: EventEmitter<void> =
-    new EventEmitter<void>();
+  @Output() deletePositionEmitter: EventEmitter<string> =
+    new EventEmitter<string>();
   public genderList: Select[] = genderList;
   public petsTable = new MatTableDataSource<AnimalTableResponse>();
   public displayedColumns: string[] = [
@@ -45,7 +45,7 @@ export class PetsTableComponent {
     this.outPetEmitter.emit(petId);
   }
 
-  public deletePosition(): void {
-    this.deletePositionEmitter.emit();
+  public deletePosition(petId: string): void {
+    this.deletePositionEmitter.emit(petId);
   }
 }
