@@ -25,6 +25,8 @@ import {
   getAnimalById,
   getAnimalDataAdoption,
   getAnimalDataRegister,
+  getAnimalsToReleaseControl,
+  getAnimalsToVaccinationChecks,
   getNumberOfAnimalsReleaseControl,
   getNumberOfAnimalsVaccinationChecks,
   isAuthorizedShelterInUpdatedAnimalModel,
@@ -245,7 +247,26 @@ router.get(
   shelterAuthenticate,
   async (req, res) => {
     try {
-      const response = await getNumberOfAnimalsVaccinationChecks();
+      const shelterId: string = req.headers['shelters_id'] as string;
+      const response = await getNumberOfAnimalsVaccinationChecks(shelterId);
+
+      res.status(200).json(response);
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
+    }
+  }
+);
+
+router.get(
+  '/getAnimalsToVaccinationChecks',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const shelterId: string = req.headers['shelters_id'] as string;
+      const response: AnimalTableResponse[] =
+        await getAnimalsToVaccinationChecks(shelterId);
 
       res.status(200).json(response);
     } catch (error: any) {
@@ -262,6 +283,23 @@ router.get(
   async (req, res) => {
     try {
       const response = await getNumberOfAnimalsReleaseControl();
+
+      res.status(200).json(response);
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
+    }
+  }
+);
+
+router.get(
+  '/getAnimalsToReleaseControl',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const shelterId: string = req.headers['shelters_id'] as string;
+      const response = await getAnimalsToReleaseControl(shelterId);
 
       res.status(200).json(response);
     } catch (error: any) {
