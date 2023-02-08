@@ -25,6 +25,8 @@ import {
   getAnimalById,
   getAnimalDataAdoption,
   getAnimalDataRegister,
+  getNumberOfAnimalsReleaseControl,
+  getNumberOfAnimalsVaccinationChecks,
   isAuthorizedShelterInUpdatedAnimalModel,
   postAnimalDataRegister,
   updateAnimalDataRegister,
@@ -228,6 +230,38 @@ router.delete(
     try {
       const animalId: string = req.params.animalId;
       const response = await archiveAnimal(animalId);
+
+      res.status(200).json(response);
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
+    }
+  }
+);
+
+router.get(
+  '/numberOfAnimalsVaccinationChecks',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const response = await getNumberOfAnimalsVaccinationChecks();
+
+      res.status(200).json(response);
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
+    }
+  }
+);
+
+router.get(
+  '/numberOfAnimalsReleaseControl',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const response = await getNumberOfAnimalsReleaseControl();
 
       res.status(200).json(response);
     } catch (error: any) {

@@ -89,6 +89,7 @@ model Animals {
   date_sterilization DateTime? @db.Date
   adopted            Boolean?  @default(false)
   archived Boolean? @default(false)
+  avatar Bytes? @default("")
 
   adoption     Adoption[]
   registration Registration[]

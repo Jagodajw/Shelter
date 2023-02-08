@@ -1,4 +1,4 @@
-import { tableAnimals } from '@prisma/client';
+import { Animals, tableAnimals } from '@prisma/client';
 import { prisma } from '..';
 import { AnimalIdGenerator } from '../helpers/AnimalIdGenerator';
 import { MissingDictionaryAdder } from '../helpers/MissingDictionaryAdder';
@@ -537,4 +537,31 @@ export async function archiveAnimal(animalId: string): Promise<AnimalData> {
     where: { ID: animalId },
     data: { archived: true },
   });
+}
+
+export async function getNumberOfAnimalsVaccinationChecks(): Promise<number> {
+  const alertBefore: number = 7;
+
+  const animals = await prisma.animals.findMany({
+    where: { vaccination: true, archived: false },
+  });
+
+  return animals.filter(({ date_vaccination, name }: Animals) => {
+    const vaccinationAlertDateFrom: Date = new Date(date_vaccination as Date);
+    vaccinationAlertDateFrom.setFullYear(
+      vaccinationAlertDateFrom.getFullYear() + 1
+    );
+    vaccinationAlertDateFrom.setDate(
+      vaccinationAlertDateFrom.getDate() - alertBefore
+    );
+
+    const actualDateTime: number = new Date().getTime();
+    console.log(name, vaccinationAlertDateFrom.getTime(), actualDateTime);
+
+    return actualDateTime >= vaccinationAlertDateFrom.getTime();
+  }).length;
+}
+
+export async function getNumberOfAnimalsReleaseControl(): Promise<number> {
+  return 0;
 }
