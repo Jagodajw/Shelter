@@ -201,4 +201,4 @@ export interface AnimalQuery {
   datePickerAccepted: RangeDate | undefined; //todo;
 }
 
-export type AnimalQueryResponse = Animals;
+export type AnimalData = Animals;

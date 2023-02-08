@@ -4,6 +4,7 @@ import {
   AdoptDataByAnimalIdResponse,
   AdoptionResponse,
   AnimalAdoptionRequest,
+  AnimalData,
   AnimalDetailResponse,
   AnimalQuery,
   AnimalStatus,
@@ -83,5 +84,9 @@ export class PetService extends ApiService {
       `${this.rootUrl}/animalsByQuery/${status}`,
       query
     );
+  }
+
+  public deletePet(petId: string): Observable<AnimalData> {
+    return this.http.delete<AnimalData>(`${this.rootUrl}/animal/${petId}`);
   }
 }

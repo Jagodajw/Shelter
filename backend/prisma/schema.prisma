@@ -88,6 +88,7 @@ model Animals {
   sterilization      Boolean?  @default(false)
   date_sterilization DateTime? @db.Date
   adopted            Boolean?  @default(false)
+  archived Boolean? @default(false)
 
   adoption     Adoption[]
   registration Registration[]

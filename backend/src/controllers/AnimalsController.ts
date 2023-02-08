@@ -18,6 +18,7 @@ import {
 } from '../models/AnimalsModel';
 import {
   adoptAnimal,
+  archiveAnimal,
   getAdoptDataByAnimalId,
   getAllAnimalsByQuery,
   getAllAnimalsByShelterId,
@@ -212,6 +213,23 @@ router.post(
       );
 
       res.status(200).json(animalsByQueryResponse as AnimalTableResponse[]);
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
+    }
+  }
+);
+
+router.delete(
+  '/animal/:animalId',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const animalId: string = req.params.animalId;
+      const response = await archiveAnimal(animalId);
+
+      res.status(200).json(response);
     } catch (error: any) {
       console.log(error);
       res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
