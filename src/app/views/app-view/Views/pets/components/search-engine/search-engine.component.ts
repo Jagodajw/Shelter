@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AnimalQuery } from 'backend/src/models/AnimalsModel';
-import { filter, map, Observable, of } from 'rxjs';
+import { filter, map, Observable, of, tap } from 'rxjs';
 import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from 'src/app/views/app-view/components/select/select';
 import { PetService } from 'src/app/views/app-view/services/api/pet.service';
+import { ShelterService } from 'src/app/views/app-view/services/shelter.service';
 import { PetsRootService } from '../../services/pets-root.service';
 
 @UntilDestroy()
@@ -26,10 +27,12 @@ export class SearchEngineComponent implements OnInit {
   constructor(
     private _form: FormBuilder,
     private root: PetsRootService,
-    private apiPet: PetService
+    private apiPet: PetService,
+    private readonly shelter: ShelterService
   ) {}
 
   ngOnInit(): void {
+    this.shelterChangeDetector();
     this.buildForm();
     this.resetSearchQuerDetector();
     this.speciesId =
@@ -39,8 +42,6 @@ export class SearchEngineComponent implements OnInit {
           return ((species as Select)?.ID || undefined) as number | undefined;
         })
       ) ?? of(undefined);
-
-    this.setNumberOfAnimals();
   }
 
   public buildForm(): void {
@@ -98,6 +99,16 @@ export class SearchEngineComponent implements OnInit {
       .subscribe({
         next: () => this.searchEngineForm.reset(),
       });
+  }
+
+  private shelterChangeDetector(): void {
+    this.shelter.selectedShelterChangeDetector$
+      .pipe(
+        tap(() => {
+          this.setNumberOfAnimals();
+        })
+      )
+      .subscribe();
   }
 
   private setNumberOfAnimals(): void {
