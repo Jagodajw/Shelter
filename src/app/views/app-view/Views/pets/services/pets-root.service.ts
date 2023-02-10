@@ -72,7 +72,6 @@ export class PetsRootService {
       )
     )
       .pipe(
-        delay(5000),
         tap(() => this.isLoading$.next(true)),
         map(
           ([status, searchQuery]) =>

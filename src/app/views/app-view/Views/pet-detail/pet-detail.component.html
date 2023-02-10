@@ -18,23 +18,22 @@
         <mat-tab label="Dane przyjętego zwierzęcia">
             <form [formGroup]="detailPetsForm">
                 <div class="pet-detail_content">
-
-                    <app-data-pet-register></app-data-pet-register>
-
-                    <app-data-person-donor></app-data-person-donor>
-
-                    <app-data-register></app-data-register>
-
+                    <ng-container *ngIf="{isLoading: isLoading$ | async} as vm">
+                        <app-pet-basic-data *ngIf="vm.isLoading===false; else loadingView"></app-pet-basic-data>
+                        <ng-template #loadingView> <app-empty-data
+                                [isLoading]="vm.isLoading"></app-empty-data></ng-template>
+                    </ng-container>
                 </div>
             </form>
         </mat-tab>
         <mat-tab label="Dane wydanego zwierzęcia" [disabled]="!isAdopted">
             <form [formGroup]="detailPetsOutForm">
                 <div class="pet-detail_content">
-
-                    <app-data-pet-out></app-data-pet-out>
-                    <app-data-person-take-away></app-data-person-take-away>
-
+                    <ng-container *ngIf="{isLoading: isLoading$ | async} as vm">
+                        <app-pet-out-data *ngIf="vm.isLoading===false; else loadingView"></app-pet-out-data>
+                        <ng-template #loadingView> <app-empty-data
+                                [isLoading]="vm.isLoading"></app-empty-data></ng-template>
+                    </ng-container>
                 </div>
             </form>
         </mat-tab>

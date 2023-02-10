@@ -3,7 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
-  FormControlName,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -22,6 +21,7 @@ import {
   throwError,
 } from 'rxjs';
 import { PetService } from '../../services/api/pet.service';
+
 @UntilDestroy()
 @Component({
   selector: 'app-pet-detail',
@@ -36,6 +36,9 @@ export class PetDetailComponent implements OnInit {
   public isAdopted: boolean = false;
   public edit: boolean = false;
   public attachments: FormControl = new FormControl();
+  public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
+    true
+  );
   constructor(
     private readonly _form: FormBuilder,
     private _location: Location,
@@ -67,10 +70,10 @@ export class PetDetailComponent implements OnInit {
     this.isEditMode$.next(true);
   }
   public saveEditButtonClick() {
+    this.editPet();
     this.edit = false;
     this.detailPetsForm.disable();
     this.detailPetsOutForm.disable();
-    this.editPet();
   }
   public buildForm(): void {
     this.detailPetsForm = this._form.group({
@@ -191,7 +194,10 @@ export class PetDetailComponent implements OnInit {
         ),
         untilDestroyed(this)
       )
-      .subscribe();
+      .subscribe({
+        next: () => this.isLoading$.next(false),
+        error: (err) => this.isLoading$.next(false),
+      });
   }
   private getPetAdoptData(): void {
     this.activatedRoute.params
@@ -237,7 +243,10 @@ export class PetDetailComponent implements OnInit {
         ),
         untilDestroyed(this)
       )
-      .subscribe();
+      .subscribe({
+        next: () => this.isLoading$.next(false),
+        error: (err) => this.isLoading$.next(false),
+      });
   }
 
   private editPet(): void {

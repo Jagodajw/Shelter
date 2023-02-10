@@ -118,4 +118,8 @@ export class SearchEngineComponent implements OnInit {
     this.numberOfAnimalsReleaseControl =
       this.apiPet.getNumberOfAnimalsReleaseControl();
   }
+
+  public AnimalsReleaseControl(): void{
+    
+  }
 }
