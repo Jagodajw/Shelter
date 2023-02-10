@@ -9,10 +9,12 @@ import {
   AnimalQuery,
   AnimalStatus,
   AnimalTableResponse,
+  EditAnimalAdoptionRequest,
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
   RegisterEditAnimalRequest,
   RegisterPersonAddRequest,
+  RegisterPersonEditRequest,
 } from 'backend/src/models/AnimalsModel';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
@@ -99,6 +101,19 @@ export class PetService extends ApiService {
   public getNumberOfAnimalsReleaseControl(): Observable<number> {
     return this.http.get<number>(
       `${this.rootUrl}/numberOfAnimalsReleaseControl`
+    );
+  }
+
+  public editAdoptPetData(
+    petId: string,
+    model: {
+      dataPetOut: EditAnimalAdoptionRequest;
+      dataPersonTakeAway: RegisterPersonEditRequest;
+    }
+  ): Observable<AdoptionResponse> {
+    return this.http.put<AdoptionResponse>(
+      `${this.rootUrl}/adoptAnimal/${petId}`,
+      model
     );
   }
 }

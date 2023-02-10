@@ -9,14 +9,12 @@ import {
 import {
   BehaviorSubject,
   combineLatest,
-  delay,
   filter,
   map,
   mergeMap,
   Observable,
   tap,
 } from 'rxjs';
-import { ConfirmPopupComponent } from '../../../components/confirm-popup/confirm-popup.component';
 import { PetService } from '../../../services/api/pet.service';
 import { ShelterService } from '../../../services/shelter.service';
 import { PopupOutAnimalComponent } from '../components/popup-out-animal/popup-out-animal.component';
@@ -72,7 +70,6 @@ export class PetsRootService {
       )
     )
       .pipe(
-        delay(5000),
         tap(() => this.isLoading$.next(true)),
         map(
           ([status, searchQuery]) =>

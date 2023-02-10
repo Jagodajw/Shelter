@@ -8,6 +8,7 @@ import {
   AnimalQuery,
   AnimalStatus,
   AnimalTableResponse,
+  EditAnimalAdoptionRequest,
   RegisterAddAnimalResponse,
   RegisterAnimalAddRequest,
   RegisterAnimalEditRequest,
@@ -31,6 +32,7 @@ import {
   getNumberOfAnimalsVaccinationChecks,
   isAuthorizedShelterInUpdatedAnimalModel,
   postAnimalDataRegister,
+  updateAnimalAdoption,
   updateAnimalDataRegister,
 } from '../services/AnimalsService';
 
@@ -105,19 +107,46 @@ router.post(
       const animalId = req.params.animalId;
       const shelterId: string = req.headers['shelters_id'] as string;
       const adoptionRequest: AnimalAdoptionRequest = req.body.dataPetOut;
-      const personnRequest: RegisterPersonAddRequest =
+      const personRequest: RegisterPersonAddRequest =
         req.body.dataPersonTakeAway;
 
       const adoptAnimalResponse: AdoptionResponse = await adoptAnimal(
         animalId,
         shelterId,
         adoptionRequest,
-        personnRequest
+        personRequest
       );
       res.status(200).json(adoptAnimalResponse);
     } catch (error) {
       console.log(error);
       res.sendStatus(500);
+    }
+  }
+);
+
+router.put(
+  '/adoptAnimal/:animalId',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const animalId = req.params.animalId;
+      const shelterId: string = req.headers['shelters_id'] as string;
+      const adoptionRequest: EditAnimalAdoptionRequest = req.body.dataPetOut;
+      const personRequest: RegisterPersonEditRequest =
+        req.body.dataPersonTakeAway;
+
+      const updateResponse = await updateAnimalAdoption(
+        animalId,
+        shelterId,
+        adoptionRequest,
+        personRequest
+      );
+
+      res.status(200).json(updateResponse);
+    } catch (error: any) {
+      console.error(error);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
     }
   }
 );
