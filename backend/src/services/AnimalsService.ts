@@ -11,12 +11,14 @@ import {
   AnimalQuery,
   AnimalStatus,
   AnimalTableResponse,
+  EditAnimalAdoptionRequest,
   RegisterAddAnimalRequest,
   RegisterAddAnimalResponse,
   RegisterAnimalResponse,
   RegisterEditAnimalRequest,
   RegisterPeopleResponse,
   RegisterPersonAddRequest,
+  RegisterPersonEditRequest,
   RegistrationResponse,
 } from '../models/AnimalsModel';
 
@@ -435,6 +437,71 @@ export async function adoptAnimal(
     await tx.animals.update({
       where: { ID: animalId },
       data: { adopted: true },
+    });
+
+    return adoptionResponse;
+  });
+}
+
+export async function updateAnimalAdoption(
+  animalId: string,
+  sheltersId: string,
+  adoptionRequest: EditAnimalAdoptionRequest,
+  personRequest: RegisterPersonEditRequest
+): Promise<AdoptionResponse> {
+  return await prisma.$transaction(async (tx) => {
+    const dictionaryAdder = new MissingDictionaryAdder(tx);
+
+    const cityId = await dictionaryAdder.getDictonaryField(
+      'city',
+      personRequest.city,
+      sheltersId,
+      { zip_code: personRequest.zip_code }
+    );
+
+    const communeId = await dictionaryAdder.getDictonaryField(
+      'commune',
+      personRequest.commune,
+      sheltersId
+    );
+
+    const personRespnse = await tx.people.update({
+      where: { ID: adoptionRequest.ID },
+      data: {
+        type_of_person: personRequest.type_of_person,
+        name: personRequest.name,
+        id_number: personRequest.id_number,
+        pesel: personRequest.pesel,
+        nip: personRequest.nip,
+        email: personRequest.email,
+        telephone: personRequest.telephone,
+        adress: personRequest.adress,
+        province_id: personRequest.province_id,
+        description: personRequest.description,
+        shelters_id: sheltersId,
+        city_id: cityId,
+        commune_id: communeId,
+      },
+    });
+
+    const typeAdoptionId = await dictionaryAdder.getDictonaryField(
+      'type_adoption',
+      adoptionRequest.type_adoption,
+      sheltersId
+    );
+
+    const adoptionResponse = await tx.adoption.update({
+      where: { ID: personRequest.ID },
+      data: {
+        date_of_adoption: adoptionRequest.date_of_adoption,
+        description: adoptionRequest.description,
+        introduced_employees_id: adoptionRequest.introduced_employees_id,
+        accepted_employees_id: adoptionRequest.accepted_employees_id,
+        type_adoption_id: typeAdoptionId,
+        animals_id: animalId,
+        shelters_id: sheltersId,
+        people_id: personRespnse.ID,
+      },
     });
 
     return adoptionResponse;

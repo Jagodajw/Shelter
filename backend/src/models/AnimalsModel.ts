@@ -169,6 +169,10 @@ export type AnimalAdoptionRequest = Omit<
   'ID' | 'type_adoption_id'
 > & { type_adoption: TypeAcceptanceResponse };
 
+export type EditAnimalAdoptionRequest = Omit<Adoption, 'type_adoption_id'> & {
+  type_adoption: TypeAcceptanceResponse;
+};
+
 export type AdoptionResponse = Adoption;
 
 export type AdoptDataByAnimalIdResponse = {
