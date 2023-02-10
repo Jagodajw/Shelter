@@ -1,20 +1,16 @@
 <ng-container>
     <div class="spinner">
         <ng-container *ngIf="!isLoading; else loading">
-            <img
-                src="{{ '/assets/images/' }}"
-                class="mx-auto"
-                [ngStyle]="
+            <img src="{{ '/assets/images/' }}" class="mx-auto" [ngStyle]="
                     imageWidth !== undefined ? { width: imageWidth } : null
-                "
-            />
+                " />
             <span class="spinner-margin">{{
                 (label | translate)
-            }}</span>
+                }}</span>
         </ng-container>
 
         <ng-template #loading>
-            <mat-spinner diameter="50" class="m-auto"></mat-spinner>
+            <mat-spinner diameter="50"></mat-spinner>
         </ng-template>
     </div>
 </ng-container>

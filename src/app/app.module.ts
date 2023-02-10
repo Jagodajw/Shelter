@@ -39,7 +39,6 @@ export function appInit(appInitService: AppInitService): any {
     MatDialogModule,
     MatNativeDateModule,
     HttpClientModule,
-    NoopAnimationsModule,
     MatSnackBarModule,
     MatDatepickerModule,
     MatDialogModule,
