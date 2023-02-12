@@ -17,10 +17,18 @@
       &-animate {
         display: flex;
       }
-      & button {
+      &-addPet {
         padding: 10px;
         background-color: #514edd;
         color: #fff;
+      }
+      &-controlBtn {
+        margin-top: 23px;
+        margin-left: 20px;
+        & mat-button-toggle-group {
+          border: 1px solid #6867b9;
+          box-shadow: none;
+        }
       }
       & h1 {
         padding-right: 10px;
@@ -49,6 +57,7 @@
       display: inline-block;
       transition: all 500ms;
       padding-left: 3px;
+      user-select: none;
     }
 
     .toggle-item-container-animated {
@@ -72,6 +81,17 @@
       font-weight: bolder;
       font-size: 28px;
       align-items: center;
+    }
+  }
+
+  ::ng-deep {
+    .mat-button-toggle-checked {
+      background-color: #6867b9;
+      color: white;
+    }
+    .mat-button-toggle-appearance-standard .mat-button-toggle-label-content {
+      padding: 7px;
+      line-height: 24px;
     }
   }
 }

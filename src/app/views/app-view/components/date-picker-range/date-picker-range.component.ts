@@ -27,10 +27,7 @@ export class DatePickerRangeComponent
     super(ngControl);
   }
 
-  ngOnInit(): void {
-    this.initDateGroupByPickerType();
-    this.handleSetDisabledStateFromOutside();
-  }
+  ngOnInit(): void {}
   private initDateGroupByPickerType(): void {
     this.dateGroup = this._form.group({
       from: [null],
@@ -40,10 +37,18 @@ export class DatePickerRangeComponent
   }
   public changedDate(event: MatDatepickerInputEvent<Date>): void {
     this.value = event.value;
+    console.log('contro', this.value);
   }
   public clearForm(): void {
-    //zrobic wyszukiwanie tutaj po kliku + errror
     this.dateGroup.reset();
     this.value = null;
+  }
+
+  override handleValueChangeFromOutside(): void {
+    this.dateGroup === undefined && this.initDateGroupByPickerType();
+    if (this.value === null) {
+      this.dateGroup.get('from')?.patchValue(null);
+      this.dateGroup.get('to')?.patchValue(null);
+    }
   }
 }

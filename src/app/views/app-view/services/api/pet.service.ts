@@ -92,27 +92,34 @@ export class PetService extends ApiService {
     return this.http.delete<AnimalData>(`${this.rootUrl}/animal/${petId}`);
   }
 
+  public getAnimalsToVaccinationChecks(): Observable<AnimalTableResponse[]> {
+    return this.http.get<AnimalTableResponse[]>(
+      `${this.rootUrl}/getAnimalsToVaccinationChecks`
+    );
+  }
   public getNumberOfAnimalsVaccinationChecks(): Observable<number> {
     return this.http.get<number>(
       `${this.rootUrl}/numberOfAnimalsVaccinationChecks`
     );
   }
 
+  public getAnimalsToReleaseControl(): Observable<AnimalTableResponse[]> {
+    return this.http.get<AnimalTableResponse[]>(
+      `${this.rootUrl}/getAnimalsToReleaseControl`
+    );
+  }
   public getNumberOfAnimalsReleaseControl(): Observable<number> {
     return this.http.get<number>(
       `${this.rootUrl}/numberOfAnimalsReleaseControl`
     );
   }
 
-  public editAdoptPetData(
-    petId: string,
-    model: {
-      dataPetOut: EditAnimalAdoptionRequest;
-      dataPersonTakeAway: RegisterPersonEditRequest;
-    }
-  ): Observable<AdoptionResponse> {
+  public editAdoptPetData(model: {
+    dataPetOut: EditAnimalAdoptionRequest;
+    dataPersonTakeAway: RegisterPersonEditRequest;
+  }): Observable<AdoptionResponse> {
     return this.http.put<AdoptionResponse>(
-      `${this.rootUrl}/adoptAnimal/${petId}`,
+      `${this.rootUrl}/adoptAnimal`,
       model
     );
   }

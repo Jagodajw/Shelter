@@ -1,45 +1,49 @@
-<div class="pet-detail">
-    <div class="inline  input-80 ">
-        <button mat-button (click)="backClicked()">
-            <mat-icon>arrow_back</mat-icon>
-        </button>
-    </div>
-    <div class="inline">
-        <app-button type="submit" variant="raised" [disabled]="!!(isEditMode$ | async)" (click)="editButtonClick()">
-            <mat-icon>edit</mat-icon> {{ 'action.edit' | translate }}
-        </app-button>
-        <app-button type="submit" variant="raised" (click)="saveEditButtonClick()"
-            [disabled]="(isEditMode$ | async) === false">
-            <mat-icon>star</mat-icon>{{'action.save' | translate}}
-        </app-button>
-    </div>
-    <mat-tab-group mat-align-tabs="center">
+<ng-container *ngIf="{isEditMode: isEditMode$ | async} as vm">
+    <div class="pet-detail">
+        <div class="pet-detail__header">
+            <div class="inline ">
+                <button mat-button (click)="backClicked()">
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </div>
+            <div class="inline">
+                <app-button type="submit" variant="raised" (click)="editButtonClick()">
+                    <mat-icon>edit</mat-icon> {{ 'action.edit' | translate }}
+                </app-button>
+                <app-button type="submit" variant="raised" (click)="saveEditButtonClick()"
+                    [disabled]="vm.isEditMode=== false">
+                    <mat-icon>star</mat-icon>{{'action.save' | translate}}
+                </app-button>
+            </div>
+        </div>
+        <mat-tab-group mat-align-tabs="center" #tabGroup>
 
-        <mat-tab label="Dane przyjętego zwierzęcia">
-            <form [formGroup]="detailPetsForm">
-                <div class="pet-detail_content">
+            <mat-tab label="Dane przyjętego zwierzęcia" [disabled]="!!vm.isEditMode">
+                <div *ngIf="tabGroup.selectedIndex === petStepsEnum.basicData" class="pet-detail_content">
                     <ng-container *ngIf="{isLoading: isLoading$ | async} as vm">
-                        <app-pet-basic-data *ngIf="vm.isLoading===false; else loadingView"></app-pet-basic-data>
+                        <app-pet-basic-data #basicDataRef [data]="basicData$ | async"
+                            *ngIf="vm.isLoading===false; else loadingView"></app-pet-basic-data>
                         <ng-template #loadingView> <app-empty-data
                                 [isLoading]="vm.isLoading"></app-empty-data></ng-template>
                     </ng-container>
                 </div>
-            </form>
-        </mat-tab>
-        <mat-tab label="Dane wydanego zwierzęcia" [disabled]="!isAdopted">
-            <form [formGroup]="detailPetsOutForm">
-                <div class="pet-detail_content">
+            </mat-tab>
+            <mat-tab label="Dane wydanego zwierzęcia" [disabled]="!isAdopted || !!vm.isEditMode">
+
+                <div *ngIf="tabGroup.selectedIndex === petStepsEnum.outData" class="pet-detail_content">
                     <ng-container *ngIf="{isLoading: isLoading$ | async} as vm">
-                        <app-pet-out-data *ngIf="vm.isLoading===false; else loadingView"></app-pet-out-data>
+                        <app-pet-out-data #outDataRef [data]="adoptedData$ | async" [basicData]="basicData$ | async"
+                            *ngIf="vm.isLoading===false; else loadingView"></app-pet-out-data>
                         <ng-template #loadingView> <app-empty-data
                                 [isLoading]="vm.isLoading"></app-empty-data></ng-template>
                     </ng-container>
                 </div>
-            </form>
-        </mat-tab>
-        <mat-tab label="Dokumenty">
-            <app-file-upload [formControl]="attachments" (downloadAttachment)="downloadAttachment($event)"
-                (deleteAttachment)="deleteAttachment($event)"></app-file-upload>
-        </mat-tab>
-    </mat-tab-group>
-</div>
+            </mat-tab>
+            <mat-tab label="Dokumenty" [disabled]="!!vm.isEditMode">
+                <app-file-upload *ngIf="tabGroup.selectedIndex === petStepsEnum.files" [formControl]="attachments"
+                    (downloadAttachment)="downloadAttachment($event)"
+                    (deleteAttachment)="deleteAttachment($event)"></app-file-upload>
+            </mat-tab>
+        </mat-tab-group>
+    </div>
+</ng-container>

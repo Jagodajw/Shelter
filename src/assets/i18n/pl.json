@@ -51,7 +51,8 @@
     },
     "vaccination": "Szczepienie",
     "dateVaccination": "Data szczepienia",
-    "resetSearch": "Wyczyść"
+    "resetSearch": "Wyczyść",
+    "EmptyData": "Brak danych"
   },
   "people": {
     "title": "Osoby",

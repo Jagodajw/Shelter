@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Self } from '@angular/core';
-import { FormBuilder, FormControl, NgControl } from '@angular/forms';
+import { FormBuilder, NgControl } from '@angular/forms';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 
 @Component({
@@ -26,9 +26,4 @@ export class SearchComponent
     this.value = (event.target as HTMLInputElement).value;
   }
 
-  keyDownFunction(event: any) {
-    if (event.code === 'Enter') {
-      this.clearForm();
-    }
-  }
 }

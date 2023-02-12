@@ -444,7 +444,6 @@ export async function adoptAnimal(
 }
 
 export async function updateAnimalAdoption(
-  animalId: string,
   sheltersId: string,
   adoptionRequest: EditAnimalAdoptionRequest,
   personRequest: RegisterPersonEditRequest
@@ -498,7 +497,7 @@ export async function updateAnimalAdoption(
         introduced_employees_id: adoptionRequest.introduced_employees_id,
         accepted_employees_id: adoptionRequest.accepted_employees_id,
         type_adoption_id: typeAdoptionId,
-        animals_id: animalId,
+        animals_id: adoptionRequest.animals_id,
         shelters_id: sheltersId,
         people_id: personRespnse.ID,
       },

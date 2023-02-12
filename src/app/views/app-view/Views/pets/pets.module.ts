@@ -1,6 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
@@ -27,7 +30,11 @@ import { PetsComponent } from './pets.component';
     PopupOutAnimalModule,
     PetsTableModule,
     SearchEngineModule,
-    EmptyDataModule
+    EmptyDataModule,
+    MatBadgeModule,
+    MatButtonToggleModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
 })
 export class PetsModule {}

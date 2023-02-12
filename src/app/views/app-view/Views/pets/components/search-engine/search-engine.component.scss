@@ -48,20 +48,5 @@
       }
     }
 
-    &__main {
-      display: flex;
-      justify-content: space-between;
-
-      &-header {
-        display: flex;
-        .demo-section {
-          & button {
-            color: #514edd;
-            background-color: rgb(255, 255, 255);
-            border: 3px solid #514edd;
-          }
-        }
-      }
-    }
   }
 }

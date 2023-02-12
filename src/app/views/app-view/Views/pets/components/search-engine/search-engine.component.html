@@ -2,22 +2,6 @@
 
     <div class="search__main">
         <h2>Wyszukiwanie</h2>
-        <div class="search__main-header">
-            <div class="demo-section">
-                <button *ngIf="status$ | async" mat-raised-button matBadge="{{numberOfAnimalsReleaseControl | async}}"
-                    type="button" matBadgePosition="before" matBadgeColor="accent">
-                    {{"pets.controlToOut" | translate}}
-                    (click)="AnimalsReleaseControl()"
-                </button>
-            </div>
-            <div class="demo-section">
-                <button *ngIf="!(status$ | async)" mat-raised-button
-                    matBadge="{{numberOfAnimalsVaccinationChecks | async}}" type="button" matBadgePosition="before"
-                    matBadgeColor="accent">
-                    {{"pets.controlToVaccination" | translate}}
-                </button>
-            </div>
-        </div>
     </div>
 
 

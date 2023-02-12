@@ -125,19 +125,17 @@ router.post(
 );
 
 router.put(
-  '/adoptAnimal/:animalId',
+  '/adoptAnimal',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
     try {
-      const animalId = req.params.animalId;
       const shelterId: string = req.headers['shelters_id'] as string;
       const adoptionRequest: EditAnimalAdoptionRequest = req.body.dataPetOut;
       const personRequest: RegisterPersonEditRequest =
         req.body.dataPersonTakeAway;
 
       const updateResponse = await updateAnimalAdoption(
-        animalId,
         shelterId,
         adoptionRequest,
         personRequest
