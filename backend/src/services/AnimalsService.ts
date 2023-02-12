@@ -817,3 +817,24 @@ function getAnimalsListToVaccinationChecks<
     return actualDateTime >= vaccinationAlertDateFrom.getTime();
   });
 }
+
+export async function updateAnimalAvatar(animalId: string, avatar: any) {
+  const response = await prisma.animals.update({
+    where: { ID: animalId },
+    data: { avatar },
+    select: { avatar: true },
+  });
+
+  return response.avatar;
+}
+
+export async function getAnimalAvatar(
+  animalId: string
+): Promise<Buffer | null | undefined> {
+  const response = await prisma.animals.findUnique({
+    where: { ID: animalId },
+    select: { avatar: true },
+  });
+
+  return response?.avatar;
+}
