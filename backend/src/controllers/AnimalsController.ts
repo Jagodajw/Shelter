@@ -1,4 +1,5 @@
 import express from 'express';
+import multer from 'multer';
 import { authenticate } from '../middlewares/authentication';
 import { shelterAuthenticate } from '../middlewares/shelterAuthentication';
 import {
@@ -23,6 +24,7 @@ import {
   getAdoptDataByAnimalId,
   getAllAnimalsByQuery,
   getAllAnimalsByShelterId,
+  getAnimalAvatar,
   getAnimalById,
   getAnimalDataAdoption,
   getAnimalDataRegister,
@@ -33,6 +35,7 @@ import {
   isAuthorizedShelterInUpdatedAnimalModel,
   postAnimalDataRegister,
   updateAnimalAdoption,
+  updateAnimalAvatar,
   updateAnimalDataRegister,
 } from '../services/AnimalsService';
 
@@ -329,6 +332,49 @@ router.get(
       const response = await getAnimalsToReleaseControl(shelterId);
 
       res.status(200).json(response);
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
+    }
+  }
+);
+
+const storage = multer.memoryStorage();
+const upload = multer({ storage });
+
+router.put(
+  '/animalAvatar/:animalId',
+  authenticate,
+  shelterAuthenticate,
+  upload.single('avatar'),
+  async (req, res) => {
+    try {
+      req.file;
+      const animalId: string = req.params.animalId;
+      const avatar = req.file;
+      console.log(avatar);
+
+      const updatedAvatar = updateAnimalAvatar(animalId, avatar!.buffer);
+
+      res.send(updatedAvatar);
+      console.log(avatar);
+    } catch (error: any) {
+      console.log(error);
+      res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});
+    }
+  }
+);
+
+router.get(
+  '/animalAvatar/:animalId',
+  authenticate,
+  shelterAuthenticate,
+  async (req, res) => {
+    try {
+      const animalId: string = req.params.animalId;
+      const avatar = await getAnimalAvatar(animalId);
+
+      res.send(avatar);
     } catch (error: any) {
       console.log(error);
       res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});

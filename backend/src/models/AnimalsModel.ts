@@ -199,10 +199,10 @@ export interface AnimalQuery {
   size: Size | undefined;
   sterilization: boolean;
   search: string | undefined;
-  cuarantine: boolean; //todo
-  unvaccinated: boolean; //todo
+  cuarantine: boolean; //todo to test
+  unvaccinated: boolean; //todo to test
   datePickerBirthFromTo: RangeDate | undefined;
-  datePickerAccepted: RangeDate | undefined; //todo;
+  datePickerAccepted: RangeDate | undefined; //todo to test;
 }
 
 export type AnimalData = Animals;
