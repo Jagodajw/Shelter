@@ -11,4 +11,8 @@ export class AppViewComponent implements OnInit {
   ngOnInit(): void {
     this.shelter.init();
   }
+
+  ngOnDestroy(): void {
+    this.shelter.destroy();
+  }
 }

@@ -66,7 +66,7 @@ export class PetsRootService {
       this.status$,
       this.searchQuery$,
       this.shelter.selectedShelterChangeDetector$.pipe(
-        tap((x) => this.searchQuery$.next(null))
+        tap(() => this.searchQuery$.next(null))
       )
     )
       .pipe(

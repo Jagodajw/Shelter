@@ -18,7 +18,6 @@ export class ShelterService {
     private readonly api: ShelterApiService
   ) {
     const shelter: Shelters = this.storage.get('shelter') as Shelters;
-    console.log(shelter);
     this.selectedShelter$.next(shelter ?? null);
   }
 
@@ -27,6 +26,10 @@ export class ShelterService {
       this.selectedShelter$.next(null);
       this.openDialog();
     }
+  }
+
+  public destroy(): void {
+    this.selectedShelter$.next(null);
   }
 
   public openDialog(): void {
