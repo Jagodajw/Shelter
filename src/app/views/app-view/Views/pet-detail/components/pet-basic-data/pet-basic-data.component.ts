@@ -1,4 +1,11 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AnimalDetailResponse } from 'backend/src/models/AnimalsModel';
@@ -13,10 +20,15 @@ import { PetDetailService } from '../../pet-detail.service';
 export class PetBasicDataComponent implements OnInit {
   public detailPetsForm!: FormGroup;
 
+  @Output() private updateAvatar: EventEmitter<FormData> =
+    new EventEmitter<FormData>();
   @Input() set data(basicData: AnimalDetailResponse | null) {
     if (basicData === null) return;
 
-    this.detailPetsForm.patchValue(basicData);
+    this.detailPetsForm.patchValue({
+      ...basicData,
+      registerAnimal: { ...basicData.registerAnimal, avatar: null },
+    });
     this.detailPetsForm
       .get('register')
       ?.get('accepted_employees_id')
@@ -30,6 +42,14 @@ export class PetBasicDataComponent implements OnInit {
       ?.get('province_id')
       ?.patchValue(basicData.registerPeople?.province);
     this.cd.markForCheck();
+  }
+
+  @Input() set avatar(petAvatar: Blob | null) {
+    if (petAvatar === null) return;
+
+    this.detailPetsForm
+      .get('registerAnimal.avatar')
+      ?.patchValue(new Blob([petAvatar]));
   }
 
   constructor(
@@ -73,6 +93,14 @@ export class PetBasicDataComponent implements OnInit {
           this.detailPetsForm.disable();
         }
       });
+
+    this.detailPetsForm
+      .get('registerAnimal.avatar')
+      ?.valueChanges.pipe(untilDestroyed(this))
+      .subscribe((avatar: FormData) => {
+        console.log('from valueCahgen pet basic data', avatar);
+        this.updateAvatar.emit(avatar);
+      });
   }
 
   public buildForm(): void {
@@ -101,6 +129,7 @@ export class PetBasicDataComponent implements OnInit {
         description_animal: [''],
         vaccination: [false],
         date_vaccination: [{ value: null, disabled: true }],
+        avatar: [],
       }),
       registerPeople: this._form.group({
         ID: [],

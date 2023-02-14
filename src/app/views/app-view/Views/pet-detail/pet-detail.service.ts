@@ -27,12 +27,10 @@ export class PetDetailService {
     );
   }
 
-  public editAdoptPetData(
-    model: {
-      dataPetOut: EditAnimalAdoptionRequest;
-      dataPersonTakeAway: RegisterPersonEditRequest;
-    }
-  ): Observable<AdoptionResponse> {
+  public editAdoptPetData(model: {
+    dataPetOut: EditAnimalAdoptionRequest;
+    dataPersonTakeAway: RegisterPersonEditRequest;
+  }): Observable<AdoptionResponse> {
     return this.api.editAdoptPetData(model).pipe(
       tap(() => {
         this.isEditMode$.next(false);
@@ -46,5 +44,9 @@ export class PetDetailService {
 
   public toggleEditMode(): void {
     this.isEditMode$.next(!this.isEditMode$.value);
+  }
+
+  public setPetAvater(petId: string, avatar: FormData): Observable<void> {
+    return this.api.setPetAvatar(petId, avatar);
   }
 }

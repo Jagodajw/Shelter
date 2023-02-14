@@ -123,4 +123,12 @@ export class PetService extends ApiService {
       model
     );
   }
+
+  public setPetAvatar(petId: string, avatar: FormData): Observable<void> {
+    return this.http.put<void>(`${this.rootUrl}/animalAvatar/${petId}`, avatar);
+  }
+
+  public getPetAvatar(petId: string): Observable<Blob> {
+    return this.http.get<Blob>(`${this.rootUrl}/animalAvatar/${petId}`, {responseType: 'blob' as 'json'});
+  }
 }

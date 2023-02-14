@@ -13,6 +13,8 @@ import {
   filter,
   mergeMap,
   Observable,
+  Subject,
+  take,
   tap,
   throwError,
 } from 'rxjs';
@@ -51,6 +53,8 @@ export class PetDetailComponent implements OnInit {
     new BehaviorSubject<Nullable<AnimalDetailResponse>>(null);
   public adoptedData$: BehaviorSubject<Nullable<AdoptDataByAnimalIdResponse>> =
     new BehaviorSubject<Nullable<AdoptDataByAnimalIdResponse>>(null);
+  public avatar$: BehaviorSubject<Blob | null> =
+    new BehaviorSubject<Blob | null>(null);
 
   constructor(
     private _location: Location,
@@ -68,7 +72,7 @@ export class PetDetailComponent implements OnInit {
   public backClicked() {
     this._location.back();
   }
-  
+
   public editButtonClick() {
     this.root.toggleEditMode();
   }
@@ -104,6 +108,11 @@ export class PetDetailComponent implements OnInit {
             })
           )
         ),
+        mergeMap((petResponse: AnimalDetailResponse) =>
+          this.api
+            .getPetAvatar(petResponse.registerAnimal!.ID)
+            .pipe(tap((avatar: Blob) => this.avatar$.next(avatar)))
+        ),
         untilDestroyed(this)
       )
       .subscribe({
@@ -133,6 +142,14 @@ export class PetDetailComponent implements OnInit {
         next: () => this.isLoading$.next(false),
         error: (err) => this.isLoading$.next(false),
       });
+  }
+
+  public updateAvatar(updatedAvatar: FormData): void {
+    const petId = this.activatedRoute.snapshot.params['id'];
+    console.log('petID', petId);
+    if (petId === null) return;
+
+    this.root.setPetAvater(petId, updatedAvatar).subscribe();
   }
 
   downloadAttachment(attachmentId: string): void {
