@@ -1,0 +1,21 @@
+<div class="popup__header">
+    <h3 class="popup__title">{{'settings.addEmployees' | translate}}</h3>
+</div>
+<form [formGroup]="employeesForm" class="popup__content" (submit)="addEmployees()">
+    <div class="input-row">
+        <mat-form-field class="input-half">
+            <mat-label>{{'settings.nameEmployees' | translate}}</mat-label>
+            <input matInput formControlName="name" />
+        </mat-form-field>
+        <mat-form-field class="input-half">
+            <mat-label>{{'settings.surnameEmployees' | translate}}</mat-label>
+            <input matInput formControlName="surname" />
+        </mat-form-field>
+    </div>
+    <div class="popup__btn-container">
+        <app-button variant="cancelable" mat-dialog-close>{{ 'action.cancel' | translate }}</app-button>
+        <app-button variant="raised" type="submit">
+            {{ 'action.save' | translate }}
+        </app-button>
+    </div>
+</form>

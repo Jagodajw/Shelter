@@ -22,6 +22,8 @@ export class SearchEngineComponent implements OnInit {
   public speciesId!: Observable<number | undefined>;
   public status$: Observable<boolean> = this.root
     .status$ as Observable<boolean>;
+
+  public isSearching: boolean = false;
   constructor(
     private _form: FormBuilder,
     private root: PetsRootService,
@@ -80,10 +82,12 @@ export class SearchEngineComponent implements OnInit {
         this.searchEngineForm.get('datePickerAccepted')?.value ?? undefined,
     };
     this.root.searchQuery$.next(data);
+    this.isSearching = true;
   }
 
   resetSearch(): void {
     this.root.searchQuery$.next(null);
+    this.isSearching = false;
   }
 
   private resetSearchQuerDetector(): void {

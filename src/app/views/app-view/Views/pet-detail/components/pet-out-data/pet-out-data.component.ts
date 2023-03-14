@@ -80,7 +80,7 @@ export class PetOutDataComponent implements OnInit {
       dataPersonTakeAway: this._form.group({
         ID: [],
         name: ['', Validators.required],
-        id_number: [''],
+        id_number: ['', [Validators.minLength(9), Validators.maxLength(9)]],
         pesel: [null, Validators.pattern('[0-9]{11}')],
         nip: [null],
         email: ['', Validators.email],

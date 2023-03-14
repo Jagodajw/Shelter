@@ -16,7 +16,7 @@ import { CommunityAutocompleteModule } from 'src/app/views/app-view/components/c
 import { BreedAutocompleteModule } from 'src/app/views/app-view/components/breed-autocomplete/breed-autocomplete.module';
 import { ColorAutocompleteModule } from 'src/app/views/app-view/components/color-autocomplete/color-autocomplete.module';
 import { DatePickerRangeModule } from '../../../../components/date-picker-range/date-picker-range.module';
-
+import { MatExpansionModule } from "@angular/material/expansion";
 @NgModule({
   declarations: [SearchEngineComponent],
   exports: [SearchEngineComponent],
@@ -38,6 +38,7 @@ import { DatePickerRangeModule } from '../../../../components/date-picker-range/
     CommunityAutocompleteModule,
     ColorAutocompleteModule,
     DatePickerRangeModule,
+    MatExpansionModule,
   ],
 })
 export class SearchEngineModule {}

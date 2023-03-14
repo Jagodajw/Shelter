@@ -1,0 +1,40 @@
+.popup {
+    &__title {
+      color: white;
+      font-weight: bold;
+      padding: 16px;
+      margin: auto;
+    }
+    &__header {
+      background-color: #514edd;
+    }
+    &__content {
+      padding: 15px 24px 24px 24px;
+    }
+    &__btn {
+      &-container {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 8px;
+  
+        button {
+          color: white;
+          // background-color: $blue;
+          transition: background-color 500ms;
+          &[disabled] {
+            background-color: lightgray;
+          }
+          &:first-child {
+            background-color: whitesmoke;
+            color: red;
+          }
+        }
+  
+        *:first-child {
+          display: block;
+          margin-right: 15px;
+        }
+      }
+    }
+  }
+  

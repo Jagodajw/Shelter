@@ -1,66 +1,83 @@
-<form class="search" [formGroup]="searchEngineForm" (submit)="searchAnimals()">
+<mat-accordion class="search">
+    <mat-expansion-panel #searchPanel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div class="search__main">
+                    <h2>Wyszukiwanie</h2>
+                </div>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
 
-    <div class="search__main">
-        <h2>Wyszukiwanie</h2>
-    </div>
+
+        <form [formGroup]="searchEngineForm">
+
+            <div style="font-size: 14px" class="search__primary">
+                <span class="input-quarter">
+                    <app-species-autocomplete formControlName="species_id"></app-species-autocomplete>
+                </span>
+
+                <span class="input-quarter">
+                    <app-breed-autocomplete [speciesId]="speciesId | async"
+                        formControlName="breed_id"></app-breed-autocomplete>
+                </span>
+
+                <span class="input-quarter">
+                    <app-community-autocomplete formControlName="commune_id"></app-community-autocomplete>
+                </span>
+                <span class="input-quarter">
+                    <app-area-autocomplete formControlName="area_id"></app-area-autocomplete>
+                </span>
+                <span class="input-quarter">
+                    <app-color-autocomplete formControlName="color_id"></app-color-autocomplete>
+                </span>
+                <div class="input-quarter">
+                    <app-select formControlName="gender" [values]="genderList" placeholder="pets.gender">
+                    </app-select>
+                </div>
+                <div class="input-quarter">
+                    <app-select formControlName="size" [values]="sizeList" placeholder="pets.size">
+                    </app-select>
+                </div>
+                <div class="input-quarter search__castred">
+                    <mat-checkbox formControlName="sterilization">{{"pets.filterCastrated" | translate}}
+                    </mat-checkbox>
+                </div>
+                <div class="input-quarter">
+                    <app-search formControlName="search" placeholder="pets.searchPlaceholder"></app-search>
+                </div>
+                <div class="input-quarter">
+                    <app-date-picker-range formControlName="datePickerBirthFromTo"
+                        placeholder="pets.datePickerBirthFromTo">
+                    </app-date-picker-range>
+                </div>
+                <div class="input-quarter">
+                    <app-date-picker-range formControlName="datePickerAccepted" placeholder="pets.datePickerAccepted">
+                    </app-date-picker-range>
+                </div>
+                <div class="search__primary-checkbox input-quarter">
+                    <p class="inline">
+                        <mat-checkbox formControlName="cuarantine">{{"pets.cuarantine" | translate}}</mat-checkbox>
+                    </p>
+                    <p class="inline">
+                        <mat-checkbox formControlName="unvaccinated">{{"pets.unvaccinated" |translate}}
+                        </mat-checkbox>
+                    </p>
+                </div>
+            </div>
+
+        </form>
+
+        <div class="search__btn">
+            <button *ngIf="isSearching" (click)="resetSearch()" class="search__btn-reset" mat-flat-button
+                color="accent">
+                {{"pets.resetSearch" | translate}}
+            </button>
+            <button class="search__btn-search" tpye="button" (click)="searchAnimals()" mat-flat-button color="accent">
+                {{"pets.search" | translate}}
+            </button>
+        </div>
 
 
-    <div style="font-size: 14px" class="search__primary">
-        <span class="input-quarter">
-            <app-species-autocomplete formControlName="species_id"></app-species-autocomplete>
-        </span>
 
-        <span class="input-quarter">
-            <app-breed-autocomplete [speciesId]="speciesId | async" formControlName="breed_id"></app-breed-autocomplete>
-        </span>
-
-        <span class="input-quarter">
-            <app-community-autocomplete formControlName="commune_id"></app-community-autocomplete>
-        </span>
-        <span class="input-quarter">
-            <app-area-autocomplete formControlName="area_id"></app-area-autocomplete>
-        </span>
-        <span class="input-quarter">
-            <app-color-autocomplete formControlName="color_id"></app-color-autocomplete>
-        </span>
-        <div class="input-quarter">
-            <app-select formControlName="gender" [values]="genderList" placeholder="pets.gender">
-            </app-select>
-        </div>
-        <div class="input-quarter">
-            <app-select formControlName="size" [values]="sizeList" placeholder="pets.size">
-            </app-select>
-        </div>
-        <div class="input-quarter search__castred">
-            <mat-checkbox formControlName="sterilization">{{"pets.filterCastrated" | translate}}
-            </mat-checkbox>
-        </div>
-        <div class="input-quarter">
-            <app-search formControlName="search" placeholder="pets.searchPlaceholder"></app-search>
-        </div>
-        <div class="input-quarter">
-            <app-date-picker-range formControlName="datePickerBirthFromTo" placeholder="pets.datePickerBirthFromTo">
-            </app-date-picker-range>
-        </div>
-        <div class="input-quarter">
-            <app-date-picker-range formControlName="datePickerAccepted" placeholder="pets.datePickerAccepted">
-            </app-date-picker-range>
-        </div>
-        <div class="search__primary-checkbox input-quarter">
-            <p class="inline">
-                <mat-checkbox formControlName="cuarantine">{{"pets.cuarantine" | translate}}</mat-checkbox>
-            </p>
-            <p class="inline">
-                <mat-checkbox formControlName="unvaccinated">{{"pets.unvaccinated" |translate}} </mat-checkbox>
-            </p>
-        </div>
-    </div>
-    <div class="search__btn">
-        <button (click)="resetSearch()" class="search__btn-reset" mat-flat-button color="accent">
-            {{"pets.resetSearch" | translate}}
-        </button>
-        <button class="search__btn-search" tpye="sumbit" mat-flat-button color="accent">
-            {{"pets.search" | translate}}
-        </button>
-    </div>
-</form>
+    </mat-expansion-panel>
+</mat-accordion>
