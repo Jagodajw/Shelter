@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
@@ -35,8 +36,11 @@ export class PetsRootService {
   public isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(
     true
   );
+  public numberOfAnimalsVaccinationChecks$!: Observable<number>;
+  public numberOfAnimalsReleaseControl$!: Observable<number>;
   public readonly searchQuery$: BehaviorSubject<AnimalQuery | null> =
     new BehaviorSubject<AnimalQuery | null>(null);
+  public readonly alertControl: FormControl = new FormControl([false]);
 
   constructor(
     private dialog: MatDialog,
@@ -70,7 +74,10 @@ export class PetsRootService {
       )
     )
       .pipe(
-        tap(() => this.isLoading$.next(true)),
+        tap(() => {
+          this.isLoading$.next(true);
+          this.setNumberOfAnimals();
+        }),
         map(
           ([status, searchQuery]) =>
             ({
@@ -88,10 +95,11 @@ export class PetsRootService {
       )
       .subscribe({
         next: (petsData: AnimalTableResponse[]) => {
+          this.alertControl.patchValue([false]);
           this.pets$.next(petsData);
           this.isLoading$.next(false);
         },
-        error: (err) => this.isLoading$.next(false),
+        error: () => this.isLoading$.next(false),
       });
   }
 
@@ -129,11 +137,49 @@ export class PetsRootService {
     });
   }
 
+  public getAnimalsToVaccinationChecks(): void {
+    const alertValue: boolean | undefined = this.alertControl.value[0];
+    if (alertValue === undefined || alertValue === false) {
+      this.refreschGet().subscribe();
+      return;
+    }
+
+    this.api.getAnimalsToVaccinationChecks().subscribe({
+      next: (pets: AnimalTableResponse[]) => this.pets$.next(pets),
+    });
+  }
+
+  public getAnimalsReleaseControl(): void {
+    const alertValue: boolean | undefined = this.alertControl.value[0];
+    if (alertValue === undefined || alertValue === false) {
+      this.refreschGet().subscribe();
+      return;
+    }
+
+    this.api.getAnimalsToReleaseControl().subscribe({
+      next: (pets: AnimalTableResponse[]) => this.pets$.next(pets),
+    });
+  }
+
   private refreschGet(): Observable<AnimalTableResponse[]> {
     return this.api.getPets().pipe(
       tap((petsData: AnimalTableResponse[]) => {
         this.pets$.next(petsData);
       })
+    );
+  }
+
+  private setNumberOfAnimals(): void {
+    this.numberOfAnimalsVaccinationChecks$ =
+      this.api.getNumberOfAnimalsVaccinationChecks();
+
+    this.numberOfAnimalsReleaseControl$ =
+      this.api.getNumberOfAnimalsReleaseControl();
+  }
+
+  public get isAlertActive$(): Observable<boolean> {
+    return this.alertControl.valueChanges.pipe(
+      map(([alertStatus]: [boolean | undefined]) => !alertStatus)
     );
   }
 }

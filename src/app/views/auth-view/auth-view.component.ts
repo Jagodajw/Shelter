@@ -21,8 +21,8 @@ export class AuthViewComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.form.group({
-      login: ['', [Validators.required, Validators.minLength(6)]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      login: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, Validators.minLength(5)]],
     });
   }
   onSubmit() {

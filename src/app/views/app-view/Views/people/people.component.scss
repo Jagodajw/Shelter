@@ -22,15 +22,17 @@
     &-table {
       margin: 0 auto;
       width: 80%;
+      padding-bottom: 20px;
       & table {
         width: 100%;
+        tr {
+          height: 46px;
+        }
         th {
           min-width: 120px;
-          // background-color: #a3a2df;
           background-color: #514edd;
           color: #ffffff;
-          font-size: 1.2rem;
-          padding-top: 10px;
+          font-size: 1rem;
         }
         th:last-child {
           text-align: center;

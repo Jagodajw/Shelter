@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { EMPTY, mergeMap } from 'rxjs';
 import { PetService } from 'src/app/views/app-view/services/api/pet.service';
 
 type PersonType = 'private' | 'legal' | 'none';
@@ -51,10 +52,11 @@ export class PopupRegisterComponent implements OnInit {
         description_animal: [''],
         vaccination: [false],
         date_vaccination: [{ value: '', disabled: true }],
+        avatar: [],
       }),
       registerPeople: this._form.group({
         name: ['', Validators.required],
-        id_number: [''],
+        id_number: ['', [Validators.minLength(9), Validators.maxLength(9)]],
         pesel: [null, Validators.pattern('[0-9]{11}')],
         nip: [null],
         email: ['', Validators.email],
@@ -83,6 +85,10 @@ export class PopupRegisterComponent implements OnInit {
   }
 
   public addPet(): void {
+    const isAvatarChosen: boolean = !!this.registerPetsForm.get(
+      'registerAnimal.avatar'
+    )!.value;
+
     this.api
       .addPet({
         ...this.registerPetsForm.value,
@@ -91,11 +97,24 @@ export class PopupRegisterComponent implements OnInit {
           type_of_person: this.typePerson,
         },
       })
+      .pipe(
+        mergeMap((register) =>
+          isAvatarChosen
+            ? this.api.setPetAvatar(
+                register.registerAnimal.ID,
+                this.registerPetsForm.get('registerAnimal.avatar')!.value
+              )
+            : EMPTY
+        )
+      )
       .subscribe({
-        next: () => {
-          this.dialogRef.close({ isAdded: true });
-        },
+        next: () => this.successfulCloseDialog(),
+        complete: () => this.successfulCloseDialog(),
       });
+  }
+
+  private successfulCloseDialog(): void {
+    this.dialogRef.close({ isAdded: true });
   }
 
   public close(): void {

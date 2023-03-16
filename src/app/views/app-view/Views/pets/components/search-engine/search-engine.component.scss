@@ -31,9 +31,8 @@
     &__btn {
       display: flex;
       justify-content: flex-end;
-
       & button {
-        margin: 20px;
+        margin-left: 10px;
         padding: 3px;
         width: 200px;
         letter-spacing: 5px;
@@ -47,21 +46,11 @@
         background-color: #514edd;
       }
     }
+  }
+}
 
-    &__main {
-      display: flex;
-      justify-content: space-between;
-
-      &-header {
-        display: flex;
-        .demo-section {
-          & button {
-            color: #514edd;
-            background-color: rgb(255, 255, 255);
-            border: 3px solid #514edd;
-          }
-        }
-      }
-    }
+::ng-deep {
+  .mat-accordion .mat-expansion-panel:last-of-type {
+    box-shadow: none;
   }
 }

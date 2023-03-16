@@ -1,9 +1,10 @@
 <ng-container>
     <div class="spinner">
         <ng-container *ngIf="!isLoading; else loading">
-            <img src="{{ '/assets/images/' }}" class="mx-auto" [ngStyle]="
+            <!-- <img src="{{ '/assets/images/' }}" class="mx-auto" [ngStyle]="
                     imageWidth !== undefined ? { width: imageWidth } : null
-                " />
+                " /> -->
+            
             <span class="spinner-margin">{{
                 (label | translate)
                 }}</span>

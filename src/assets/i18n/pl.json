@@ -51,7 +51,8 @@
     },
     "vaccination": "Szczepienie",
     "dateVaccination": "Data szczepienia",
-    "resetSearch": "Wyczyść"
+    "resetSearch": "Wyczyść",
+    "EmptyData": "Brak danych"
   },
   "people": {
     "title": "Osoby",
@@ -103,7 +104,8 @@
     "accept": "Zarejestruj",
     "acceptOut": "Wydaj zwierze",
     "edit": "Edytuj",
-    "save": "Zapisz"
+    "save": "Zapisz",
+    "delete": "Usuń"
   },
   "deleteDialog": {
     "beSure": "Czy na pewno chcesz usunąć?",
@@ -144,5 +146,21 @@
   },
   "documents": {
     "upload": "Dodaj załącznik"
+  },
+  "settings": {
+    "title": "Ustawienia",
+    "employees": "Pracownicy",
+    "species": "Gatunek",
+    "breed": "Rasa",
+    "color": "Maść",
+    "city": "Miejscowość",
+    "commune": "Gmina",
+    "area": "Rejon",
+    "acceptanceType": "Typ przyjęcia",
+    "adoptionType": "Typ wydania",
+    "addEmployees": "Dodaj pracownika",
+    "nameEmployees": "Imię",
+    "surnameEmployees": "Nazwisko",
+    "addSpecies": "Dodaj gatunek"
   }
 }

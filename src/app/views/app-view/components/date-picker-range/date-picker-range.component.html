@@ -8,7 +8,7 @@
 
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker></mat-date-range-picker>
-    <button matSuffix mat-icon-button aria-label="Clear" (click)="clearForm()">
+    <button type="button" matSuffix mat-icon-button aria-label="Clear" (click)="clearForm()">
         <mat-icon>close</mat-icon>
     </button>
     <mat-error>{{

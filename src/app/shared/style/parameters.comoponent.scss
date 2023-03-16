@@ -1,14 +1,21 @@
 :host {
   display: block;
+
+  .btn {
+    display: flex;
+    justify-content: flex-end;
+    margin: 20px;
+  }
+
   & table {
+    margin: auto;
     margin-bottom: 20px;
-    width: 100%;
+    width: 60%;
     tr {
-      height: 46px;
+      height: 36px;
     }
     th {
-      min-width: 120px;
-      background-color: #514edd;
+      background-color: #625ea5;
       color: #ffffff;
       font-size: 1rem;
     }
@@ -17,18 +24,15 @@
     }
     td {
       color: #6867b9;
-      font-size: 0.8rem;
+      font-size: 0.5rem;
       text-transform: uppercase;
     }
-    td:first-child {
+    td {
       font-size: 1rem;
       text-transform: uppercase;
     }
     td:last-child {
       text-align: -webkit-center;
     }
-  }
-  .style-for-people {
-    background-color: #6867b917;
   }
 }
