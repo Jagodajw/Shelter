@@ -11,7 +11,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   AdoptDataByAnimalIdResponse,
   AnimalDetailResponse,
-} from 'backend/src/models/AnimalsModel';
+} from 'backend/src/views/AnimalsView';
 import {
   BehaviorSubject,
   catchError,

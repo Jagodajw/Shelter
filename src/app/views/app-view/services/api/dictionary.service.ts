@@ -17,7 +17,7 @@ import {
   TypeAcceptanceResponse,
   TypeAdoptionRequest,
   TypeAdoptionResponse,
-} from 'backend/src/models/DictionaryModel';
+} from 'backend/src/views/DictionaryView';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 

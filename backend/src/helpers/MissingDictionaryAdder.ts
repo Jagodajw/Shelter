@@ -1,21 +1,19 @@
 import { prisma } from '..';
+import { PrismaClientType } from '../models/DictionaryModel';
+import { AreaService } from '../services/dictionary/AreaService';
+import { BreedService } from '../services/dictionary/BreedService';
+import { CityService } from '../services/dictionary/CityService';
+import { ColorService } from '../services/dictionary/ColorService';
+import { CommuneService } from '../services/dictionary/CommuneService';
+import { SpeciesService } from '../services/dictionary/SpeciesService';
+import { TypeAcceptanceService } from '../services/dictionary/TypeAcceptanceService';
+import { TypeAdoptionService } from '../services/dictionary/TypeAdoptionService';
 import {
   AnimalAdoptionRequest,
   RegisterAnimalAddRequest,
   RegisterPersonAddRequest,
   RegistrationAddRequest,
-} from '../models/AnimalsModel';
-import {
-  addArea,
-  addBreed,
-  addCity,
-  addColor,
-  addComune,
-  addSpecies,
-  addTypeAcceptance,
-  addTypeAdoption,
-  PrismaClientType,
-} from '../services/DictionaryService';
+} from '../views/AnimalsView';
 
 type RequestKeys =
   | keyof RegisterAnimalAddRequest
@@ -36,7 +34,7 @@ export class MissingDictionaryAdder {
 
     switch (key) {
       case 'species': {
-        const newSpecies = await addSpecies(
+        const newSpecies = await SpeciesService.add(
           { species: data, ...extraData },
           shelterId,
           this.prismaClient
@@ -44,7 +42,7 @@ export class MissingDictionaryAdder {
         return newSpecies.ID;
       }
       case 'breed': {
-        const newBreed = await addBreed(
+        const newBreed = await BreedService.add(
           { breed: data, ...extraData },
           shelterId,
           this.prismaClient
@@ -53,7 +51,7 @@ export class MissingDictionaryAdder {
       }
 
       case 'commune': {
-        const newCommune = await addComune(
+        const newCommune = await CommuneService.add(
           { commune: data, ...extraData },
           shelterId,
           this.prismaClient
@@ -62,7 +60,7 @@ export class MissingDictionaryAdder {
       }
 
       case 'area': {
-        const newArea = await addArea(
+        const newArea = await AreaService.add(
           { area: data, ...extraData },
           shelterId,
           this.prismaClient
@@ -72,7 +70,7 @@ export class MissingDictionaryAdder {
       }
 
       case 'color': {
-        const newColor = await addColor(
+        const newColor = await ColorService.add(
           { color: data, ...extraData },
           shelterId,
           this.prismaClient
@@ -82,7 +80,7 @@ export class MissingDictionaryAdder {
       }
 
       case 'city': {
-        const newCity = await addCity(
+        const newCity = await CityService.add(
           { city: data, ...extraData },
           shelterId,
           this.prismaClient
@@ -92,7 +90,7 @@ export class MissingDictionaryAdder {
       }
 
       case 'type_of_acceptance': {
-        const newTypeOfAcceptance = await addTypeAcceptance(
+        const newTypeOfAcceptance = await TypeAcceptanceService.add(
           { type_acceptance: data, ...extraData },
           shelterId,
           this.prismaClient
@@ -102,7 +100,7 @@ export class MissingDictionaryAdder {
       }
 
       case 'type_adoption': {
-        const newTypeOfAdoption = await addTypeAdoption(
+        const newTypeOfAdoption = await TypeAdoptionService.add(
           { type_adoption: data, ...extraData },
           shelterId,
           this.prismaClient
@@ -118,5 +116,10 @@ export class MissingDictionaryAdder {
 
   private isPrimitiveTypeOf(dictionary: unknown): dictionary is string {
     return typeof dictionary === 'string';
+  }
+
+  private addDictonary<TInstance>(shelterId: string) {
+    return async (dictonaryInstance: any, model: any) =>
+      await dictonaryInstance.add(model, this.prismaClient);
   }
 }

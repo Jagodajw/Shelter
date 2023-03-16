@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { EmployeeResponse } from 'backend/src/models/EmployeeModel';
+import { EmployeeResponse } from 'backend/src/views/EmployeeView';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 

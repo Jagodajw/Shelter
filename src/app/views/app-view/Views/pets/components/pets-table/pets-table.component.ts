@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
-import { AnimalTableResponse } from 'backend/src/models/AnimalsModel';
+import { AnimalTableResponse } from 'backend/src/views/AnimalsView';
 import { genderList } from 'src/app/data/data-list';
 import { Select } from '../../../../components/select/select';
 import { PetsRootService } from '../../services/pets-root.service';

@@ -1,6 +1,6 @@
-import { Component, forwardRef, Input, OnInit, Self } from '@angular/core';
-import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EmployeeResponse } from 'backend/src/models/EmployeeModel';
+import { Component, Input, OnInit, Self } from '@angular/core';
+import { FormControl, NgControl } from '@angular/forms';
+import { EmployeeResponse } from 'backend/src/views/EmployeeView';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { EmployeeService } from '../../services/api/employee.service';

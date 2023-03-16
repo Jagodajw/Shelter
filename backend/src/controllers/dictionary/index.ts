@@ -1,0 +1,10 @@
+export { AreaController } from './AreaController';
+export { BreedController } from './BreedController';
+export { CityController } from './CityController';
+export { ColorController } from './ColorController';
+export { CommuneController } from './CommuneController';
+export { EmployeeController } from './EmployeeController';
+export { ProvinceController } from './ProvinceController';
+export { SpeciesController } from './SpeciesController';
+export { TypeAcceptanceController } from './TypeAcceptanceController';
+export { TypeAdoptionController } from './TypeAdoptionController';

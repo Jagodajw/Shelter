@@ -1,6 +1,6 @@
 import { Component, OnInit, Self } from '@angular/core';
 import { FormControl, NgControl, Validators } from '@angular/forms';
-import { SpeciesResponse } from 'backend/src/models/DictionaryModel';
+import { SpeciesResponse } from 'backend/src/views/DictionaryView';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
@@ -71,13 +71,15 @@ export class SpeciesAutocompleteComponent
 
   override handleValueChangeFromOutside(): void {
     this.control.patchValue(
-      this.isValueAsSpeciesResponse(this.value) ?
-      { ...this.value, name: this.value.species } 
-      : this.value
+      this.isValueAsSpeciesResponse(this.value)
+        ? { ...this.value, name: this.value.species }
+        : this.value
     );
   }
 
-  private isValueAsSpeciesResponse(value: ReturnValue): value is SpeciesResponse {
+  private isValueAsSpeciesResponse(
+    value: ReturnValue
+  ): value is SpeciesResponse {
     return (value as SpeciesResponse)?.species !== undefined;
   }
 }

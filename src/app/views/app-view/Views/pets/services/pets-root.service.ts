@@ -5,7 +5,7 @@ import {
   AnimalQuery,
   AnimalStatus,
   AnimalTableResponse,
-} from 'backend/src/models/AnimalsModel';
+} from 'backend/src/views/AnimalsView';
 import {
   BehaviorSubject,
   combineLatest,

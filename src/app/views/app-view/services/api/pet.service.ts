@@ -15,7 +15,7 @@ import {
   RegisterEditAnimalRequest,
   RegisterPersonAddRequest,
   RegisterPersonEditRequest,
-} from 'backend/src/models/AnimalsModel';
+} from 'backend/src/views/AnimalsView';
 import { Observable } from 'rxjs';
 import { ApiService } from 'src/app/services/api.service';
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { AnimalQuery } from 'backend/src/models/AnimalsModel';
+import { AnimalQuery } from 'backend/src/views/AnimalsView';
 import { filter, map, Observable, of, tap } from 'rxjs';
 import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from 'src/app/views/app-view/components/select/select';
@@ -119,7 +119,5 @@ export class SearchEngineComponent implements OnInit {
       this.apiPet.getNumberOfAnimalsReleaseControl();
   }
 
-  public AnimalsReleaseControl(): void{
-    
-  }
+  public AnimalsReleaseControl(): void {}
 }

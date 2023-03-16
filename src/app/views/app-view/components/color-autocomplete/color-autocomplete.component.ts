@@ -1,6 +1,6 @@
 import { Component, OnInit, Self } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
-import { ColorResponse } from 'backend/src/models/DictionaryModel';
+import { ColorResponse } from 'backend/src/views/DictionaryView';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
@@ -67,7 +67,11 @@ export class ColorAutocompleteComponent
   }
 
   override handleValueChangeFromOutside(): void {
-    this.control.patchValue(this.isValueAsColorResponse(this.value) ? { ...this.value, name: this.value.color } : this.value);
+    this.control.patchValue(
+      this.isValueAsColorResponse(this.value)
+        ? { ...this.value, name: this.value.color }
+        : this.value
+    );
   }
 
   private isValueAsColorResponse(value: ReturnValue): value is ColorResponse {

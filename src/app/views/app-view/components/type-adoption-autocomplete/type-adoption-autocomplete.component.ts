@@ -1,6 +1,6 @@
-import { Component, forwardRef, OnInit, Self } from '@angular/core';
-import { FormControl, NgControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { TypeAdoptionResponse } from 'backend/src/models/DictionaryModel';
+import { Component, OnInit, Self } from '@angular/core';
+import { FormControl, NgControl } from '@angular/forms';
+import { TypeAdoptionResponse } from 'backend/src/views/DictionaryView';
 import { map, Observable, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';

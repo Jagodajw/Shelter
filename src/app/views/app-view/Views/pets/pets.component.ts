@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AnimalTableResponse } from 'backend/src/models/AnimalsModel';
+import { AnimalTableResponse } from 'backend/src/views/AnimalsView';
 import { Observable } from 'rxjs';
 import { PetsRootService } from './services/pets-root.service';
 
@@ -36,5 +36,4 @@ export class PetsComponent implements OnInit {
   public deletePosition(petId: string): void {
     this.root.deletePet(petId);
   }
-  
 }
