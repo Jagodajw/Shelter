@@ -50,7 +50,7 @@ router.delete(
 );
 
 router.put(
-  '/settingsCommuneId/:communeId',
+  '/commune/:communeId',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {

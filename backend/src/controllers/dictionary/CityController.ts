@@ -38,7 +38,7 @@ router.post('/city', authenticate, shelterAuthenticate, async (req, res) => {
 });
 
 router.put(
-  '/settingsCityId/:cityId',
+  '/city/:cityId',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
@@ -61,7 +61,7 @@ router.put(
 );
 
 router.delete(
-  '/settingsCity/:cityId',
+  '/city/:cityId',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {

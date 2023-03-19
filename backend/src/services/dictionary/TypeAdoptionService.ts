@@ -28,15 +28,13 @@ export class TypeAdoptionService {
 
   public static async update(
     typeAdoptionId: number,
-    updateTypeAdoption: string
+    model: TypeAdoptionRequest
   ) {
     return await prisma.typeAdoption.update({
       where: {
         ID: typeAdoptionId,
       },
-      data: {
-        type_adoption: updateTypeAdoption,
-      },
+      data: model,
     });
   }
 

@@ -3,7 +3,7 @@ import express from 'express';
 import { authenticate } from '../../middlewares/authentication';
 import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
 import { SpeciesService } from '../../services/dictionary/SpeciesService';
-import { SpeciesResponse } from '../../views/DictionaryView';
+import { SpeciesRequest, SpeciesResponse } from '../../views/DictionaryView';
 
 const router = express.Router();
 
@@ -24,7 +24,7 @@ router.get('/species', authenticate, shelterAuthenticate, async (req, res) => {
 });
 
 router.delete(
-  '/settingsSpecies/:speciesId',
+  '/species/:speciesId',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
@@ -50,12 +50,12 @@ router.delete(
 );
 
 router.put(
-  '/settingsSpeciesId/:speciesId',
+  '/species/:speciesId',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
     try {
-      const updatedSpecies = req.body.species;
+      const updatedSpecies: SpeciesRequest = req.body;
       const speciesId = req.params.speciesId;
 
       const convertSpeciesId = parseInt(speciesId);
@@ -73,11 +73,8 @@ router.put(
 router.post('/species', authenticate, shelterAuthenticate, async (req, res) => {
   try {
     const shelterId: string = req.headers['shelters_id'] as string;
-    const species: string = req.body.species;
-    const dictionaryAddSpeciesd = await SpeciesService.add(
-      { species },
-      shelterId
-    );
+    const species: SpeciesRequest = req.body;
+    const dictionaryAddSpeciesd = await SpeciesService.add(species, shelterId);
     res.json(dictionaryAddSpeciesd as SpeciesResponse);
   } catch (error) {
     res.sendStatus(500);

@@ -21,14 +21,12 @@ export class AreaService {
     });
   }
 
-  public static async update(areaId: number, updateArea: string) {
+  public static async update(areaId: number, areaModel: AreaRequest) {
     return await prisma.area.update({
       where: {
         ID: areaId,
       },
-      data: {
-        area: updateArea,
-      },
+      data: areaModel,
     });
   }
 

@@ -21,14 +21,12 @@ export class SpeciesService {
     });
   }
 
-  public static async update(speciesId: number, updateSpecies: string) {
+  public static async update(speciesId: number, model: SpeciesRequest) {
     return await prisma.species.update({
       where: {
         ID: speciesId,
       },
-      data: {
-        species: updateSpecies,
-      },
+      data: model,
     });
   }
 

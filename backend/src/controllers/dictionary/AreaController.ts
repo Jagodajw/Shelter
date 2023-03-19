@@ -3,7 +3,7 @@ import express from 'express';
 import { authenticate } from '../../middlewares/authentication';
 import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
 import { AreaService } from '../../services/dictionary/AreaService';
-import { AreaResponse } from '../../views/DictionaryView';
+import { AreaRequest, AreaResponse } from '../../views/DictionaryView';
 
 const router = express.Router();
 
@@ -53,7 +53,7 @@ router.put(
   shelterAuthenticate,
   async (req, res) => {
     try {
-      const updatedArea = req.body.area;
+      const updatedArea: AreaRequest = req.body;
       const areaId = req.params.areaId;
 
       const convertAreaId = parseInt(areaId);
@@ -71,8 +71,8 @@ router.put(
 router.post('/area', authenticate, shelterAuthenticate, async (req, res) => {
   try {
     const shelterId: string = req.headers['shelters_id'] as string;
-    const area: string = req.body.area;
-    const dictionaryAddArea = await AreaService.add({ area }, shelterId);
+    const area: AreaRequest = req.body;
+    const dictionaryAddArea = await AreaService.add(area, shelterId);
     res.json(dictionaryAddArea as AreaResponse);
   } catch (error) {
     res.sendStatus(500);

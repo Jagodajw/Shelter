@@ -29,14 +29,12 @@ export class BreedService {
     });
   }
 
-  public static async update(breedId: number, updateBreed: string) {
+  public static async update(breedId: number, breedModel: BreedRequest) {
     return await prisma.breed.update({
       where: {
         ID: breedId,
       },
-      data: {
-        breed: updateBreed,
-      },
+      data: breedModel,
     });
   }
 

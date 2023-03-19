@@ -3,7 +3,10 @@ import express from 'express';
 import { authenticate } from '../../middlewares/authentication';
 import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
 import { TypeAdoptionService } from '../../services/dictionary/TypeAdoptionService';
-import { TypeAdoptionResponse } from '../../views/DictionaryView';
+import {
+  TypeAdoptionRequest,
+  TypeAdoptionResponse,
+} from '../../views/DictionaryView';
 
 const router = express.Router();
 
@@ -62,7 +65,7 @@ router.put(
   shelterAuthenticate,
   async (req, res) => {
     try {
-      const updatedTypeAdoption = req.body.type_adoption;
+      const updatedTypeAdoption: TypeAdoptionRequest = req.body;
       const typeAdoptionId = req.params.typeAdoptionId;
 
       const convertAdoptionId = parseInt(typeAdoptionId);
@@ -84,9 +87,9 @@ router.post(
   async (req, res) => {
     try {
       const shelterId: string = req.headers['shelters_id'] as string;
-      const typeAdoption: string = req.body.type_adoption;
+      const typeAdoption: TypeAdoptionRequest = req.body;
       const dictionaryTypeAdoptionUpdate = await TypeAdoptionService.add(
-        { type_adoption: typeAdoption },
+        typeAdoption,
         shelterId
       );
       res.json(dictionaryTypeAdoptionUpdate as TypeAdoptionResponse);

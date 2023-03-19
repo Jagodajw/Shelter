@@ -73,7 +73,7 @@ router.put(
   shelterAuthenticate,
   async (req, res) => {
     try {
-      const updatedBreed = req.body.breed;
+      const updatedBreed: BreedRequest = req.body;
       const breedId = req.params.breedId;
 
       const convertBreedId = parseInt(breedId);

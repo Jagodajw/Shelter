@@ -35,7 +35,7 @@ export class TypeAcceptanceService {
 
   public static async update(
     typeAcceptanceId: number,
-    typeAcceptanceModel: TypeAcceptance
+    typeAcceptanceModel: TypeAcceptanceRequest
   ): Promise<TypeAcceptance> {
     return await prisma.typeAcceptance.update({
       where: { ID: typeAcceptanceId },

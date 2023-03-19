@@ -48,7 +48,7 @@ router.delete(
 );
 
 router.put(
-  '/settingsColorId/:colorId',
+  '/color/:colorId',
   authenticate,
   shelterAuthenticate,
   async (req, res) => {
