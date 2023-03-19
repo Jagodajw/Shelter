@@ -8,6 +8,8 @@ import { SettingsEmployeesPopupModule } from './settings-employees/settings-empl
 import { SettingsEmployeesModule } from './settings-employees/settings-employees.module';
 import { SettingsSpeciesModule } from './settings-species/settings-species.module';
 import { SettingsSpeciesPopupModule } from './settings-species/settings-species-popup/settings-species-popup.module';
+import { SettingsCityModule } from './settings-city/settings-city.module';
+import { SettingsColorModule } from './settings-color/settings-color.module';
 
 @NgModule({
   declarations: [SettingsComponent],
@@ -20,6 +22,8 @@ import { SettingsSpeciesPopupModule } from './settings-species/settings-species-
     SettingsEmployeesModule,
     SettingsSpeciesModule,
     SettingsSpeciesPopupModule,
+    SettingsCityModule,
+    SettingsColorModule,
   ],
 })
 export class SettingsModule {}

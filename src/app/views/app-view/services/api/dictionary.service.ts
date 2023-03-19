@@ -37,6 +37,17 @@ export class DictionaryService extends ApiService {
     return this.http.post<CityResponse>(`${this.rootUrl}/city`, model);
   }
 
+  public editCity(
+    cityId: string,
+    model: CityRequest
+  ): Observable<CityResponse> {
+    return this.http.put<CityResponse>(`${this.rootUrl}/city/${cityId}`, model);
+  }
+
+  public deleteCity(cityId: string): Observable<CityResponse> {
+    return this.http.delete<CityResponse>(`${this.rootUrl}/city/${cityId}`);
+  }
+
   public getCommune(): Observable<CommuneResponse[]> {
     return this.http.get<CommuneResponse[]>(`${this.rootUrl}/commune`);
   }
@@ -51,6 +62,22 @@ export class DictionaryService extends ApiService {
 
   public addSpecies(model: SpeciesRequest): Observable<SpeciesResponse> {
     return this.http.post<SpeciesResponse>(`${this.rootUrl}/species`, model);
+  }
+
+  public editSpecies(
+    speciesId: string,
+    model: SpeciesRequest
+  ): Observable<SpeciesResponse> {
+    return this.http.put<SpeciesResponse>(
+      `${this.rootUrl}/species/${speciesId}`,
+      model
+    );
+  }
+
+  public deleteSpecies(speciesId: string): Observable<SpeciesResponse> {
+    return this.http.delete<SpeciesResponse>(
+      `${this.rootUrl}/species/${speciesId}`
+    );
   }
 
   public getBreed(speciesId?: number): Observable<BreedResponse[]> {
@@ -71,6 +98,20 @@ export class DictionaryService extends ApiService {
     return this.http.post<ColorResponse>(`${this.rootUrl}/color`, model);
   }
 
+  public editColor(
+    colorId: string,
+    model: ColorRequest
+  ): Observable<ColorResponse> {
+    return this.http.put<ColorResponse>(
+      `${this.rootUrl}/color/${colorId}`,
+      model
+    );
+  }
+
+  public deleteColor(colorId: string): Observable<ColorResponse> {
+    return this.http.delete<ColorResponse>(`${this.rootUrl}/color/${colorId}`);
+  }
+  
   public getArea(): Observable<AreaResponse[]> {
     return this.http.get<AreaResponse[]>(`${this.rootUrl}/area`);
   }

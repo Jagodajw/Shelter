@@ -1,18 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SettingsSpeciesComponent } from './settings-species.component';
+import { SettingsColorComponent } from './settings-color.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
-import { ButtonItemDeleteModule } from 'src/app/views/app-view/components/button-item-delete/button-item-delete.module';
-import { ButtonModule } from 'src/app/views/app-view/components/button/button.module';
-import { SettingsSpeciesPopupModule } from './settings-species-popup/settings-species-popup.module';
+import { ButtonModule } from '../../../components/button/button.module';
+import { ButtonItemDeleteModule } from '../../../components/button-item-delete/button-item-delete.module';
+import { SettingsColorPopupModule } from './settings-color-popup/settings-color-popup.module';
+
 @NgModule({
-  declarations: [SettingsSpeciesComponent],
-  exports: [SettingsSpeciesComponent],
+  declarations: [SettingsColorComponent],
+  exports: [SettingsColorComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -23,7 +24,7 @@ import { SettingsSpeciesPopupModule } from './settings-species-popup/settings-sp
     MatMenuModule,
     ButtonItemDeleteModule,
     ButtonModule,
-    SettingsSpeciesPopupModule,
+    SettingsColorPopupModule,
   ],
 })
-export class SettingsSpeciesModule {}
+export class SettingsColorModule {}

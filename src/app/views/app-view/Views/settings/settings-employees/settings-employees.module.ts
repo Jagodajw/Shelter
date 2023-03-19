@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { ButtonItemDeleteModule } from '../../../components/button-item-delete/button-item-delete.module';
-import { EmptyDataModule } from '../../../components/empty-data/empty-data.module';
+import { SettingsEmployeesPopupModule } from './settings-employees-popup/settings-employees-popup.module';
 
 @NgModule({
   declarations: [SettingsEmployeesComponent],
@@ -24,6 +24,7 @@ import { EmptyDataModule } from '../../../components/empty-data/empty-data.modul
     MatMenuModule,
     ButtonItemDeleteModule,
     ButtonModule,
+    SettingsEmployeesPopupModule
   ],
 })
 export class SettingsEmployeesModule {}
