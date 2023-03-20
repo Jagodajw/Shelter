@@ -5,8 +5,8 @@
 
 
 <table mat-table [dataSource]="communeTable">
-    <ng-container matColumnDef="color">
-        <th mat-header-cell *matHeaderCellDef>{{ "settings.color" | translate }}</th>
+    <ng-container matColumnDef="commune">
+        <th mat-header-cell *matHeaderCellDef>{{ "settings.commune" | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.commune }}</td>
     </ng-container>
 

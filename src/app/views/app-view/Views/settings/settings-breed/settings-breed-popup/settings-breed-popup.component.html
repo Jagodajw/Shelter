@@ -1,1 +1,17 @@
-<p>settings-breed-popup works!</p>
+<div class="popup__header">
+    <h3 class="popup__title">{{ data.title| translate}}</h3>
+</div>
+<form class="popup__content" (submit)="addBreed()">
+    <div class="input-row">
+        <mat-form-field class="input-full">
+            <mat-label>{{'settings.color' | translate}}</mat-label>
+            <input matInput [formControl]="breedControl" />
+        </mat-form-field>
+    </div>
+    <div class="popup__btn-container">
+        <app-button variant="cancelable" mat-dialog-close>{{ 'action.cancel' | translate }}</app-button>
+        <app-button variant="raised" type="submit">
+            {{ 'action.save' | translate }}
+        </app-button>
+    </div>
+</form>

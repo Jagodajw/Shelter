@@ -14,7 +14,7 @@ interface Data {
   styleUrls: ['../../../../../../shared/style/popup.component.scss'],
 })
 export class SettingsAcceptanceTypePopupComponent implements OnInit {
-public acceptanceTypeControl: FormControl = new FormControl()
+  public acceptanceTypeControl: FormControl = new FormControl();
   constructor(
     private readonly root: DictionaryService,
     private readonly ref: MatDialogRef<SettingsAcceptanceTypePopupComponent>,
@@ -23,22 +23,26 @@ public acceptanceTypeControl: FormControl = new FormControl()
 
   ngOnInit(): void {
     if (this.data.model !== undefined)
-      this.acceptanceTypeControl.patchValue(this.data.model.acceptanceType);
+      this.acceptanceTypeControl.patchValue(this.data.model.type_acceptance);
   }
 
   addAcceptanceType(): void {
     if (this.data.model) {
       this.root
         .editTypeAcceptance(this.data.model.ID.toString(), {
-          color: this.acceptanceTypeControl.value,
+          type_acceptance: this.acceptanceTypeControl.value,
         })
         .subscribe({
           next: () => this.ref.close({ fetchData: true }),
         });
     } else {
-      this.root.addTypeAcceptance({ color: this.acceptanceTypeControl.value }).subscribe({
-        next: () => this.ref.close({ fetchData: true }),
-      });
+      this.root
+        .addTypeAcceptance({
+          type_acceptance: this.acceptanceTypeControl.value,
+        })
+        .subscribe({
+          next: () => this.ref.close({ fetchData: true }),
+        });
     }
   }
 }

@@ -9,20 +9,23 @@ import { SettingsAcceptanceTypePopupComponent } from './settings-acceptance-type
 @Component({
   selector: 'app-settings-acceptance-type',
   templateUrl: './settings-acceptance-type.component.html',
+  styleUrls: ['../../../../../shared/style/parameters.comoponent.scss'],
 })
 export class SettingsAcceptanceTypeComponent implements OnInit {
-public acceptanceTypeTable = new MatTableDataSource<TypeAcceptanceResponse>([])
-public displayedColumns: string[] = ['acceptanceType', 'action'];
+  public acceptanceTypeTable = new MatTableDataSource<TypeAcceptanceResponse>(
+    []
+  );
+  public displayedColumns: string[] = ['acceptanceType', 'action'];
   constructor(
     private readonly dialog: MatDialog,
     private readonly root: DictionaryService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.getAcceptanceType();
   }
 
-  public addAcceptanceTypePopup(): void{
+  public addAcceptanceTypePopup(): void {
     this.dialog
       .open(SettingsAcceptanceTypePopupComponent, {
         panelClass: ['modal__width--50', 'modal-without-padding'],
@@ -36,7 +39,10 @@ public displayedColumns: string[] = ['acceptanceType', 'action'];
         ),
         mergeMap(() => this.root.getTypeAcceptance())
       )
-      .subscribe((acceptanceType: TypeAcceptanceResponse[]) => (this.setAcceptanceTypeTable = acceptanceType));
+      .subscribe(
+        (acceptanceType: TypeAcceptanceResponse[]) =>
+          (this.setAcceptanceTypeTable = acceptanceType)
+      );
   }
   public editPosition(acceptanceType: TypeAcceptanceResponse): void {
     this.dialog
@@ -52,11 +58,17 @@ public displayedColumns: string[] = ['acceptanceType', 'action'];
         ),
         mergeMap(() => this.root.getTypeAcceptance())
       )
-      .subscribe((acceptanceType: TypeAcceptanceResponse[]) => (this.setAcceptanceTypeTable = acceptanceType));
+      .subscribe(
+        (acceptanceType: TypeAcceptanceResponse[]) =>
+          (this.setAcceptanceTypeTable = acceptanceType)
+      );
   }
 
-  public deletePosition(acceptanceType: TypeAcceptanceResponse, index: number): void {
-    this.root.deleteSpecies(acceptanceType.ID.toString()).subscribe({
+  public deletePosition(
+    acceptanceType: TypeAcceptanceResponse,
+    index: number
+  ): void {
+    this.root.deleteTypeAcceptance(acceptanceType.ID.toString()).subscribe({
       next: () => {
         this.acceptanceTypeTable.data.splice(index, 1);
         this.setAcceptanceTypeTable = this.acceptanceTypeTable.data;
@@ -65,12 +77,16 @@ public displayedColumns: string[] = ['acceptanceType', 'action'];
   }
 
   public getAcceptanceType(): void {
-    this.root.getTypeAcceptance().subscribe((acceptanceType: TypeAcceptanceResponse[]) => {
-      this.setAcceptanceTypeTable = acceptanceType;
-    });
+    this.root
+      .getTypeAcceptance()
+      .subscribe((acceptanceType: TypeAcceptanceResponse[]) => {
+        this.setAcceptanceTypeTable = acceptanceType;
+      });
   }
 
   private set setAcceptanceTypeTable(acceptanceType: TypeAcceptanceResponse[]) {
-    this.acceptanceTypeTable = new MatTableDataSource<TypeAcceptanceResponse>(acceptanceType);
+    this.acceptanceTypeTable = new MatTableDataSource<TypeAcceptanceResponse>(
+      acceptanceType
+    );
   }
 }

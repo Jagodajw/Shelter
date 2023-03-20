@@ -62,7 +62,7 @@ export class DictionaryService extends ApiService {
   }
 
   public deleteCommune(communeId: string): Observable<CommuneResponse>{
-    return this.http.delete<CommuneResponse>(`${this.rootUrl}/commune${communeId}`)
+    return this.http.delete<CommuneResponse>(`${this.rootUrl}/commune/${communeId}`)
   }
 
   public getSpecies(): Observable<SpeciesResponse[]> {
@@ -98,6 +98,23 @@ export class DictionaryService extends ApiService {
   public addBreed(model: BreedRequest): Observable<BreedResponse> {
     return this.http.post<BreedResponse>(`${this.rootUrl}/breed`, model);
   }
+
+  public editBreed(
+    breedId : string,
+    model: BreedRequest
+  ): Observable<BreedResponse> {
+    return this.http.put<BreedResponse>(
+      `${this.rootUrl}/breed/${breedId}`,
+      model
+    );
+  }
+
+  public deleteBreed(breedId: string): Observable<BreedResponse> {
+    return this.http.delete<BreedResponse>(
+      `${this.rootUrl}/breed/${breedId}`
+    );
+  }
+
 
   public getColors(): Observable<ColorResponse[]> {
     return this.http.get<ColorResponse[]>(`${this.rootUrl}/colors`);

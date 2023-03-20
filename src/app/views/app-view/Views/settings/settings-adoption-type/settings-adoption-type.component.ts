@@ -13,17 +13,17 @@ import { SettingsAdoptionTypePopupComponent } from './settings-adoption-type-pop
 })
 export class SettingsAdoptionTypeComponent implements OnInit {
   public adoptionTypeTable = new MatTableDataSource<TypeAdoptionResponse>([]);
-  public displayedColumns: string[] = ['adoption_type', 'action'];
+  public displayedColumns: string[] = ['adoptionType', 'action'];
   constructor(
     private readonly dialog: MatDialog,
     private readonly root: DictionaryService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.getAdoption()
+    this.getAdoption();
   }
 
-  public addAdoptionTypePopup(): void{
+  public addAdoptionTypePopup(): void {
     this.dialog
       .open(SettingsAdoptionTypePopupComponent, {
         panelClass: ['modal__width--50', 'modal-without-padding'],
@@ -37,7 +37,10 @@ export class SettingsAdoptionTypeComponent implements OnInit {
         ),
         mergeMap(() => this.root.getTypeAdoptation())
       )
-      .subscribe((typeAdoption: TypeAdoptionResponse[]) => (this.setTypeAdoptionTable = typeAdoption));
+      .subscribe(
+        (typeAdoption: TypeAdoptionResponse[]) =>
+          (this.setTypeAdoptionTable = typeAdoption)
+      );
   }
 
   public editPosition(typeAdoption: TypeAdoptionResponse): void {
@@ -54,10 +57,16 @@ export class SettingsAdoptionTypeComponent implements OnInit {
         ),
         mergeMap(() => this.root.getTypeAdoptation())
       )
-      .subscribe((typeAdoption: TypeAdoptionResponse[]) => (this.setTypeAdoptionTable = typeAdoption));
+      .subscribe(
+        (typeAdoption: TypeAdoptionResponse[]) =>
+          (this.setTypeAdoptionTable = typeAdoption)
+      );
   }
 
-  public deletePosition(typeAdoption: TypeAdoptionResponse, index: number): void {
+  public deletePosition(
+    typeAdoption: TypeAdoptionResponse,
+    index: number
+  ): void {
     this.root.deleteTypeAdoptation(typeAdoption.ID.toString()).subscribe({
       next: () => {
         this.adoptionTypeTable.data.splice(index, 1);
@@ -67,12 +76,16 @@ export class SettingsAdoptionTypeComponent implements OnInit {
   }
 
   public getAdoption(): void {
-    this.root.getTypeAdoptation().subscribe((typeAdoption: TypeAdoptionResponse[]) => {
-      this.setTypeAdoptionTable = typeAdoption;
-    });
+    this.root
+      .getTypeAdoptation()
+      .subscribe((typeAdoption: TypeAdoptionResponse[]) => {
+        this.setTypeAdoptionTable = typeAdoption;
+      });
   }
 
   private set setTypeAdoptionTable(typeAdoption: TypeAdoptionResponse[]) {
-    this.adoptionTypeTable = new MatTableDataSource<TypeAdoptionResponse>(typeAdoption);
+    this.adoptionTypeTable = new MatTableDataSource<TypeAdoptionResponse>(
+      typeAdoption
+    );
   }
 }

@@ -1,1 +1,37 @@
-<p>settings-breed works!</p>
+<div class="btn">
+    <app-button vairan="raised" type="button" (clickEvent)="addBreedPopup()">{{'settings.addBreed' |
+        translate}}</app-button>
+</div>
+
+
+<table mat-table [dataSource]="breedTable">
+    <ng-container matColumnDef="breed">
+        <th mat-header-cell *matHeaderCellDef>{{ "settings.breed" | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.breed }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef>Akcja</th>
+        <td mat-cell *matCellDef="let breedRowModel; let index=index" class="settings__menu-box">
+            <button mat-icon-button [matMenuTriggerFor]="tableMenuAction" (click)="$event.stopPropagation()">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+
+            <mat-menu #tableMenuAction="matMenu" xPosition="before">
+                <button mat-menu-item (click)="editPosition(breedRowModel)">
+                    <mat-icon> edit</mat-icon>
+                    {{ "action.edit" | translate }}
+                </button>
+
+                <app-button-item-delete (onDelete)="deletePosition(breedRowModel, index)">
+                    <mat-icon>delete</mat-icon>
+                    {{ "action.delete" | translate }}
+                </app-button-item-delete>
+            </mat-menu>
+        </td>
+    </ng-container>
+    <ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    </ng-container>
+    <tr mat-row *matRowDef="let breedRowModel; columns: displayedColumns"></tr>
+</table>

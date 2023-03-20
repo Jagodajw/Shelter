@@ -7,7 +7,7 @@
 <table mat-table [dataSource]="acceptanceTypeTable">
     <ng-container matColumnDef="acceptanceType">
         <th mat-header-cell *matHeaderCellDef>{{ "settings.acceptanceType" | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.accep }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.type_acceptance }}</td>
     </ng-container>
 
     <ng-container matColumnDef="action">
