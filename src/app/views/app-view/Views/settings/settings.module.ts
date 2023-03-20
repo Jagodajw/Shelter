@@ -10,6 +10,12 @@ import { SettingsSpeciesModule } from './settings-species/settings-species.modul
 import { SettingsSpeciesPopupModule } from './settings-species/settings-species-popup/settings-species-popup.module';
 import { SettingsCityModule } from './settings-city/settings-city.module';
 import { SettingsColorModule } from './settings-color/settings-color.module';
+import { SettingsCommuneModule } from './settings-community/settings-commune.module';
+import { SettingsAreaModule } from './settings-area/settings-area.module';
+import { SettingsAcceptanceTypeModule } from './settings-acceptance-type/settings-acceptance-type.module';
+import { SettingsAdoptionTypeModule } from './settings-adoption-type/settings-adoption-type.module';
+import { SettingsBreedModule } from './settings-breed/settings-breed.module';
+
 
 @NgModule({
   declarations: [SettingsComponent],
@@ -24,6 +30,11 @@ import { SettingsColorModule } from './settings-color/settings-color.module';
     SettingsSpeciesPopupModule,
     SettingsCityModule,
     SettingsColorModule,
+    SettingsCommuneModule,
+    SettingsAreaModule,
+    SettingsAcceptanceTypeModule,
+    SettingsAdoptionTypeModule,
+    SettingsBreedModule
   ],
 })
 export class SettingsModule {}

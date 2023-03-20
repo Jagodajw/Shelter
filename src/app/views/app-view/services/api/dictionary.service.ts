@@ -14,6 +14,7 @@ import {
   ProvinceResponse,
   SpeciesRequest,
   SpeciesResponse,
+  TypeAcceptanceRequest,
   TypeAcceptanceResponse,
   TypeAdoptionRequest,
   TypeAdoptionResponse,
@@ -54,6 +55,14 @@ export class DictionaryService extends ApiService {
 
   public addCommune(model: CommuneRequest): Observable<CommuneResponse> {
     return this.http.post<CommuneResponse>(`${this.rootUrl}/commune`, model);
+  }
+
+  public editCommune(communeId: string, model: CommuneRequest): Observable<CommuneResponse>{
+    return this.http.put<CommuneResponse>(`${this.rootUrl}/commune/${communeId}`, model)
+  }
+
+  public deleteCommune(communeId: string): Observable<CommuneResponse>{
+    return this.http.delete<CommuneResponse>(`${this.rootUrl}/commune${communeId}`)
   }
 
   public getSpecies(): Observable<SpeciesResponse[]> {
@@ -120,7 +129,15 @@ export class DictionaryService extends ApiService {
     return this.http.post<AreaResponse>(`${this.rootUrl}/area`, model);
   }
 
-  public getTypeAdoptation(): Observable<TypeAdoptionResponse[]> {
+  public editArea(areaId: string, model: AreaRequest): Observable<AreaResponse>{
+    return this.http.put<AreaResponse>(`${this.rootUrl}/area/${areaId}`, model)
+  }
+
+  public deleteArea(areaId: string): Observable<AreaResponse>{
+    return this.http.delete<AreaResponse>(`${this.rootUrl}/area/${areaId}`)
+  }
+
+   public getTypeAdoptation(): Observable<TypeAdoptionResponse[]> {
     return this.http.get<TypeAdoptionResponse[]>(
       `${this.rootUrl}/typeAdoption`
     );
@@ -134,6 +151,13 @@ export class DictionaryService extends ApiService {
       model
     );
   }
+  public editTypeAdoptation(typeAdoptionId: string, model: TypeAdoptionRequest): Observable<TypeAdoptionResponse>{
+    return this.http.put<TypeAdoptionResponse>(`${this.rootUrl}/typeAdoption/${typeAdoptionId}`, model)
+  }
+
+  public deleteTypeAdoptation(typeAdoptionId: string): Observable<TypeAdoptionResponse>{
+    return this.http.delete<TypeAdoptionResponse>(`${this.rootUrl}/typeAdoption/${typeAdoptionId}`)
+  }
 
   public getProvince(): Observable<ProvinceResponse[]> {
     return this.http.get<ProvinceResponse[]>(`${this.rootUrl}/province`);
@@ -143,5 +167,21 @@ export class DictionaryService extends ApiService {
     return this.http.get<TypeAcceptanceResponse[]>(
       `${this.rootUrl}/typeAcceptance`
     );
+  }
+
+  public addTypeAcceptance(
+    model: TypeAcceptanceRequest
+  ): Observable<TypeAcceptanceResponse> {
+    return this.http.post<TypeAcceptanceResponse>(
+      `${this.rootUrl}/typeAcceptance`,
+      model
+    );
+  }
+  public editTypeAcceptance(typeAcceptanceId: string, model: TypeAcceptanceRequest): Observable<TypeAcceptanceResponse>{
+    return this.http.put<TypeAcceptanceResponse>(`${this.rootUrl}/typeAcceptance/${typeAcceptanceId}`, model)
+  }
+
+  public deleteTypeAcceptance(typeAcceptanceId: string): Observable<TypeAcceptanceResponse>{
+    return this.http.delete<TypeAcceptanceResponse>(`${this.rootUrl}/typeAcceptance/${typeAcceptanceId}`)
   }
 }

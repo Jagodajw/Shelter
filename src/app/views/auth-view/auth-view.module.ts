@@ -12,6 +12,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
 import { ChooseShelterPopupComponenet } from '../app-view/components/choose-shelter-popup/choose-shelter-popup.componenet';
 import { TranslateModule } from '@ngx-translate/core';
+import { SettingsBreedPopupModule } from '../app-view/Views/settings/settings-breed/settings-breed-popup/settings-breed-popup.module';
 
 @NgModule({
   declarations: [AuthViewComponent, ChooseShelterPopupComponenet],
@@ -28,6 +29,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MatToolbarModule,
     MatCardModule,
     TranslateModule,
+    SettingsBreedPopupModule,
   ],
 })
 export class AuthViewModule {}

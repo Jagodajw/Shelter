@@ -57,7 +57,7 @@ export class SettingsColorComponent implements OnInit {
   }
 
   public deletePosition(color: ColorResponse, index: number): void {
-    this.root.deleteSpecies(color.ID.toString()).subscribe({
+    this.root.deleteColor(color.ID.toString()).subscribe({
       next: () => {
         this.colorTable.data.splice(index, 1);
         this.setColorTable = this.colorTable.data;
