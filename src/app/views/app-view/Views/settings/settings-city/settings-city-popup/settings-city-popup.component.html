@@ -1,15 +1,15 @@
 <div class="popup__header">
     <h3 class="popup__title">{{data.title | translate}}</h3>
 </div>
-<form [formGroup]="employeesForm" class="popup__content" (submit)="addEmployees()">
+<form [formGroup]="cityForm" class="popup__content" (submit)="addCity()">
     <div class="input-row">
         <mat-form-field class="input-half">
-            <mat-label>{{'settings.nameEmployees' | translate}}</mat-label>
-            <input matInput formControlName="name" />
+            <mat-label>{{'settings.city' | translate}}</mat-label>
+            <input matInput formControlName="city" />
         </mat-form-field>
         <mat-form-field class="input-half">
-            <mat-label>{{'settings.surnameEmployees' | translate}}</mat-label>
-            <input matInput formControlName="surname" />
+            <mat-label>{{'settings.zip_code' | translate}}</mat-label>
+            <input matInput formControlName="zip_code" />
         </mat-form-field>
     </div>
     <div class="popup__btn-container">

@@ -1,19 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SettingsEmployeesComponent } from './settings-employees.component';
-import { ButtonModule } from '../../../components/button/button.module';
-import { TranslateModule } from '@ngx-translate/core';
+import { SettingsBreedComponent } from './settings-breed.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatDialogModule } from '@angular/material/dialog';
+import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
+import { ButtonModule } from '../../../components/button/button.module';
 import { ButtonItemDeleteModule } from '../../../components/button-item-delete/button-item-delete.module';
-import { SettingsEmployeesPopupModule } from './settings-employees-popup/settings-employees-popup.module';
+import { MatButtonModule } from '@angular/material/button';
+import { SettingsBreedPopupModule } from './settings-breed-popup/settings-breed-popup.module';
+
+
 
 @NgModule({
-  declarations: [SettingsEmployeesComponent],
-  exports: [SettingsEmployeesComponent],
+  declarations: [SettingsBreedComponent],
+  exports: [SettingsBreedComponent],
   imports: [
     CommonModule,
     MatTableModule,
@@ -24,7 +26,7 @@ import { SettingsEmployeesPopupModule } from './settings-employees-popup/setting
     MatMenuModule,
     ButtonItemDeleteModule,
     ButtonModule,
-    SettingsEmployeesPopupModule
-  ],
+    SettingsBreedPopupModule
+  ]
 })
-export class SettingsEmployeesModule {}
+export class SettingsBreedModule { }

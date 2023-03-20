@@ -12,7 +12,7 @@ export class SearchComponent
   implements OnInit
 {
   @Input() placeholder = '';
-  constructor(@Self() ngControl: NgControl, private formBuilder: FormBuilder) {
+  constructor(@Self() ngControl: NgControl) {
     super(ngControl);
   }
 

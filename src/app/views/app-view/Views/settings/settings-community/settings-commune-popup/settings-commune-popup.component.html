@@ -1,11 +1,11 @@
 <div class="popup__header">
-    <h3 class="popup__title">{{ data.title | translate}}</h3>
+    <h3 class="popup__title">{{ data.title| translate}}</h3>
 </div>
-<form class="popup__content" (submit)="addSpecies()">
+<form class="popup__content" (submit)="addCommune()">
     <div class="input-row">
         <mat-form-field class="input-full">
-            <mat-label>{{'settings.species' | translate}}</mat-label>
-            <input matInput [formControl]="speciesControl" />
+            <mat-label>{{'settings.commune' | translate}}</mat-label>
+            <input matInput [formControl]="communeControl" />
         </mat-form-field>
     </div>
     <div class="popup__btn-container">

@@ -27,6 +27,7 @@ export class SettingsSpeciesComponent implements OnInit {
     this.dialog
       .open(SettingsSpeciesPopupComponent, {
         panelClass: ['modal__width--50', 'modal-without-padding'],
+        data: { title: 'settings.addSpecies' },
       })
       .afterClosed()
       .pipe(
@@ -40,8 +41,33 @@ export class SettingsSpeciesComponent implements OnInit {
         (species: SpeciesResponse[]) => (this.setSpeciesTable = species)
       );
   }
-  public deletePosition(speciesId: string): void {}
-  public editPosition(speciesId: string): void {}
+  public editPosition(species: SpeciesResponse): void {
+    this.dialog
+      .open(SettingsSpeciesPopupComponent, {
+        panelClass: ['modal__width--50', 'modal-without-padding'],
+        data: { title: 'settings.editSpecies', model: species },
+      })
+      .afterClosed()
+      .pipe(
+        filter(
+          (data: { fetchData: boolean } | undefined) =>
+            data?.fetchData !== undefined
+        ),
+        mergeMap(() => this.root.getSpecies())
+      )
+      .subscribe(
+        (species: SpeciesResponse[]) => (this.setSpeciesTable = species)
+      );
+  }
+
+  public deletePosition(species: SpeciesResponse, index: number): void {
+    this.root.deleteSpecies(species.ID.toString()).subscribe({
+      next: () => {
+        this.speciesTable.data.splice(index, 1);
+        this.setSpeciesTable = this.speciesTable.data;
+      },
+    });
+  }
 
   public getSpecies(): void {
     this.root.getSpecies().subscribe((species: SpeciesResponse[]) => {

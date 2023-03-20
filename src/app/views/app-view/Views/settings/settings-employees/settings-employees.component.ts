@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { EmployeeResponse } from 'backend/src/views/EmployeeView';
+import { filter, mergeMap } from 'rxjs';
+
 import { EmployeeService } from '../../../services/api/employee.service';
 import { SettingsEmployeesPopupComponent } from './settings-employees-popup/settings-employees-popup.component';
 
@@ -27,20 +29,58 @@ export class SettingsEmployeesComponent implements OnInit {
     this.dialog
       .open(SettingsEmployeesPopupComponent, {
         panelClass: ['modal__width--60', 'modal-without-padding'],
+        data: { title: 'settings.addEmployees' },
       })
       .afterClosed()
-      .subscribe((res) => console.log(res));
+      .pipe(
+        filter(
+          (data: { fetchData: boolean } | undefined) =>
+            data?.fetchData !== undefined
+        ),
+        mergeMap(() => this.employeesService.getEmployee())
+      )
+      .subscribe(
+        (employees: EmployeeResponse[]) => (this.setEmployeesTable = employees)
+      );
   }
-  public deletePosition(employeesId: string): void {}
-  public editPosition(employeesId: string): void {}
+
+  public editPosition(employee: EmployeeResponse): void {
+    this.dialog
+      .open(SettingsEmployeesPopupComponent, {
+        panelClass: ['modal__width--60', 'modal-without-padding'],
+        data: { title: 'settings.editEmployees', model: employee },
+      })
+      .afterClosed()
+      .pipe(
+        filter(
+          (data: { fetchData: boolean } | undefined) =>
+            data?.fetchData !== undefined
+        ),
+        mergeMap(() => this.employeesService.getEmployee())
+      )
+      .subscribe(
+        (employees: EmployeeResponse[]) => (this.setEmployeesTable = employees)
+      );
+  }
+
+  public deletePosition(employee: EmployeeResponse, index: number): void {
+    this.employeesService.deleteEmployee(employee.ID.toString()).subscribe({
+      next: () => {
+        this.employeesTable.data.splice(index, 1);
+        this.setEmployeesTable = this.employeesTable.data;
+      },
+    });
+  }
 
   public getEmployees(): void {
     this.employeesService
       .getEmployee()
       .subscribe((employees: EmployeeResponse[]) => {
-        this.employeesTable = new MatTableDataSource<EmployeeResponse>(
-          employees
-        );
+        this.setEmployeesTable = employees;
       });
+  }
+
+  private set setEmployeesTable(employees: EmployeeResponse[]) {
+    this.employeesTable = new MatTableDataSource<EmployeeResponse>(employees);
   }
 }
