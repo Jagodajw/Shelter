@@ -1,10 +1,11 @@
 import express from 'express';
 import { authenticate } from '../middlewares/authentication';
 import {
-  getAllPeople,
   getanimalsOfPeopleGivingBack,
   getPeopleById,
+  PeopleService,
 } from '../services/PeopleService';
+import { PeopleResponse, PeopleStatus } from '../views/PeopleView';
 
 const router = express.Router();
 
@@ -13,17 +14,26 @@ router.use((req, res, next) => {
   next();
 });
 
-//REQUEST - ep/endpoint
-// req- ządanie z frontu
-// Response res - odpowiedź z backu
-router.get('/people', authenticate, async (req, res) => {
-  try {
-    const people = await getAllPeople();
-    res.json(people);
-  } catch (error) {
-    res.sendStatus(500);
+router.get(
+  '/people/:status/:areBlockedUsers',
+  authenticate,
+  async (req, res) => {
+    try {
+      const shelters_id: string = req.headers['shelters_id'] as string;
+      const status: PeopleStatus = req.params.status as PeopleStatus;
+      const areBlockedUsers: boolean = req.params.areBlockedUsers === 'true';
+
+      const people: PeopleResponse[] = await PeopleService.getList(
+        shelters_id,
+        status,
+        areBlockedUsers
+      );
+      res.json(people as PeopleResponse[]);
+    } catch (error) {
+      res.sendStatus(500);
+    }
   }
-});
+);
 
 router.get(
   '/animalsOfPeopleGivingBack/:peopleId',

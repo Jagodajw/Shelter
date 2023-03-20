@@ -1,5 +1,7 @@
 import { Gender, tableAnimals } from '@prisma/client';
 import { prisma } from '../..';
+import { AnimalMapper } from '../../helpers/AnimalMapper';
+import { AnimalModel } from '../../models/AnimalsModel';
 import {
   AnimalData,
   AnimalQuery,
@@ -14,7 +16,7 @@ export class AniamlsCoreSerivce {
     shelterId: string,
     animalStatus: AnimalStatus
   ): Promise<AnimalTableResponse[]> {
-    const response = await prisma.animals.findMany({
+    const response: AnimalModel[] = await prisma.animals.findMany({
       where: {
         shelters_id: shelterId,
         adopted: animalStatus === 'adopted',
@@ -35,13 +37,7 @@ export class AniamlsCoreSerivce {
       },
     });
 
-    return await response.map((response) => ({
-      ...response,
-      species: response.species?.species ?? '',
-      breed: response.breed?.breed ?? '',
-      commune: response.commune?.commune ?? '',
-      area: response.area?.area ?? '',
-    }));
+    return await AnimalMapper.mapToAnimalView(response);
   }
 
   public static async getById(animalId: string): Promise<tableAnimals | null> {
