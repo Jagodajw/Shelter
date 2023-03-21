@@ -12,13 +12,6 @@ type ReturnValue = string | null | Select | SpeciesResponse;
   selector: 'app-species-autocomplete',
   templateUrl: './species-autocomplete.component.html',
   styleUrls: ['./species-autocomplete.component.scss'],
-  // providers: [
-  //   {
-  //     provide: NG_VALUE_ACCESSOR,
-  //     useExisting: forwardRef(() => SpeciesAutocompleteComponent),
-  //     multi: true,
-  //   },
-  // ],
 })
 export class SpeciesAutocompleteComponent
   extends ControlValueAccessorsAbstract<ReturnValue>

@@ -5,6 +5,10 @@
 
 
 <table mat-table [dataSource]="breedTable">
+    <ng-container matColumnDef="species_id">
+        <th mat-header-cell *matHeaderCellDef>{{ "settings.species" | translate }}</th>
+        <td mat-cell *matCellDef="let element">{{ element.species_id }}</td>
+    </ng-container>
     <ng-container matColumnDef="breed">
         <th mat-header-cell *matHeaderCellDef>{{ "settings.breed" | translate }}</th>
         <td mat-cell *matCellDef="let element">{{ element.breed }}</td>

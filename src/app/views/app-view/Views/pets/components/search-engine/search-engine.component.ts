@@ -5,8 +5,7 @@ import { AnimalQuery } from 'backend/src/views/AnimalsView';
 import { filter, map, Observable, of } from 'rxjs';
 import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from 'src/app/views/app-view/components/select/select';
-import { PetService } from 'src/app/views/app-view/services/api/pet.service';
-import { ShelterService } from 'src/app/views/app-view/services/shelter.service';
+
 import { PetsRootService } from '../../services/pets-root.service';
 
 @UntilDestroy()
@@ -24,12 +23,7 @@ export class SearchEngineComponent implements OnInit {
     .status$ as Observable<boolean>;
 
   public isSearching: boolean = false;
-  constructor(
-    private _form: FormBuilder,
-    private root: PetsRootService,
-    private apiPet: PetService,
-    private readonly shelter: ShelterService
-  ) {}
+  constructor(private _form: FormBuilder, private root: PetsRootService) {}
 
   ngOnInit(): void {
     this.buildForm();

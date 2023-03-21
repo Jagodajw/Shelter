@@ -13,7 +13,7 @@ import { SettingsBreedPopupComponent } from './settings-breed-popup/settings-bre
 })
 export class SettingsBreedComponent implements OnInit {
   public breedTable = new MatTableDataSource<BreedResponse>([]);
-  public displayedColumns: string[] = ['breed', 'action'];
+  public displayedColumns: string[] = ['species_id', 'breed', 'action'];
   constructor(
     private readonly dialog: MatDialog,
     private readonly root: DictionaryService
@@ -43,7 +43,7 @@ export class SettingsBreedComponent implements OnInit {
     this.dialog
       .open(SettingsBreedPopupComponent, {
         panelClass: ['modal__width--50', 'modal-without-padding'],
-        data: { title: 'settings.editColor', model: breed },
+        data: { title: 'settings.editBreed', model: breed },
       })
       .afterClosed()
       .pipe(
