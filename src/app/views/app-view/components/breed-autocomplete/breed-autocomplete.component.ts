@@ -1,6 +1,6 @@
 import { Component, Input, OnInit, Self } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
-import { BreedResponse } from 'backend/src/views/DictionaryView';
+import { BreedListResponse, BreedResponse } from 'backend/src/views/DictionaryView';
 import { map, Observable, Subscription, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
@@ -46,8 +46,8 @@ export class BreedAutocompleteComponent
         tap(() => {
           this.breedList$ = this.api.getBreed(speciesId ?? undefined).pipe(
             map(
-              (breedResponse: BreedResponse[]) =>
-                breedResponse.map((breed: BreedResponse) => ({
+              (breedResponse: BreedListResponse[]) =>
+                breedResponse.map((breed: BreedListResponse) => ({
                   ID: breed.ID,
                   name: breed.breed,
                 })) as Select[]

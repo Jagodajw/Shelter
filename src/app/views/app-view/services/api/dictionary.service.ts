@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import {
   AreaRequest,
   AreaResponse,
+  BreedListResponse,
   BreedRequest,
   BreedResponse,
   CityRequest,
@@ -97,10 +98,10 @@ export class DictionaryService extends ApiService {
     );
   }
 
-  public getBreed(speciesId?: number): Observable<BreedResponse[]> {
+  public getBreed(speciesId?: number): Observable<BreedListResponse[]> {
     if (speciesId === undefined)
-      return this.http.get<BreedResponse[]>(`${this.rootUrl}/breed`);
-    return this.http.get<BreedResponse[]>(`${this.rootUrl}/breed/${speciesId}`);
+      return this.http.get<BreedListResponse[]>(`${this.rootUrl}/breed`);
+    return this.http.get<BreedListResponse[]>(`${this.rootUrl}/breed/${speciesId}`);
   }
   public getBreeds(): Observable<BreedResponse[]> {
     return this.http.get<BreedResponse[]>(`${this.rootUrl}/breed`);

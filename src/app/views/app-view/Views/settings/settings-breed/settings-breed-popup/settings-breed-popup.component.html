@@ -4,7 +4,7 @@
 <form [formGroup]="breedForm" class="popup__content" (submit)="addBreed()">
     <div class="input-row">
         <span class="input-half">
-            <app-species-autocomplete formControlName="species_id"></app-species-autocomplete>
+            <app-species-autocomplete formControlName="species"></app-species-autocomplete>
         </span>
         <mat-form-field class="input-half">
             <mat-label>{{'settings.breed' | translate}}</mat-label>

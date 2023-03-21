@@ -1,12 +1,15 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { BreedResponse } from 'backend/src/views/DictionaryView';
+import {
+  BreedListResponse,
+  BreedResponse,
+} from 'backend/src/views/DictionaryView';
 import { DictionaryService } from 'src/app/views/app-view/services/api/dictionary.service';
 
 interface Data {
   title: string;
-  model: BreedResponse | undefined;
+  model: BreedListResponse | undefined;
 }
 @Component({
   selector: 'app-settings-breed-popup',
@@ -25,34 +28,33 @@ export class SettingsBreedPopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-    this.breedForm.get('species_id')?.enable();
+    this.breedForm.get('species')?.enable();
     if (this.data.model !== undefined) {
-      this.breedForm.patchValue(this.data.model);
-      this.breedForm.get('species_id')?.disable();
+      this.breedForm.get('species')?.patchValue(this.data.model.species);
+      this.breedForm.get('breed')?.patchValue(this.data.model.breed);
+      this.breedForm.get('species')?.disable();
     }
   }
 
   private buildForm(): void {
     this.breedForm = this._form.group({
-      species_id: [],
+      species: [],
       breed: [],
     });
   }
 
   addBreed(): void {
-    // if (this.data.model) {
-    //   this.breedForm.get('species_id')?.disable();
-    //   this.root
-    //     .editBreed(this.data.model.ID.toString(), {
-    //       breed: this.breedControl.value,
-    //     })
-    //     .subscribe({
-    //       next: () => this.ref.close({ fetchData: true }),
-    //     });
-    // } else {
-    //   this.root.addBreed({ breed: this.breedControl.value }).subscribe({
-    //     next: () => this.ref.close({ fetchData: true }),
-    //   });
-    // }
+    if (this.data.model) {
+      this.breedForm.get('species')?.disable();
+      this.root
+        .editBreed(this.data.model.ID.toString(), this.breedForm.value)
+        .subscribe({
+          next: () => this.ref.close({ fetchData: true }),
+        });
+    } else {
+      this.root.addBreed(this.breedForm.value).subscribe({
+        next: () => this.ref.close({ fetchData: true }),
+      });
+    }
   }
 }
