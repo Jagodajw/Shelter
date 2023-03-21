@@ -11,6 +11,7 @@ import { ButtonItemDeleteModule } from '../../../components/button-item-delete/b
 import { MatButtonModule } from '@angular/material/button';
 import { SettingsBreedPopupModule } from './settings-breed-popup/settings-breed-popup.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SettingsBreedSearchEngineModule } from './settings-breed-search-engine/settings-breed-search-engine.module';
 
 @NgModule({
   declarations: [SettingsBreedComponent],
@@ -28,6 +29,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     SettingsBreedPopupModule,
     ReactiveFormsModule,
     FormsModule,
+    SettingsBreedSearchEngineModule,
   ],
 })
 export class SettingsBreedModule {}

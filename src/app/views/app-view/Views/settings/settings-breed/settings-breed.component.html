@@ -2,6 +2,9 @@
     <app-button vairan="raised" type="button" (clickEvent)="addBreedPopup()">{{'settings.addBreed' |
         translate}}</app-button>
 </div>
+<div class="">
+    <app-settings-breed-search-engine (searchParams)="getSearchParams($event)"></app-settings-breed-search-engine>
+</div>
 
 
 <table mat-table [dataSource]="breedTable">

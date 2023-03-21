@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { BreedListResponse, BreedResponse } from 'backend/src/views/DictionaryView';
+import {
+  BreedListResponse,
+  BreedResponse,
+} from 'backend/src/views/DictionaryView';
 import { filter, mergeMap } from 'rxjs';
 import { DictionaryService } from '../../../services/api/dictionary.service';
 import { SettingsBreedPopupComponent } from './settings-breed-popup/settings-breed-popup.component';
+
 
 @Component({
   selector: 'app-settings-breed',
@@ -73,5 +77,9 @@ export class SettingsBreedComponent implements OnInit {
 
   private set setBreedTable(breed: BreedListResponse[]) {
     this.breedTable = new MatTableDataSource<BreedListResponse>(breed);
+  }
+
+  public getSearchParams(event: any) {
+    this.breedTable.filter = event.trim().toLowerCase();
   }
 }
