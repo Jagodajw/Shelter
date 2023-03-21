@@ -3,7 +3,11 @@ import express from 'express';
 import { authenticate } from '../../middlewares/authentication';
 import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
 import { BreedService } from '../../services/dictionary/BreedService';
-import { BreedRequest, BreedResponse } from '../../views/DictionaryView';
+import {
+  BreedListResponse,
+  BreedRequest,
+  BreedResponse,
+} from '../../views/DictionaryView';
 
 const router = express.Router();
 
@@ -17,7 +21,7 @@ router.get('/breed', authenticate, shelterAuthenticate, async (req, res) => {
     const shelterId: string = req.headers['shelters_id'] as string;
     const dictionaryBreed = await BreedService.getList(shelterId);
 
-    res.json(dictionaryBreed as BreedResponse[]);
+    res.json(dictionaryBreed as BreedListResponse[]);
   } catch (error) {
     res.sendStatus(500);
   }

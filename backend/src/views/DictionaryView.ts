@@ -20,6 +20,9 @@ export type SpeciesResponse = Species;
 export type SpeciesRequest = Omit<Species, 'ID' | 'shelters_id'>;
 
 export type BreedResponse = Breed;
+export type BreedListResponse = Omit<Breed, 'species_id'> & {
+  species: SpeciesResponse | null;
+};
 export type BreedRequest = Omit<Breed, 'ID' | 'shelters_id'>;
 
 export type ColorResponse = Color;

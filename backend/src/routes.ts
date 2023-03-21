@@ -19,13 +19,15 @@ import {
   TypeAcceptanceController,
   TypeAdoptionController,
 } from './controllers/dictionary';
-import PeopleController from './controllers/PeopleController';
+import {
+  PeopleCoreController,
+  PeopleGettersController,
+} from './controllers/people';
 import SheltersController from './controllers/SheltersController';
 
 const router = express.Router();
 
 const authApi: Router = AuthController;
-const peopleApi: Router = PeopleController;
 const sheltersApi: Router = SheltersController;
 
 const animalsRoutes: Router[] = [
@@ -35,6 +37,8 @@ const animalsRoutes: Router[] = [
   AnimalsAvatarController,
   AnimalsRegistrationController,
 ];
+
+const peopleRoutes: Router[] = [PeopleCoreController, PeopleGettersController];
 
 const dictionaryRoutes: Router[] = [
   CityController,
@@ -50,10 +54,10 @@ const dictionaryRoutes: Router[] = [
 ];
 
 router.use(authApi);
-router.use(peopleApi);
 router.use(sheltersApi);
 
 animalsRoutes.forEach((route) => router.use(route));
+peopleRoutes.forEach((route) => router.use(route));
 dictionaryRoutes.forEach((route) => router.use(route));
 
 export default router;

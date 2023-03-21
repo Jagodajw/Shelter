@@ -1,14 +1,26 @@
 import { prisma } from '../..';
 import { PrismaClientType } from '../../models/DictionaryModel';
-import { BreedRequest, BreedResponse } from '../../views/DictionaryView';
+import {
+  BreedListResponse,
+  BreedRequest,
+  BreedResponse,
+} from '../../views/DictionaryView';
 
 export class BreedService {
   constructor() {}
 
-  public static async getList(sheltersId: string): Promise<BreedResponse[]> {
+  public static async getList(
+    sheltersId: string
+  ): Promise<BreedListResponse[]> {
     return await prisma.breed.findMany({
       where: {
         shelters_id: sheltersId,
+      },
+      select: {
+        ID: true,
+        breed: true,
+        shelters_id: true,
+        species: true,
       },
     });
   }
