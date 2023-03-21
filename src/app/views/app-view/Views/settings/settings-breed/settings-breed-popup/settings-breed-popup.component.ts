@@ -25,9 +25,11 @@ export class SettingsBreedPopupComponent implements OnInit {
 
   ngOnInit(): void {
     this.buildForm();
-
-    if (this.data.model !== undefined)
+    this.breedForm.get('species_id')?.enable();
+    if (this.data.model !== undefined) {
       this.breedForm.patchValue(this.data.model);
+      this.breedForm.get('species_id')?.disable();
+    }
   }
 
   private buildForm(): void {
@@ -39,6 +41,7 @@ export class SettingsBreedPopupComponent implements OnInit {
 
   addBreed(): void {
     // if (this.data.model) {
+    //   this.breedForm.get('species_id')?.disable();
     //   this.root
     //     .editBreed(this.data.model.ID.toString(), {
     //       breed: this.breedControl.value,
