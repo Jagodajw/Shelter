@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { BreedResponse } from 'backend/src/views/DictionaryView';
 import { DictionaryService } from 'src/app/views/app-view/services/api/dictionary.service';
@@ -14,17 +14,27 @@ interface Data {
   styleUrls: ['../../../../../../shared/style/popup.component.scss'],
 })
 export class SettingsBreedPopupComponent implements OnInit {
-  public breedControl: FormControl = new FormControl();
+  public breedForm!: FormGroup;
 
   constructor(
     private readonly root: DictionaryService,
     private readonly ref: MatDialogRef<SettingsBreedPopupComponent>,
+    private readonly _form: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: Data
   ) {}
 
   ngOnInit(): void {
+    this.buildForm();
+
     if (this.data.model !== undefined)
-      this.breedControl.patchValue(this.data.model.breed);
+      this.breedForm.patchValue(this.data.model);
+  }
+
+  private buildForm(): void {
+    this.breedForm = this._form.group({
+      species_id: [],
+      breed: [],
+    });
   }
 
   addBreed(): void {

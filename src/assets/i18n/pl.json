@@ -152,6 +152,8 @@
     "employees": "Pracownicy",
     "species": "Gatunek",
     "breed": "Rasa",
+    "addBreed": "Dodaj rasę",
+    "editBreed": "Edytuj rasę",
     "color": "Maść",
     "city": "Miejscowość",
     "zip_code": "kod pocztowy",

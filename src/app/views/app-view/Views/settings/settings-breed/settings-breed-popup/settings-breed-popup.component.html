@@ -1,11 +1,14 @@
 <div class="popup__header">
     <h3 class="popup__title">{{ data.title| translate}}</h3>
 </div>
-<form class="popup__content" (submit)="addBreed()">
+<form [formGroup]="breedForm" class="popup__content" (submit)="addBreed()">
     <div class="input-row">
-        <mat-form-field class="input-full">
-            <mat-label>{{'settings.color' | translate}}</mat-label>
-            <input matInput [formControl]="breedControl" />
+        <span class="input-half">
+            <app-species-autocomplete formControlName="species_id"></app-species-autocomplete>
+        </span>
+        <mat-form-field class="input-half">
+            <mat-label>{{'settings.breed' | translate}}</mat-label>
+            <input matInput formControlName="breed" />
         </mat-form-field>
     </div>
     <div class="popup__btn-container">

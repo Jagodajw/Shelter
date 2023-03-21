@@ -57,12 +57,20 @@ export class DictionaryService extends ApiService {
     return this.http.post<CommuneResponse>(`${this.rootUrl}/commune`, model);
   }
 
-  public editCommune(communeId: string, model: CommuneRequest): Observable<CommuneResponse>{
-    return this.http.put<CommuneResponse>(`${this.rootUrl}/commune/${communeId}`, model)
+  public editCommune(
+    communeId: string,
+    model: CommuneRequest
+  ): Observable<CommuneResponse> {
+    return this.http.put<CommuneResponse>(
+      `${this.rootUrl}/commune/${communeId}`,
+      model
+    );
   }
 
-  public deleteCommune(communeId: string): Observable<CommuneResponse>{
-    return this.http.delete<CommuneResponse>(`${this.rootUrl}/commune/${communeId}`)
+  public deleteCommune(communeId: string): Observable<CommuneResponse> {
+    return this.http.delete<CommuneResponse>(
+      `${this.rootUrl}/commune/${communeId}`
+    );
   }
 
   public getSpecies(): Observable<SpeciesResponse[]> {
@@ -94,13 +102,16 @@ export class DictionaryService extends ApiService {
       return this.http.get<BreedResponse[]>(`${this.rootUrl}/breed`);
     return this.http.get<BreedResponse[]>(`${this.rootUrl}/breed/${speciesId}`);
   }
+  public getBreeds(): Observable<BreedResponse[]> {
+    return this.http.get<BreedResponse[]>(`${this.rootUrl}/breed`);
+  }
 
   public addBreed(model: BreedRequest): Observable<BreedResponse> {
     return this.http.post<BreedResponse>(`${this.rootUrl}/breed`, model);
   }
 
   public editBreed(
-    breedId : string,
+    breedId: string,
     model: BreedRequest
   ): Observable<BreedResponse> {
     return this.http.put<BreedResponse>(
@@ -110,11 +121,8 @@ export class DictionaryService extends ApiService {
   }
 
   public deleteBreed(breedId: string): Observable<BreedResponse> {
-    return this.http.delete<BreedResponse>(
-      `${this.rootUrl}/breed/${breedId}`
-    );
+    return this.http.delete<BreedResponse>(`${this.rootUrl}/breed/${breedId}`);
   }
-
 
   public getColors(): Observable<ColorResponse[]> {
     return this.http.get<ColorResponse[]>(`${this.rootUrl}/colors`);
@@ -137,7 +145,7 @@ export class DictionaryService extends ApiService {
   public deleteColor(colorId: string): Observable<ColorResponse> {
     return this.http.delete<ColorResponse>(`${this.rootUrl}/color/${colorId}`);
   }
-  
+
   public getArea(): Observable<AreaResponse[]> {
     return this.http.get<AreaResponse[]>(`${this.rootUrl}/area`);
   }
@@ -146,15 +154,18 @@ export class DictionaryService extends ApiService {
     return this.http.post<AreaResponse>(`${this.rootUrl}/area`, model);
   }
 
-  public editArea(areaId: string, model: AreaRequest): Observable<AreaResponse>{
-    return this.http.put<AreaResponse>(`${this.rootUrl}/area/${areaId}`, model)
+  public editArea(
+    areaId: string,
+    model: AreaRequest
+  ): Observable<AreaResponse> {
+    return this.http.put<AreaResponse>(`${this.rootUrl}/area/${areaId}`, model);
   }
 
-  public deleteArea(areaId: string): Observable<AreaResponse>{
-    return this.http.delete<AreaResponse>(`${this.rootUrl}/area/${areaId}`)
+  public deleteArea(areaId: string): Observable<AreaResponse> {
+    return this.http.delete<AreaResponse>(`${this.rootUrl}/area/${areaId}`);
   }
 
-   public getTypeAdoptation(): Observable<TypeAdoptionResponse[]> {
+  public getTypeAdoptation(): Observable<TypeAdoptionResponse[]> {
     return this.http.get<TypeAdoptionResponse[]>(
       `${this.rootUrl}/typeAdoption`
     );
@@ -168,12 +179,22 @@ export class DictionaryService extends ApiService {
       model
     );
   }
-  public editTypeAdoptation(typeAdoptionId: string, model: TypeAdoptionRequest): Observable<TypeAdoptionResponse>{
-    return this.http.put<TypeAdoptionResponse>(`${this.rootUrl}/typeAdoption/${typeAdoptionId}`, model)
+  public editTypeAdoptation(
+    typeAdoptionId: string,
+    model: TypeAdoptionRequest
+  ): Observable<TypeAdoptionResponse> {
+    return this.http.put<TypeAdoptionResponse>(
+      `${this.rootUrl}/typeAdoption/${typeAdoptionId}`,
+      model
+    );
   }
 
-  public deleteTypeAdoptation(typeAdoptionId: string): Observable<TypeAdoptionResponse>{
-    return this.http.delete<TypeAdoptionResponse>(`${this.rootUrl}/typeAdoption/${typeAdoptionId}`)
+  public deleteTypeAdoptation(
+    typeAdoptionId: string
+  ): Observable<TypeAdoptionResponse> {
+    return this.http.delete<TypeAdoptionResponse>(
+      `${this.rootUrl}/typeAdoption/${typeAdoptionId}`
+    );
   }
 
   public getProvince(): Observable<ProvinceResponse[]> {
@@ -194,11 +215,21 @@ export class DictionaryService extends ApiService {
       model
     );
   }
-  public editTypeAcceptance(typeAcceptanceId: string, model: TypeAcceptanceRequest): Observable<TypeAcceptanceResponse>{
-    return this.http.put<TypeAcceptanceResponse>(`${this.rootUrl}/typeAcceptance/${typeAcceptanceId}`, model)
+  public editTypeAcceptance(
+    typeAcceptanceId: string,
+    model: TypeAcceptanceRequest
+  ): Observable<TypeAcceptanceResponse> {
+    return this.http.put<TypeAcceptanceResponse>(
+      `${this.rootUrl}/typeAcceptance/${typeAcceptanceId}`,
+      model
+    );
   }
 
-  public deleteTypeAcceptance(typeAcceptanceId: string): Observable<TypeAcceptanceResponse>{
-    return this.http.delete<TypeAcceptanceResponse>(`${this.rootUrl}/typeAcceptance/${typeAcceptanceId}`)
+  public deleteTypeAcceptance(
+    typeAcceptanceId: string
+  ): Observable<TypeAcceptanceResponse> {
+    return this.http.delete<TypeAcceptanceResponse>(
+      `${this.rootUrl}/typeAcceptance/${typeAcceptanceId}`
+    );
   }
 }
