@@ -124,7 +124,8 @@
     "FORBIDDEN": "Brak dostępu",
     "WRONG_LOGIN_DATA": "Błędne dane logownia, spróbuj ponownie",
     "REGISTRATION_OF_ANIMAL_DOESNT_EXIST": "Rejestracja dla zwierzęcia nie istnieje",
-    "ADOPTION_OF_ANIMAL_DOESNT_EXIST": "Adopcja dla zwierzęcia nie istnieje"
+    "ADOPTION_OF_ANIMAL_DOESNT_EXIST": "Adopcja dla zwierzęcia nie istnieje",
+    "RESORCE_IN_USE": "Pórbujesz usunąć wykorzystany element"
   },
 
   "size": {

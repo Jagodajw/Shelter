@@ -25,7 +25,6 @@ export class PetsComponent implements OnInit {
     this.isLoading$ = this.root.isLoading$.asObservable();
     this.numberOfAnimalsReleaseControl$ =
       this.root.numberOfAnimalsReleaseControl$;
-
     this.numberOfAnimalsVaccinationChecks$ =
       this.root.numberOfAnimalsVaccinationChecks$;
     this.alertControl = this.root.alertControl;
@@ -33,7 +32,7 @@ export class PetsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isAlertActive$.subscribe(console.log);
+    this.isAlertActive$.subscribe();
   }
 
   public togglePetsView() {

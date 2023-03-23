@@ -24,7 +24,6 @@ export class PetAvatarComponent
   onFileChange(event: Event) {
     const file: File[] = (event.target as any).files;
     if (file.length > 1) return;
-    console.log(file);
 
     const reader: FileReader = new FileReader();
     reader.onload = () => {
@@ -39,7 +38,6 @@ export class PetAvatarComponent
 
     const form = new FormData();
     form.append('avatar', new Blob([value]));
-    console.log(form.get('avatar'));
 
     this.value = form;
   }

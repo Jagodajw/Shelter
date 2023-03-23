@@ -79,7 +79,6 @@ export abstract class ControlValueAccessorsAbstract<T = unknown> {
         customErrors[errorId] ??
         getErrorMessage(errorId, controlErrors[errorId])
     );
-    console.log(controlErrors);
     return errorMessages.length ? errorMessages[0] : '';
   }
 }

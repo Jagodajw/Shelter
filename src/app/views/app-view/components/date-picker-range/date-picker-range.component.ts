@@ -37,7 +37,6 @@ export class DatePickerRangeComponent
   }
   public changedDate(event: MatDatepickerInputEvent<Date>): void {
     this.value = event.value;
-    console.log('contro', this.value);
   }
   public clearForm(): void {
     this.dateGroup.reset();

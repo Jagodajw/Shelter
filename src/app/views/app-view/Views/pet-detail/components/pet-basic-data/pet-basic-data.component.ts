@@ -98,7 +98,6 @@ export class PetBasicDataComponent implements OnInit {
       .get('registerAnimal.avatar')
       ?.valueChanges.pipe(untilDestroyed(this))
       .subscribe((avatar: FormData) => {
-        console.log('from valueCahgen pet basic data', avatar);
         this.updateAvatar.emit(avatar);
       });
   }

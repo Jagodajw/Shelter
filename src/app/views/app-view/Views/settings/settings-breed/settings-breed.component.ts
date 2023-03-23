@@ -9,7 +9,6 @@ import { filter, mergeMap } from 'rxjs';
 import { DictionaryService } from '../../../services/api/dictionary.service';
 import { SettingsBreedPopupComponent } from './settings-breed-popup/settings-breed-popup.component';
 
-
 @Component({
   selector: 'app-settings-breed',
   templateUrl: './settings-breed.component.html',
@@ -17,7 +16,7 @@ import { SettingsBreedPopupComponent } from './settings-breed-popup/settings-bre
 })
 export class SettingsBreedComponent implements OnInit {
   public breedTable = new MatTableDataSource<BreedListResponse>([]);
-  public displayedColumns: string[] = ['species_id', 'breed', 'action'];
+  public displayedColumns: string[] = ['species', 'breed', 'action'];
   constructor(
     private readonly dialog: MatDialog,
     private readonly root: DictionaryService
@@ -77,9 +76,17 @@ export class SettingsBreedComponent implements OnInit {
 
   private set setBreedTable(breed: BreedListResponse[]) {
     this.breedTable = new MatTableDataSource<BreedListResponse>(breed);
+    this.breedTable.filterPredicate = function (data, filter: string): boolean {
+      return (
+        data.species?.species.toLowerCase().includes(filter) ||
+        data.breed.toLowerCase().includes(filter)
+      );
+    };
   }
 
   public getSearchParams(event: any) {
-    this.breedTable.filter = event.trim().toLowerCase();
+    event = event.trim();
+    event = event.toLowerCase();
+    this.breedTable.filter = event;
   }
 }

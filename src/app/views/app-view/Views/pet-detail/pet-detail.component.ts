@@ -144,7 +144,6 @@ export class PetDetailComponent implements OnInit {
 
   public updateAvatar(updatedAvatar: FormData): void {
     const petId = this.activatedRoute.snapshot.params['id'];
-    console.log('petID', petId);
     if (petId === null) return;
 
     this.root.setPetAvater(petId, updatedAvatar).subscribe();
