@@ -1,8 +1,8 @@
-import { Prisma } from '@prisma/client';
 import express from 'express';
 import { authenticate } from '../../middlewares/authentication';
 import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
 import { TypeAcceptanceService } from '../../services/dictionary/TypeAcceptanceService';
+import { prismaErrorHandler } from '../../utils/prisma-error-handler';
 import {
   TypeAcceptanceRequest,
   TypeAcceptanceResponse,
@@ -45,15 +45,8 @@ router.delete(
       );
       res.json(dictionaryTypeAcceptanceDelete);
     } catch (error) {
-      let errorStatus = 500;
-      let errorCode = {};
-      if (!(error instanceof Prisma.PrismaClientKnownRequestError)) return;
-      if (error.code === 'P2003') {
-        errorStatus = 406;
-        errorCode = { ERROR_CODE: 'RESORCE_IN_USE' };
-      }
-
-      res.status(errorStatus).json(errorCode);
+      const { status, code } = prismaErrorHandler(error);
+      res.status(status).json(code);
     }
   }
 );

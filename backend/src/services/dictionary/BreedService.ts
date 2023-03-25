@@ -1,9 +1,12 @@
 import { prisma } from '../..';
+import { MissingDictionaryAdder } from '../../helpers/MissingDictionaryAdder';
 import { PrismaClientType } from '../../models/DictionaryModel';
 import {
+  BreedAddRequest,
   BreedListResponse,
   BreedRequest,
   BreedResponse,
+  BreedUpdateRequest,
 } from '../../views/DictionaryView';
 
 export class BreedService {
@@ -41,12 +44,38 @@ export class BreedService {
     });
   }
 
-  public static async update(breedId: number, breedModel: BreedRequest) {
+  public static async update(
+    breedId: number,
+    { breed, species }: BreedUpdateRequest
+  ) {
     return await prisma.breed.update({
       where: {
         ID: breedId,
       },
-      data: breedModel,
+      data: {
+        breed,
+        species_id: species.ID,
+      },
+    });
+  }
+
+  public static async addWithSpecies(
+    breedModel: BreedAddRequest,
+    shelters_id: string
+  ): Promise<BreedResponse> {
+    return await prisma.$transaction(async (tx) => {
+      const species_id: number = await new MissingDictionaryAdder(
+        tx
+      ).getDictonaryField('species', breedModel.species, shelters_id);
+      console.log(species_id);
+      return await this.add(
+        {
+          breed: breedModel.breed,
+          species_id,
+        },
+        shelters_id,
+        tx
+      );
     });
   }
 

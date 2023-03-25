@@ -1,8 +1,8 @@
-import { Prisma } from '@prisma/client';
 import express from 'express';
 import { authenticate } from '../../middlewares/authentication';
 import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
 import { CityService } from '../../services/dictionary/CityService';
+import { prismaErrorHandler } from '../../utils/prisma-error-handler';
 import { CityRequest, CityResponse } from '../../views/DictionaryView';
 
 const router = express.Router();
@@ -71,15 +71,8 @@ router.delete(
       const dictionaryCityDelete = await CityService.delete(convertCityId);
       res.json(dictionaryCityDelete);
     } catch (error) {
-      let errorStatus = 500;
-      let errorCode = {};
-      if (!(error instanceof Prisma.PrismaClientKnownRequestError)) return;
-      if (error.code === 'P2003') {
-        errorStatus = 406;
-        errorCode = { ERROR_CODE: 'RESORCE_IN_USE' };
-      }
-
-      res.status(errorStatus).json(errorCode);
+      const { status, code } = prismaErrorHandler(error);
+      res.status(status).json(code);
     }
   }
 );

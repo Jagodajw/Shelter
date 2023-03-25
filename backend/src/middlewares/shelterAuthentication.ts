@@ -4,7 +4,6 @@ export const shelterAuthenticate = async (req: any, res: any, next: any) => {
   const sheltersId = req.headers['shelters_id'];
   // to cache
   const shelters = await getShelters();
-
   if (
     sheltersId === null ||
     shelters.findIndex(({ ID }) => ID === sheltersId) === -1

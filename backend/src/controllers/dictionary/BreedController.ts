@@ -1,12 +1,12 @@
-import { Prisma } from '@prisma/client';
 import express from 'express';
-import { authenticate } from '../../middlewares/authentication';
-import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
 import { BreedService } from '../../services/dictionary/BreedService';
+import { middlewares } from '../../utils/middlewares';
+import { prismaErrorHandler } from '../../utils/prisma-error-handler';
 import {
+  BreedAddRequest,
   BreedListResponse,
-  BreedRequest,
   BreedResponse,
+  BreedUpdateRequest,
 } from '../../views/DictionaryView';
 
 const router = express.Router();
@@ -16,7 +16,7 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get('/breed', authenticate, shelterAuthenticate, async (req, res) => {
+router.get('/breed', ...middlewares, async (req, res) => {
   try {
     const shelterId: string = req.headers['shelters_id'] as string;
     const dictionaryBreed = await BreedService.getList(shelterId);
@@ -27,81 +27,63 @@ router.get('/breed', authenticate, shelterAuthenticate, async (req, res) => {
   }
 });
 
-router.get(
-  '/breed/:speciesId',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const shelterId: string = req.headers['shelters_id'] as string;
-      const speciesId: string = req.params.speciesId;
-      const dictionaryBreed = await BreedService.getListBySpeciesId(
-        shelterId,
-        Number.parseInt(speciesId)
-      );
-
-      res.json(dictionaryBreed as BreedResponse[]);
-    } catch (error) {
-      res.sendStatus(500);
-    }
-  }
-);
-
-router.delete(
-  '/breed/:breedId',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const breedId = req.params.breedId;
-      const convertBreedId = parseInt(breedId);
-      const dictionaryBreedDelete = await BreedService.delete(convertBreedId);
-      res.json(dictionaryBreedDelete);
-    } catch (error) {
-      let errorStatus = 500;
-      let errorCode = {};
-      if (!(error instanceof Prisma.PrismaClientKnownRequestError)) return;
-      if (error.code === 'P2003') {
-        errorStatus = 406;
-        errorCode = { ERROR_CODE: 'RESORCE_IN_USE' };
-      }
-
-      res.status(errorStatus).json(errorCode);
-    }
-  }
-);
-
-router.put(
-  '/breed/:breedId',
-  authenticate,
-  shelterAuthenticate,
-  async (req, res) => {
-    try {
-      const updatedBreed: BreedRequest = req.body;
-      const breedId = req.params.breedId;
-
-      const convertBreedId = parseInt(breedId);
-      const dictionaryBreedIdUpdate = await BreedService.update(
-        convertBreedId,
-        updatedBreed
-      );
-      res.json(dictionaryBreedIdUpdate);
-    } catch (error) {
-      res.sendStatus(500);
-    }
-  }
-);
-
-router.post('/breed', authenticate, async (req, res) => {
+router.get('/breed/:speciesId', ...middlewares, async (req, res) => {
   try {
     const shelterId: string = req.headers['shelters_id'] as string;
-    const breedModel: BreedRequest = {
+    const speciesId: string = req.params.speciesId;
+    const dictionaryBreed = await BreedService.getListBySpeciesId(
+      shelterId,
+      Number.parseInt(speciesId)
+    );
+
+    res.json(dictionaryBreed as BreedResponse[]);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
+
+router.delete('/breed/:breedId', ...middlewares, async (req, res) => {
+  try {
+    const breedId = req.params.breedId;
+    const convertBreedId = parseInt(breedId);
+    const dictionaryBreedDelete = await BreedService.delete(convertBreedId);
+    res.json(dictionaryBreedDelete);
+  } catch (error) {
+    const { status, code } = prismaErrorHandler(error);
+    res.status(status).json(code);
+  }
+});
+
+router.put('/breed/:breedId', ...middlewares, async (req, res) => {
+  try {
+    const updatedBreed: BreedUpdateRequest = req.body;
+    const breedId = req.params.breedId;
+
+    const convertBreedId = parseInt(breedId);
+    const dictionaryBreedIdUpdate = await BreedService.update(
+      convertBreedId,
+      updatedBreed
+    );
+    res.json(dictionaryBreedIdUpdate);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
+
+router.post('/breed', ...middlewares, async (req, res) => {
+  try {
+    const shelterId: string = req.headers['shelters_id'] as string;
+    const breedModel: BreedAddRequest = {
       breed: req.body.breed,
-      species_id: req.body.species_id,
+      species: req.body.species,
     };
-    const dictionaryAddBreed = await BreedService.add(breedModel, shelterId);
+    const dictionaryAddBreed = await BreedService.addWithSpecies(
+      breedModel,
+      shelterId
+    );
     res.json(dictionaryAddBreed as BreedResponse);
   } catch (error) {
+    console.log(error);
     res.sendStatus(500);
   }
 });

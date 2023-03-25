@@ -2,6 +2,7 @@ import express from 'express';
 import { authenticate } from '../../middlewares/authentication';
 import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
 import { EmployeeService } from '../../services/dictionary/EmployeeService';
+import { prismaErrorHandler } from '../../utils/prisma-error-handler';
 import { EmployeeRequest, EmployeeResponse } from '../../views/EmployeeView';
 
 const router = express.Router();
@@ -72,8 +73,9 @@ router.delete(
         await EmployeeService.delete(Number.parseInt(employeeId));
 
       res.status(200).json(deleteEmployeeModel);
-    } catch {
-      res.sendStatus(500);
+    } catch (error) {
+      const { status, code } = prismaErrorHandler(error);
+      res.status(status).json(code);
     }
   }
 );

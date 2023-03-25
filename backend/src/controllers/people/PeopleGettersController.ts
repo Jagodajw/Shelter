@@ -10,25 +10,21 @@ router.use((req, res, next) => {
   next();
 });
 
-router.get(
-  '/people/:status/:areBlockedUsers',
-  ...middlewares,
-  async (req, res) => {
-    try {
-      const shelters_id: string = req.headers['shelters_id'] as string;
-      const status: PeopleStatus = req.params.status as PeopleStatus;
-      const areBlockedUsers: boolean = req.params.areBlockedUsers === 'true';
+router.get('/people', ...middlewares, async (req, res) => {
+  try {
+    const shelters_id: string = req.headers['shelters_id'] as string;
+    const status: PeopleStatus = req.query.status as PeopleStatus;
+    const areBlockedUsers: boolean = req.query.areBlockedUsers === 'true';
 
-      const people: PeopleResponse[] = await PeopleGettersService.getList(
-        shelters_id,
-        status,
-        areBlockedUsers
-      );
-      res.json(people as PeopleResponse[]);
-    } catch (error) {
-      res.sendStatus(500);
-    }
+    const people: PeopleResponse[] = await PeopleGettersService.getList(
+      shelters_id,
+      status,
+      areBlockedUsers
+    );
+    res.json(people as PeopleResponse[]);
+  } catch (error) {
+    res.sendStatus(500);
   }
-);
+});
 
 export { router as PeopleGettersController };

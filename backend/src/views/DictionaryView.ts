@@ -24,6 +24,13 @@ export type BreedListResponse = Omit<Breed, 'species_id'> & {
   species: SpeciesResponse | null;
 };
 export type BreedRequest = Omit<Breed, 'ID' | 'shelters_id'>;
+export type BreedUpdateRequest = Pick<Breed, 'breed'> & {
+  species: SpeciesResponse;
+};
+
+export type BreedAddRequest = Pick<Breed, 'breed'> & {
+  species: SpeciesResponse | string;
+};
 
 export type ColorResponse = Color;
 export type ColorRequest = Omit<Color, 'ID' | 'shelters_id'>;

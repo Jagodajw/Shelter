@@ -1,8 +1,8 @@
-import { Prisma } from '@prisma/client';
 import express from 'express';
 import { authenticate } from '../../middlewares/authentication';
 import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
 import { SpeciesService } from '../../services/dictionary/SpeciesService';
+import { prismaErrorHandler } from '../../utils/prisma-error-handler';
 import { SpeciesRequest, SpeciesResponse } from '../../views/DictionaryView';
 
 const router = express.Router();
@@ -36,15 +36,8 @@ router.delete(
       );
       res.json(dictionarySpeciesDelete);
     } catch (error) {
-      let errorStatus = 500;
-      let errorCode = {};
-      if (!(error instanceof Prisma.PrismaClientKnownRequestError)) return;
-      if (error.code === 'P2003') {
-        errorStatus = 406;
-        errorCode = { ERROR_CODE: 'RESORCE_IN_USE' };
-      }
-
-      res.status(errorStatus).json(errorCode);
+      const { status, code } = prismaErrorHandler(error);
+      res.status(status).json(code);
     }
   }
 );
