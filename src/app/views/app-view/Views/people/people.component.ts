@@ -16,6 +16,7 @@ export class PeopleComponent implements OnInit {
   public readonly status$: Observable<boolean>;
   public readonly people$: Observable<PeopleResponse[]>;
   public isLoading$: Observable<boolean>;
+  public isBlackList$: Observable<boolean>;
   public search = new FormControl();
 
   constructor(
@@ -25,6 +26,7 @@ export class PeopleComponent implements OnInit {
   ) {
     this.people$ = this.root.peopleObservable$;
     this.status$ = this.root.status$.asObservable();
+    this.isBlackList$ = this.root.isBlackList$.asObservable();
     this.isLoading$ = this.root.isLoading$.asObservable();
   }
 
@@ -32,5 +34,9 @@ export class PeopleComponent implements OnInit {
 
   public togglePeopleView() {
     this.root.status$.next(!this.root.status$.value);
+  }
+
+  toggleChangeBlackList() {
+    this.root.isBlackList$.next(!this.root.isBlackList$.value);
   }
 }

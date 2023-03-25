@@ -1,2 +1,5 @@
-<img src="{{img}}" alt="avatar pet's" (click)="refInput.click()" />
-<input (change)="onFileChange($event)" type="file" hidden #refInput>
+<img [src]="img | safe: 'url'" alt="avatar pet's" (click)="refInput.click()" />
+<button *ngIf="isAddImg" class="delete-btn" mat-icon-button (click)="deleteImg()">
+    <mat-icon>close</mat-icon>
+</button>
+<input (change)="onFileChange($event)" type="file" accept="image/*" hidden #refInput>

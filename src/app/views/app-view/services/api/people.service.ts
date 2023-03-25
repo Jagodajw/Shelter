@@ -15,7 +15,7 @@ export class PeopleService extends ApiService {
     areBlockedUsers: boolean
   ): Observable<PeopleResponse[]> {
     return this.http.get<PeopleResponse[]>(
-      `${this.rootUrl}/people/${status}/${areBlockedUsers.toString()}`
+      `${this.rootUrl}/people?status=${status}&areBlockedUsers=${areBlockedUsers}`
     );
   }
 }
