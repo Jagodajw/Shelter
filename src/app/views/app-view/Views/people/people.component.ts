@@ -1,105 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormControlName } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { MatTableDataSource } from '@angular/material/table';
-import { PeopleTableInterface, peopleType } from './people-table-interface';
 import { Router } from '@angular/router';
-import { DataPersonDonorComponent } from '../../components/data-person-donor/data-person-donor.component';
-import { DataPersonActionPopupComponent } from '../../components/data-person-action-popup/data-person-action-popup.component';
-import { PetsTableInterface } from '../pets/pets-table-interface';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { PeopleResponse } from 'backend/src/views/PeopleView';
+import { Observable } from 'rxjs';
+import { PeopleRootService } from './people-root.service';
 
 @Component({
   selector: 'app-people',
   templateUrl: './people.component.html',
   styleUrls: ['./people.component.scss'],
-  animations: [
-    trigger('extension', [
-      state('collapse', style({ display: 'none' })),
-      state('expand', style({ display: 'table-row' })),
-      transition('expand <=> collapse', animate('225ms')),
-    ]),
-  ],
+  providers: [PeopleRootService],
 })
 export class PeopleComponent implements OnInit {
-  public status: boolean = false;
-  public peopleType: PeopleTableInterface[] = [];
-  public expandedElement!: PetsTableInterface | null;
+  public readonly status$: Observable<boolean>;
+  public readonly people$: Observable<PeopleResponse[]>;
+  public isLoading$: Observable<boolean>;
+  public isBlackList$: Observable<boolean>;
   public search = new FormControl();
-  public peopleTable = new MatTableDataSource<PeopleTableInterface>(
-    this.peopleType
-  );
 
   constructor(
-    private _form: FormBuilder,
     public dialog: MatDialog,
-    public router: Router
-  ) {}
-  public displayedColumns: string[] = [
-    'name',
-    'city',
-    'adress',
-    'peselNip',
-    'telepohone',
-    'community',
-    'blackList',
-    'action',
-  ];
+    public router: Router,
+    private readonly root: PeopleRootService
+  ) {
+    this.people$ = this.root.peopleObservable$;
+    this.status$ = this.root.status$.asObservable();
+    this.isBlackList$ = this.root.isBlackList$.asObservable();
+    this.isLoading$ = this.root.isLoading$.asObservable();
+  }
 
   ngOnInit(): void {}
-  clickEvent() {
-    this.status = !this.status;
-  }
-  public dataPeople: PeopleTableInterface[] = [
-    {
-      id: 0,
-      name: 'Jagoda',
-      surname: 'Wasiak',
-      adress: 'Borowa 33',
-      city: 'Tychy',
-      postCode: 43 - 100,
-      community: 'Tychy',
-      province: 'Slask',
-      ID: 'CDE13123',
-      pesel: '002114012123',
-      telephone: 605901924,
-      email: 'jagodajw@gmail.com',
-      description: 'opis elo elo',
-      blackList: false,
-      typePerson: peopleType.naturalPerson,
-      pets: [],
-    },
-  ];
-  public dataSource = this.dataPeople;
 
-  // outPet(): void {
-  //   this.dialog.open(PopupOutAnimalComponent, {
-  //     panelClass: ['input-70', 'modal-without-padding'],
-  //     disableClose: true,
-  //   });
-  // }
-  public viewPerson(): void {
-    this.dialog.open(DataPersonActionPopupComponent, {
-      panelClass: ['input-70', 'modal-without-padding'],
-      disableClose: true,
-    });
-  }
-  public openDialog(): void {
-    this.dialog.open(DataPersonDonorComponent, {
-      panelClass: ['input-70', 'modal-without-padding'],
-      disableClose: true,
-    });
+  public togglePeopleView() {
+    this.root.status$.next(!this.root.status$.value);
   }
 
-  deletePeople() {}
-
-  public openPetDetail(petId: number) {
-    this.router.navigate(['/app-view/pet-detail/', petId]);
+  toggleChangeBlackList() {
+    this.root.isBlackList$.next(!this.root.isBlackList$.value);
   }
 }

@@ -12,13 +12,14 @@ import { HeaderComponent } from './components/header/header.component';
 import { SearchModule } from './components/search/search.module';
 import { DictionaryService } from './services/api/dictionary.service';
 import { EmployeeService } from './services/api/employee.service';
+import { PeopleService } from './services/api/people.service';
 import { PetService } from './services/api/pet.service';
 import { ShelterService } from './services/shelter.service';
 import { PetAvatarModule } from './Views/pets/components/pet-avatar/pet-avatar.module';
 
 @NgModule({
   declarations: [AppViewComponent, HeaderComponent, ToolbarDateComponent],
-  providers: [PetService, DictionaryService, EmployeeService, ShelterService],
+  providers: [PetService, DictionaryService, EmployeeService, ShelterService, PeopleService],
   imports: [
     CommonModule,
     AppViewRoutingModule,

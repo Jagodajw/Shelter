@@ -18,6 +18,8 @@ import { DataPersonDonorModule } from '../../components/data-person-donor/data-p
 import { DataPersonActionPopupModule } from '../../components/data-person-action-popup/data-person-action-popup.module';
 import { PetsTableModule } from '../pets/components/pets-table/pets-table.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmptyDataModule } from '../../components/empty-data/empty-data.module';
+import { PeopleTableModule } from './components/people-table/people-table.module';
 @NgModule({
   declarations: [PeopleComponent],
   imports: [
@@ -40,6 +42,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PetsTableModule,
     ReactiveFormsModule,
     FormsModule,
+    EmptyDataModule,
+    PeopleTableModule,
   ],
 })
 export class PeopleModule {}

@@ -11,10 +11,8 @@ export class PetAvatarComponent
   extends ControlValueAccessorsAbstract<FormData | string>
   implements OnInit
 {
-  private file!: File;
-  public img: string =
-    'https://otoz.pl/wp-content/themes/otoz/images/otoz-animals.png';
-
+  public img: string = 'assets/img/photo.png';
+  public isAddImg: boolean = false;
   constructor(@Self() ngControl: NgControl) {
     super(ngControl);
   }
@@ -23,34 +21,52 @@ export class PetAvatarComponent
 
   onFileChange(event: Event) {
     const file: File[] = (event.target as any).files;
-    if (file.length > 1) return;
-    console.log(file);
+    if (file.length > 1) {
+      this.img = 'assets/img/photo.png';
+      this.isAddImg = false;
+      return;
+    }
 
     const reader: FileReader = new FileReader();
     reader.onload = () => {
       this.createFormData(reader.result);
       this.img = reader.result as string;
+      this.isAddImg = true;
     };
     reader.readAsDataURL(file[0]);
   }
 
   private createFormData(value: ArrayBuffer | null | string): void {
-    if (value === null) return;
+    if (value === null) {
+      this.img = 'assets/img/photo.png';
+      this.isAddImg = false;
+      return;
+    }
 
     const form = new FormData();
     form.append('avatar', new Blob([value]));
-    console.log(form.get('avatar'));
 
     this.value = form;
   }
 
   override handleValueChangeFromOutside(): void {
-    if (!this.value) return;
+    if (!this.value) {
+      this.img = 'assets/img/photo.png';
+      this.isAddImg = false;
+      return;
+    }
 
     const reader: FileReader = new FileReader();
     reader.onload = () => {
       this.img = reader.result as string;
+      this.isAddImg = true;
     };
     reader.readAsBinaryString(new Blob([this.value as string]));
+  }
+
+  deleteImg(): void {
+    this.value = null;
+    this.img = 'assets/img/photo.png';
+    this.isAddImg = false;
   }
 }

@@ -4,6 +4,7 @@ import { PetAvatarComponent } from './pet-avatar.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SanitizerModule } from 'src/app/sanitizer/sanitizer.module';
 
 @NgModule({
   declarations: [PetAvatarComponent],
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatIconModule,
     ReactiveFormsModule,
     FormsModule,
+    SanitizerModule,
   ],
 })
 export class PetAvatarModule {}

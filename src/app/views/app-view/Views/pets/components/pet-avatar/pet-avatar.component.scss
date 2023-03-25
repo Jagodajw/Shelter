@@ -1,11 +1,18 @@
 :host {
   display: flex;
   justify-content: center;
+  position: relative;
+  .delete-btn {
+    position: absolute;
+    right: 0;
+    top: -7px;
+    color: red;
+  }
   img {
-    max-width: 200px;
+    max-width: 100%;
     max-height: 200px;
     object-fit: cover;
     border-radius: 5px;
-    border: 1px solid rgb(104, 103, 185);
+    /* border: 1px solid rgb(104, 103, 185); */
   }
 }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
-import { BreedResponse } from 'backend/src/views/DictionaryView';
+import {
+  BreedListResponse,
+  BreedResponse,
+} from 'backend/src/views/DictionaryView';
 import { filter, mergeMap } from 'rxjs';
 import { DictionaryService } from '../../../services/api/dictionary.service';
 import { SettingsBreedPopupComponent } from './settings-breed-popup/settings-breed-popup.component';
@@ -12,8 +15,8 @@ import { SettingsBreedPopupComponent } from './settings-breed-popup/settings-bre
   styleUrls: ['../../../../../shared/style/parameters.comoponent.scss'],
 })
 export class SettingsBreedComponent implements OnInit {
-  public breedTable = new MatTableDataSource<BreedResponse>([]);
-  public displayedColumns: string[] = ['species_id', 'breed', 'action'];
+  public breedTable = new MatTableDataSource<BreedListResponse>([]);
+  public displayedColumns: string[] = ['species', 'breed', 'action'];
   constructor(
     private readonly dialog: MatDialog,
     private readonly root: DictionaryService
@@ -37,9 +40,9 @@ export class SettingsBreedComponent implements OnInit {
         ),
         mergeMap(() => this.root.getBreed())
       )
-      .subscribe((breed: BreedResponse[]) => (this.setBreedTable = breed));
+      .subscribe((breed: BreedListResponse[]) => (this.setBreedTable = breed));
   }
-  public editPosition(breed: BreedResponse): void {
+  public editPosition(breed: BreedListResponse): void {
     this.dialog
       .open(SettingsBreedPopupComponent, {
         panelClass: ['modal__width--50', 'modal-without-padding'],
@@ -53,7 +56,7 @@ export class SettingsBreedComponent implements OnInit {
         ),
         mergeMap(() => this.root.getBreed())
       )
-      .subscribe((breed: BreedResponse[]) => (this.setBreedTable = breed));
+      .subscribe((breed: BreedListResponse[]) => (this.setBreedTable = breed));
   }
 
   public deletePosition(breed: BreedResponse, index: number): void {
@@ -66,12 +69,24 @@ export class SettingsBreedComponent implements OnInit {
   }
 
   public getBreed(): void {
-    this.root.getBreed().subscribe((breed: BreedResponse[]) => {
+    this.root.getBreed().subscribe((breed: BreedListResponse[]) => {
       this.setBreedTable = breed;
     });
   }
 
-  private set setBreedTable(breed: BreedResponse[]) {
-    this.breedTable = new MatTableDataSource<BreedResponse>(breed);
+  private set setBreedTable(breed: BreedListResponse[]) {
+    this.breedTable = new MatTableDataSource<BreedListResponse>(breed);
+    this.breedTable.filterPredicate = function (data, filter: string): boolean {
+      return (
+        data.species?.species.toLowerCase().includes(filter) ||
+        data.breed.toLowerCase().includes(filter)
+      );
+    };
+  }
+
+  public getSearchParams(event: any) {
+    event = event.trim();
+    event = event.toLowerCase();
+    this.breedTable.filter = event;
   }
 }

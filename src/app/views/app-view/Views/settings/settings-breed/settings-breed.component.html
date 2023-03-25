@@ -2,12 +2,15 @@
     <app-button vairan="raised" type="button" (clickEvent)="addBreedPopup()">{{'settings.addBreed' |
         translate}}</app-button>
 </div>
+<div class="search">
+    <app-settings-breed-search-engine (searchParams)="getSearchParams($event)"></app-settings-breed-search-engine>
+</div>
 
 
 <table mat-table [dataSource]="breedTable">
-    <ng-container matColumnDef="species_id">
+    <ng-container matColumnDef="species">
         <th mat-header-cell *matHeaderCellDef>{{ "settings.species" | translate }}</th>
-        <td mat-cell *matCellDef="let element">{{ element.species_id }}</td>
+        <td mat-cell *matCellDef="let element">{{ element.species?.species }}</td>
     </ng-container>
     <ng-container matColumnDef="breed">
         <th mat-header-cell *matHeaderCellDef>{{ "settings.breed" | translate }}</th>
