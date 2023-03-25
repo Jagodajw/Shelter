@@ -1,4 +1,5 @@
 import { prisma } from '../..';
+import { AnimalData } from '../../views/AnimalsView';
 
 export class AnimalsAvatarService {
   constructor() {}
@@ -22,5 +23,12 @@ export class AnimalsAvatarService {
     });
 
     return response?.avatar;
+  }
+
+  public static async delete(animalId: string): Promise<AnimalData> {
+    return await prisma.animals.update({
+      where: { ID: animalId },
+      data: { avatar: null },
+    });
   }
 }
