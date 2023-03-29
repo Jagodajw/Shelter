@@ -88,18 +88,20 @@ model Animals {
   sterilization      Boolean?  @default(false)
   date_sterilization DateTime? @db.Date
   adopted            Boolean?  @default(false)
-  archived Boolean? @default(false)
-  avatar Bytes? @default("")
+  archived           Boolean?  @default(false)
+  avatar             Bytes?    @default("")
 
   adoption     Adoption[]
   registration Registration[]
+  document     Document[]
+
   // relations
-  area         Area?          @relation(fields: [area_id], references: [ID])
-  commune      Commune?       @relation(fields: [commune_id], references: [ID])
-  color        Color?         @relation(fields: [color_id], references: [ID])
-  species      Species?       @relation(fields: [species_id], references: [ID])
-  breed        Breed?         @relation(fields: [breed_id], references: [ID])
-  shelters     Shelters?      @relation(fields: [shelters_id], references: [ID])
+  area     Area?     @relation(fields: [area_id], references: [ID])
+  commune  Commune?  @relation(fields: [commune_id], references: [ID])
+  color    Color?    @relation(fields: [color_id], references: [ID])
+  species  Species?  @relation(fields: [species_id], references: [ID])
+  breed    Breed?    @relation(fields: [breed_id], references: [ID])
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
 }
 
 model tableAnimals {
@@ -337,12 +339,19 @@ model Shelters {
   commune        Commune[]
   typeAdoption   TypeAdoption[]
   typeAcceptance TypeAcceptance[]
+  document       Document[]
 }
 
-model File {
-  ID String @id @default(uuid())
-  name String 
-  createAt DateTime @default(now())
+model Document {
+  ID          String   @id @unique @default(uuid())
+  name        String
+  file        Bytes
+  createAt    DateTime @default(now())
+  animals_id  String?  @default("")
+  shelters_id String
+
+  shelters Shelters? @relation(fields: [shelters_id], references: [ID])
+  animals  Animals?  @relation(fields: [animals_id], references: [ID])
 }
 
 model Account {

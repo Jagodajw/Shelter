@@ -3,9 +3,9 @@ import {
   AnimalsAdoptionController,
   AnimalsAvatarController,
   AnimalsControlsController,
+  AnimalsCoreController,
   AnimalsRegistrationController,
 } from './controllers/animals';
-import AnimalsCoreController from './controllers/AnimalsCoreController';
 import AuthController from './controllers/AuthController';
 import {
   AreaController,
@@ -19,6 +19,7 @@ import {
   TypeAcceptanceController,
   TypeAdoptionController,
 } from './controllers/dictionary';
+import { DocumentsController } from './controllers/DocumentController';
 import {
   PeopleCoreController,
   PeopleGettersController,
@@ -55,6 +56,7 @@ const dictionaryRoutes: Router[] = [
 
 router.use(authApi);
 router.use(sheltersApi);
+router.use(DocumentsController);
 
 animalsRoutes.forEach((route) => router.use(route));
 peopleRoutes.forEach((route) => router.use(route));

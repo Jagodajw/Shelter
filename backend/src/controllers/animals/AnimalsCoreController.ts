@@ -1,17 +1,17 @@
 import express from 'express';
-import { authenticate } from '../middlewares/authentication';
-import { shelterAuthenticate } from '../middlewares/shelterAuthentication';
-import { AniamlsCoreSerivce } from '../services/animals/AnimalsCoreService';
+import { authenticate } from '../../middlewares/authentication';
+import { shelterAuthenticate } from '../../middlewares/shelterAuthentication';
+import { AniamlsCoreSerivce } from '../../services/animals/AnimalsCoreService';
 import {
   AnimalQuery,
   AnimalStatus,
   AnimalTableResponse,
-} from '../views/AnimalsView';
+} from '../../views/AnimalsView';
 
 const router = express.Router();
 
 router.use((req, res, next) => {
-  // #swagger.tags = ['Animals']
+  // #swagger.tags = ['Animals Core']
   next();
 });
 
@@ -74,4 +74,4 @@ router.delete(
   }
 );
 
-export default router;
+export { router as AnimalsCoreController };

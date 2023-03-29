@@ -14,4 +14,6 @@ export class PeopleCoreSerivce {
 
     return state;
   }
+
+  // public static async ()
 }
