@@ -18,4 +18,13 @@ export class PeopleService extends ApiService {
       `${this.rootUrl}/people?status=${status}&areBlockedUsers=${areBlockedUsers}`
     );
   }
+
+  public getToggleBlackListState(
+    peopleId: number,
+    areBlockedUsers: boolean
+  ): Observable<boolean> {
+    return this.http.get<boolean>(
+      `${this.rootUrl}/people/${peopleId}/${areBlockedUsers}`
+    );
+  }
 }

@@ -7,7 +7,11 @@ import {
   Self,
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { filter, merge, mergeMap, Observable } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
+import { hasAttachmentAcceptableFormat } from '../../../components/file-reader-dialog/component/file-reader-acceptable-formats';
+import { FileReaderDialogComponent } from '../../../components/file-reader-dialog/component/file-reader-dialog.component';
 import { RemovedAttachment } from './upload-attachment/components/upload-attachment.component';
 
 @Component({
@@ -25,7 +29,10 @@ export class FileUploadComponent
   @Output() downloadAttachment: EventEmitter<string> =
     new EventEmitter<string>();
 
-  constructor(@Self() ngControl: NgControl) {
+  constructor(
+    @Self() ngControl: NgControl,
+    private readonly dialog: MatDialog
+  ) {
     super(ngControl);
   }
 
@@ -57,5 +64,49 @@ export class FileUploadComponent
     });
 
     this.value = values;
+  }
+
+  showAttachment({ id, name }: RemovedAttachment, documentId: string): void {
+    if (!id) return;
+
+    // const attachment: Observable<Blob> = this.customApi
+    //   .documentAttachmentAttachmentIdGet(id, documentId)
+    //   .pipe(share());
+
+    // const correctFormat: Observable<void> = attachment.pipe(
+    //   filter(
+    //     (attachment: Blob) =>
+    //       attachment && hasAttachmentAcceptableFormat(attachment.type)
+    //   ),
+    //   mergeMap((attachment: Blob) =>
+    //     this.dialog
+    //       .open(FileReaderDialogComponent, {
+    //         panelClass: ['custom-dialog', 'w-1/2'],
+    //         data: { file: attachment, fileName: name },
+    //       })
+    //       .afterClosed()
+    //   )
+    // );
+
+    // const incorrectFormat: Observable<void> = attachment.pipe(
+    //     filter(
+    //         (attachment: Blob) =>
+    //             attachment &&
+    //             !hasAttachmentAcceptableFormat(attachment.type),
+    //     ),
+    //     tap(() => {
+    //         this.snackBar.openFromComponent(NotificationComponent, {
+    //             data: {
+    //                 title: this.translateService.translate(
+    //                     `errors.cantReadFile`,
+    //                 ),
+    //                 variant: 'error',
+    //             },
+    //         });
+    //     }),
+    //     map(() => {}),
+    // );
+
+    // merge(correctFormat).subscribe();
   }
 }

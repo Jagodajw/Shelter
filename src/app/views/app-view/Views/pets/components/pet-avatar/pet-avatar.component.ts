@@ -1,5 +1,6 @@
 import { Component, OnInit, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 
 @Component({
@@ -13,6 +14,7 @@ export class PetAvatarComponent
 {
   public img: string = 'assets/img/photo.png';
   public isAddImg: boolean = false;
+
   constructor(@Self() ngControl: NgControl) {
     super(ngControl);
   }

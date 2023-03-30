@@ -39,4 +39,8 @@ export class PeopleComponent implements OnInit {
   toggleChangeBlackList() {
     this.root.isBlackList$.next(!this.root.isBlackList$.value);
   }
+
+  public addToBlackList(peopleId: number): void {
+    this.root.addPeopleForBlackList(peopleId);
+  }
 }

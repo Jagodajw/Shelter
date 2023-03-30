@@ -1,3 +1,6 @@
+<app-search-engine-table width="input-full" (searchParams)="getSearchParams($event)"></app-search-engine-table>
+
+
 <table mat-table [dataSource]="peopleTable" multiTemplateDataRows class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
@@ -25,14 +28,14 @@
         <td mat-cell *matCellDef="let element"> {{element.telephone}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="community">
+    <ng-container matColumnDef="commune">
         <th mat-header-cell *matHeaderCellDef> {{"pets.community" | translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.community}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.commune}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="blackList">
+    <ng-container matColumnDef="black_list">
         <th mat-header-cell *matHeaderCellDef> {{"people.blackList" | translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.blackList}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.black_list}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
@@ -50,9 +53,9 @@
                     <mat-icon> edit</mat-icon>
                     {{ 'people.editSelectedPosition' | translate }}
                 </button>
-                <button mat-menu-item>
+                <button mat-menu-item (click)="addToBlackList(peopleRowModel.ID)">
                     <mat-icon> pan_tool</mat-icon>
-                    {{ 'people.addToBlackList' | translate }}
+                    {{ peopleRowModel.black_list ? 'people.deleteToBlackList' : 'people.addToBlackList' | translate }}
                 </button>
 
                 <!-- <app-button-item-delete (onDelete)="deletePeople()">
@@ -70,7 +73,7 @@
                 {{"pets.title" | translate}}
             </h3>
             <div class="pets">
-                <app-pets-table [isVisibiltyHeader]="false">
+                <app-pets-table [pets]="element.animals" [isVisibiltyHeader]="false">
                 </app-pets-table>
             </div>
         </td>

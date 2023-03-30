@@ -4,11 +4,13 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { PeopleResponse, PeopleStatus } from 'backend/src/views/PeopleView';
 import {
   BehaviorSubject,
+  catchError,
   combineLatest,
   map,
   mergeMap,
   Observable,
   tap,
+  throwError,
 } from 'rxjs';
 import { PeopleService } from '../../services/api/people.service';
 import { ShelterService } from '../../services/shelter.service';
@@ -33,7 +35,7 @@ export class PeopleRootService {
     true
   );
   constructor(
-    // private dialog: MatDialog,
+    private dialog: MatDialog,
     private readonly api: PeopleService,
     private readonly shelter: ShelterService
   ) {
@@ -53,7 +55,7 @@ export class PeopleRootService {
         map(
           ([status, isBlackList]) =>
             ({
-              status: status ? 'moving' : 'receiving',
+              status: this.getPeopleStatus(status),
               isBlackList,
             } as ChangesParams)
         ),
@@ -73,5 +75,35 @@ export class PeopleRootService {
 
   public get peopleObservable$(): Observable<PeopleResponse[]> {
     return this.people$.asObservable();
+  }
+
+  public addPeopleForBlackList(peopleId: number): void {
+    const people = this.people$.value.find((people) => people.ID === peopleId);
+    if (people?.ID === undefined) return;
+
+    this.api
+      .getToggleBlackListState(people.ID, !this.isBlackList$.value)
+      .pipe(mergeMap(() => this.refreschGet(this.isBlackList$.value)))
+      .subscribe();
+  }
+
+  private refreschGet(blackList: boolean): Observable<PeopleResponse[]> {
+    this.isLoading$.next(true);
+    return this.api
+      .getPeople(this.getPeopleStatus(this.status$.value), blackList)
+      .pipe(
+        tap((peopleData: PeopleResponse[]) => {
+          this.people$.next(peopleData);
+          this.isLoading$.next(false);
+        }),
+        catchError((err) => {
+          this.isLoading$.next(false);
+          return throwError(err);
+        })
+      );
+  }
+
+  private getPeopleStatus(status: boolean): PeopleStatus {
+    return status ? 'moving' : 'receiving';
   }
 }

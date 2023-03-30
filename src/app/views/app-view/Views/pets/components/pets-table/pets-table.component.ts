@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { AnimalTableResponse } from 'backend/src/views/AnimalsView';
 import { genderList } from 'src/app/data/data-list';
 import { Select } from '../../../../components/select/select';
-import { PetsRootService } from '../../services/pets-root.service';
 
 @Component({
   selector: 'app-pets-table',
@@ -35,7 +34,7 @@ export class PetsTableComponent {
     'action',
   ];
 
-  constructor(public readonly router: Router, public root: PetsRootService) {}
+  constructor(public readonly router: Router) {}
 
   public openPetDetail(petId: string) {
     this.router.navigate(['/app-view/pet-detail/', petId]);

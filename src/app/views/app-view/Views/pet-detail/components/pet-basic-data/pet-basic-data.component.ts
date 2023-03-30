@@ -20,8 +20,8 @@ import { PetDetailService } from '../../pet-detail.service';
 export class PetBasicDataComponent implements OnInit {
   public detailPetsForm!: FormGroup;
 
-  @Output() private updateAvatar: EventEmitter<FormData> =
-    new EventEmitter<FormData>();
+  @Output() private updateAvatar: EventEmitter<FormData | null> =
+    new EventEmitter<FormData | null>();
   @Input() set data(basicData: AnimalDetailResponse | null) {
     if (basicData === null) return;
 
