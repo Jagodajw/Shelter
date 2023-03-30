@@ -29,15 +29,143 @@
         }
       }
     },
-    "/animals/{status}": {
-      "get": {
+    "/document": {
+      "post": {
         "tags": [
-          "Animals"
+          "Documents"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "status",
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "animals_id": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/document/{animalId}": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "animalId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/document/{documentId}": {
+      "delete": {
+        "tags": [
+          "Documents"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/documentFile/{documentId}": {
+      "get": {
+        "tags": [
+          "Documents"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "documentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/adoptAnimal/{animalId}": {
+      "post": {
+        "tags": [
+          "Animals adoption"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "animalId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -51,6 +179,21 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dataPetOut": {
+                  "example": "any"
+                },
+                "dataPersonTakeAway": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -67,12 +210,63 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/animalDataRegister/{animalId}": {
+      },
+      "put": {
+        "tags": [
+          "Animals adoption"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "animalId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "dataPetOut": {
+                  "example": "any"
+                },
+                "dataPersonTakeAway": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
       "get": {
         "tags": [
-          "Animals"
+          "Animals adoption"
         ],
         "description": "",
         "parameters": [
@@ -112,7 +306,7 @@
     "/animalDataAdoption/{animalId}": {
       "get": {
         "tags": [
-          "Animals"
+          "Animals adoption"
         ],
         "description": "",
         "parameters": [
@@ -149,116 +343,10 @@
         }
       }
     },
-    "/adoptAnimal/{animalId}": {
-      "post": {
-        "tags": [
-          "Animals"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "animalId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "dataPetOut": {
-                  "example": "any"
-                },
-                "dataPersonTakeAway": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "Animals"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "animalId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "dataPetOut": {
-                  "example": "any"
-                },
-                "dataPersonTakeAway": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
+    "/animalAvatar/{animalId}": {
       "get": {
         "tags": [
-          "Animals"
+          "Animals avatar"
         ],
         "description": "",
         "parameters": [
@@ -267,128 +355,11 @@
             "in": "path",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/adoptAnimal": {
-      "put": {
-        "tags": [
-          "Animals"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "dataPetOut": {
-                  "example": "any"
-                },
-                "dataPersonTakeAway": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/animalRegistration": {
-      "post": {
-        "tags": [
-          "Animals"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "registerAnimal": {
-                  "example": "any"
-                },
-                "registerPeople": {
-                  "example": "any"
-                },
-                "register": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
@@ -397,7 +368,53 @@
       },
       "put": {
         "tags": [
-          "Animals"
+          "Animals avatar"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "animalId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Animals avatar"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "animalId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/numberOfAnimalsVaccinationChecks": {
+      "get": {
+        "tags": [
+          "Animals controls"
         ],
         "description": "",
         "parameters": [
@@ -410,24 +427,148 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/getAnimalsToVaccinationChecks": {
+      "get": {
+        "tags": [
+          "Animals controls"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "registerAnimal": {
-                  "example": "any"
-                },
-                "registerPeople": {
-                  "example": "any"
-                },
-                "register": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/numberOfAnimalsReleaseControl": {
+      "get": {
+        "tags": [
+          "Animals controls"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/getAnimalsToReleaseControl": {
+      "get": {
+        "tags": [
+          "Animals controls"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/animals/{status}": {
+      "get": {
+        "tags": [
+          "Animals Core"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -449,7 +590,7 @@
     "/animalsByQuery/{status}": {
       "post": {
         "tags": [
-          "Animals"
+          "Animals Core"
         ],
         "description": "",
         "parameters": [
@@ -489,7 +630,7 @@
     "/animal/{animalId}": {
       "delete": {
         "tags": [
-          "Animals"
+          "Animals Core"
         ],
         "description": "",
         "parameters": [
@@ -526,81 +667,19 @@
         }
       }
     },
-    "/numberOfAnimalsVaccinationChecks": {
+    "/animalDataRegister/{animalId}": {
       "get": {
         "tags": [
-          "Animals"
+          "Animals registration"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "shelters_id",
-            "in": "header",
+            "name": "animalId",
+            "in": "path",
+            "required": true,
             "type": "string"
           },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/getAnimalsToVaccinationChecks": {
-      "get": {
-        "tags": [
-          "Animals"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/numberOfAnimalsReleaseControl": {
-      "get": {
-        "tags": [
-          "Animals"
-        ],
-        "description": "",
-        "parameters": [
           {
             "name": "authorization",
             "in": "header",
@@ -628,10 +707,10 @@
         }
       }
     },
-    "/getAnimalsToReleaseControl": {
-      "get": {
+    "/animalRegistration": {
+      "post": {
         "tags": [
-          "Animals"
+          "Animals registration"
         ],
         "description": "",
         "parameters": [
@@ -644,6 +723,24 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "registerAnimal": {
+                  "example": "any"
+                },
+                "registerPeople": {
+                  "example": "any"
+                },
+                "register": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -660,19 +757,16 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/animalAvatar/{animalId}": {
+      },
       "put": {
         "tags": [
-          "Animals"
+          "Animals registration"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "animalId",
-            "in": "path",
-            "required": true,
+            "name": "shelters_id",
+            "in": "header",
             "type": "string"
           },
           {
@@ -680,426 +774,23 @@
             "in": "header",
             "type": "string"
           },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Animals"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "animalId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/login": {
-      "post": {
-        "tags": [
-          "Auth"
-        ],
-        "description": "",
-        "parameters": [
           {
             "name": "body",
             "in": "body",
             "schema": {
               "type": "object",
               "properties": {
-                "login": {
+                "registerAnimal": {
                   "example": "any"
                 },
-                "password": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/cities": {
-      "get": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/commune": {
-      "get": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "commune": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/species": {
-      "get": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "species": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/breed": {
-      "get": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "breed": {
+                "registerPeople": {
                   "example": "any"
                 },
-                "species_id": {
+                "register": {
                   "example": "any"
                 }
               }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/breed/{speciesId}": {
-      "get": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "speciesId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/colors": {
-      "get": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
           }
         ],
         "responses": {
@@ -1121,7 +812,7 @@
     "/area": {
       "get": {
         "tags": [
-          "Dictonary"
+          "Dictonary Area"
         ],
         "description": "",
         "parameters": [
@@ -1153,53 +844,7 @@
       },
       "post": {
         "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "area": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/typeAdoption": {
-      "get": {
-        "tags": [
-          "Dictonary"
+          "Dictonary Area"
         ],
         "description": "",
         "parameters": [
@@ -1228,241 +873,12 @@
             "description": "Internal Server Error"
           }
         }
-      },
-      "post": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "type_adoption": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
       }
     },
-    "/settingsCity/{cityId}": {
+    "/area/{areaId}": {
       "delete": {
         "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "cityId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/settingsCommune/{communeId}": {
-      "delete": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "communeId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/settingsSpecies/{speciesId}": {
-      "delete": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "speciesId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/settingsBreed/{breedId}": {
-      "delete": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "breedId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/settingsColor/{colorId}": {
-      "delete": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "colorId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          }
-        }
-      }
-    },
-    "/settingsArea/{areaId}": {
-      "delete": {
-        "tags": [
-          "Dictonary"
+          "Dictonary Area"
         ],
         "description": "",
         "parameters": [
@@ -1494,17 +910,15 @@
             "description": "Forbidden"
           }
         }
-      }
-    },
-    "/settingsTypeAdoption/{typeAdoptionId}": {
-      "delete": {
+      },
+      "put": {
         "tags": [
-          "Dictonary"
+          "Dictonary Area"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "typeAdoptionId",
+            "name": "areaId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1529,26 +943,41 @@
           },
           "403": {
             "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
-      },
-      "put": {
+      }
+    },
+    "/breed": {
+      "get": {
         "tags": [
-          "Dictonary"
+          "Dictonary Breed"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "typeAdoptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
           },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Dictonary Breed"
+        ],
+        "description": "",
+        "parameters": [
           {
             "name": "shelters_id",
             "in": "header",
@@ -1560,7 +989,159 @@
             "schema": {
               "type": "object",
               "properties": {
-                "type_adoption": {
+                "breed": {
+                  "example": "any"
+                },
+                "species": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/breed/{speciesId}": {
+      "get": {
+        "tags": [
+          "Dictonary Breed"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "speciesId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/breed/{breedId}": {
+      "delete": {
+        "tags": [
+          "Dictonary Breed"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "breedId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dictonary Breed"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "breedId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/cities": {
+      "get": {
+        "tags": [
+          "Dictonary City"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/city": {
+      "post": {
+        "tags": [
+          "Dictonary City"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "city": {
+                  "example": "any"
+                },
+                "zip_code": {
                   "example": "any"
                 }
               }
@@ -1583,10 +1164,10 @@
         }
       }
     },
-    "/settingsCityId/{cityId}": {
+    "/city/{cityId}": {
       "put": {
         "tags": [
-          "Dictonary"
+          "Dictonary City"
         ],
         "description": "",
         "parameters": [
@@ -1636,17 +1217,15 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/settingsCommuneId/{communeId}": {
-      "put": {
+      },
+      "delete": {
         "tags": [
-          "Dictonary"
+          "Dictonary City"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "communeId",
+            "name": "cityId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1660,18 +1239,37 @@
             "name": "shelters_id",
             "in": "header",
             "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/colors": {
+      "get": {
+        "tags": [
+          "Dictonary Color"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
           },
           {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "commune": {
-                  "example": "any"
-                }
-              }
-            }
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
           }
         ],
         "responses": {
@@ -1690,15 +1288,15 @@
         }
       }
     },
-    "/settingsSpeciesId/{speciesId}": {
-      "put": {
+    "/color/{colorId}": {
+      "delete": {
         "tags": [
-          "Dictonary"
+          "Dictonary Color"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "speciesId",
+            "name": "colorId",
             "in": "path",
             "required": true,
             "type": "string"
@@ -1712,18 +1310,6 @@
             "name": "shelters_id",
             "in": "header",
             "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "species": {
-                  "example": "any"
-                }
-              }
-            }
           }
         ],
         "responses": {
@@ -1735,69 +1321,12 @@
           },
           "403": {
             "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/settingsBreedId/{breedId}": {
+      },
       "put": {
         "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "breedId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "breed": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/settingsColorId/{colorId}": {
-      "put": {
-        "tags": [
-          "Dictonary"
+          "Dictonary Color"
         ],
         "description": "",
         "parameters": [
@@ -1824,107 +1353,6 @@
               "type": "object",
               "properties": {
                 "color": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/settingsAreaId/{areaId}": {
-      "put": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "areaId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "area": {
-                  "example": "any"
-                }
-              }
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/city": {
-      "post": {
-        "tags": [
-          "Dictonary"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "shelters_id",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "city": {
-                  "example": "any"
-                },
-                "zip_code": {
                   "example": "any"
                 }
               }
@@ -1950,7 +1378,7 @@
     "/color": {
       "post": {
         "tags": [
-          "Dictonary"
+          "Dictonary Color"
         ],
         "description": "",
         "parameters": [
@@ -1993,13 +1421,18 @@
         }
       }
     },
-    "/province": {
+    "/commune": {
       "get": {
         "tags": [
-          "Dictonary"
+          "Dictonary Commune"
         ],
         "description": "",
         "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
           {
             "name": "authorization",
             "in": "header",
@@ -2020,12 +1453,10 @@
             "description": "Internal Server Error"
           }
         }
-      }
-    },
-    "/typeAcceptance": {
-      "get": {
+      },
+      "post": {
         "tags": [
-          "Dictonary"
+          "Dictonary Commune"
         ],
         "description": "",
         "parameters": [
@@ -2038,6 +1469,105 @@
             "name": "authorization",
             "in": "header",
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "commune": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/commune/{communeId}": {
+      "delete": {
+        "tags": [
+          "Dictonary Commune"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "communeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dictonary Commune"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "communeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "commune": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
@@ -2088,30 +1618,623 @@
             "description": "Internal Server Error"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "Employee"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/employee/{employeeId}": {
+      "put": {
+        "tags": [
+          "Employee"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Employee"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "employeeId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/province": {
+      "get": {
+        "tags": [
+          "Dictonary Province"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/species": {
+      "get": {
+        "tags": [
+          "Dictonary Species"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Dictonary Species"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/species/{speciesId}": {
+      "delete": {
+        "tags": [
+          "Dictonary Species"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "speciesId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dictonary Species"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "speciesId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/typeAcceptance": {
+      "get": {
+        "tags": [
+          "Dictonary TypeAcceptance"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Dictonary TypeAcceptance"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/typeAcceptance/{typeAcceptanceId}": {
+      "delete": {
+        "tags": [
+          "Dictonary TypeAcceptance"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "typeAcceptanceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dictonary TypeAcceptance"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "typeAcceptanceId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/typeAdoption": {
+      "get": {
+        "tags": [
+          "Dictonary TypeAdoption"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Dictonary TypeAdoption"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/typeAdoption/{typeAdoptionId}": {
+      "delete": {
+        "tags": [
+          "Dictonary TypeAdoption"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "typeAdoptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Dictonary TypeAdoption"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "typeAdoptionId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "shelters_id",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/people/{personId}/{blockState}": {
+      "get": {
+        "tags": [
+          "People Core"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "blockState",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
       }
     },
     "/people": {
       "get": {
         "tags": [
-          "People"
+          "People Getters"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "authorization",
+            "name": "shelters_id",
             "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "areBlockedUsers",
+            "in": "query",
             "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
@@ -2119,69 +2242,32 @@
         }
       }
     },
-    "/animalsOfPeopleGivingBack/{peopleId}": {
-      "get": {
+    "/login": {
+      "post": {
         "tags": [
-          "People"
+          "Auth"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "peopleId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "login": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                }
+              }
+            }
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "500": {
-            "description": "Internal Server Error"
-          }
-        }
-      }
-    },
-    "/peopleById/{peopleId}": {
-      "get": {
-        "tags": [
-          "People"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "peopleId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "authorization",
-            "in": "header",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
           },
           "500": {
             "description": "Internal Server Error"
