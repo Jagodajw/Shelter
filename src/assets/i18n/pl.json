@@ -78,8 +78,10 @@
     "delete": "Usuń osobę",
     "action": "Akcja",
     "addToBlackList": "Dodaj na czarną listę",
+    "deleteToBlackList": "Usuń z czarnej listy",
     "deleteSelectedPosition": "Usuń wybraną osobę",
-    "editSelectedPosition": "Edytuj wybraną osobę"
+    "editSelectedPosition": "Edytuj wybraną osobę",
+    "ConfirmAddPeopleToBlackList": "Czy na pewno chcesz dodać tą osobę na czarną listę?"
   },
   "stats": {
     "title": "Statystyki"

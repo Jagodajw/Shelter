@@ -12,6 +12,7 @@ import { ButtonModule } from 'src/app/views/app-view/components/button/button.mo
 import { EmptyDataModule } from 'src/app/views/app-view/components/empty-data/empty-data.module';
 import { PetsRoutingModule } from '../../../pets/pets-routing.module';
 import { PetsTableModule } from '../../../pets/components/pets-table/pets-table.module';
+import { SearchEngineTableModule } from 'src/app/views/app-view/components/search-engine-table/search-engine-table.module';
 
 @NgModule({
   declarations: [PeopleTableComponent],
@@ -28,7 +29,8 @@ import { PetsTableModule } from '../../../pets/components/pets-table/pets-table.
     ButtonItemDeleteModule,
     ButtonModule,
     EmptyDataModule,
-    PetsTableModule
+    PetsTableModule,
+    SearchEngineTableModule,
   ],
 })
 export class PeopleTableModule {}

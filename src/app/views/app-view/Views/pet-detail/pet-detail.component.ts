@@ -142,10 +142,13 @@ export class PetDetailComponent implements OnInit {
       });
   }
 
-  public updateAvatar(updatedAvatar: FormData): void {
+  public updateAvatar(updatedAvatar: FormData | null): void {
     const petId = this.activatedRoute.snapshot.params['id'];
     if (petId === null) return;
-
+    if (updatedAvatar === null) {
+      this.root.deletePetAvatar(petId).subscribe();
+      return;
+    }
     this.root.setPetAvater(petId, updatedAvatar).subscribe();
   }
 

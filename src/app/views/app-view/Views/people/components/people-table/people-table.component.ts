@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { PeopleResponse } from 'backend/src/views/PeopleView';
+import { Observable } from 'rxjs';
 import { DataPersonActionPopupComponent } from 'src/app/views/app-view/components/data-person-action-popup/data-person-action-popup.component';
 import { PeopleRootService } from '../../people-root.service';
 
@@ -28,10 +29,10 @@ import { PeopleRootService } from '../../people-root.service';
 export class PeopleTableComponent implements OnInit {
   @Input() set people(newPeople: PeopleResponse[] | null) {
     if (newPeople === null) return;
-    this.peopleTable = new MatTableDataSource<PeopleResponse>(newPeople);
+    this.setPeopleTable = newPeople;
   }
-  @Output() deletePositionEmitter: EventEmitter<string> =
-    new EventEmitter<string>();
+  @Output() addToBlackListEmitter: EventEmitter<number> =
+    new EventEmitter<number>();
   public expandedElement!: PeopleResponse | null;
   public peopleTable = new MatTableDataSource<PeopleResponse>([]);
   constructor(
@@ -46,8 +47,8 @@ export class PeopleTableComponent implements OnInit {
     'adress',
     'peselNip',
     'telepohone',
-    'community',
-    'blackList',
+    'commune',
+    'black_list',
     'action',
   ];
   ngOnInit(): void {}
@@ -63,7 +64,29 @@ export class PeopleTableComponent implements OnInit {
     this.router.navigate(['/app-view/pet-detail/', petId]);
   }
 
-  public deletePosition(petId: string): void {
-    this.deletePositionEmitter.emit(petId);
+  public addToBlackList(peopleId: number): void {
+    this.addToBlackListEmitter.emit(peopleId);
+  }
+
+  private set setPeopleTable(name: PeopleResponse[]) {
+    this.peopleTable = new MatTableDataSource<PeopleResponse>(name);
+    this.peopleTable.filterPredicate = function (
+      data,
+      filter: string
+    ): boolean {
+      return (
+        `${data.name} ${data.surname}`.toLowerCase().includes(filter) ||
+        (Object.keys(data) as (keyof PeopleResponse)[]).some(
+          (key: keyof PeopleResponse) =>
+            JSON.stringify(data[key]).toLowerCase().includes(filter)
+        )
+      );
+    };
+  }
+
+  public getSearchParams(event: any) {
+    event = event.trim();
+    event = event.toLowerCase();
+    this.peopleTable.filter = event;
   }
 }

@@ -49,4 +49,8 @@ export class PetDetailService {
   public setPetAvater(petId: string, avatar: FormData): Observable<void> {
     return this.api.setPetAvatar(petId, avatar);
   }
+
+  public deletePetAvatar(petId: string): Observable<void> {
+    return this.api.deletePetAvatar(petId);
+  }
 }

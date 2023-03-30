@@ -22,7 +22,7 @@
                 <div *ngIf="tabGroup.selectedIndex === petStepsEnum.basicData" class="pet-detail_content">
                     <ng-container *ngIf="{isLoading: isLoading$ | async} as vm">
                         <app-pet-basic-data #basicDataRef [data]="basicData$ | async" [avatar]="avatar$ | async"
-                            (updateAvatar)="updateAvatar($event)"
+                            (updateAvatar)="updateAvatar($event)" 
                             *ngIf="vm.isLoading===false; else loadingView"></app-pet-basic-data>
                         <ng-template #loadingView> <app-empty-data
                                 [isLoading]="vm.isLoading"></app-empty-data></ng-template>

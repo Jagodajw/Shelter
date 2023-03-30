@@ -9,9 +9,8 @@ import { MatMenuModule } from '@angular/material/menu';
 import { ButtonModule } from '../../../components/button/button.module';
 import { ButtonItemDeleteModule } from '../../../components/button-item-delete/button-item-delete.module';
 import { MatButtonModule } from '@angular/material/button';
-import { SettingsBreedPopupModule } from './settings-breed-popup/settings-breed-popup.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SettingsBreedSearchEngineModule } from './settings-breed-search-engine/settings-breed-search-engine.module';
+import { SearchEngineTableModule } from '../../../components/search-engine-table/search-engine-table.module';
 
 @NgModule({
   declarations: [SettingsBreedComponent],
@@ -26,10 +25,9 @@ import { SettingsBreedSearchEngineModule } from './settings-breed-search-engine/
     MatMenuModule,
     ButtonItemDeleteModule,
     ButtonModule,
-    SettingsBreedPopupModule,
     ReactiveFormsModule,
     FormsModule,
-    SettingsBreedSearchEngineModule,
+    SearchEngineTableModule,
   ],
 })
 export class SettingsBreedModule {}

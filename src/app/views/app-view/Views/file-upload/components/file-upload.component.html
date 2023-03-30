@@ -8,7 +8,7 @@
     <ng-container *ngIf="!!files?.length">
         <ul class="list-attach">
             <app-upload-attachment *ngFor="let file of files" [file]="file" (remove)="removeAttachment($event)"
-                (download)="downloadAttachment.emit($event)"></app-upload-attachment>
+                (download)="downloadAttachment.emit($event)" ></app-upload-attachment>
         </ul>
     </ng-container>
 </div>

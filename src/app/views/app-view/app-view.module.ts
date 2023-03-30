@@ -19,7 +19,13 @@ import { PetAvatarModule } from './Views/pets/components/pet-avatar/pet-avatar.m
 
 @NgModule({
   declarations: [AppViewComponent, HeaderComponent, ToolbarDateComponent],
-  providers: [PetService, DictionaryService, EmployeeService, ShelterService, PeopleService],
+  providers: [
+    PetService,
+    DictionaryService,
+    EmployeeService,
+    ShelterService,
+    PeopleService,
+  ],
   imports: [
     CommonModule,
     AppViewRoutingModule,

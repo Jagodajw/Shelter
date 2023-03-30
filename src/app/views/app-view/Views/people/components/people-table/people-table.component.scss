@@ -1,0 +1,37 @@
+:host {
+  display: block;
+  & table {
+    margin-bottom: 20px;
+    width: 100%;
+    tr {
+      height: 46px;
+    }
+    th {
+      min-width: 120px;
+      background-color: #514edd;
+      color: #ffffff;
+      font-size: 1rem;
+    }
+    th:last-child {
+      text-align: center;
+    }
+    td {
+      color: #6867b9;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+    td:first-child {
+      font-size: 1rem;
+      text-transform: uppercase;
+    }
+    td:last-child {
+      text-align: -webkit-center;
+    }
+  }
+  & h3 {
+    text-align: left;
+  }
+  .style-for-people {
+    background-color: #6867b917;
+  }
+}

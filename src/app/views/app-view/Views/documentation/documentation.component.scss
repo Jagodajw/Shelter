@@ -1,0 +1,15 @@
+:host {
+  display: block;
+  .document {
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    width: 100%;
+    margin: auto;
+  }
+  mat-expansion-panel {
+    width: 70%;
+    margin: auto;
+  }
+}

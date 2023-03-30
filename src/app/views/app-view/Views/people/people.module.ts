@@ -20,6 +20,7 @@ import { PetsTableModule } from '../pets/components/pets-table/pets-table.module
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmptyDataModule } from '../../components/empty-data/empty-data.module';
 import { PeopleTableModule } from './components/people-table/people-table.module';
+
 @NgModule({
   declarations: [PeopleComponent],
   imports: [

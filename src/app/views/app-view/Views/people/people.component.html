@@ -22,11 +22,8 @@
     </div>
 
     <div class="people_container-table">
-        <span class="input-full">
-            <app-search placeholder="people.searchPlaceholder" [formControl]="search"></app-search>
-        </span>
         <ng-container *ngIf="{people:people$ |async, isLoading: isLoading$ | async} as vm">
-            <app-people-table *ngIf="vm.people?.length && vm.isLoading===false; else loadingView" [people]="people$ | async"
+            <app-people-table *ngIf="vm.people?.length && vm.isLoading===false; else loadingView" [people]="people$ | async" (addToBlackListEmitter)="addToBlackList($event)"
              ></app-people-table>
             <ng-template #loadingView> <app-empty-data  [isLoading]="vm.isLoading"></app-empty-data></ng-template>
           </ng-container>

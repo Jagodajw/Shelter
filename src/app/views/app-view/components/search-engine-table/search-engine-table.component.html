@@ -1,4 +1,4 @@
-<mat-form-field class="input-third">
+<mat-form-field [class]="width">
     <input type="text" (input)="onInput($event)" matInput placeholder="{{ 'pets.search' | translate }}" />
     <button matSuffix mat-icon-button type="button">
         <mat-icon>search</mat-icon>

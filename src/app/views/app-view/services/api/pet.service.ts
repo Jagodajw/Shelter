@@ -129,6 +129,12 @@ export class PetService extends ApiService {
   }
 
   public getPetAvatar(petId: string): Observable<Blob> {
-    return this.http.get<Blob>(`${this.rootUrl}/animalAvatar/${petId}`, {responseType: 'blob' as 'json'});
+    return this.http.get<Blob>(`${this.rootUrl}/animalAvatar/${petId}`, {
+      responseType: 'blob' as 'json',
+    });
+  }
+
+  public deletePetAvatar(petId: string): Observable<void> {
+    return this.http.delete<void>(`${this.rootUrl}/animalAvatar/${petId}`);
   }
 }
