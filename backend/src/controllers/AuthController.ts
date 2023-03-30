@@ -1,5 +1,6 @@
 import express from 'express';
 import jwt, { Secret } from 'jsonwebtoken';
+import { authenticate } from '../middlewares/authentication';
 import { checkAccountExists } from '../services/AuthService';
 
 const router = express.Router();
@@ -27,6 +28,14 @@ router.post('/login', async (req, res) => {
   );
 
   res.send({ accessToken, refreshToken });
+});
+
+router.head('/authorization', authenticate, async (req, res) => {
+  try {
+    res.sendStatus(200);
+  } catch {
+    res.sendStatus(401);
+  }
 });
 
 export default router;

@@ -1,20 +1,18 @@
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import {
   HttpClient,
   HttpClientModule,
   HTTP_INTERCEPTORS,
 } from '@angular/common/http';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import localePl from '@angular/common/locales/pl';
+import { APP_INITIALIZER, LOCALE_ID, NgModule } from '@angular/core';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserModule } from '@angular/platform-browser';
-import {
-  BrowserAnimationsModule,
-  NoopAnimationsModule,
-} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.component';
@@ -23,8 +21,6 @@ import { ErrorHandlerInteceptorService } from './interceptors/error-handler.inte
 import { ShelterInterceptorService } from './interceptors/shelter-interceptor.service';
 import { TokenApiRestInterceptorService } from './interceptors/token-api-rest-interceptor.service';
 import { AppInitService } from './services/app-init.service';
-import { registerLocaleData } from '@angular/common';
-import localePl from '@angular/common/locales/pl';
 
 export function appInit(appInitService: AppInitService): any {
   return () => appInitService.init();
@@ -54,6 +50,12 @@ export function appInit(appInitService: AppInitService): any {
     {
       provide: LOCALE_ID,
       useValue: 'pl-PL',
+    },
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInit,
+      deps: [AppInitService],
+      multi: true,
     },
     {
       provide: HTTP_INTERCEPTORS,

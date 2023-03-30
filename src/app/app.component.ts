@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { AppInitService } from './services/app-init.service';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +7,7 @@ import { AppInitService } from './services/app-init.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  constructor(
-    private readonly translate: TranslateService,
-    private readonly appInit: AppInitService
-  ) {
+  constructor(private readonly translate: TranslateService) {
     translate.use('pl');
-  }
-
-  ngOnInit(): void {
-    this.appInit.init();
   }
 }

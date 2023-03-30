@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
+  { path: '', pathMatch: 'full', redirectTo: 'auth-view' },
   {
     path: 'auth-view',
     loadChildren: () =>
@@ -18,7 +19,6 @@ const routes: Routes = [
   {
     path: '**',
     redirectTo: 'auth-view',
-    // pathMatch: 'full',
   },
 ];
 @NgModule({
@@ -28,6 +28,7 @@ const routes: Routes = [
       enableTracing: environment.enableRoutingTracing,
       relativeLinkResolution: 'legacy',
       paramsInheritanceStrategy: 'always',
+      initialNavigation: 'disabled',
       useHash: true,
     }),
   ],

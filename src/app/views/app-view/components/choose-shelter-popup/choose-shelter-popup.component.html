@@ -1,14 +1,18 @@
 <div class="popup-container">
   <div class="popup-container-title">
-    <h1>{{'shelter.choose' | translate}}</h1>
+    <h1>{{ "shelter.choose" | translate }}</h1>
   </div>
 
   <div class="popup-container-cards">
     <ul>
       <li *ngFor="let shelter of data.shelterList$ | async">
-        <div class="popup-container-cards-item" [routerLink]="['/app-view/pets']" (click)="setShelter(shelter)">
-          <h2>{{shelter.name}} </h2>
-          <img src="{{shelter.img?? defaultShelterImg}}" alt="" />
+        <div
+          class="popup-container-cards-item"
+          [routerLink]="['/app-view/pets']"
+          (click)="setShelter(shelter)"
+        >
+          <h2>{{ shelter.name }}</h2>
+          <img src="{{ shelter.img ?? defaultShelterImg }}" alt="" />
         </div>
       </li>
     </ul>
