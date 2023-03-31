@@ -30,7 +30,7 @@ router.get('/people', ...middlewares, async (req, res) => {
   }
 });
 
-router.get('/people/:personId', ...middlewares, async (req, res) => {
+router.get('/person/:personId', ...middlewares, async (req, res) => {
   try {
     const personId: number = Number.parseInt(req.params.personId);
     const personData: RegisterPeopleResponse | null =

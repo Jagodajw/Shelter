@@ -198,3 +198,5 @@ export type RegistrationAddRequest = Omit<
   date_sterilization: Date;
   type_of_acceptance: TypeAcceptanceResponse;
 };
+
+export type PeopleRawResponse = People;
