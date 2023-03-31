@@ -3,27 +3,25 @@
     <mat-toolbar>Schronisko</mat-toolbar>
     <mat-card>
       <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" data-cy="login-field">
           <mat-label>Nazwa użytkownika</mat-label>
           <mat-icon matPrefix>person_outline</mat-icon>
           <input
             autofocus
             type="login"
-            id="mat-input-0"
             matInput
             placeholder="Podaj login"
             formControlName="login"
           />
         </mat-form-field>
 
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="fill" data-cy="passowrd-field">
           <mat-label>Hasło</mat-label>
           <mat-icon matPrefix>lock_outline</mat-icon>
           <input
             [type]="hide ? 'password' : 'text'"
             type="password"
             autocomplete="false"
-            id="mat-input-1"
             matInput
             placeholder="Podaj hasło"
             formControlName="password"
@@ -43,6 +41,7 @@
           class="login-container__content-button-form"
           type="submit"
           mat-raised-button
+          data-cy="submit-btn"
         >
           Zaloguj się
         </button>
