@@ -13,6 +13,8 @@ export function prismaErrorHandler(error: any): PrismaErrorHandlerReturn {
       status = 406;
       code = { ERROR_CODE: 'RESORCE_IN_USE' };
     }
+  } else {
+    code = !!error.message ? { ERROR_CODE: error.message } : {};
   }
 
   return { status, code };

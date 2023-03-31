@@ -133,7 +133,8 @@
     "ADOPTION_OF_ANIMAL_DOESNT_EXIST": "Adopcja dla zwierzęcia nie istnieje",
     "RESORCE_IN_USE": "Pórbujesz usunąć wykorzystany element",
     "ERROR_WHILE_UPLOADING_THE_FILE": "Błąd podczas wysyłania pliku",
-    "ERROR_WHILE_DOWNLOADING_THE_FILE": "Błąd podczas pobierania pliku"
+    "ERROR_WHILE_DOWNLOADING_THE_FILE": "Błąd podczas pobierania pliku",
+    "PERSON_DOESNT_EXISTS": "Osoba nie istnieje"
   },
 
   "size": {
