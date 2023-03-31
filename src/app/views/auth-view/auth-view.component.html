@@ -6,20 +6,44 @@
         <mat-form-field appearance="fill">
           <mat-label>Nazwa użytkownika</mat-label>
           <mat-icon matPrefix>person_outline</mat-icon>
-          <input autofocus type="login" matInput placeholder="Podaj login" formControlName="login" />
+          <input
+            autofocus
+            type="login"
+            id="mat-input-0"
+            matInput
+            placeholder="Podaj login"
+            formControlName="login"
+          />
         </mat-form-field>
 
         <mat-form-field appearance="fill">
           <mat-label>Hasło</mat-label>
           <mat-icon matPrefix>lock_outline</mat-icon>
-          <input [type]="hide ? 'password' : 'text'" type="password" autocomplete="false" matInput
-            placeholder="Podaj hasło" formControlName="password" />
-          <button mat-icon-button matSuffix type="button" (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide">
+          <input
+            [type]="hide ? 'password' : 'text'"
+            type="password"
+            autocomplete="false"
+            id="mat-input-1"
+            matInput
+            placeholder="Podaj hasło"
+            formControlName="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            type="button"
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
             <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
           </button>
         </mat-form-field>
-        <button class="login-container__content-button-form" type="submit" mat-raised-button>
+        <button
+          class="login-container__content-button-form"
+          type="submit"
+          mat-raised-button
+        >
           Zaloguj się
         </button>
       </form>

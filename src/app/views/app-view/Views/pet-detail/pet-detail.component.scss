@@ -24,4 +24,11 @@
       justify-content: space-between;
     }
   }
+
+  .list-attach {
+    list-style-type: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
 }

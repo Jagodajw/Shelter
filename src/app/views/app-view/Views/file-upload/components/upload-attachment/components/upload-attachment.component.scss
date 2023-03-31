@@ -41,10 +41,11 @@
   }
 
   .attachment {
-    color: aquamarine;
+    /* color: aquamarine; */
+    color: #12345f;
     text-decoration-line: underline;
     text-decoration-thickness: 1px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
   }
 }

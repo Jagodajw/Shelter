@@ -11,6 +11,7 @@ import { ToolbarDateComponent } from './components/header/Components/toolbar-dat
 import { HeaderComponent } from './components/header/header.component';
 import { SearchModule } from './components/search/search.module';
 import { DictionaryService } from './services/api/dictionary.service';
+import { DocumentService } from './services/api/document.service';
 import { EmployeeService } from './services/api/employee.service';
 import { PeopleService } from './services/api/people.service';
 import { PetService } from './services/api/pet.service';
@@ -25,6 +26,7 @@ import { PetAvatarModule } from './Views/pets/components/pet-avatar/pet-avatar.m
     EmployeeService,
     ShelterService,
     PeopleService,
+    DocumentService,
   ],
   imports: [
     CommonModule,

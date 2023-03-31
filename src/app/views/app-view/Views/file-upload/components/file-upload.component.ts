@@ -8,10 +8,7 @@ import {
 } from '@angular/core';
 import { NgControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, merge, mergeMap, Observable } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
-import { hasAttachmentAcceptableFormat } from '../../../components/file-reader-dialog/component/file-reader-acceptable-formats';
-import { FileReaderDialogComponent } from '../../../components/file-reader-dialog/component/file-reader-dialog.component';
 import { RemovedAttachment } from './upload-attachment/components/upload-attachment.component';
 
 @Component({
@@ -59,7 +56,8 @@ export class FileUploadComponent
 
     this.files.forEach((file) => {
       const form = new FormData();
-      form.append('bill', file);
+      form.append('file', file);
+      form.append('name', file.name);
       values.push(form);
     });
 

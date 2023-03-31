@@ -1,35 +1,50 @@
-<!-- <span class="file-reader">
-    <button mat-icon-button mat-dialog-close>
-        <mat-icon>close</mat-icon>
-    </button>
+<span class="file-reader">
+  <button mat-icon-button mat-dialog-close>
+    <mat-icon>close</mat-icon>
+  </button>
 </span>
 <main class="main">
-    <header class="main-header">
-        <h1>
-            {{ 'common.attachment'|translate }}
-        </h1>
-        <p>{{ data.fileName }}</p>
-    </header>
+  <header class="main-header">
+    <h1>
+      {{ "global.attachment" | translate }}
+    </h1>
+    <p>{{ data.fileName }}</p>
+  </header>
 
-    <div *ngIf="data.file?.type === 'application/pdf'" class="main-container">
-        <button mat-icon-button [disabled]="pageNumber === 1" (click)="prevPage()">
-            <mat-icon>keyboard_arrow_left</mat-icon>
-        </button>
-        <span> {{ pageNumber }} / {{ numberOfPages }} </span>
-        <button mat-icon-button [disabled]="pageNumber + 1 > numberOfPages" (click)="nextPage()">
-            <mat-icon>keyboard_arrow_right</mat-icon>
-        </button>
-    </div>
+  <div *ngIf="data.file?.type === 'application/pdf'" class="main-container">
+    <button mat-icon-button [disabled]="pageNumber === 1" (click)="prevPage()">
+      <mat-icon>keyboard_arrow_left</mat-icon>
+    </button>
+    <span> {{ pageNumber }} / {{ numberOfPages }} </span>
+    <button
+      mat-icon-button
+      [disabled]="pageNumber + 1 > numberOfPages"
+      (click)="nextPage()"
+    >
+      <mat-icon>keyboard_arrow_right</mat-icon>
+    </button>
+  </div>
 
-    <mat-dialog-content>
-        <ng-container *ngIf="data.file?.type !== 'application/pdf'">
-            <img class="w-full max-w-full" [src]="file | safe: 'url'" alt="attachment" />
-        </ng-container>
+  <mat-dialog-content>
+    <ng-container *ngIf="data.file?.type !== 'application/pdf'">
+      <img
+        class="w-full max-w-full"
+        [src]="file | safe : 'url'"
+        alt="attachment"
+      />
+    </ng-container>
 
-        <ng-container *ngIf="data.file?.type === 'application/pdf'">
-            <pdf-viewer #viewerRef [src]="file" [render-text]="true" [show-all]="false" [original-size]="false"
-                [page]="pageNumber" style="width: 100%; height: 100vh"
-                (after-load-complete)="callBackPdfFn($event)"></pdf-viewer>
-        </ng-container>
-    </mat-dialog-content>
-</main> -->
+    <ng-container *ngIf="data.file?.type === 'application/pdf'">
+      <pdf-viewer
+        #viewerRef
+        [src]="file"
+        [render-text]="true"
+        [show-all]="false"
+        [original-size]="false"
+        [page]="pageNumber"
+        style="width: 100%; height: 100vh"
+        (after-load-complete)="callBackPdfFn($event)"
+      ></pdf-viewer>
+    </ng-container>
+  </mat-dialog-content>
+</main>

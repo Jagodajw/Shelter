@@ -75,8 +75,8 @@ router.delete('/document/:documentId', ...middlewares, async (req, res) => {
   try {
     const documentId: string = req.params.documentId;
     await DocumentService.delete(documentId);
-    console.log(documentId);
-    res.sendStatus(200);
+
+    res.send();
   } catch (error: any) {
     console.log(error);
     res.status(500).json(error.message ? { ERROR_CODE: error.message } : {});

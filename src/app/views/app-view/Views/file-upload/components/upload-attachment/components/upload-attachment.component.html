@@ -1,19 +1,33 @@
 <li class="list-none">
-    <div class="list-none-content">
-        <mat-icon class="list-none-content-icon description-attachment">attach_file</mat-icon>
-        <span class="list-none-content-text" [ngClass]="{
-                'attachment':
-                    showAttachment.observed
-            }" (click)="showAttachment.emit({ id: file.id, name: file.name })">{{ file?.filename || file.name }}</span>
-        <div class="list-none-content-button">
-            <button mat-icon-button class="icon-button icon-button-download" (click)="download.emit(file.id)"
-                type="button">
-                <mat-icon>download</mat-icon>
-            </button>
-            <button mat-icon-button class="icon-button icon-button-remove"
-                (click)="remove.emit({ id: file.id, name: file.name })" type="button">
-                <mat-icon>close</mat-icon>
-            </button>
-        </div>
+  <div class="list-none-content">
+    <mat-icon class="list-none-content-icon description-attachment"
+      >attach_file</mat-icon
+    >
+    <span
+      class="list-none-content-text"
+      [ngClass]="{
+        attachment: showAttachment.observed
+      }"
+      (click)="showAttachment.emit(file)"
+      >{{ file?.filename || file.name }}</span
+    >
+    <div class="list-none-content-button">
+      <button
+        mat-icon-button
+        class="icon-button icon-button-download"
+        (click)="download.emit(file)"
+        type="button"
+      >
+        <mat-icon>download</mat-icon>
+      </button>
+      <button
+        mat-icon-button
+        class="icon-button icon-button-remove"
+        (click)="remove.emit(file)"
+        type="button"
+      >
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
+  </div>
 </li>

@@ -1,39 +1,28 @@
 <section>
-    <div class="document">
-        <h1>{{ 'document.title' |translate }}</h1>
+  <div class="document">
+    <h1>{{ "document.title" | translate }}</h1>
 
-        <app-button variant="raised" type="button" (clickEvent)="addDocument()">
-            <mat-icon>
-                add
-            </mat-icon>
-            {{ 'documents.upload' | translate }}
-        </app-button>
-    </div>
+    <app-file-upload [formControl]="attachments">
+      <mat-icon> add </mat-icon>
+      {{ "documents.upload" | translate }}
+    </app-file-upload>
+  </div>
 
+  <ng-container *ngIf="{ documents: documents$ | async } as vm">
+    <ng-container *ngIf="!!vm.documents?.length">
+      <ul class="list-attach">
+        <app-upload-attachment
+          *ngFor="let file of vm.documents"
+          [file]="file"
+          (remove)="deleteAttachment($event)"
+          (download)="downloadAttachment($event)"
+          (showAttachment)="showAttachment($event)"
+        ></app-upload-attachment>
+      </ul>
+    </ng-container>
+  </ng-container>
 
-    <!-- <ng-container *ngIf="
-                !!documentList.length && (isLoading$ | async) === false;
-                else emptyDataTemplate
-            "> -->
-            <!-- <mat-accordion>
-                <mat-expansion-panel (opened)="panelOpenState = true"
-                                     (closed)="panelOpenState = false">
-                  <mat-expansion-panel-header>
-                    <mat-panel-title>
-                      {{"document.name"}}
-                    </mat-panel-title>
-                    <mat-panel-description>
-                      {{"Data dodania: document.addDate"}}
-                    </mat-panel-description>
-                  </mat-expansion-panel-header>
-                  <p>I'm visible because I am open</p>
-                </mat-expansion-panel>
-              </mat-accordion> -->
-    <!-- </ng-container> -->
-
-    
-    <ng-template #emptyDataTemplate>
-        <app-empty-data 
-            [isLoading]="isLoading$ | async"></app-empty-data>
-    </ng-template>
+  <ng-template #emptyDataTemplate>
+    <app-empty-data [isLoading]="isLoading$ | async"></app-empty-data>
+  </ng-template>
 </section>

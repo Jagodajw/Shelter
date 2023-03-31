@@ -1,26 +1,32 @@
 import { Location } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { MatTabGroup } from '@angular/material/tabs';
 import { ActivatedRoute, Params } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import {
   AdoptDataByAnimalIdResponse,
   AnimalDetailResponse,
 } from 'backend/src/views/AnimalsView';
+import { DocumentResponse } from 'backend/src/views/DocumentView';
+import FileSaver from 'file-saver';
 import {
   BehaviorSubject,
+  Observable,
   catchError,
   filter,
   mergeMap,
-  Observable,
   tap,
   throwError,
 } from 'rxjs';
+import { SnackbarMessageService } from 'src/app/services/snackbar-message.service';
+import { FileReaderDialogComponent } from '../../components/file-reader-dialog/component/file-reader-dialog.component';
+import { DocumentService } from '../../services/api/document.service';
 import { PetService } from '../../services/api/pet.service';
-import { PetDetailService } from './pet-detail.service';
-import { MatTabGroup } from '@angular/material/tabs';
 import { PetBasicDataComponent } from './components/pet-basic-data/pet-basic-data.component';
 import { PetOutDataComponent } from './components/pet-out-data/pet-out-data.component';
+import { PetDetailService } from './pet-detail.service';
 
 enum PetSteps {
   basicData = 0,
@@ -53,18 +59,46 @@ export class PetDetailComponent implements OnInit {
     new BehaviorSubject<Nullable<AdoptDataByAnimalIdResponse>>(null);
   public avatar$: BehaviorSubject<Blob | null> =
     new BehaviorSubject<Blob | null>(null);
+  public documents$: Observable<DocumentResponse[]>;
 
   constructor(
     private _location: Location,
     private readonly api: PetService,
     private readonly activatedRoute: ActivatedRoute,
-    private readonly root: PetDetailService
+    private readonly root: PetDetailService,
+    private readonly documentApi: DocumentService,
+    private readonly snackBarMessage: SnackbarMessageService,
+    private readonly dialog: MatDialog
   ) {
     this.isEditMode$ = this.root.isEditModeObservable$;
+    this.documents$ = this.getDocuments$;
   }
 
   ngOnInit(): void {
     this.getPetData();
+
+    this.attachments.valueChanges
+      .pipe(untilDestroyed(this))
+      .subscribe((files: FormData[]) => {
+        files.forEach((file: FormData) => {
+          file.set('animals_id', this.activatedRoute.snapshot.params['id']);
+          this.documentApi.addDocument(file).subscribe({
+            next: () => {
+              this.snackBarMessage.showMessageSnackBar(
+                'pets.documentHasBeenAdd'
+              );
+
+              this.documents$ = this.getDocuments$;
+            },
+          });
+        });
+      });
+  }
+
+  private get getDocuments$(): Observable<DocumentResponse[]> {
+    return this.documentApi.getDocumentsByPetId(
+      this.activatedRoute.snapshot.params['id']
+    );
   }
 
   public backClicked() {
@@ -152,38 +186,34 @@ export class PetDetailComponent implements OnInit {
     this.root.setPetAvater(petId, updatedAvatar).subscribe();
   }
 
-  downloadAttachment(attachmentId: string): void {
-    // if (!this.data?.id) {
-    //     this.notification.openFromComponent(NotificationComponent, {
-    //         data: {
-    //             title: this.translocoService.translate('settings.save'),
-    //             variant: 'error',
-    //         },
-    //     });
-    //     return;
-    // }
-    // this.customApi
-    //     .documentAttachmentAttachmentIdGet(attachmentId, this.data.id)
-    //     .subscribe((file: Blob) => FileSaver.saveAs(file));
+  downloadAttachment({ ID, name }: { ID: string; name: string }): void {
+    this.documentApi.getFile(ID).subscribe({
+      next: (file: Blob) => {
+        FileSaver.saveAs(file, name);
+        this.snackBarMessage.showMessageSnackBar('pets.downloadDocumet');
+      },
+    });
   }
 
-  deleteAttachment(attachmentId: string): void {
-    // if (!this.data?.id) return;
-    // this.iCApiDocumentService
-    //     .documentDeleteDocumentIdAttachmentDelete(
-    //         this.data.id,
-    //         attachmentId,
-    //     )
-    //     .subscribe(() => {
-    //         this.notification.openFromComponent(NotificationComponent, {
-    //             data: {
-    //                 title: this.translocoService.translate(
-    //                     'common.delete-success',
-    //                 ),
-    //                 variant: 'success',
-    //             },
-    //         });
-    //         this.sendModel.emit({ refreshPage: true });
-    //     });
+  deleteAttachment({ ID }: { ID: string; name: string }): void {
+    this.documentApi.deleteDocument(ID).subscribe({
+      next: () => {
+        this.snackBarMessage.showMessageSnackBar('pets.deletedDocument');
+        this.documents$ = this.getDocuments$;
+      },
+    });
+  }
+
+  showAttachment({ ID, name }: { ID: string; name: string }): void {
+    this.documentApi
+      .getFile(ID)
+      .pipe(
+        mergeMap((file: Blob) =>
+          this.dialog
+            .open(FileReaderDialogComponent, { data: { file, fileName: name } })
+            .afterClosed()
+        )
+      )
+      .subscribe();
   }
 }

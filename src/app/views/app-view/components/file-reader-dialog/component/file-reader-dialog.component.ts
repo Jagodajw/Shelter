@@ -25,6 +25,7 @@ export class FileReaderDialogComponent implements OnInit {
 
   ngOnInit(): void {
     if (!this.data.file) return;
+    console.log(this.data.file);
 
     this.file = URL.createObjectURL(this.data.file);
   }

@@ -52,7 +52,10 @@
     "vaccination": "Szczepienie",
     "dateVaccination": "Data szczepienia",
     "resetSearch": "Wyczyść",
-    "EmptyData": "Brak danych"
+    "EmptyData": "Brak danych",
+    "documentHasBeenAdd": "Dodano dokument",
+    "downloadDocumet": "Pobrano dokument",
+    "deletedDocument": "Usunięto dokument"
   },
   "people": {
     "title": "Osoby",
@@ -117,7 +120,8 @@
     "action": {
       "no": "nie",
       "yes": "tak"
-    }
+    },
+    "attachment": "Załącznik"
   },
   "errors": {
     "BAD_SHELTER_ID": "Błędny Identyfikator schroniska",
@@ -127,7 +131,9 @@
     "WRONG_LOGIN_DATA": "Błędne dane logownia, spróbuj ponownie",
     "REGISTRATION_OF_ANIMAL_DOESNT_EXIST": "Rejestracja dla zwierzęcia nie istnieje",
     "ADOPTION_OF_ANIMAL_DOESNT_EXIST": "Adopcja dla zwierzęcia nie istnieje",
-    "RESORCE_IN_USE": "Pórbujesz usunąć wykorzystany element"
+    "RESORCE_IN_USE": "Pórbujesz usunąć wykorzystany element",
+    "ERROR_WHILE_UPLOADING_THE_FILE": "Błąd podczas wysyłania pliku",
+    "ERROR_WHILE_DOWNLOADING_THE_FILE": "Błąd podczas pobierania pliku"
   },
 
   "size": {

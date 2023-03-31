@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { SnackbarMessageService } from 'src/api/services/snackbar-message.service';
+import { SnackbarMessageService } from 'src/app/services/snackbar-message.service';
 import { AuthRootService } from '../services/auth-root.service';
 
 @Injectable()
