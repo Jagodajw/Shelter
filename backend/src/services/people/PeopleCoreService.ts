@@ -1,5 +1,6 @@
 import { prisma } from '../..';
 import { MissingDictionaryAdder } from '../../helpers/MissingDictionaryAdder';
+import { PeopleUpdateParser } from '../../helpers/PeopleUpdateParser';
 import {
   PeopleRawResponse,
   RegisterPersonEditRequest,
@@ -44,19 +45,11 @@ export class PeopleCoreSerivce {
       return await prisma.people.update({
         where: { ID: personId },
         data: {
-          type_of_person: personModel.type_of_person,
-          name: personModel.name,
-          id_number: personModel.id_number,
-          pesel: personModel.pesel,
-          nip: personModel.nip,
-          email: personModel.email,
-          telephone: personModel.telephone,
-          adress: personModel.adress,
-          province_id: personModel.province_id,
-          description: personModel.description,
-          city_id: cityId,
-          commune_id: peopleCommuneId,
-          shelters_id: shelterId,
+          ...PeopleUpdateParser.parse(personModel, {
+            cityId,
+            peopleCommuneId,
+            shelterId,
+          }),
         },
       });
     });
