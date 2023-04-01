@@ -1,6 +1,7 @@
 import { prisma } from '../..';
 import { AnimalIdGenerator } from '../../helpers/AnimalIdGenerator';
 import { MissingDictionaryAdder } from '../../helpers/MissingDictionaryAdder';
+import { PeopleUpdateParser } from '../../helpers/PeopleUpdateParser';
 import {
   AnimalDetailResponse,
   RegisterAddAnimalRequest,
@@ -260,19 +261,11 @@ export class AnimalsRegistrationService {
       const registerPeople = await tx.people.update({
         where: { ID: updateDataRegisterPeople.ID },
         data: {
-          type_of_person: updateDataRegisterPeople.type_of_person,
-          name: updateDataRegisterPeople.name,
-          id_number: updateDataRegisterPeople.id_number,
-          pesel: updateDataRegisterPeople.pesel,
-          nip: updateDataRegisterPeople.nip,
-          email: updateDataRegisterPeople.email,
-          telephone: updateDataRegisterPeople.telephone,
-          adress: updateDataRegisterPeople.adress,
-          province_id: updateDataRegisterPeople.province_id,
-          description: updateDataRegisterPeople.description,
-          city_id: cityId,
-          commune_id: peopleCommuneId,
-          shelters_id: shelterId,
+          ...PeopleUpdateParser.parse(updateDataRegisterPeople, {
+            cityId,
+            peopleCommuneId,
+            shelterId,
+          }),
         },
       });
 

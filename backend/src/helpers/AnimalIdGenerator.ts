@@ -6,6 +6,13 @@ interface DateCreator {
   year: number;
 }
 
+type SpecieSign = 'P' | 'K' | 'I';
+
+interface SpeciesList {
+  phrase: string;
+  sign: SpecieSign;
+}
+
 export class AnimalIdGenerator {
   private static readonly actualYear: number = new Date().getFullYear();
   constructor() {}
@@ -64,13 +71,13 @@ export class AnimalIdGenerator {
     return date;
   }
 
-  private static async getSpeciesSign(speciesId: number): Promise<string> {
-    const speciesSign = {
+  private static async getSpeciesSign(speciesId: number): Promise<SpecieSign> {
+    const speciesSign: { [key in string]: SpecieSign } = {
       dog: 'P',
       cat: 'K',
       other: 'I',
     };
-    const speciesList = [
+    const speciesList: SpeciesList[] = [
       { phrase: 'kot', sign: speciesSign.cat },
       { phrase: 'pies', sign: speciesSign.dog },
     ];

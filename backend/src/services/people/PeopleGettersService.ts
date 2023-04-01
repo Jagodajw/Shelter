@@ -2,10 +2,24 @@ import { prisma } from '../..';
 import { dataToBeExtractedWhenPeopleAreTaken } from '../../data/PeopleData';
 import { AnimalMapper } from '../../helpers/AnimalMapper';
 import { PersonTableModel } from '../../models/PeopleModel';
+import { RegisterPeopleResponse } from '../../views/AnimalsView';
 import { PeopleResponse, PeopleStatus } from '../../views/PeopleView';
 
 export class PeopleGettersService {
   constructor() {}
+
+  public static async getById(
+    peresonId: number
+  ): Promise<RegisterPeopleResponse | null> {
+    return (await prisma.people.findUnique({
+      where: { ID: peresonId },
+      include: {
+        city: true,
+        commune: true,
+        province: true,
+      },
+    })) as RegisterPeopleResponse | null;
+  }
 
   public static async getList(
     sheltersId: string,
