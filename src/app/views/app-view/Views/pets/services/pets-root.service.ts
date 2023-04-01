@@ -103,6 +103,8 @@ export class PetsRootService {
       });
   }
 
+  
+
   public outPet(petId: string): void {
     const pet = this.pets$.value.find((pets) => pets.ID === petId);
 
