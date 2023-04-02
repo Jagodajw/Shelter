@@ -2209,6 +2209,27 @@
         }
       }
     },
+    "/person/{personId}": {
+      "get": {
+        "tags": [
+          "People Getters"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "personId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/people": {
       "get": {
         "tags": [
@@ -2229,27 +2250,6 @@
           {
             "name": "areBlockedUsers",
             "in": "query",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/people/{personId}": {
-      "get": {
-        "tags": [
-          "People Getters"
-        ],
-        "description": "",
-        "parameters": [
-          {
-            "name": "personId",
-            "in": "path",
-            "required": true,
             "type": "string"
           }
         ],

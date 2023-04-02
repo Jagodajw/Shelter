@@ -4,12 +4,13 @@
   </div>
 
   <div class="popup-container-cards">
-    <ul>
+    <ul data-cy="shelters-list">
       <li *ngFor="let shelter of data.shelterList$ | async">
         <div
           class="popup-container-cards-item"
           [routerLink]="['/app-view/pets']"
           (click)="setShelter(shelter)"
+          data-cy="shelter-item"
         >
           <h2>{{ shelter.name }}</h2>
           <img src="{{ shelter.img ?? defaultShelterImg }}" alt="" />
