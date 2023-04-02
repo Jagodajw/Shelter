@@ -81,7 +81,10 @@ export class DocumentationComponent implements OnInit {
       .pipe(
         mergeMap((file: Blob) =>
           this.dialog
-            .open(FileReaderDialogComponent, { data: { file, fileName: name } })
+            .open(FileReaderDialogComponent, {
+              panelClass: ['modal-without-padding', 'input-70'],
+              data: { file, fileName: name },
+            })
             .afterClosed()
         )
       )

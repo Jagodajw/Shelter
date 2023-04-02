@@ -27,7 +27,7 @@
     </ng-container>
 
     <ng-container *ngIf="data.fileName.search('pdf') !== -1">
-      <pdf-viewer #viewerRef [src]="file" [render-text]="true" [show-all]="false" [original-size]="false"
+      <pdf-viewer #viewerRef [src]="file" [render-text]="true" [show-all]="true" [fit-to-page]="true"
         [page]="pageNumber" style="width: 100%; height: 100vh"
         (after-load-complete)="callBackPdfFn($event)"></pdf-viewer>
     </ng-container>
