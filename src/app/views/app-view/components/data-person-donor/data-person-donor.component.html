@@ -1,73 +1,141 @@
-<ng-container *ngIf="{personType: personType$ | async} as vm">
+<ng-container *ngIf="{ personType: personType$ | async } as vm">
   <div class="dataPerson" formGroupName="registerPeople">
     <h2>{{ "people.dataPerson" | translate }}</h2>
 
-    <app-button-filter [filters]="filtersPeople" formControlName="type_of_person"
-      (change)="onChangeSelect($event)"></app-button-filter>
+    <app-button-filter
+      [filters]="filtersPeople"
+      formControlName="type_of_person"
+      (change)="onChangeSelect($event)"
+    ></app-button-filter>
 
-    <div class="input-row"> 
+    <div class="input-row">
       <mat-form-field class="input-five">
-        <mat-label *ngIf="vm.personType === 'none' || vm.personType === 'private'">
+        <mat-label
+          *ngIf="vm.personType === 'none' || vm.personType === 'private'"
+        >
           {{ "people.personName" | translate }}
         </mat-label>
         <mat-label *ngIf="vm.personType === 'legal'">
           {{ "people.name" | translate }}
         </mat-label>
-        <input formControlName="name" matInput placeholder="{{ 'people.personName' | translate }}" />
+
+        <input
+          formControlName="name"
+          matInput
+          placeholder="{{ 'people.personName' | translate }}"
+          data-cy="person-name-field"
+        />
       </mat-form-field>
+
       <mat-form-field class="input-five">
         <mat-label>{{ "people.IDnumber" | translate }}</mat-label>
-        <input formControlName="id_number" [disabled]="blockInput" matInput
-          placeholder=" {{ 'people.IDnumber' | translate }}" />
+        <input
+          formControlName="id_number"
+          [disabled]="blockInput"
+          matInput
+          placeholder=" {{ 'people.IDnumber' | translate }}"
+          data-cy="person-id-number-field"
+        />
       </mat-form-field>
-      <mat-form-field class="input-five" *ngIf="vm.personType === 'private' || vm.personType === 'none'">
+
+      <mat-form-field
+        class="input-five"
+        *ngIf="vm.personType === 'private' || vm.personType === 'none'"
+      >
         <mat-label>{{ "people.pesel" | translate }}</mat-label>
 
-        <input formControlName="pesel" matInput placeholder="{{ 'people.pesel' | translate }}" />
+        <input
+          formControlName="pesel"
+          matInput
+          placeholder="{{ 'people.pesel' | translate }}"
+          data-cy="pesel-field"
+        />
       </mat-form-field>
 
       <mat-form-field *ngIf="vm.personType === 'legal'" class="input-five">
         <mat-label>{{ "people.nip" | translate }}</mat-label>
-        <input matInput formControlName="nip" placeholder="{{ 'people.nip' | translate }}" />
+        <input
+          matInput
+          formControlName="nip"
+          placeholder="{{ 'people.nip' | translate }}"
+          data-cy="nip-field"
+        />
       </mat-form-field>
 
       <mat-form-field class="input-five">
         <mat-label>{{ "people.email" | translate }}</mat-label>
-        <input formControlName="email" type="email" matInput placeholder="{{ 'people.email' | translate }}" />
+        <input
+          formControlName="email"
+          type="email"
+          matInput
+          placeholder="{{ 'people.email' | translate }}"
+          data-cy="email-field"
+        />
       </mat-form-field>
 
       <mat-form-field class="input-five">
         <mat-label>{{ "people.tel" | translate }}</mat-label>
         <span matPrefix>+48 &nbsp;</span>
-        <input formControlName="telephone" type="tel" matInput placeholder="{{ 'people.tel' | translate }}" />
+        <input
+          formControlName="telephone"
+          type="tel"
+          matInput
+          placeholder="{{ 'people.tel' | translate }}"
+          data-cy="telephone-field"
+        />
       </mat-form-field>
     </div>
 
     <div class="input-row">
       <mat-form-field class="input-five">
         <mat-label>{{ "people.adress" | translate }}</mat-label>
-        <input formControlName="adress" matInput placeholder="{{ 'people.adress' | translate }}" />
+        <input
+          formControlName="adress"
+          matInput
+          placeholder="{{ 'people.adress' | translate }}"
+          data-cy="address-field"
+        />
       </mat-form-field>
 
       <div class="inline input-five">
-        <app-city-autocomplete formControlName="city"> </app-city-autocomplete>
+        <app-city-autocomplete formControlName="city" data-cy="city-field">
+        </app-city-autocomplete>
       </div>
+
       <mat-form-field class="input-five">
         <mat-label>{{ "people.zip-code" | translate }}</mat-label>
-        <input formControlName="zip_code" matInput placeholder="{{ 'people.zip-code' | translate }}" />
+        <input
+          formControlName="zip_code"
+          matInput
+          placeholder="{{ 'people.zip-code' | translate }}"
+          data-cy="zip-code-field"
+        />
       </mat-form-field>
+
       <div class="inline input-five">
-        <app-community-autocomplete formControlName="commune"></app-community-autocomplete>
+        <app-community-autocomplete
+          formControlName="commune"
+          data-cy="person-donor-commune-field"
+        ></app-community-autocomplete>
       </div>
+
       <div class="inline input-five">
-        <app-province-autocomplete formControlName="province_id"></app-province-autocomplete>
+        <app-province-autocomplete
+          formControlName="province_id"
+          data-cy="province-field"
+        ></app-province-autocomplete>
       </div>
     </div>
     <div class="input-row">
       <mat-form-field class="input-full">
         <mat-label>{{ "pets.commentsRegister" | translate }}</mat-label>
-        <textarea formControlName="description" matInput rows="1" placeholder="{{ 'pets.comments' | translate }}">
-      </textarea>
+        <textarea
+          formControlName="description"
+          matInput
+          rows="1"
+          placeholder="{{ 'pets.comments' | translate }}"
+          data-cy="description-field"
+        ></textarea>
       </mat-form-field>
     </div>
   </div>

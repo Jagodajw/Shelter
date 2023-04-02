@@ -7,7 +7,9 @@
     <mat-dialog-content class="register__animals">
       <app-data-pet-register></app-data-pet-register>
 
-      <app-data-person-donor (personTypeEmit)="personType($event)"></app-data-person-donor>
+      <app-data-person-donor
+        (personTypeEmit)="personType($event)"
+      ></app-data-person-donor>
 
       <app-data-register></app-data-register>
 
@@ -15,7 +17,7 @@
         <app-button variant="cancelable" (clickEvent)="close()">
           {{ "action.cancel" | translate }}
         </app-button>
-        <app-button type="submit" variant="raised">
+        <app-button type="submit" variant="raised" data-cy="register-pet-btn">
           {{ "action.accept" | translate }}
         </app-button>
       </mat-dialog-actions>
