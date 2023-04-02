@@ -108,6 +108,7 @@ export class PetDetailComponent implements OnInit {
   public editButtonClick() {
     this.root.toggleEditMode();
   }
+  
   public saveEditButtonClick() {
     switch (this.tabGroup.selectedIndex) {
       case PetSteps.basicData:

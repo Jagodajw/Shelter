@@ -1,4 +1,4 @@
-import { Component, OnInit, Self } from '@angular/core';
+import { Component, OnInit, Self, Output, EventEmitter } from '@angular/core';
 import { FormControl, NgControl, Validators } from '@angular/forms';
 import { SpeciesResponse } from 'backend/src/views/DictionaryView';
 import { map, Observable, tap } from 'rxjs';
@@ -7,21 +7,29 @@ import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
 import { Select } from '../select/select';
 
-type ReturnValue = string | null | Select | SpeciesResponse;
+export type SpeciesAutocompleteReturnValue =
+  | string
+  | null
+  | Select
+  | SpeciesResponse;
 @Component({
   selector: 'app-species-autocomplete',
   templateUrl: './species-autocomplete.component.html',
   styleUrls: ['./species-autocomplete.component.scss'],
 })
 export class SpeciesAutocompleteComponent
-  extends ControlValueAccessorsAbstract<ReturnValue>
+  extends ControlValueAccessorsAbstract<SpeciesAutocompleteReturnValue>
   implements OnInit
 {
+  @Output() private change: EventEmitter<SpeciesAutocompleteReturnValue> =
+    new EventEmitter<SpeciesAutocompleteReturnValue>();
+
   public speciesList$!: Observable<Select[]>;
   public readonly control: FormControl = new FormControl(
     null,
     Validators.required
   );
+
   constructor(
     @Self() ngControl: NgControl,
     private readonly api: DictionaryService,
@@ -34,7 +42,11 @@ export class SpeciesAutocompleteComponent
     this.shelterChangeDetector();
     this.control.valueChanges.subscribe({
       next: (value) => {
-        if (value) this.value = value;
+        if ((this.value as any)?.ID === value?.ID) return;
+        if (value) {
+          this.value = value;
+          this.change.emit(value);
+        }
       },
     });
   }
@@ -71,7 +83,7 @@ export class SpeciesAutocompleteComponent
   }
 
   private isValueAsSpeciesResponse(
-    value: ReturnValue
+    value: SpeciesAutocompleteReturnValue
   ): value is SpeciesResponse {
     return (value as SpeciesResponse)?.species !== undefined;
   }

@@ -11,7 +11,10 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { PeopleResponse } from 'backend/src/views/PeopleView';
 import { Observable } from 'rxjs';
-import { DataPersonActionPopupComponent } from 'src/app/views/app-view/components/data-person-action-popup/data-person-action-popup.component';
+import {
+  DataPersonActionPopupComponent,
+  DataPersonPopupData,
+} from 'src/app/views/app-view/components/data-person-action-popup/data-person-action-popup.component';
 import { PeopleRootService } from '../../people-root.service';
 
 @Component({
@@ -35,11 +38,14 @@ export class PeopleTableComponent implements OnInit {
     new EventEmitter<number>();
   public expandedElement!: PeopleResponse | null;
   public peopleTable = new MatTableDataSource<PeopleResponse>([]);
+  public readonly status$: Observable<boolean>;
   constructor(
     public readonly router: Router,
     public root: PeopleRootService,
     public dialog: MatDialog
-  ) {}
+  ) {
+    this.status$ = this.root.status$.asObservable();
+  }
 
   public displayedColumns: string[] = [
     'name',
@@ -53,10 +59,15 @@ export class PeopleTableComponent implements OnInit {
   ];
   ngOnInit(): void {}
 
-  public viewPerson(): void {
+  public editPerson(peopleId: number): void {
+    const data: DataPersonPopupData = {
+      status$: this.status$,
+      peopleId,
+    };
     this.dialog.open(DataPersonActionPopupComponent, {
       panelClass: ['input-70', 'modal-without-padding'],
       disableClose: true,
+      data,
     });
   }
 

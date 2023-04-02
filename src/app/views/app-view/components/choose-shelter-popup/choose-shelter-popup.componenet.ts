@@ -25,7 +25,6 @@ export class ChooseShelterPopupComponenet implements OnInit {
   ngOnInit(): void {}
 
   setShelter(shelter: Shelters): void {
-    // przekazje inforamcje do serwisu
     this.dialogRef.close(shelter);
   }
 }

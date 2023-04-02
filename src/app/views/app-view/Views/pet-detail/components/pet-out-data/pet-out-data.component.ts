@@ -59,8 +59,18 @@ export class PetOutDataComponent implements OnInit {
     this.root.isEditModeObservable$
       .pipe(untilDestroyed(this))
       .subscribe((isEditMode: boolean) => {
-        if (isEditMode) this.detailPetsOutForm.enable();
-        else this.detailPetsOutForm.disable();
+        if (isEditMode) {
+          this.detailPetsOutForm.enable();
+          this.detailPetsOutForm
+            .get('dataPersonTakeAway.type_of_person')
+            ?.disable();
+          this.detailPetsOutForm
+            .get('dataPetOut.name')
+            ?.disable({ emitEvent: false });
+          this.detailPetsOutForm
+            .get('dataPetOut.species')
+            ?.disable({ emitEvent: false });
+        } else this.detailPetsOutForm.disable();
       });
   }
 
@@ -70,7 +80,7 @@ export class PetOutDataComponent implements OnInit {
         ID: [],
         name: ['', Validators.required],
         species: ['', Validators.required],
-        typeAdoption: ['', Validators.required],
+        type_adoption: ['', Validators.required],
         date_of_adoption: [, Validators.required],
         introduced_employees_id: ['', Validators.required],
         accepted_employees_id: ['', Validators.required],
@@ -79,6 +89,7 @@ export class PetOutDataComponent implements OnInit {
       }),
       dataPersonTakeAway: this._form.group({
         ID: [],
+        type_of_person: [{ value: 'private', disabled: true }],
         name: ['', Validators.required],
         id_number: ['', [Validators.minLength(9), Validators.maxLength(9)]],
         pesel: [null, Validators.pattern('[0-9]{11}')],
@@ -90,15 +101,20 @@ export class PetOutDataComponent implements OnInit {
         zip_code: [''],
         commune: ['', Validators.required],
         province_id: ['', Validators.required],
-        comments: [''],
+        description: [''],
       }),
     });
   }
 
   public editPetAdopted(): void {
-    this.root.editAdoptPetData(this.detailPetsOutForm.value).subscribe({
-      next: () => this.detailPetsOutForm.disable(),
-      error: (err) => this.detailPetsOutForm.disable(),
-    });
+    this.root
+      .editAdoptPetData(
+        this.detailPetsOutForm.value,
+        this.activatedRoute.snapshot.params['id']
+      )
+      .subscribe({
+        next: () => this.detailPetsOutForm.disable(),
+        error: (err) => this.detailPetsOutForm.disable(),
+      });
   }
 }

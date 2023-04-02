@@ -16,35 +16,20 @@
       <mat-icon>keyboard_arrow_left</mat-icon>
     </button>
     <span> {{ pageNumber }} / {{ numberOfPages }} </span>
-    <button
-      mat-icon-button
-      [disabled]="pageNumber + 1 > numberOfPages"
-      (click)="nextPage()"
-    >
+    <button mat-icon-button [disabled]="pageNumber + 1 > numberOfPages" (click)="nextPage()">
       <mat-icon>keyboard_arrow_right</mat-icon>
     </button>
   </div>
 
   <mat-dialog-content>
-    <ng-container *ngIf="data.file?.type !== 'application/pdf'">
-      <img
-        class="w-full max-w-full"
-        [src]="file | safe : 'url'"
-        alt="attachment"
-      />
+    <ng-container *ngIf="data.fileName.search('pdf') === -1">
+      <img class="size" [src]="file | safe : 'url'" alt="attachment" />
     </ng-container>
 
-    <ng-container *ngIf="data.file?.type === 'application/pdf'">
-      <pdf-viewer
-        #viewerRef
-        [src]="file"
-        [render-text]="true"
-        [show-all]="false"
-        [original-size]="false"
-        [page]="pageNumber"
-        style="width: 100%; height: 100vh"
-        (after-load-complete)="callBackPdfFn($event)"
-      ></pdf-viewer>
+    <ng-container *ngIf="data.fileName.search('pdf') !== -1">
+      <pdf-viewer #viewerRef [src]="file" [render-text]="true" [show-all]="false" [original-size]="false"
+        [page]="pageNumber" style="width: 100%; height: 100vh"
+        (after-load-complete)="callBackPdfFn($event)"></pdf-viewer>
     </ng-container>
   </mat-dialog-content>
 </main>

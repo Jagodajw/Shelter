@@ -117,9 +117,9 @@ export class PetService extends ApiService {
   public editAdoptPetData(model: {
     dataPetOut: EditAnimalAdoptionRequest;
     dataPersonTakeAway: RegisterPersonEditRequest;
-  }): Observable<AdoptionResponse> {
+  }, animalId: string): Observable<AdoptionResponse> {
     return this.http.put<AdoptionResponse>(
-      `${this.rootUrl}/adoptAnimal`,
+      `${this.rootUrl}/adoptAnimal/${animalId}`,
       model
     );
   }

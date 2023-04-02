@@ -1,5 +1,5 @@
-<mat-button-toggle-group class="btn" [disabled]="disabled" (change)="onChange($event)" [value]="initialValue">
+<mat-button-toggle-group class="btn" [disabled]="isDisabled" (change)="onChange($event)" [value]="value">
   <mat-button-toggle class="btn__toggle" *ngFor="let filter of filters" [value]="filter.id">{{filter.name|
     translate}}
   </mat-button-toggle>
-</mat-button-toggle-group>
+</mat-button-toggle-group> 

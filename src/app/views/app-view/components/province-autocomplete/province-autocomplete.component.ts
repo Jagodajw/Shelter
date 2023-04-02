@@ -12,13 +12,6 @@ type ReturnValue = string | null | Select | ProvinceResponse;
   selector: 'app-province-autocomplete',
   templateUrl: './province-autocomplete.component.html',
   styleUrls: ['./province-autocomplete.component.scss'],
-  // providers: [
-  //   {
-  //     provide: NG_VALUE_ACCESSOR,
-  //     useExisting: forwardRef(() => ProvinceAutocompleteComponent),
-  //     multi: true,
-  //   },
-  // ],
 })
 export class ProvinceAutocompleteComponent
   extends ControlValueAccessorsAbstract<ReturnValue>

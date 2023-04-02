@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AnimalDetailResponse } from 'backend/src/views/AnimalsView';
 import { PetDetailService } from '../../pet-detail.service';
+import { Observable } from 'rxjs';
 
 @UntilDestroy()
 @Component({
@@ -19,6 +20,7 @@ import { PetDetailService } from '../../pet-detail.service';
 })
 export class PetBasicDataComponent implements OnInit {
   public detailPetsForm!: FormGroup;
+  public isEditMode$: Observable<boolean>;
 
   @Output() private updateAvatar: EventEmitter<FormData | null> =
     new EventEmitter<FormData | null>();
@@ -58,11 +60,13 @@ export class PetBasicDataComponent implements OnInit {
     private readonly cd: ChangeDetectorRef
   ) {
     this.buildForm();
-    this.detailPetsForm.disable();
+    this.detailPetsForm.disable({ emitEvent: false });
+
+    this.isEditMode$ = this.root.isEditModeObservable$;
   }
 
   ngOnInit(): void {
-    this.root.isEditModeObservable$
+    this.isEditMode$
       .pipe(untilDestroyed(this))
       .subscribe((isEditMode: boolean) => {
         const dateVaccination = this.detailPetsForm
@@ -74,7 +78,7 @@ export class PetBasicDataComponent implements OnInit {
           ?.get('date_sterilization');
 
         if (isEditMode) {
-          this.detailPetsForm.enable();
+          this.detailPetsForm.enable({ emitEvent: false });
           this.detailPetsForm
             .get('registerAnimal')
             ?.get('id_number')
@@ -90,7 +94,7 @@ export class PetBasicDataComponent implements OnInit {
             dateVaccination?.disable();
           }
         } else {
-          this.detailPetsForm.disable();
+          this.detailPetsForm.disable({ emitEvent: false });
         }
       });
 
@@ -133,6 +137,7 @@ export class PetBasicDataComponent implements OnInit {
       registerPeople: this._form.group({
         ID: [],
         shelters_id: [],
+        type_of_person: [],
         name: ['', Validators.required],
         id_number: ['', [Validators.minLength(9), Validators.maxLength(9)]],
         pesel: [null, Validators.pattern('[0-9]{11}')],
@@ -156,15 +161,15 @@ export class PetBasicDataComponent implements OnInit {
         type_of_acceptance: [''],
         introduced_employees_id: [''],
         accepted_employees_id: [''],
-        commentsRegister: [''],
+        description: [''],
       }),
     });
   }
 
   public editPet(): void {
     this.root.editPet(this.detailPetsForm.value).subscribe({
-      next: () => this.detailPetsForm.disable(),
-      error: () => this.detailPetsForm.disable(),
+      next: () => this.detailPetsForm.disable({ emitEvent: false }),
+      error: () => this.detailPetsForm.disable({ emitEvent: false }),
     });
   }
 }

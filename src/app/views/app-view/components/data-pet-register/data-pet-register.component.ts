@@ -5,9 +5,18 @@ import {
   FormGroupDirective,
 } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { map, mergeMap, Observable, of } from 'rxjs';
+import {
+  BehaviorSubject,
+  filter,
+  map,
+  mergeMap,
+  Observable,
+  of,
+  tap,
+} from 'rxjs';
 import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from '../select/select';
+import { SpeciesAutocompleteReturnValue } from '../species-autocomplete/species-autocomplete.component';
 
 @Component({
   selector: 'app-data-pet-register',
@@ -24,25 +33,39 @@ import { Select } from '../select/select';
 export class DataPetRegisterComponent implements OnInit {
   public sizeList: Select[] = sizeList;
   public genderList: Select[] = genderList;
-  public speciesId!: Observable<number | undefined>;
+  public speciesId$: BehaviorSubject<number | undefined> = new BehaviorSubject<
+    number | undefined
+  >(undefined);
+  // private hasBeenSpeciesFirstChanges: boolean = false;
 
   constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
   ngOnInit(): void {
-    this.speciesId =
-      (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
-        .get('species')
-        ?.valueChanges.pipe(
-          map((species: Select | null | string) => {
-            (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
-              .get('breed')
-              ?.patchValue('');
-            return ((species as Select)?.ID || undefined) as number | undefined;
-          })
-        ) ?? of(undefined);
+    // this.speciesId =
+    //   this.formGroupDirective.control
+    //     .get('registerAnimal.species')
+    //     ?.valueChanges.pipe(
+    //       map((species: Select | null | string) => {
+    //         console.log(species);
+    //         (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
+    //           .get('breed')
+    //           ?.patchValue('');
+    //         return ((species as Select)?.ID || undefined) as number | undefined;
+    //       })
+    //     ) ?? of(undefined);
   }
 
-  Vaccination({ checked }: MatCheckboxChange): void {
+  public setSpeciesId(species: SpeciesAutocompleteReturnValue): void {
+    console.log('ASDFSDAFSD');
+    (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
+      .get('breed')
+      ?.patchValue('');
+    this.speciesId$.next(
+      ((species as Select)?.ID || undefined) as number | undefined
+    );
+  }
+
+  public vaccination({ checked }: MatCheckboxChange): void {
     if (checked) {
       (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
         .get('date_vaccination')

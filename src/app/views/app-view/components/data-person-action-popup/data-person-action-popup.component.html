@@ -1,16 +1,24 @@
 <div class="popup">
-    <form *ngIf="1 === 1" [formGroup]="dataPersonTakeAwayEdit">
+    <form [formGroup]="dataPersonTakeAwayEdit" (submit)="updateDataPerson()">
         <div class="popup__container-title">
             <h1 mat-dialog-title>{{'people.editSelectedPosition' | translate}}</h1>
         </div>
         <mat-dialog-content class="popup__container">
-            <app-data-person-take-away></app-data-person-take-away>
+            <ng-container *ngIf="data.status$ | async; else otherBlock">
+                <app-data-person-take-away></app-data-person-take-away>
+            </ng-container>
+
+            <ng-template #otherBlock>
+                <app-data-person-donor></app-data-person-donor>
+            </ng-template>
+
+
             <div class="popup__container-btn">
                 <app-button type="button" variant="cancelable" mat-dialog-close>
                     {{ 'action.cancel' | translate }}
                 </app-button>
                 <app-button type="submit" variant="raised">
-                    {{ 'action.edit' | translate }}
+                    {{ 'action.save' | translate }}
                 </app-button>
             </div>
         </mat-dialog-content>

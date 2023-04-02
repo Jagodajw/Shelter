@@ -15,9 +15,9 @@ import { PeopleRootService } from './people-root.service';
 export class PeopleComponent implements OnInit {
   public readonly status$: Observable<boolean>;
   public readonly people$: Observable<PeopleResponse[]>;
-  public isLoading$: Observable<boolean>;
-  public isBlackList$: Observable<boolean>;
-  public search = new FormControl();
+  public readonly isLoading$: Observable<boolean>;
+  public readonly isBlackList$: Observable<boolean>;
+  public readonly search = new FormControl();
 
   constructor(
     public dialog: MatDialog,
