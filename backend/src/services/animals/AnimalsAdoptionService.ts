@@ -118,7 +118,7 @@ export class AnimalsAdoptionService {
       );
 
       const personRespnse = await tx.people.update({
-        where: { ID: adoptionRequest.ID },
+        where: { ID: personRequest.ID },
         data: {
           type_of_person: personRequest.type_of_person,
           name: personRequest.name,
@@ -143,7 +143,7 @@ export class AnimalsAdoptionService {
       );
 
       const adoptionResponse = await tx.adoption.update({
-        where: { ID: personRequest.ID },
+        where: { animals_id: animalId },
         data: {
           date_of_adoption: adoptionRequest.date_of_adoption,
           description: adoptionRequest.description,
@@ -187,7 +187,10 @@ export class AnimalsAdoptionService {
 
       if (dataPersonTakeAway === null) throw new Error('PERSON_DOESNT_EXIST');
 
-      return { dataPetOut, dataPersonTakeAway };
+      return {
+        dataPetOut: { ...dataPetOut, type_adoption: dataPetOut.typeAdoption },
+        dataPersonTakeAway,
+      };
     });
   }
 }
