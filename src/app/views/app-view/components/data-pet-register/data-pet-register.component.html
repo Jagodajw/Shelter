@@ -18,13 +18,14 @@
       <span class="inline input-third">
         <app-species-autocomplete
           formControlName="species"
+          (change)="setSpeciesId($event)"
           data-cy="species-field"
         ></app-species-autocomplete>
       </span>
 
       <span class="inline input-third">
         <app-breed-autocomplete
-          [speciesId]="speciesId | async"
+          [speciesId]="speciesId$ | async"
           formControlName="breed"
           data-cy="breed-field"
         ></app-breed-autocomplete>
@@ -103,7 +104,7 @@
 
       <div class="input-third">
         <mat-checkbox
-          (change)="Vaccination($event)"
+          (change)="vaccination($event)"
           class="dataPet__checkbox-vaccination"
           formControlName="vaccination"
           data-cy="vaccination-field"

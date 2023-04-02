@@ -152,7 +152,14 @@ export class PetsRootService {
   public getAnimalsReleaseControl(): void {
     const alertValue: boolean | undefined = this.alertControl.value[0];
     if (alertValue === undefined || alertValue === false) {
-      this.refreschGet().subscribe();
+      this.api
+        .getPets('adopted')
+        .pipe(
+          tap((petsData: AnimalTableResponse[]) => {
+            this.pets$.next(petsData);
+          })
+        )
+        .subscribe();
       return;
     }
 

@@ -67,3 +67,4 @@ export class ErrorHandlerInteceptorService implements HttpInterceptor {
     this.snackBarMessage.showMessageSnackBar(errorMessage);
   }
 }
+

@@ -30,8 +30,8 @@ export class PetDetailService {
   public editAdoptPetData(model: {
     dataPetOut: EditAnimalAdoptionRequest;
     dataPersonTakeAway: RegisterPersonEditRequest;
-  }): Observable<AdoptionResponse> {
-    return this.api.editAdoptPetData(model).pipe(
+  }, animalId: string): Observable<AdoptionResponse> {
+    return this.api.editAdoptPetData(model, animalId).pipe(
       tap(() => {
         this.isEditMode$.next(false);
       })

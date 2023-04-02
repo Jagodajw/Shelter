@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { ButtonModule } from '../button/button.module';
 import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DataPersonDonorModule } from '../data-person-donor/data-person-donor.module';
 
 @NgModule({
   declarations: [DataPersonActionPopupComponent],
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TranslateModule,
     ButtonModule,
     MatDialogModule,
+    DataPersonDonorModule,
   ],
 })
 export class DataPersonActionPopupModule {}

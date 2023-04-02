@@ -17,13 +17,6 @@ import { Select } from '../select/select';
   selector: 'app-autocomplete',
   templateUrl: './autocomplete.component.html',
   styleUrls: ['./autocomplete.component.scss'],
-  // providers: [
-  //   {
-  //     provide: NG_VALUE_ACCESSOR,
-  //     useExisting: forwardRef(() => AutocompleteComponent),
-  //     multi: true,
-  //   },
-  // ],
 })
 export class AutocompleteComponent
   extends ControlValueAccessorsAbstract<Select | string | null>

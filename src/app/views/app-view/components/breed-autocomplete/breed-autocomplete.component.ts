@@ -1,6 +1,9 @@
 import { Component, Input, OnInit, Self } from '@angular/core';
 import { FormControl, NgControl } from '@angular/forms';
-import { BreedListResponse, BreedResponse } from 'backend/src/views/DictionaryView';
+import {
+  BreedListResponse,
+  BreedResponse,
+} from 'backend/src/views/DictionaryView';
 import { map, Observable, Subscription, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';

@@ -51,7 +51,8 @@ export class PopupOutAnimalComponent implements OnInit {
         zip_code: [''],
         commune: [''],
         province_id: [''],
-        comments: [''],
+        description: [''],
+        type_of_person: [{ value: 'private', disabled: true }],
       }),
     });
   }

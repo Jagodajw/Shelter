@@ -55,6 +55,7 @@ export class PopupRegisterComponent implements OnInit {
         avatar: [],
       }),
       registerPeople: this._form.group({
+        type_of_person: ['private'],
         name: ['', Validators.required],
         id_number: ['', [Validators.minLength(9), Validators.maxLength(9)]],
         pesel: [null, Validators.pattern('[0-9]{11}')],
@@ -76,7 +77,7 @@ export class PopupRegisterComponent implements OnInit {
         type_of_acceptance: [''],
         introduced_employees_id: [''],
         accepted_employees_id: [''],
-        commentsRegister: [''],
+        description: [''],
       }),
     });
   }

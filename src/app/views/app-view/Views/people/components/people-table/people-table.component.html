@@ -49,8 +49,8 @@
             </button>
 
             <mat-menu #tableMenuAction="matMenu" xPosition="before">
-                <button mat-menu-item (click)="viewPerson()">
-                    <mat-icon> edit</mat-icon>
+                <button mat-menu-item (click)="editPerson(peopleRowModel.ID)">
+                    <mat-icon>edit</mat-icon>
                     {{ 'people.editSelectedPosition' | translate }}
                 </button>
                 <button mat-menu-item (click)="addToBlackList(peopleRowModel.ID)">

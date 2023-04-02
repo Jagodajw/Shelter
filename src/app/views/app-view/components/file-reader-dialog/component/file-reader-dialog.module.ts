@@ -5,7 +5,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
-import { SanitizerModule } from 'src/app/sanitizer/sanitizer.module';
+import { SanitizerModule } from 'src/app/pipes/sanitizer/sanitizer.module';
 
 import { FileReaderDialogComponent } from './file-reader-dialog.component';
 

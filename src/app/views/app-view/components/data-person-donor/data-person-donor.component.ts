@@ -1,6 +1,7 @@
 import {
   Component,
   EventEmitter,
+  Input,
   OnInit,
   Output,
   SkipSelf,
@@ -11,7 +12,7 @@ import {
   FormGroupDirective,
 } from '@angular/forms';
 import { ButtonFilter } from '../button-filter/button-filter';
-import { Select } from '../select/select';
+import { Observable, map, of, startWith, tap } from 'rxjs';
 
 type PersonType = 'private' | 'legal' | 'none';
 
@@ -28,14 +29,16 @@ type PersonType = 'private' | 'legal' | 'none';
   ],
 })
 export class DataPersonDonorComponent implements OnInit {
+  @Input() public isEditMode: boolean = false;
   @Output() personTypeEmit: EventEmitter<PersonType> =
     new EventEmitter<PersonType>();
   public personType: PersonType = 'private';
   public blockInput: boolean = false;
+  public personType$?: Observable<PersonType> = of('private');
   constructor(private readonly formGroupDirective: FormGroupDirective) {}
 
   ngOnInit(): void {
-    this.personTypeEmit.emit(this.personType);
+    // this.personTypeEmit.emit(this.personType);
     (this.formGroupDirective.control.get('registerPeople') as FormGroup)
       .get('city')
       ?.valueChanges.subscribe((city) => {
@@ -43,7 +46,24 @@ export class DataPersonDonorComponent implements OnInit {
           .get('zip_code')
           ?.patchValue(city.zip_code);
       });
+
+    this.personType$ = this.getPersonType$;
   }
+
+  private get getPersonType$(): Observable<PersonType> | undefined {
+    const typeOfPersonControl = (
+      this.formGroupDirective.control.get('registerPeople') as FormGroup
+    ).get('type_of_person');
+
+    return typeOfPersonControl?.valueChanges.pipe(
+      startWith(typeOfPersonControl.value),
+      tap(
+        (personType: PersonType) => (this.blockInput = personType === 'legal')
+      ),
+      map((data) => data as PersonType)
+    );
+  }
+
   public filtersPeople: ButtonFilter<PersonType>[] = [
     { id: 'private', name: 'typePerson.private' },
     { id: 'legal', name: 'typePerson.legal' },
@@ -51,12 +71,12 @@ export class DataPersonDonorComponent implements OnInit {
   ];
 
   public onChangeSelect(event: PersonType): void {
-    this.personTypeEmit.emit(event);
-    this.personType = event;
-    if (this.personType === 'legal') {
-      this.blockInput = true;
-    } else {
-      this.blockInput = false;
-    }
+    // this.personTypeEmit.emit(event);
+    // this.personType = event;
+    // if (this.personType === 'legal') {
+    //   this.blockInput = true;
+    // } else {
+    //   this.blockInput = false;
+    // }
   }
 }

@@ -1,6 +1,5 @@
 import { Component, OnInit, SkipSelf } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
-import { Select } from '../select/select';
 
 @Component({
   selector: 'app-data-pet-out',
