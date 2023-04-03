@@ -13,14 +13,7 @@
           data-cy="shelter-item"
         >
           <h2>{{ shelter.name }}</h2>
-          <img
-            [src]="
-              shelter.img === null
-                ? defaultShelterImg
-                : (shelter.name | getImgFile)
-            "
-            alt=""
-          />
+          <img [src]="shelter.name | getImgFile" alt="" />
         </div>
       </li>
     </ul>
