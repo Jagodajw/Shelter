@@ -1,10 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {
-  BreedListResponse,
-  BreedResponse,
-} from 'backend/src/views/DictionaryView';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { BreedListResponse } from 'backend/src/views/DictionaryView';
 import { DictionaryService } from 'src/app/views/app-view/services/api/dictionary.service';
 
 interface Data {
@@ -47,7 +44,7 @@ export class SettingsBreedPopupComponent implements OnInit {
     if (this.data.model) {
       this.breedForm.get('species')?.disable();
       this.root
-        .editBreed(this.data.model.ID.toString(), this.breedForm.value)
+        .editBreed(this.data.model.ID.toString(), this.breedForm.getRawValue())
         .subscribe({
           next: () => this.ref.close({ fetchData: true }),
         });

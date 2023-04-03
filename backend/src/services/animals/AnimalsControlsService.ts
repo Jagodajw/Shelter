@@ -73,9 +73,13 @@ export class AnimalsControlsService {
     });
   }
 
-  public static async getNumberOfAnimalsReleaseControl(): Promise<number> {
+  public static async getNumberOfAnimalsReleaseControl(
+    shelterId: string
+  ): Promise<number> {
     const adoption = await prisma.adoption.findMany({
-      where: { animals: { archived: false, adopted: true } },
+      where: {
+        animals: { archived: false, adopted: true, shelters_id: shelterId },
+      },
     });
 
     return (await this.getAnimalsListToReleaseControl(adoption)).length;
@@ -96,7 +100,7 @@ export class AnimalsControlsService {
           select: {
             ID: true,
             name: true,
-            species: { select: { species: true } },
+            species: true,
             breed: { select: { breed: true } },
             gender: true,
             commune: { select: { commune: true } },
@@ -115,6 +119,7 @@ export class AnimalsControlsService {
       (response: any) => ({
         ...response.animals,
         species: response.animals?.species?.species ?? '',
+        species_object: response.species ?? null,
         breed: response.animals?.breed?.breed ?? '',
         commune: response.animals?.commune?.commune ?? '',
         area: response.animals?.area?.area ?? '',

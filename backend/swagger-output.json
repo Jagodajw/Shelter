@@ -487,12 +487,12 @@
         "description": "",
         "parameters": [
           {
-            "name": "authorization",
+            "name": "shelters_id",
             "in": "header",
             "type": "string"
           },
           {
-            "name": "shelters_id",
+            "name": "authorization",
             "in": "header",
             "type": "string"
           }
