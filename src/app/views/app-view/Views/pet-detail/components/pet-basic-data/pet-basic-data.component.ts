@@ -9,8 +9,8 @@ import {
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { AnimalDetailResponse } from 'backend/src/views/AnimalsView';
-import { PetDetailService } from '../../pet-detail.service';
 import { Observable } from 'rxjs';
+import { PetDetailService } from '../../pet-detail.service';
 
 @UntilDestroy()
 @Component({
@@ -49,6 +49,13 @@ export class PetBasicDataComponent implements OnInit {
       .get('registerPeople')
       ?.get('province_id')
       ?.patchValue(basicData.registerPeople?.province);
+
+    this.detailPetsForm
+      .get('register.date_sterilization')
+      ?.patchValue(basicData.registerAnimal?.date_sterilization);
+    this.detailPetsForm
+      .get('register.sterilization')
+      ?.patchValue(basicData.registerAnimal?.sterilization);
     this.cd.markForCheck();
   }
 
@@ -173,7 +180,7 @@ export class PetBasicDataComponent implements OnInit {
   }
 
   public editPet(): void {
-    this.root.editPet(this.detailPetsForm.value).subscribe({
+    this.root.editPet(this.detailPetsForm.getRawValue()).subscribe({
       next: () => this.detailPetsForm.disable({ emitEvent: false }),
       error: () => this.detailPetsForm.disable({ emitEvent: false }),
     });
