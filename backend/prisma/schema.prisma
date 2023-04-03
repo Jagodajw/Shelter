@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -347,7 +347,7 @@ model Document {
   name        String
   file        Bytes
   createAt    DateTime @default(now())
-  animals_id  String?  @default("")
+  animals_id  String?  @db.Uuid 
   shelters_id String
 
   shelters Shelters? @relation(fields: [shelters_id], references: [ID])
