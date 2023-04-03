@@ -16,11 +16,27 @@
       #5b86e4 100%,
       rgba(193, 193, 200, 1) 60%
     );
-    &__logo {
-      font-size: 1.3rem;
-      color: azure;
-      margin-left: 40px;
+    @media screen and (min-width: 1280px) {
+      &__wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &--logo {
+          font-size: 1.3rem;
+          color: azure;
+          margin-left: 40px;
+        }
+      }
     }
+    @media screen and (max-width: 1279px) {
+      &__wrapper {
+        &--logo {
+          font-size: 1rem;
+          color: azure;
+        }
+      }
+    }
+
     &__link {
       & li {
         display: inline-block;

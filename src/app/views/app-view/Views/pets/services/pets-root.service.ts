@@ -20,6 +20,7 @@ import { PetService } from '../../../services/api/pet.service';
 import { ShelterService } from '../../../services/shelter.service';
 import { PopupOutAnimalComponent } from '../components/popup-out-animal/popup-out-animal.component';
 import { PopupRegisterComponent } from '../components/popup-register/popup-register.component';
+import { delay } from 'rxjs/operators';
 
 interface ChangesParams {
   status: AnimalStatus;
@@ -90,7 +91,6 @@ export class PetsRootService {
             return this.api.getPetsByQuery(searchQuery, status);
           return this.api.getPets(status);
         }),
-
         untilDestroyed(this)
       )
       .subscribe({
@@ -140,18 +140,24 @@ export class PetsRootService {
   public getAnimalsToVaccinationChecks(): void {
     const alertValue: boolean | undefined = this.alertControl.value[0];
     if (alertValue === undefined || alertValue === false) {
-      this.refreschGet().subscribe();
+      this.refreschGet().subscribe({
+        next: () => this.isLoading$.next(false),
+        error: () => this.isLoading$.next(false),
+      });
       return;
     }
-
+    this.isLoading$.next(true);
     this.api.getAnimalsToVaccinationChecks().subscribe({
-      next: (pets: AnimalTableResponse[]) => this.pets$.next(pets),
+      next: (pets: AnimalTableResponse[]) => {
+        this.pets$.next(pets), this.isLoading$.next(false);
+      },
     });
   }
 
   public getAnimalsReleaseControl(): void {
     const alertValue: boolean | undefined = this.alertControl.value[0];
     if (alertValue === undefined || alertValue === false) {
+      this.isLoading$.next(true);
       this.api
         .getPets('adopted')
         .pipe(
@@ -159,7 +165,10 @@ export class PetsRootService {
             this.pets$.next(petsData);
           })
         )
-        .subscribe();
+        .subscribe({
+          next: () => this.isLoading$.next(false),
+          error: () => this.isLoading$.next(false),
+        });
       return;
     }
 

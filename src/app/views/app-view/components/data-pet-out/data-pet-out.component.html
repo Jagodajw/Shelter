@@ -10,7 +10,8 @@
     </div>
 
     <div class="input-quarter">
-      <app-type-adoption-autocomplete formControlName="type_adoption" placeholder="pets.out.type">
+      <app-type-adoption-autocomplete data-cy="type-adoption-field" formControlName="type_adoption"
+        placeholder="pets.out.type">
       </app-type-adoption-autocomplete>
     </div>
     <div class="input-quarter">
@@ -20,11 +21,11 @@
 
   <div class="input-row">
     <div class="input-quarter">
-      <app-employees-autocomplete formControlName="introduced_employees_id"
+      <app-employees-autocomplete formControlName="introduced_employees_id" data-cy="introduced-employees-field"
         placeholder="pets.introduced"></app-employees-autocomplete>
     </div>
     <div class="input-quarter">
-      <app-employees-autocomplete formControlName="accepted_employees_id"
+      <app-employees-autocomplete formControlName="accepted_employees_id" data-cy="accepted-employees-field"
         placeholder="pets.accepted"></app-employees-autocomplete>
     </div>
 

@@ -31,6 +31,12 @@ export class PetBasicDataComponent implements OnInit {
       ...basicData,
       registerAnimal: { ...basicData.registerAnimal, avatar: null },
     });
+
+    this.detailPetsForm
+      .get('registerPeople')
+      ?.get('zip_code')
+      ?.patchValue(basicData.registerPeople?.city?.zip_code);
+
     this.detailPetsForm
       .get('register')
       ?.get('accepted_employees_id')

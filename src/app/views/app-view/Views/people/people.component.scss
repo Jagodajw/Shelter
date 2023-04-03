@@ -65,6 +65,12 @@
       font-size: 28px;
       align-items: center;
     }
+
+    ::ng-deep {
+      .mat-elevation-z8 {
+        box-shadow: none;
+      }
+    }
   }
   .pets {
     width: 100%;

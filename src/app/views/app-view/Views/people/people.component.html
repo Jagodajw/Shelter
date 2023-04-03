@@ -6,7 +6,7 @@
             </h1>
 
             <div class="toggle-item-container" (click)="togglePeopleView()"
-            [ngClass]="(status$ | async) ? ''  : 'toggle-item-container-animated' ">
+                [ngClass]="(status$ | async) ? ''  : 'toggle-item-container-animated' ">
                 <div class="toggle-item-2">{{"people.bringing" | translate}}</div>
                 <div class="toggle-item-2">{{"people.takeAway" | translate}}</div>
             </div>
@@ -21,12 +21,12 @@
         </span>
     </div>
 
-    <div class="people_container-table">
+    <div style="overflow-x:auto;" class="people_container-table">
         <ng-container *ngIf="{people:people$ |async, isLoading: isLoading$ | async} as vm">
-            <app-people-table *ngIf="vm.people?.length && vm.isLoading===false; else loadingView" [people]="people$ | async" (addToBlackListEmitter)="addToBlackList($event)"
-             ></app-people-table>
-            <ng-template #loadingView> <app-empty-data  [isLoading]="vm.isLoading"></app-empty-data></ng-template>
-          </ng-container>
+            <app-people-table *ngIf="vm.people?.length && vm.isLoading===false; else loadingView"
+                [people]="people$ | async" (addToBlackListEmitter)="addToBlackList($event)"></app-people-table>
+            <ng-template #loadingView> <app-empty-data [isLoading]="vm.isLoading"></app-empty-data></ng-template>
+        </ng-container>
     </div>
 
 

@@ -6,6 +6,7 @@ import {
   BehaviorSubject,
   catchError,
   combineLatest,
+  filter,
   map,
   mergeMap,
   Observable,
@@ -14,6 +15,10 @@ import {
 } from 'rxjs';
 import { PeopleService } from '../../services/api/people.service';
 import { ShelterService } from '../../services/shelter.service';
+import {
+  DataPersonActionPopupComponent,
+  DataPersonPopupData,
+} from '../../components/data-person-action-popup/data-person-action-popup.component';
 
 interface ChangesParams {
   status: PeopleStatus;
@@ -105,5 +110,27 @@ export class PeopleRootService {
 
   private getPeopleStatus(status: boolean): PeopleStatus {
     return status ? 'moving' : 'receiving';
+  }
+
+  public editPeople(peopleId: number): void {
+    const data: DataPersonPopupData = {
+      status$: this.status$,
+      peopleId,
+    };
+    this.dialog
+      .open(DataPersonActionPopupComponent, {
+        panelClass: ['input-70', 'modal-without-padding'],
+        disableClose: true,
+        data,
+      })
+      .afterClosed()
+      .pipe(
+        filter(
+          (data: { fetchData: boolean } | undefined) =>
+            data?.fetchData !== undefined
+        ),
+        mergeMap(()=>this.refreschGet(this.isBlackList$.value))
+      )
+      .subscribe();
   }
 }

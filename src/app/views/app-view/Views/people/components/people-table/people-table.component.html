@@ -55,7 +55,7 @@
                 </button>
                 <button mat-menu-item (click)="addToBlackList(peopleRowModel.ID)">
                     <mat-icon> pan_tool</mat-icon>
-                    {{ peopleRowModel.black_list ? 'people.deleteToBlackList' : 'people.addToBlackList' | translate }}
+                    {{ (peopleRowModel.black_list ? 'people.deleteToBlackList' : 'people.addToBlackList') | translate }}
                 </button>
 
                 <!-- <app-button-item-delete (onDelete)="deletePeople()">
