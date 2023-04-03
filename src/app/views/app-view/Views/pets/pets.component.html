@@ -5,11 +5,8 @@
         {{ "pets.title" | translate }}
       </h1>
 
-      <div
-        class="toggle-item-container"
-        (click)="togglePetsView()"
-        [ngClass]="(status$ | async) ? '' : 'toggle-item-container-animated'"
-      >
+      <div class="toggle-item-container" (click)="togglePetsView()"
+        [ngClass]="(status$ | async) ? '' : 'toggle-item-container-animated'">
         <div class="toggle-item-2">{{ "pets.current" | translate }}</div>
         <div class="toggle-item-2">{{ "pets.past" | translate }}</div>
       </div>
@@ -18,47 +15,23 @@
       </div>
 
       <div class="pets_container-header-controlBtn">
-        <mat-button-toggle-group
-          *ngIf="status$ | async"
-          [formControl]="alertControl"
-          matBadge="{{ numberOfAnimalsReleaseControl$ | async }}"
-          matBadgeColor="accent"
-          multiple
-        >
-          <mat-button-toggle
-            (click)="getAnimalsReleaseControl()"
-            type="button"
-            [value]="true"
-          >
+        <mat-button-toggle-group *ngIf="status$ | async" [formControl]="alertControl"
+          matBadge="{{ numberOfAnimalsReleaseControl$ | async }}" matBadgeColor="accent" multiple>
+          <mat-button-toggle (click)="getAnimalsReleaseControl()" type="button" [value]="true">
             {{ "pets.controlToOut" | translate }}
           </mat-button-toggle>
         </mat-button-toggle-group>
 
-        <mat-button-toggle-group
-          *ngIf="!(status$ | async)"
-          [formControl]="alertControl"
-          matBadge="{{ numberOfAnimalsVaccinationChecks$ | async }}"
-          matBadgeColor="accent"
-          multiple
-        >
-          <mat-button-toggle
-            mat-raised-button
-            (click)="getAnimalsToVaccinationChecks()"
-            [value]="true"
-            type="button"
-          >
+        <mat-button-toggle-group *ngIf="!(status$ | async)" [formControl]="alertControl"
+          matBadge="{{ numberOfAnimalsVaccinationChecks$ | async }}" matBadgeColor="accent" multiple>
+          <mat-button-toggle mat-raised-button (click)="getAnimalsToVaccinationChecks()" [value]="true" type="button">
             {{ "pets.controlToVaccination" | translate }}
           </mat-button-toggle>
         </mat-button-toggle-group>
       </div>
     </div>
 
-    <button
-      class="pets_container-header-addPet"
-      mat-flat-button
-      data-cy="add-btn"
-      (click)="addPet()"
-    >
+    <button class="pets_container-header-addPet" mat-flat-button data-cy="add-btn" (click)="addPet()">
       {{ "pets.addPets" | translate }}
       <mat-icon>add_circle</mat-icon>
     </button>
@@ -68,19 +41,12 @@
     <app-search-engine></app-search-engine>
   </div>
 
-  <div class="pets_container-tabble">
-    <ng-container
-      *ngIf="{ pets: pets$ | async, isLoading: isLoading$ | async } as vm"
-    >
-      <app-pets-table
-        *ngIf="vm.pets?.length && vm.isLoading === false; else loadingView"
-        [pets]="pets$ | async"
-        (outPetEmitter)="outPet($event)"
-        (deletePositionEmitter)="deletePosition($event)"
-      ></app-pets-table>
+  <div style="overflow-x:auto;" class="pets_container-tabble">
+    <ng-container *ngIf="{ pets: pets$ | async, isLoading: isLoading$ | async } as vm">
+      <app-pets-table *ngIf="vm.pets?.length && vm.isLoading === false; else loadingView" [pets]="pets$ | async"
+        (outPetEmitter)="outPet($event)" (deletePositionEmitter)="deletePosition($event)"></app-pets-table>
       <ng-template #loadingView>
-        <app-empty-data [isLoading]="vm.isLoading"></app-empty-data
-      ></ng-template>
+        <app-empty-data [isLoading]="vm.isLoading"></app-empty-data></ng-template>
     </ng-container>
   </div>
 </div>

@@ -91,13 +91,7 @@ export class PopupRegisterComponent implements OnInit {
     )!.value;
 
     this.api
-      .addPet({
-        ...this.registerPetsForm.value,
-        registerPeople: {
-          ...this.registerPetsForm.value.registerPeople,
-          type_of_person: this.typePerson,
-        },
-      })
+      .addPet(this.registerPetsForm.value)
       .pipe(
         mergeMap((register) =>
           isAvatarChosen

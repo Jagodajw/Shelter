@@ -1,8 +1,10 @@
 <mat-toolbar class="header" role="header">
-  <h1 class="header__logo">
-    {{ "shelter.title" | translate }} {{ shelterName$ | async }}
-  </h1>
-  <app-toolbar-date></app-toolbar-date>
+  <div class="header__wrapper">
+    <h1 class="header__wrapper--logo">
+      {{ "shelter.title" | translate }} {{ shelterName$ | async }}
+    </h1>
+    <app-toolbar-date></app-toolbar-date>
+  </div>
   <span class="example-spacer"></span>
   <div class="header__link">
     <ul>

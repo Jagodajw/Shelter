@@ -1,7 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PeopleService } from '../../services/api/people.service';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { RegisterPeopleResponse } from 'backend/src/views/AnimalsView';
 import { Observable, map, mergeMap, take, tap } from 'rxjs';
 
@@ -26,6 +26,7 @@ export class DataPersonActionPopupComponent implements OnInit {
   constructor(
     private readonly _form: FormBuilder,
     private readonly api: PeopleService,
+    private readonly ref: MatDialogRef<DataPersonActionPopupComponent>,
     @Inject(MAT_DIALOG_DATA) public readonly data: DataPersonPopupData
   ) {}
 
@@ -59,6 +60,7 @@ export class DataPersonActionPopupComponent implements OnInit {
       name: [''],
       id_number: [''],
       pesel: [''],
+      nip: [''],
       email: [''],
       telephone: [''],
       adress: [''],
@@ -86,6 +88,6 @@ export class DataPersonActionPopupComponent implements OnInit {
         this.data.peopleId,
         this.dataPersonTakeAwayEdit.get(this.groupName)?.value
       )
-      .subscribe();
+      .subscribe({ next: () => this.ref.close({ fetchData: true }) });
   }
 }

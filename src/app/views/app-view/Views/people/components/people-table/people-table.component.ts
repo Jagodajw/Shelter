@@ -11,12 +11,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { PeopleResponse } from 'backend/src/views/PeopleView';
 import { Observable } from 'rxjs';
-import {
-  DataPersonActionPopupComponent,
-  DataPersonPopupData,
-} from 'src/app/views/app-view/components/data-person-action-popup/data-person-action-popup.component';
-import { PeopleRootService } from '../../people-root.service';
 
+import { PeopleRootService } from '../../people-root.service';
+import { mergeMap } from 'rxjs';
 @Component({
   selector: 'app-people-table',
   templateUrl: './people-table.component.html',
@@ -60,15 +57,7 @@ export class PeopleTableComponent implements OnInit {
   ngOnInit(): void {}
 
   public editPerson(peopleId: number): void {
-    const data: DataPersonPopupData = {
-      status$: this.status$,
-      peopleId,
-    };
-    this.dialog.open(DataPersonActionPopupComponent, {
-      panelClass: ['input-70', 'modal-without-padding'],
-      disableClose: true,
-      data,
-    });
+    this.root.editPeople(peopleId);
   }
 
   public openPetDetail(petId: string) {
