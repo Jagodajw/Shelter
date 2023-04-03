@@ -5,15 +5,7 @@ import {
   FormGroupDirective,
 } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import {
-  BehaviorSubject,
-  filter,
-  map,
-  mergeMap,
-  Observable,
-  of,
-  tap,
-} from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { genderList, sizeList } from 'src/app/data/data-list';
 import { Select } from '../select/select';
 import { SpeciesAutocompleteReturnValue } from '../species-autocomplete/species-autocomplete.component';
@@ -56,7 +48,6 @@ export class DataPetRegisterComponent implements OnInit {
   }
 
   public setSpeciesId(species: SpeciesAutocompleteReturnValue): void {
-    console.log('ASDFSDAFSD');
     (this.formGroupDirective.control.get('registerAnimal') as FormGroup)
       .get('breed')
       ?.patchValue('');

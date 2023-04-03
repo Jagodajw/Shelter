@@ -1,7 +1,7 @@
-import { Component, OnInit, Self, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, Self } from '@angular/core';
 import { FormControl, NgControl, Validators } from '@angular/forms';
 import { SpeciesResponse } from 'backend/src/views/DictionaryView';
-import { map, Observable, tap } from 'rxjs';
+import { Observable, map, tap } from 'rxjs';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { DictionaryService } from '../../services/api/dictionary.service';
 import { ShelterService } from '../../services/shelter.service';
@@ -42,7 +42,8 @@ export class SpeciesAutocompleteComponent
     this.shelterChangeDetector();
     this.control.valueChanges.subscribe({
       next: (value) => {
-        if ((this.value as any)?.ID === value?.ID) return;
+        if ((this.value as any)?.ID === value?.ID && typeof value !== 'string')
+          return;
         if (value) {
           this.value = value;
           this.change.emit(value);
