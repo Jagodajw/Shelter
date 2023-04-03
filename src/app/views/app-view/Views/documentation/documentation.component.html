@@ -1,5 +1,6 @@
-<section>
-  <div class="document">
+<div class="people_container">
+  <div class="people_container-header">
+
     <h1>{{ "document.title" | translate }}</h1>
 
     <app-file-upload [formControl]="attachments">
@@ -8,16 +9,12 @@
     </app-file-upload>
   </div>
 
+
   <ng-container *ngIf="{ documents: documents$ | async } as vm">
     <ng-container *ngIf="!!vm.documents?.length">
       <ul class="list-attach">
-        <app-upload-attachment
-          *ngFor="let file of vm.documents"
-          [file]="file"
-          (remove)="deleteAttachment($event)"
-          (download)="downloadAttachment($event)"
-          (showAttachment)="showAttachment($event)"
-        ></app-upload-attachment>
+        <app-upload-attachment *ngFor="let file of vm.documents" [file]="file" (remove)="deleteAttachment($event)"
+          (download)="downloadAttachment($event)" (showAttachment)="showAttachment($event)"></app-upload-attachment>
       </ul>
     </ng-container>
   </ng-container>
@@ -25,4 +22,4 @@
   <ng-template #emptyDataTemplate>
     <app-empty-data [isLoading]="isLoading$ | async"></app-empty-data>
   </ng-template>
-</section>
+</div>

@@ -1,22 +1,19 @@
 :host {
   display: block;
-  .document {
-    padding: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    width: 100%;
-    margin: auto;
-  }
-  mat-expansion-panel {
-    width: 70%;
-    margin: auto;
-  }
 
+  .people_container {
+    margin: 40px;
+    &-header {
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      & h1 {
+        padding-right: 10px;
+      }
+    }
+  }
   .list-attach {
-    list-style-type: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+    list-style: none;
   }
 }

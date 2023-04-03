@@ -178,7 +178,7 @@ export class PetsRootService {
   }
 
   private refreschGet(): Observable<AnimalTableResponse[]> {
-    return this.api.getPets().pipe(
+    return this.api.getPets(this.getPetStatus(this.status$.value)).pipe(
       tap((petsData: AnimalTableResponse[]) => {
         this.pets$.next(petsData);
       })
@@ -197,5 +197,8 @@ export class PetsRootService {
     return this.alertControl.valueChanges.pipe(
       map(([alertStatus]: [boolean | undefined]) => !alertStatus)
     );
+  }
+  private getPetStatus(status: boolean): AnimalStatus {
+    return status ? 'adopted' : 'staying';
   }
 }

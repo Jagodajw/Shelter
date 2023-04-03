@@ -109,7 +109,7 @@ export class PeopleRootService {
   }
 
   private getPeopleStatus(status: boolean): PeopleStatus {
-    return status ? 'moving' : 'receiving';
+    return status ? 'receiving' : 'moving';
   }
 
   public editPeople(peopleId: number): void {
@@ -129,7 +129,7 @@ export class PeopleRootService {
           (data: { fetchData: boolean } | undefined) =>
             data?.fetchData !== undefined
         ),
-        mergeMap(()=>this.refreschGet(this.isBlackList$.value))
+        mergeMap(() => this.refreschGet(this.isBlackList$.value))
       )
       .subscribe();
   }
