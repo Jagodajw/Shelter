@@ -10,8 +10,8 @@ import {
   FormGroup,
   FormGroupDirective,
 } from '@angular/forms';
-import { ButtonFilter } from '../button-filter/button-filter';
 import { Observable, map, of, startWith, tap } from 'rxjs';
+import { ButtonFilter } from '../button-filter/button-filter';
 type PersonType = 'private' | 'legal' | 'none';
 @Component({
   selector: 'app-data-person-take-away',
@@ -29,6 +29,12 @@ export class DataPersonTakeAwayComponent implements OnInit {
   public blockInput: boolean = false;
   public personType$?: Observable<PersonType> = of('private');
   private primaryGroup!: FormGroup;
+
+  public filtersPeople: ButtonFilter<PersonType>[] = [
+    { id: 'private', name: 'typePerson.private' },
+    { id: 'legal', name: 'typePerson.legal' },
+    { id: 'none', name: 'typePerson.none' },
+  ];
 
   @Output() personTypeEmit: EventEmitter<PersonType> =
     new EventEmitter<PersonType>();
@@ -54,15 +60,10 @@ export class DataPersonTakeAwayComponent implements OnInit {
       tap(
         (personType: PersonType) => (this.blockInput = personType === 'legal')
       ),
-      map((data) => data as PersonType)
+      map((data) => data as PersonType),
+      tap(console.log)
     );
   }
-
-  public filtersPeople: ButtonFilter<PersonType>[] = [
-    { id: 'private', name: 'typePerson.private' },
-    { id: 'legal', name: 'typePerson.legal' },
-    { id: 'none', name: 'typePerson.none' },
-  ];
 
   onChangeSelect(event: PersonType): void {
     // this.personTypeEmit.emit(event);

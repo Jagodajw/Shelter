@@ -1,5 +1,5 @@
-import { Component, Input, OnInit, Self } from '@angular/core';
-import { FormBuilder, FormGroup, NgControl, Validators } from '@angular/forms';
+import { Component, Input, Self } from '@angular/core';
+import { FormBuilder, FormGroup, NgControl } from '@angular/forms';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 
@@ -8,10 +8,7 @@ import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-acce
   templateUrl: './date-picker-range.component.html',
   styleUrls: ['./date-picker-range.component.scss'],
 })
-export class DatePickerRangeComponent
-  extends ControlValueAccessorsAbstract
-  implements OnInit
-{
+export class DatePickerRangeComponent extends ControlValueAccessorsAbstract {
   @Input() placeholder = '';
   @Input() set minDate(date: Date | string | null) {
     if (date === null) return;
@@ -27,7 +24,6 @@ export class DatePickerRangeComponent
     super(ngControl);
   }
 
-  ngOnInit(): void {}
   private initDateGroupByPickerType(): void {
     this.dateGroup = this._form.group({
       from: [null],
@@ -35,9 +31,11 @@ export class DatePickerRangeComponent
     });
     return;
   }
+
   public changedDate(event: MatDatepickerInputEvent<Date>): void {
-    this.value = event.value;
+    this.value = this.dateGroup.value;
   }
+
   public clearForm(): void {
     this.dateGroup.reset();
     this.value = null;

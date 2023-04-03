@@ -1,7 +1,7 @@
 import express from 'express';
 import { authenticate } from '../middlewares/authentication';
 import { ShelterResponse } from '../models/ShelterModel';
-import { getShelters } from '../services/SheltersService';
+import { getShelterImage, getShelters } from '../services/SheltersService';
 
 const router = express.Router();
 
@@ -18,4 +18,16 @@ router.get('/shelters', authenticate, async (req, res) => {
     res.sendStatus(500);
   }
 });
+
+router.get('/shelterImage/:shelterId', authenticate, async (req, res) => {
+  try {
+    const shelterId: string = req.params.shelterId;
+    const image = await getShelterImage(shelterId);
+
+    res.send(image);
+  } catch (error) {
+    res.sendStatus(500);
+  }
+});
+
 export default router;

@@ -32,7 +32,7 @@ export const dataToBeExtractedWhenPeopleAreTaken = {
     select: {
       ID: true,
       name: true,
-      species: { select: { species: true } },
+      species: true,
       breed: { select: { breed: true } },
       gender: true,
       commune: { select: { commune: true } },

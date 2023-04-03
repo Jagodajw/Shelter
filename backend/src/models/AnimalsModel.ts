@@ -2,6 +2,7 @@ import {
   Gender as PrismaGender,
   Size as PrismaSize,
   Type_of_person as PrismaTypeOfPerson,
+  Species,
 } from '@prisma/client';
 
 export type Gender = PrismaGender;
@@ -19,9 +20,7 @@ export interface AnimalModel {
   area: {
     area: string;
   } | null;
-  species: {
-    species: string;
-  } | null;
+  species: Species | null | undefined;
   breed: {
     breed: string;
   } | null;

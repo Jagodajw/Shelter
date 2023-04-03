@@ -12,7 +12,6 @@ type PersonType = 'private' | 'legal' | 'none';
 })
 export class PopupRegisterComponent implements OnInit {
   public registerPetsForm!: FormGroup;
-  private typePerson!: PersonType;
   public quarantineDate!: Date;
 
   constructor(
@@ -81,9 +80,6 @@ export class PopupRegisterComponent implements OnInit {
       }),
     });
   }
-  public personType(event: PersonType) {
-    this.typePerson = event;
-  }
 
   public addPet(): void {
     const isAvatarChosen: boolean = !!this.registerPetsForm.get(
@@ -91,13 +87,7 @@ export class PopupRegisterComponent implements OnInit {
     )!.value;
 
     this.api
-      .addPet({
-        ...this.registerPetsForm.value,
-        registerPeople: {
-          ...this.registerPetsForm.value.registerPeople,
-          type_of_person: this.typePerson,
-        },
-      })
+      .addPet(this.registerPetsForm.value)
       .pipe(
         mergeMap((register) =>
           isAvatarChosen

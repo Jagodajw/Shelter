@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { UntilDestroy } from '@ngneat/until-destroy';
 import { PetService } from 'src/app/views/app-view/services/api/pet.service';
 
@@ -18,7 +18,7 @@ export class PopupOutAnimalComponent implements OnInit {
     private readonly api: PetService,
     private readonly _form: FormBuilder,
     @Inject(MAT_DIALOG_DATA)
-    private data: { name: string; species: string; ID: string },
+    private data: { name: string; species: any | null | undefined; ID: string },
     private readonly dialogRef: MatDialogRef<
       PopupOutAnimalComponent,
       { isAdoption: boolean }

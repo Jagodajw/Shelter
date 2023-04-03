@@ -45,6 +45,10 @@ export class AnimalsRegistrationService {
             color: true,
           },
         })) as RegisterAnimalResponse | null;
+      registerAnimal!.avatar = this.correctAvatarValue(
+        registerAnimal?.avatar ?? null
+      );
+      console.log(registerAnimal?.avatar);
 
       const registerPeople: RegisterPeopleResponse | null =
         (await tx.people.findUnique({
@@ -62,6 +66,12 @@ export class AnimalsRegistrationService {
     });
   }
 
+  private static correctAvatarValue(avatar: null | Buffer): Buffer | null {
+    return !(avatar as unknown as { data: number[] })?.data?.length
+      ? null
+      : avatar;
+  }
+
   public static async add(
     shelterId: string,
     {
@@ -77,7 +87,6 @@ export class AnimalsRegistrationService {
         updateDataRegisterAnimal.species,
         shelterId
       );
-      console.log('spec id', speciesId);
       const generatedAnimalId = await AnimalIdGenerator.getGeneratedAnimalId(
         speciesId
       );

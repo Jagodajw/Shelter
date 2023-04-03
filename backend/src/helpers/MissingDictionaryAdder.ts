@@ -89,7 +89,6 @@ export class MissingDictionaryAdder {
       }
 
       case 'type_of_acceptance': {
-        console.log('eo', { type_acceptance: data, ...extraData });
         const newTypeOfAcceptance = await TypeAcceptanceService.add(
           { type_acceptance: data, ...extraData },
           shelterId,

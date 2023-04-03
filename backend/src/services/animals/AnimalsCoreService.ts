@@ -25,7 +25,7 @@ export class AniamlsCoreSerivce {
       select: {
         ID: true,
         name: true,
-        species: { select: { species: true } },
+        species: true,
         breed: { select: { breed: true } },
         gender: true,
         commune: { select: { commune: true } },
@@ -62,9 +62,12 @@ export class AniamlsCoreSerivce {
                   color_id: query.color_id,
                   gender: query.gender,
                   size: query.size,
-                  sterilization: query.sterilization,
+                  sterilization: query.sterilization ?? undefined,
                   adopted: animalStatus === 'adopted',
-                  vaccination: !query.unvaccinated,
+                  vaccination:
+                    query.unvaccinated !== undefined
+                      ? !query.unvaccinated
+                      : undefined,
                 },
                 {
                   OR: [
@@ -102,7 +105,7 @@ export class AniamlsCoreSerivce {
           select: {
             ID: true,
             name: true,
-            species: { select: { species: true } },
+            species: true,
             breed: { select: { breed: true } },
             gender: true,
             commune: { select: { commune: true } },
@@ -121,6 +124,7 @@ export class AniamlsCoreSerivce {
       ID: animals?.ID as string,
       name: animals?.name ?? '',
       species: animals?.species?.species ?? '',
+      species_object: animals?.species ?? null,
       breed: animals?.breed?.breed ?? '',
       gender: animals?.gender ?? Gender.male,
       commune: animals?.commune?.commune ?? '',

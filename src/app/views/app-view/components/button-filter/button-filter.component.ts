@@ -6,10 +6,10 @@ import {
   Output,
   Self,
 } from '@angular/core';
-import { MatButtonToggleChange } from '@angular/material/button-toggle';
-import { ButtonFilter, ButtonFilterDefaultID } from './button-filter';
-import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 import { NgControl } from '@angular/forms';
+import { MatButtonToggleChange } from '@angular/material/button-toggle';
+import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
+import { ButtonFilter, ButtonFilterDefaultID } from './button-filter';
 
 type ReturnValue = any;
 @Component({

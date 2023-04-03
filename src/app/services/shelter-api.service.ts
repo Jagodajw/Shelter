@@ -15,4 +15,10 @@ export class ShelterApiService extends ApiService {
   public getShelters(): Observable<ShelterResponse[]> {
     return this.http.get<ShelterResponse[]>(`${this.rootUrl}/shelters`);
   }
+
+  public getShelterImage(shelterId: string): Observable<Blob> {
+    return this.http.get<Blob>(`${this.rootUrl}/shelterImage/${shelterId}`, {
+      responseType: 'blob' as 'json',
+    });
+  }
 }

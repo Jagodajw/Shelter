@@ -32,7 +32,7 @@ export class AnimalsControlsService {
       select: {
         ID: true,
         name: true,
-        species: { select: { species: true } },
+        species: true,
         breed: { select: { breed: true } },
         gender: true,
         commune: { select: { commune: true } },
@@ -48,6 +48,7 @@ export class AnimalsControlsService {
     return this.getAnimalsListToVaccinationChecks(response).map((response) => ({
       ...response,
       species: response.species?.species ?? '',
+      species_object: response.species ?? null,
       breed: response.breed?.breed ?? '',
       commune: response.commune?.commune ?? '',
       area: response.area?.area ?? '',

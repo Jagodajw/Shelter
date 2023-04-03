@@ -1,6 +1,5 @@
 import { Component, OnInit, Self } from '@angular/core';
 import { NgControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { ControlValueAccessorsAbstract } from 'src/app/shared/control-value-accesors.abstract';
 
 @Component({
@@ -52,7 +51,7 @@ export class PetAvatarComponent
   }
 
   override handleValueChangeFromOutside(): void {
-    if (!this.value) {
+    if (!this.value || this.isEmptyBlob(this.value)) {
       this.img = 'assets/img/photo.png';
       this.isAddImg = false;
       return;
@@ -60,10 +59,15 @@ export class PetAvatarComponent
 
     const reader: FileReader = new FileReader();
     reader.onload = () => {
+      console.log(reader.result);
       this.img = reader.result as string;
       this.isAddImg = true;
     };
     reader.readAsBinaryString(new Blob([this.value as string]));
+  }
+
+  private isEmptyBlob(value: string | FormData | null): boolean {
+    return value instanceof Blob && value.size === 0;
   }
 
   deleteImg(): void {

@@ -9,11 +9,11 @@ import {
 } from 'backend/src/views/AnimalsView';
 import {
   BehaviorSubject,
+  Observable,
   combineLatest,
   filter,
   map,
   mergeMap,
-  Observable,
   tap,
 } from 'rxjs';
 import { PetService } from '../../../services/api/pet.service';
@@ -109,7 +109,7 @@ export class PetsRootService {
     this.dialog
       .open(PopupOutAnimalComponent, {
         panelClass: ['input-70', 'modal-without-padding'],
-        data: { name: pet?.name, species: pet?.species, ID: petId },
+        data: { name: pet?.name, species: pet?.species_object, ID: petId },
         disableClose: true,
       })
       .afterClosed()

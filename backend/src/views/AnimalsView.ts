@@ -30,6 +30,7 @@ export interface AnimalTableResponse {
   ID: string;
   name: string;
   species: string;
+  species_object: Species | null;
   breed: string;
   gender: Gender;
   commune: string;

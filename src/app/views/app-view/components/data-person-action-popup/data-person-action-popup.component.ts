@@ -1,9 +1,9 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { PeopleService } from '../../services/api/people.service';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { RegisterPeopleResponse } from 'backend/src/views/AnimalsView';
-import { Observable, map, mergeMap, take, tap } from 'rxjs';
+import { Observable, map, mergeMap } from 'rxjs';
+import { PeopleService } from '../../services/api/people.service';
 
 export interface DataPersonPopupData {
   status$: Observable<boolean>;
@@ -58,6 +58,7 @@ export class DataPersonActionPopupComponent implements OnInit {
     return this._form.group({
       name: [''],
       id_number: [''],
+      nip: [''],
       pesel: [''],
       email: [''],
       telephone: [''],
