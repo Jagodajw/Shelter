@@ -59,7 +59,6 @@ export class PetAvatarComponent
 
     const reader: FileReader = new FileReader();
     reader.onload = () => {
-      console.log(reader.result);
       this.img = reader.result as string;
       this.isAddImg = true;
     };

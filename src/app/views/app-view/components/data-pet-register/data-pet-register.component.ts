@@ -45,6 +45,12 @@ export class DataPetRegisterComponent implements OnInit {
     //         return ((species as Select)?.ID || undefined) as number | undefined;
     //       })
     //     ) ?? of(undefined);
+
+    this.speciesId$.next(
+      (this.formGroupDirective.control.get('registerAnimal') as FormGroup).get(
+        'species'
+      )?.value?.ID ?? undefined
+    );
   }
 
   public setSpeciesId(species: SpeciesAutocompleteReturnValue): void {
