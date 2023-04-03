@@ -55,8 +55,11 @@ router.get(
   shelterAuthenticate,
   async (req, res) => {
     try {
+      const shelterId: string = req.headers['shelters_id'] as string;
       const response =
-        await AnimalsControlsService.getNumberOfAnimalsReleaseControl();
+        await AnimalsControlsService.getNumberOfAnimalsReleaseControl(
+          shelterId
+        );
 
       res.status(200).json(response);
     } catch (error: any) {
