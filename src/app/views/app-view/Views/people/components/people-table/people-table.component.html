@@ -35,7 +35,7 @@
 
     <ng-container matColumnDef="black_list">
         <th mat-header-cell *matHeaderCellDef> {{"people.blackList" | translate}} </th>
-        <td mat-cell *matCellDef="let element"> {{element.black_list}} </td>
+        <td mat-cell *matCellDef="let element"> {{element.black_list ? "tak" : "nie"}} </td>
     </ng-container>
 
     <ng-container matColumnDef="action">
